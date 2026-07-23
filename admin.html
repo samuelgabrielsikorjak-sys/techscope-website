@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — TECH-SCOPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="7" stroke="var(--accent)" stroke-width="2"/><path d="M13 11 L8 16 L13 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 11 L24 16 L19 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 16 L18 16" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round"/></svg>TECH-<span>SCOPE</span> <span style="font-size:0.65rem; color:var(--ink-faint); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; vertical-align:middle;">admin</span></a>
+    <div class="nav-cta" id="admin-nav-actions"></div>
+  </div>
+</nav>
+
+<section id="login-section">
+  <div class="container" style="max-width:420px;">
+    <div class="section-head">
+      <div class="eyebrow">Admin</div>
+      <h2>Prihlásenie</h2>
+    </div>
+    <div class="form-card">
+      <div class="form-banner-error" id="login-error"></div>
+      <form id="login-form" novalidate>
+        <div class="form-row">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" autocomplete="username" required>
+        </div>
+        <div class="form-row">
+          <label for="login-heslo">Heslo</label>
+          <input type="password" id="login-heslo" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="login-submit">Prihlásiť sa</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="admin-content" style="display:none;">
+  <div class="container">
+
+    <div class="admin-section" id="slots-section">
+      <div class="section-head" style="text-align:left; margin:0 0 24px;">
+        <div class="eyebrow">Správa termínov</div>
+        <h2>Call sloty</h2>
+      </div>
+
+      <div class="form-banner-error" id="slot-error"></div>
+
+      <form id="add-slot-form" class="admin-toolbar" novalidate>
+        <div class="form-row">
+          <label for="slot-datum">Dátum</label>
+          <input type="date" id="slot-datum" required>
+        </div>
+        <div class="form-row">
+          <label for="slot-od">Čas od</label>
+          <input type="time" id="slot-od" required>
+        </div>
+        <div class="form-row">
+          <label for="slot-do">Čas do</label>
+          <input type="time" id="slot-do" required>
+        </div>
+        <button type="submit" class="btn btn-primary">+ Pridať slot</button>
+      </form>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Dátum</th><th>Čas</th><th>Stav</th><th></th></tr>
+          </thead>
+          <tbody id="slots-tbody"><tr><td colspan="4">Načítavam…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-section" id="leads-section">
+      <div class="section-head" style="text-align:left; margin:0 0 24px;">
+        <div class="eyebrow">Prehľad</div>
+        <h2>Leady</h2>
+      </div>
+
+      <div class="admin-toolbar" style="margin-bottom:20px;">
+        <div class="form-row" style="min-width:300px;">
+          <label for="lead-search">Hľadať</label>
+          <input type="search" id="lead-search" placeholder="Meno, firma, email, telefón, popis projektu…">
+        </div>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Vytvorené</th><th>Meno</th><th>Firma</th><th>Pozícia</th><th>Email</th><th>Telefón</th>
+              <th>Produkt</th><th>Rozpočet</th><th>Urgencia</th><th>Popis projektu</th><th>Zdroj</th><th>Termín</th><th>Status</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody"><tr><td colspan="14">Načítavam…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script src="assets/admin.js"></script>
+</body>
+</html>
