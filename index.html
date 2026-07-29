@@ -3,14 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TECH-SCOPE — Softvér, ktorý funguje presne tak, ako váš proces.</title>
-<meta name="description" content="Vyvíjame systémy na mieru, weby a mobilné aplikácie — s podpísaným rozsahom, fixným termínom a garanciou vrátenia peňazí. Rezervujte si bezplatný strategy call.">
+<title>TECH-SCOPE — Softvér na mieru pre vaše procesy. Fixný termín, fixná cena.</title>
+<meta name="description" content="Automatizujeme účtovníctvo, zákaznícku podporu a HR procesy pomocou riešení šitých presne na váš biznis — s podpísaným rozsahom, fixným termínom a garanciou vrátenia peňazí. Rezervujte si bezplatný strategy call.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" type="image/x-icon" href="favicon.ico">
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "TECH-SCOPE",
+  "description": "Automatizujeme účtovníctvo, zákaznícku podporu a HR procesy pomocou riešení šitých presne na váš biznis — s podpísaným rozsahom, fixným termínom a garanciou vrátenia peňazí.",
+  "url": "https://techscope.sk/index.html",
+  "email": "contact@techscope.sk",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bratislava",
+    "addressCountry": "SK"
+  },
+  "areaServed": "SK",
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI spracovanie faktúr", "url": "https://techscope.sk/sluzby-faktury.html" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI zákaznícky asistent", "url": "https://techscope.sk/sluzby-asistent.html" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dochádzkový systém", "url": "https://techscope.sk/sluzby-dochadzka.html" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Softvér na mieru", "url": "https://techscope.sk/sluzby-softver.html" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Webová a mobilná aplikácia", "url": "https://techscope.sk/produkt-apps.html" } }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -18,11 +42,10 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="7" stroke="var(--accent)" stroke-width="2"/><path d="M13 11 L8 16 L13 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 11 L24 16 L19 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 16 L18 16" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round"/></svg>TECH-<span>SCOPE</span></a>
+    <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a>
     <ul class="nav-links">
-      <li><a href="produkt-apps.html">Webové a mobilné aplikácie</a></li>
-      <li><a href="sluzby-softver.html">Softvér na mieru</a></li>
-      <li><a href="#produkty">Produkty</a></li>
+      <li><a href="#produkty">Naše riešenia</a></li>
+      <li><a href="#vlastne-riesenie">Vlastné riešenie</a></li>
       <li><a href="#garancia">Garancia</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
@@ -35,53 +58,100 @@
 
 <!-- HOOK -->
 <header class="hero">
-  <div class="geo-bg" aria-hidden="true"></div>
+  <div class="code-bg" aria-hidden="true">
+    <div class="code-panel left"></div>
+    <div class="code-panel right"></div>
+  </div>
   <div class="container">
     <div class="eyebrow">Pre firmy, ktoré potrebujú riešenie šité na mieru</div>
-    <h1>Technologické riešenia pre firmy, ktoré <mark> chcú byť o krok vpred.</mark></h1>
-    <p class="hero-sub">Vyvíjame softvéry, webové a mobilné aplikácie šité na mieru - s inovatívnymi riešeniami, fixným termínom odovzdania a garanciou vrátenia peňazí.</p>
+    <h1>Vyvíjame, automatizujeme, inovujeme, integrujeme. <mark>Vytvárame efektívne riešenia šité na mieru.</mark></h1>
+    <p class="hero-sub">Poďme prebrať Váš nápad a vypracovať Vám nezáväznú ponuku.</p>
     <div class="hero-ctas">
-      <a href="rezervacia.html" class="btn btn-primary btn-call"> Rezervovať strategy call zadarmo</a>
-      <!--<a href="#referencie" class="btn btn-ghost">Naše referencie →</a> -->
+      <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call zadarmo</a>
     </div>
     <div class="hero-proof">
       <span> Fixný rozsah</span>
       <span> Garantovaný termín</span>
-      <span> Podpora po spustení</span>
       <span> Kód a dáta patria vám</span>
     </div>
   </div>
 </header>
 
+<div class="container reveal" style="text-align:center; padding:8px 0 0;">
+  <p style="color:var(--ink-faint); font-size:1.05rem; font-weight:500;">Riešenia, ktoré premenia vašu víziu na každodennú realitu.</p>
+</div>
+
 <!-- SLUŽBY -->
 <section id="produkty" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">Garantujeme termín a kvalitu</div>
+      <div class="eyebrow">Naše riešenia</div>
       <h2>Chcete vedieť ako vyriešime váš problém?</h2>
       <p>Cenu ani rozsah nezverejňujeme naslepo — nezáväznú ponuku Vám vytvoríme na mieru na strategy calle.</p>
     </div>
 
-    <div class="branch-grid reveal">
+    <div class="branch-grid cols-3 reveal">
       <div class="branch-card">
         <div class="eyebrow">01</div>
-        <h3>Softvér na mieru</h3>
-        <div class="timeline">Fixný termín, fixná cena, garancia vrátenia peňazí.</div>
-        <p class="outcome">Softvér vytvorený presne na riešenie Vášho problému — individuálny prístup s ohľadom na potreby a špecifické požiadavky pre každého zákazníka. Fixný termín, fixná cena, garancia vrátenia peňazí.</p>
+        <h3>AI spracovanie faktúr</h3>
+        <div class="timeline">Fixný termín implementácie, garancia vrátenia peňazí.</div>
+        <p class="outcome">Automaticky vyťažíme údaje z prijatých faktúr a zapíšeme ich priamo do vášho účtovného systému. Fixný termín implementácie, garancia vrátenia peňazí.</p>
         <div class="branch-ctas">
-          <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary btn-block">Rezervovať strategy call </a>
-          <a href="sluzby-softver.html" class="btn btn-ghost btn-block">Viac o službe →</a>
+          <a href="rezervacia.html?produkt=ai_faktury" class="btn btn-primary btn-block">Rezervovať strategy call</a>
+          <a href="sluzby-faktury.html" class="btn btn-ghost btn-block">Viac o službe</a>
         </div>
       </div>
 
       <div class="branch-card">
         <div class="eyebrow">02</div>
-        <h3>Webové a mobilné aplikácie</h3>
-        <div class="timeline">Fixný termín, fixná cena, garancia vrátenia peňazí.</div>
+        <h3>AI Chatbot</h3>
+        <div class="timeline">Fixný termín implementácie, garancia vrátenia peňazí.</div>
+        <p class="outcome">Chatbot na vašej webovej stránke, ktorý okamžite odpovedá zákazníkom na základe znalostí o vašich produktoch. Fixný termín implementácie, garancia vrátenia peňazí.</p>
+        <div class="branch-ctas">
+          <a href="rezervacia.html?produkt=ai_asistent" class="btn btn-primary btn-block">Rezervovať strategy call</a>
+          <a href="sluzby-asistent.html" class="btn btn-ghost btn-block">Viac o službe</a>
+        </div>
+      </div>
+
+      <div class="branch-card">
+        <div class="eyebrow">03</div>
+        <h3>Dochádzkový systém</h3>
+        <div class="timeline">Fixný termín implementácie, garancia vrátenia peňazí.</div>
+        <p class="outcome">Digitálna evidencia dochádzky, dovoleniek a voľna na mieru vašich pravidiel, s exportom pre mzdové účtovníctvo. Fixný termín implementácie, garancia vrátenia peňazí.</p>
+        <div class="branch-ctas">
+          <a href="rezervacia.html?produkt=dochadzka_system" class="btn btn-primary btn-block">Rezervovať strategy call</a>
+          <a href="sluzby-dochadzka.html" class="btn btn-ghost btn-block">Viac o službe</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VLASTNÉ RIEŠENIE (custom-build, nižšia priorita) -->
+<section id="vlastne-riesenie">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Vlastné riešenie</div>
+      <h2>Potrebujete niečo úplne na mieru?</h2>
+      <p>Ak vaše potreby presahujú riešenia vyššie, postavíme vám softvér alebo aplikáciu od nuly — presne na mieru vášho biznisu.</p>
+    </div>
+
+    <div class="branch-grid reveal">
+      <div class="branch-card compact">
+        <div class="eyebrow">Softvér na mieru</div>
+        <p class="outcome">Interný softvér šitý presne na mieru — Fixný termín, fixná cena, garancia vrátenia peňazí.</p>
+        <div class="branch-ctas">
+          <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-ghost btn-block">Rezervovať strategy call</a>
+          <a href="sluzby-softver.html" class="btn btn-ghost btn-block">Viac o službe</a>
+        </div>
+      </div>
+
+      <div class="branch-card compact">
+        <div class="eyebrow">Webová a mobilná aplikácia</div>
         <p class="outcome">Weby, e-shopy a mobilné aplikácie navrhnuté a vyvinuté na mieru vášho biznisu — od analýzy až po nasadenie. Fixný termín, fixná cena, garancia vrátenia peňazí.</p>
         <div class="branch-ctas">
-          <a href="rezervacia.html?produkt=web_mobile_app" class="btn btn-primary btn-block">Rezervovať strategy call </a>
-          <a href="produkt-apps.html" class="btn btn-ghost btn-block">Viac o službe →</a>
+          <a href="rezervacia.html?produkt=web_mobile_app" class="btn btn-ghost btn-block">Rezervovať strategy call</a>
+          <a href="produkt-apps.html" class="btn btn-ghost btn-block">Viac o službe</a>
         </div>
       </div>
     </div>
@@ -126,32 +196,33 @@
     <div class="section-head reveal">
       <div class="eyebrow">Náš proces</div>
       <h2>Ako pracujeme</h2>
+      <p>Od prvého rozhovoru po nasadenie — bez prekvapení.</p>
     </div>
     <div class="eq-grid reveal">
       <div class="eq-card">
         <div class="num">01</div>
         <h4>Free Process Audit</h4>
-        <p>Prejdeme si váš proces a nájdeme, kde strácate čas alebo peniaze.</p>
+        <p>Ešte pred akoukoľvek zmluvou si spoločne prejdeme váš súčasný proces a identifikujeme, kde presne strácate čas alebo peniaze.</p>
       </div>
       <div class="eq-card">
         <div class="num">02</div>
         <h4>Blueprint</h4>
-        <p>Na strategy calle dostanete konkrétny návrh riešenia, ešte bez záväzku.</p>
+        <p>Na strategy calle dostanete konkrétny návrh riešenia — čo presne postavíme, ako to bude fungovať a čo to bude stáť. Ešte stále bez záväzku.</p>
       </div>
       <div class="eq-card">
         <div class="num">03</div>
         <h4>Podpísaný scope</h4>
-        <p>Presný rozsah, must-have funkcie, fixný termín. Odtiaľto beží garancia.</p>
+        <p>Definujeme presný rozsah, must-have funkcie a fixný termín. Od tohto momentu beží garancia.</p>
       </div>
       <div class="eq-card">
         <div class="num">04</div>
         <h4>Vývoj s jasnými kontrolnými bodmi</h4>
-        <p>Jeden rozhodovací bod, jeden MVP review, jeden finálny review.</p>
+        <p>Jeden rozhodovací bod, jeden MVP review, jeden finálny review. Žiadne nekonečné kolá pripomienok, žiadne "priebežne to doladíme".</p>
       </div>
       <div class="eq-card">
         <div class="num">05</div>
         <h4>Odovzdanie, zaškolenie, dokumentácia</h4>
-        <p>Nie len prístupy naslepo, ale plné odovzdanie.</p>
+        <p>Systém odovzdaný podľa scope dokumentu, s live zaškolením tímu a kompletnou dokumentáciou — nie len "tu máte prístupy, poraďte si".</p>
       </div>
     </div>
   </div>
@@ -169,7 +240,6 @@
       <ul>
         <li>Podpísaný scope — presne viete, čo dostanete, ešte pred štartom</li>
         <li>Fixný termín — dátum odovzdania poznáte vopred, nie "podľa rozsahu"</li>
-        <li>Max 3 projekty mesačne — kapacita venovaná naplno, nie rozptýlená medzi desiatky klientov</li>
         <li>Garancia vrátenia peňazí — riziko nesieme my, nie vy</li>
       </ul>
     </div>
@@ -222,8 +292,8 @@
         <p>Sme tím mladých a "hladných" programátorov, ktorí chcú zmeniť svet IT svojou inováciou. Zároveň ponúkame garanciu vrátenia peňazí a podpísaný rozsah bez skrytých položiek — riziko je na nás, nie na vás. Prvý krok za vašim riešením je bezplatný strategy call, po ktorom vám vytvoríme prototyp a nezávislú ponuku.</p>
       </details>
       <details class="faq-item">
-        <summary>Aký je rozdiel medzi softvérom na mieru a webom/mobilnou aplikáciou?</summary>
-        <p>Webová alebo mobilná aplikácia je vývoj aplikácie "Launch Sprint" zabezpečený pod jednou strechou, s ktorou prichádzate za zákazníkmi — kvalitné a individálne riešenia, kvalitný kód alebo aj konverzie. Softvér na mieru je namieru vytvorený systém, ktorý nahrádza procesy a drahé SaaS nástroje vo vašej firme.</p>
+        <summary>Aký je rozdiel medzi jednotlivými produktmi?</summary>
+        <p>AI spracovanie faktúr, AI zákaznícky asistent a Dochádzkový systém sú naše hotové riešenia — postavené na overenom základe a prispôsobené vášmu prostrediu, preto ich vieme nasadiť rýchlejšie. Ak vaše potreby presahujú tieto tri, postavíme vám Softvér na mieru alebo Webovú a mobilnú aplikáciu úplne od nuly. Všetkých päť produktov má rovnaký fixný termín, fixnú cenu a garanciu vrátenia peňazí.</p>
       </details>
       <details class="faq-item">
         <summary>Pracujete aj s naším konkrétnym tech stackom alebo odvetvím?</summary>
@@ -255,7 +325,7 @@
       </details>
       <details class="faq-item">
         <summary>Prečo len 3 projekty mesačne?</summary>
-        <p>Pretože kvalita našich projektov je nám prvoradá, a preto sa nepreťažujeme. Kapacita 3 projektov je zdieľaná naprieč Softvérom na mieru a aj aplikáciami — to je dôvod, prečo dokážeme garantovať to, čo iní len sľubujú.</p>
+        <p>Pretože kvalita našich projektov je nám prvoradá, a preto sa nepreťažujeme. Kapacita 3 projektov je zdieľaná naprieč všetkými produktmi — to je dôvod, prečo dokážeme garantovať to, čo iní len sľubujú.</p>
       </details>
     </div>
   </div>
@@ -277,14 +347,21 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <span class="footer-logo"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="7" stroke="var(--accent)" stroke-width="2"/><path d="M13 11 L8 16 L13 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 11 L24 16 L19 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 16 L18 16" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round"/></svg>TECH-<span>SCOPE</span></span>
-        <p style="color:#7A7980; font-size:0.9rem; max-width:32ch;">Webové alebo mobilné aplikácie a softvér na mieru pre malé a stredné firmy, s garantovaným termínom a garanciou vrátenia peňazí.</p>
+        <span class="footer-logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></span>
+        <p style="color:#7A7980; font-size:0.9rem; max-width:32ch;">Hotové AI riešenia aj softvér na mieru pre malé a stredné firmy, s garantovaným termínom a garanciou vrátenia peňazí.</p>
       </div>
       <div>
         <h5>Produkty</h5>
+        <p class="footer-subhead">Naše riešenia</p>
+        <ul class="footer-sublist">
+          <li><a href="sluzby-faktury.html">AI spracovanie faktúr</a></li>
+          <li><a href="sluzby-asistent.html">AI zákaznícky asistent</a></li>
+          <li><a href="sluzby-dochadzka.html">Dochádzkový systém</a></li>
+        </ul>
+        <p class="footer-subhead">Vlastné riešenie</p>
         <ul>
-          <li><a href="produkt-apps.html">Webové alebo mobilné aplikácie</a></li>
           <li><a href="sluzby-softver.html">Softvér na mieru</a></li>
+          <li><a href="produkt-apps.html">Webová a mobilná aplikácia</a></li>
         </ul>
       </div>
       <div>
@@ -305,6 +382,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 TECH-SCOPE. Všetky práva vyhradené.</span>
+      <a href="obchodne-podmienky.html">Obchodné podmienky</a>
+      <a href="ochrana-udajov.html">Ochrana osobných údajov</a>
     </div>
   </div>
 </footer>
@@ -312,5 +391,76 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/supabase-client.js"></script>
 <script src="assets/script.js"></script>
+<script>
+  window.CODE_SEQUENCES = [
+    { lines: [
+      '# spracovanie prijatej faktúry',
+      'import faktury_ai as ocr',
+      'data = ocr.extract("faktura.pdf")',
+      'if data.confidence > 0.95:',
+      '    uctovnictvo.zapisat(data)'
+    ] },
+    { lines: [
+      'function ChatWidget(props: Props) {',
+      '  const [reply, setReply] = useState("");',
+      '  const res = await assistant.query(msg);',
+      '  setReply(res.answer);',
+      '}'
+    ] },
+    { lines: [
+      'INSERT INTO dochadzka',
+      '  (zamestnanec_id, prichod, odchod)',
+      "VALUES ('EMP-1042', '08:01', '16:32');",
+      'UPDATE mzdy SET hodiny = 8.5'
+    ] },
+    { lines: [
+      '@PostMapping("/api/rezervacia")',
+      'public ResponseEntity<Booking> create(',
+      '    @RequestBody BookingRequest req) {',
+      '  return bookingService.create(req);',
+      '}'
+    ] },
+    { lines: [
+      '{',
+      '  "produkt": "dochadzka_system",',
+      '  "fixny_termin": true,',
+      '  "garancia_dni": 60',
+      '}'
+    ] },
+    { lines: [
+      '$ deploy production',
+      '✓ invoice_2847.pdf spracovaná za 1.2s',
+      '✓ scope dokument podpísaný',
+      '✓ build passed — 0 errors'
+    ] },
+    { lines: [
+      'def export_mzdy(mesiac: str):',
+      '    zaznamy = dochadzka.fetch(mesiac)',
+      '    df = pd.DataFrame(zaznamy)',
+      '    df.to_csv(f"export_{mesiac}.csv")'
+    ] },
+    { lines: [
+      '$ ./deploy.sh --env=production',
+      '[ok] migrácie databázy dokončené',
+      '[ok] testy prešli (47/47)',
+      '[ok] nasadené za 34s'
+    ] },
+    { lines: [
+      'service: ai-asistent',
+      'model: gpt-4o-mini',
+      'max_tokens: 512',
+      'fallback: "Prepájam na operátora…"'
+    ] },
+    { lines: [
+      'interface FakturaData {',
+      '  variabilny_symbol: string;',
+      '  suma: number;',
+      '}',
+      'const valid = faktura.suma > 0;'
+    ] }
+  ];
+</script>
+<script src="assets/code-typer.js"></script>
+<script src="assets/exit-popup.js"></script>
 </body>
 </html>

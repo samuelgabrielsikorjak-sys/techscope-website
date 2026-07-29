@@ -8,8 +8,11 @@
 
 (function () {
   var PRODUKT_LABELS = {
-    web_mobile_app: 'Launch Sprint — Web/Mobile Apps',
-    softver_na_mieru: 'Garantovaný Systém — Softvér na mieru'
+    ai_faktury: 'AI spracovanie faktúr',
+    ai_asistent: 'AI zákaznícky asistent',
+    dochadzka_system: 'Dochádzkový systém',
+    softver_na_mieru: 'Softvér na mieru',
+    web_mobile_app: 'Webová a mobilná aplikácia'
   };
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -24,7 +27,7 @@
     var params = new URLSearchParams(window.location.search);
     var produktKey = params.get('produkt');
 
-    if (produktKey !== 'web_mobile_app' && produktKey !== 'softver_na_mieru') {
+    if (!PRODUKT_LABELS.hasOwnProperty(produktKey)) {
       renderProductPicker(app);
       return;
     }
@@ -38,18 +41,40 @@
         '<div class="eyebrow">Krok 0 · Výber produktu</div>' +
         '<h2>Pre ktorý produkt chcete rezervovať strategy call?</h2>' +
       '</div>' +
-      '<div class="branch-grid">' +
+      '<div class="branch-grid cols-3">' +
         '<div class="branch-card">' +
-          '<div class="eyebrow">Web / Mobile Apps</div>' +
-          '<h3>Launch Sprint</h3>' +
-          '<p class="outcome">Appka, ktorá vám prestane strácať zákazníkov — alebo rýchly, validovaný launch.</p>' +
-          '<a href="rezervacia.html?produkt=web_mobile_app" class="btn btn-primary btn-block">Vybrať Launch Sprint →</a>' +
+          '<div class="eyebrow">01</div>' +
+          '<h3>AI spracovanie faktúr</h3>' +
+          '<p class="outcome">Automaticky vyťažíme údaje z prijatých faktúr a zapíšeme ich priamo do vášho účtovného systému.</p>' +
+          '<a href="rezervacia.html?produkt=ai_faktury" class="btn btn-primary btn-block">Vybrať AI spracovanie faktúr</a>' +
         '</div>' +
         '<div class="branch-card">' +
+          '<div class="eyebrow">02</div>' +
+          '<h3>AI zákaznícky asistent</h3>' +
+          '<p class="outcome">Chatbot na vašej webovej stránke, ktorý okamžite odpovedá zákazníkom na základe znalostí o vašich produktoch.</p>' +
+          '<a href="rezervacia.html?produkt=ai_asistent" class="btn btn-primary btn-block">Vybrať AI zákazníckeho asistenta</a>' +
+        '</div>' +
+        '<div class="branch-card">' +
+          '<div class="eyebrow">03</div>' +
+          '<h3>Dochádzkový systém</h3>' +
+          '<p class="outcome">Digitálna evidencia dochádzky, dovoleniek a voľna na mieru vašich pravidiel, s exportom pre mzdové účtovníctvo.</p>' +
+          '<a href="rezervacia.html?produkt=dochadzka_system" class="btn btn-primary btn-block">Vybrať Dochádzkový systém</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="section-head" style="margin-top:56px; margin-bottom:28px;">' +
+        '<div class="eyebrow">Alebo vlastné riešenie</div>' +
+        '<p style="margin:0;">Potrebujete niečo úplne na mieru? Postavíme vám softvér alebo aplikáciu od nuly.</p>' +
+      '</div>' +
+      '<div class="branch-grid">' +
+        '<div class="branch-card compact">' +
           '<div class="eyebrow">Softvér na mieru</div>' +
-          '<h3>Garantovaný Systém</h3>' +
-          '<p class="outcome">Interný systém na mieru, ktorý nahradí manuálne procesy a drahé SaaS nástroje.</p>' +
-          '<a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary btn-block">Vybrať Garantovaný Systém →</a>' +
+          '<p class="outcome">Interný systém na mieru, ktorý nahrádza manuálne procesy a drahé SaaS nástroje vo vašej firme.</p>' +
+          '<a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-ghost btn-block">Vybrať Softvér na mieru</a>' +
+        '</div>' +
+        '<div class="branch-card compact">' +
+          '<div class="eyebrow">Webová a mobilná aplikácia</div>' +
+          '<p class="outcome">Weby, e-shopy a mobilné aplikácie navrhnuté a vyvinuté na mieru vášho biznisu — od analýzy až po nasadenie.</p>' +
+          '<a href="rezervacia.html?produkt=web_mobile_app" class="btn btn-ghost btn-block">Vybrať Webovú a mobilnú aplikáciu</a>' +
         '</div>' +
       '</div>';
   }
@@ -60,9 +85,9 @@
     var today = new Date().toISOString().slice(0, 10);
 
     app.innerHTML =
-      '<div class="section-head" id="step-heading">' +
+      '<div id="step-heading" style="text-align:center; margin-bottom:20px;">' +
+        '<p style="color:var(--ink-faint); font-size:1.05rem; font-weight:500; margin-bottom:14px;">Posledný krok k uskutočneniu vašej vízie — vyberte si termín.</p>' +
         '<div class="eyebrow green">' + produktLabel + '</div>' +
-        '<h2>Krok 1 — Vyberte si termín</h2>' +
       '</div>' +
       '<div id="slot-area"><p>Načítavam dostupné termíny…</p></div>' +
       '<div id="form-area"></div>';
@@ -94,49 +119,152 @@
         });
     }
 
+    // Calendly-style two-step picker: Krok A je mesačný kalendárový grid
+    // (klik na deň s dostupnými termínmi), Krok B sú časové sloty pre
+    // vybraný deň (.slot-btn, presne ako predtým). Dáta zo slots poľa sa
+    // len preskupia podľa dátumu do byDate mapy — fetchSlots()/query sa
+    // nemení, len tento render.
     function renderSlots(slots) {
       if (!slots.length) {
         slotArea.innerHTML = '<p>Momentálne nemáme voľné termíny. Napíšte nám priamo na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a> a dohodneme sa individuálne.</p>';
         return;
       }
 
-      var groups = [];
-      var lastDatum = null;
+      var byDate = {};
       for (var i = 0; i < slots.length; i++) {
-        if (slots[i].datum !== lastDatum) {
-          groups.push({ datum: slots[i].datum, items: [] });
-          lastDatum = slots[i].datum;
-        }
-        groups[groups.length - 1].items.push(slots[i]);
+        var datum = slots[i].datum;
+        if (!byDate[datum]) byDate[datum] = [];
+        byDate[datum].push(slots[i]);
       }
 
-      var html = '';
-      for (var g = 0; g < groups.length; g++) {
-        var group = groups[g];
-        html += '<div class="slot-day"><h4>' + formatDate(group.datum) + '</h4><div class="slot-row">';
-        for (var s = 0; s < group.items.length; s++) {
-          var slot = group.items[s];
+      var firstAvailable = Object.keys(byDate).sort()[0];
+      var firstAvailableDate = new Date(firstAvailable + 'T00:00:00');
+      var viewYear = firstAvailableDate.getFullYear();
+      var viewMonth = firstAvailableDate.getMonth();
+      var todayDate = new Date(today + 'T00:00:00');
+      var selectedDate = null;
+
+      slotArea.innerHTML =
+        '<div class="calendar-wrap">' +
+          '<div class="calendar-col">' +
+            '<div class="calendar-nav">' +
+              '<button type="button" class="calendar-nav-btn" id="cal-prev" aria-label="Predchádzajúci mesiac">‹</button>' +
+              '<div class="calendar-title" id="cal-title"></div>' +
+              '<button type="button" class="calendar-nav-btn" id="cal-next" aria-label="Nasledujúci mesiac">›</button>' +
+            '</div>' +
+            '<div class="calendar-weekdays"><span>Po</span><span>Ut</span><span>St</span><span>Št</span><span>Pi</span><span>So</span><span>Ne</span></div>' +
+            '<div class="calendar-grid" id="cal-grid"></div>' +
+            '<p class="calendar-empty-note" id="cal-empty-note"></p>' +
+          '</div>' +
+          '<div class="calendar-times" id="cal-times"><p class="calendar-times-placeholder">Vyberte si deň v kalendári.</p></div>' +
+        '</div>';
+
+      var calTitle = document.getElementById('cal-title');
+      var calGrid = document.getElementById('cal-grid');
+      var calTimes = document.getElementById('cal-times');
+      var calEmptyNote = document.getElementById('cal-empty-note');
+      var prevBtn = document.getElementById('cal-prev');
+      var nextBtn = document.getElementById('cal-next');
+
+      var MONTH_NAMES = ['Január', 'Február', 'Marec', 'Apríl', 'Máj', 'Jún', 'Júl', 'August', 'September', 'Október', 'November', 'December'];
+
+      prevBtn.addEventListener('click', function () {
+        viewMonth--;
+        if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+        renderCalendar(true);
+      });
+      nextBtn.addEventListener('click', function () {
+        viewMonth++;
+        if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+        renderCalendar(true);
+      });
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function renderCalendar(animate) {
+        calTitle.textContent = MONTH_NAMES[viewMonth] + ' ' + viewYear;
+        prevBtn.disabled = (viewYear === todayDate.getFullYear() && viewMonth === todayDate.getMonth());
+
+        var firstOfMonth = new Date(viewYear, viewMonth, 1);
+        var startOffset = (firstOfMonth.getDay() + 6) % 7; // Po=0 ... Ne=6
+        var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+        var html = '';
+        for (var e = 0; e < startOffset; e++) {
+          html += '<div class="cal-day cal-day-empty"></div>';
+        }
+        var anyAvailable = false;
+        for (var day = 1; day <= daysInMonth; day++) {
+          var iso = viewYear + '-' + pad(viewMonth + 1) + '-' + pad(day);
+          var available = byDate.hasOwnProperty(iso) && iso >= today;
+          if (available) anyAvailable = true;
+
+          var classes = 'cal-day';
+          if (iso === today) classes += ' cal-day-today';
+          classes += available ? ' cal-day-available' : ' cal-day-disabled';
+          if (available && iso === selectedDate) classes += ' cal-day-selected';
+
+          html += '<button type="button" class="' + classes + '"' +
+            (available ? ' data-date="' + iso + '"' : ' disabled') +
+            '>' + day + '</button>';
+        }
+
+        calGrid.innerHTML = html;
+        calEmptyNote.textContent = anyAvailable ? '' : 'V tomto mesiaci nie sú žiadne voľné termíny.';
+
+        if (animate) {
+          calGrid.classList.remove('cal-fade-in');
+          void calGrid.offsetWidth;
+          calGrid.classList.add('cal-fade-in');
+        }
+
+        var dayButtons = calGrid.querySelectorAll('.cal-day-available');
+        for (var b = 0; b < dayButtons.length; b++) {
+          dayButtons[b].addEventListener('click', function () {
+            var prevSelected = calGrid.querySelector('.cal-day-selected');
+            if (prevSelected) prevSelected.classList.remove('cal-day-selected');
+            this.classList.add('cal-day-selected');
+            selectedDate = this.getAttribute('data-date');
+            renderTimes();
+          });
+        }
+      }
+
+      function renderTimes() {
+        if (!selectedDate || !byDate[selectedDate]) {
+          calTimes.innerHTML = '<p class="calendar-times-placeholder">Vyberte si deň v kalendári.</p>';
+          return;
+        }
+        var daySlots = byDate[selectedDate];
+        var html = '<h4>' + formatDate(selectedDate) + '</h4><div class="slot-row">';
+        for (var s = 0; s < daySlots.length; s++) {
+          var slot = daySlots[s];
           html += '<button type="button" class="slot-btn" data-slot-id="' + slot.id + '">' +
             slot.cas_od.slice(0, 5) + '–' + slot.cas_do.slice(0, 5) + '</button>';
         }
-        html += '</div></div>';
-      }
-      slotArea.innerHTML = html;
+        html += '</div>';
+        calTimes.innerHTML = html;
+        calTimes.classList.remove('cal-times-in');
+        void calTimes.offsetWidth;
+        calTimes.classList.add('cal-times-in');
 
-      var buttons = slotArea.querySelectorAll('.slot-btn');
-      for (var b = 0; b < buttons.length; b++) {
-        buttons[b].addEventListener('click', function () {
-          for (var k = 0; k < buttons.length; k++) { buttons[k].classList.remove('selected'); }
-          this.classList.add('selected');
-          var slotId = this.getAttribute('data-slot-id');
-          var match = null;
-          for (var m = 0; m < slots.length; m++) {
-            if (slots[m].id === slotId) { match = slots[m]; break; }
-          }
-          selectedSlot = match;
-          renderForm();
-        });
+        var buttons = calTimes.querySelectorAll('.slot-btn');
+        for (var b = 0; b < buttons.length; b++) {
+          buttons[b].addEventListener('click', function () {
+            for (var k = 0; k < buttons.length; k++) { buttons[k].classList.remove('selected'); }
+            this.classList.add('selected');
+            var slotId = this.getAttribute('data-slot-id');
+            var match = null;
+            for (var m = 0; m < daySlots.length; m++) {
+              if (daySlots[m].id === slotId) { match = daySlots[m]; break; }
+            }
+            selectedSlot = match;
+            renderForm();
+          });
+        }
       }
+
+      renderCalendar(false);
     }
 
     function renderForm() {

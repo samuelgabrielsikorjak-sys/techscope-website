@@ -227,3 +227,45 @@ create policy "Admin moze mazat sloty"
   for delete
   to authenticated
   using (true);
+
+-- ============================================================================
+-- exit_leads — kontakty zachytené exit-intent/neaktivita popupom
+-- (assets/exit-popup.js) naprieč verejnými stránkami. Samostatná od leads,
+-- keďže ide o oveľa "ľahší" kontakt (len email/telefón, bez produktu,
+-- rozpočtu, popisu projektu) zachytený mimo hlavného booking flow.
+-- ============================================================================
+create table exit_leads (
+  id uuid primary key default gen_random_uuid(),
+  meno text null,
+  email text null,
+  telefon text null,
+  zdrojova_stranka text not null,
+  created_at timestamptz not null default now(),
+
+  constraint exit_leads_kontakt_check check (email is not null or telefon is not null)
+);
+
+create index idx_exit_leads_created_at on exit_leads (created_at);
+
+alter table exit_leads enable row level security;
+
+drop policy if exists "Verejnost moze vlozit exit lead" on exit_leads;
+create policy "Verejnost moze vlozit exit lead"
+  on exit_leads
+  for insert
+  to anon
+  with check (true);
+
+drop policy if exists "Admin moze citat exit leady" on exit_leads;
+create policy "Admin moze citat exit leady"
+  on exit_leads
+  for select
+  to authenticated
+  using (true);
+
+drop policy if exists "Admin moze mazat exit leady" on exit_leads;
+create policy "Admin moze mazat exit leady"
+  on exit_leads
+  for delete
+  to authenticated
+  using (true);

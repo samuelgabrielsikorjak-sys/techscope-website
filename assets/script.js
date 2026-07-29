@@ -104,6 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // hero code-typing background — see assets/code-typer.js. That file is
+  // only loaded on pages that need it (homepage + product pages) and
+  // reads its content from a page-specific window.CODE_SEQUENCES set in
+  // an inline <script> just before it.
+
   // booking form — client-side only for now.
   // Builds a mailto: link so the request reaches you even before a real
   // booking backend / calendar embed (e.g. Calendly) is wired in.

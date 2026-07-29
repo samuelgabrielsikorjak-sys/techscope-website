@@ -7,15 +7,16 @@
 <title>Admin — TECH-SCOPE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="7" stroke="var(--accent)" stroke-width="2"/><path d="M13 11 L8 16 L13 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 11 L24 16 L19 21" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 16 L18 16" stroke="var(--mark-line)" stroke-width="2.4" stroke-linecap="round"/></svg>TECH-<span>SCOPE</span> <span style="font-size:0.65rem; color:var(--ink-faint); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; vertical-align:middle;">admin</span></a>
+    <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a><span class="logo-admin-tag">admin</span>
     <div class="nav-cta" id="admin-nav-actions"></div>
   </div>
 </nav>
@@ -102,6 +103,24 @@
             </tr>
           </thead>
           <tbody id="leads-tbody"><tr><td colspan="14">Načítavam…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-section" id="exit-leads-section">
+      <div class="section-head" style="text-align:left; margin:0 0 24px;">
+        <div class="eyebrow">Prehľad</div>
+        <h2>Exit Leady</h2>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Vytvorené</th><th>Meno</th><th>Email/Telefón</th><th>Zdrojová stránka</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="exit-leads-tbody"><tr><td colspan="5">Načítavam…</td></tr></tbody>
         </table>
       </div>
     </div>

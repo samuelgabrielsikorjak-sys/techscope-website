@@ -6,8 +6,11 @@
 
 (function () {
   var PRODUKT_LABELS = {
-    web_mobile_app: 'Launch Sprint',
-    softver_na_mieru: 'Garantovaný Systém'
+    ai_faktury: 'AI spracovanie faktúr',
+    ai_asistent: 'AI zákaznícky asistent',
+    dochadzka_system: 'Dochádzkový systém',
+    softver_na_mieru: 'Softvér na mieru',
+    web_mobile_app: 'Webová a mobilná aplikácia'
   };
   var STATUS_LABELS = { novy: 'Nový', kontaktovany: 'Kontaktovaný', uzavrety: 'Uzavretý' };
 
@@ -40,6 +43,7 @@
       });
       loadSlots();
       loadLeads();
+      loadExitLeads();
     }
 
     // onAuthStateChange vyšle aktuálny stav (session alebo null) hneď po
@@ -167,6 +171,7 @@ function loadSlots() {
     var leadsTbody = document.getElementById('leads-tbody');
     var leadSearchInput = document.getElementById('lead-search');
     var currentLeads = [];
+    var exitLeadsTbody = document.getElementById('exit-leads-tbody');
 
     function loadLeads() {
       leadsTbody.innerHTML = '<tr><td colspan="14">Načítavam…</td></tr>';
@@ -263,6 +268,101 @@ function loadSlots() {
           confirmPasswordAndDeleteLead(leadId, btn);
         });
       }
+    }
+
+    function loadExitLeads() {
+      if (!exitLeadsTbody) return;
+      exitLeadsTbody.innerHTML = '<tr><td colspan="5">Načítavam…</td></tr>';
+      window.supabaseClient
+        .from('exit_leads')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .then(function (res) {
+          if (res.error) {
+            exitLeadsTbody.innerHTML = '<tr><td colspan="5">Exit leady sa nepodarilo načítať.</td></tr>';
+            return;
+          }
+          renderExitLeads(res.data || []);
+        });
+    }
+
+    function renderExitLeads(leads) {
+      if (!leads.length) {
+        exitLeadsTbody.innerHTML = '<tr><td colspan="5">Zatiaľ žiadne exit leady.</td></tr>';
+        return;
+      }
+      var html = '';
+      for (var i = 0; i < leads.length; i++) {
+        var l = leads[i];
+        html += '<tr>' +
+          '<td>' + formatDateTime(l.created_at) + '</td>' +
+          '<td>' + escapeHtml(l.meno || '—') + '</td>' +
+          '<td>' + escapeHtml(l.email || l.telefon || '—') + '</td>' +
+          '<td>' + escapeHtml(l.zdrojova_stranka) + '</td>' +
+          '<td><button type="button" class="btn btn-ghost exit-lead-delete-btn" data-id="' + l.id + '">Zmazať</button></td>' +
+        '</tr>';
+      }
+      exitLeadsTbody.innerHTML = html;
+
+      var exitDeleteButtons = exitLeadsTbody.querySelectorAll('.exit-lead-delete-btn');
+      for (var d = 0; d < exitDeleteButtons.length; d++) {
+        exitDeleteButtons[d].addEventListener('click', function () {
+          var btn = this;
+          var leadId = btn.getAttribute('data-id');
+          confirmPasswordAndDeleteExitLead(leadId, btn);
+        });
+      }
+    }
+
+    // Rovnaká ochrana heslom ako pri mazaní leadov — exit_leads tiež obsahuje
+    // osobné kontaktné údaje (email/telefón/meno), takže mazanie musí byť
+    // rovnako nevratné a chránené re-authom, nielen obyčajným confirm().
+    function confirmPasswordAndDeleteExitLead(leadId, btn) {
+      var heslo = window.prompt('Pre zmazanie exit leadu znova zadajte svoje heslo:');
+      if (heslo === null) return;
+      if (!heslo) {
+        window.alert('Heslo je povinné, exit lead nebol zmazaný.');
+        return;
+      }
+
+      btn.disabled = true;
+
+      window.supabaseClient.auth.getSession().then(function (sessionRes) {
+        var session = sessionRes.data && sessionRes.data.session;
+        var email = session && session.user && session.user.email;
+        if (!email) {
+          btn.disabled = false;
+          window.alert('Nepodarilo sa overiť prihláseného používateľa.');
+          return;
+        }
+
+        window.supabaseClient.auth.signInWithPassword({ email: email, password: heslo }).then(function (authRes) {
+          if (authRes.error) {
+            btn.disabled = false;
+            window.alert('Nesprávne heslo. Exit lead nebol zmazaný.');
+            return;
+          }
+
+          if (!window.confirm('Naozaj natrvalo zmazať tento exit lead? Táto akcia sa nedá vrátiť späť.')) {
+            btn.disabled = false;
+            return;
+          }
+
+          window.supabaseClient.from('exit_leads').delete().eq('id', leadId).select().then(function (res) {
+            if (res.error) {
+              btn.disabled = false;
+              window.alert('Exit lead sa nepodarilo zmazať: ' + res.error.message);
+              return;
+            }
+            if (!res.data || res.data.length === 0) {
+              btn.disabled = false;
+              window.alert('Exit lead sa nezmazal — databáza nevrátila žiadny zmazaný riadok. Skontroluj, či je v Supabase spustená DELETE politika pre rolu authenticated na tabuľke exit_leads.');
+              return;
+            }
+            loadExitLeads();
+          });
+        });
+      });
     }
 
     // Zmazanie leadu je nevratné a ide o osobné údaje záujemcu, preto pred
