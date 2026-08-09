@@ -5,16 +5,12 @@
 // nepoužíva triedu .reveal — ten mechanizmus (assets/script.js) sleduje len
 // prvky prítomné v DOM pri DOMContentLoaded, takže neskôr pridané .reveal
 // prvky by ostali navždy neviditeľné (opacity:0).
+//
+// Jediný produkt (Data Compass) — formulár sa už nepýta, o ktorý produkt má
+// klient záujem (cenová hladina Data Compass / Data Compass Plus sa určuje
+// až na strategy calle podľa rozpočtu a rozsahu dátových zdrojov klienta).
 
 (function () {
-  var PRODUKT_LABELS = {
-    ai_faktury: 'AI spracovanie faktúr',
-    ai_asistent: 'AI zákaznícky asistent',
-    dochadzka_system: 'Dochádzkový systém',
-    softver_na_mieru: 'Softvér na mieru',
-    web_mobile_app: 'Webová a mobilná aplikácia'
-  };
-
   document.addEventListener('DOMContentLoaded', function () {
     var app = document.getElementById('rezervacia-app');
     if (!app) return;
@@ -24,70 +20,17 @@
       return;
     }
 
-    var params = new URLSearchParams(window.location.search);
-    var produktKey = params.get('produkt');
-
-    if (!PRODUKT_LABELS.hasOwnProperty(produktKey)) {
-      renderProductPicker(app);
-      return;
-    }
-
-    initBooking(app, produktKey);
+    initBooking(app);
   });
 
-  function renderProductPicker(app) {
-    app.innerHTML =
-      '<div class="section-head">' +
-        '<div class="eyebrow">Krok 0 · Výber produktu</div>' +
-        '<h2>Pre ktorý produkt chcete rezervovať strategy call?</h2>' +
-      '</div>' +
-      '<div class="branch-grid cols-3">' +
-        '<div class="branch-card">' +
-          '<div class="eyebrow">01</div>' +
-          '<h3>AI spracovanie faktúr</h3>' +
-          '<p class="outcome">Automaticky vyťažíme údaje z prijatých faktúr a zapíšeme ich priamo do vášho účtovného systému.</p>' +
-          '<a href="rezervacia.html?produkt=ai_faktury" class="btn btn-primary btn-block">Vybrať AI spracovanie faktúr</a>' +
-        '</div>' +
-        '<div class="branch-card">' +
-          '<div class="eyebrow">02</div>' +
-          '<h3>AI zákaznícky asistent</h3>' +
-          '<p class="outcome">Chatbot na vašej webovej stránke, ktorý okamžite odpovedá zákazníkom na základe znalostí o vašich produktoch.</p>' +
-          '<a href="rezervacia.html?produkt=ai_asistent" class="btn btn-primary btn-block">Vybrať AI zákazníckeho asistenta</a>' +
-        '</div>' +
-        '<div class="branch-card">' +
-          '<div class="eyebrow">03</div>' +
-          '<h3>Dochádzkový systém</h3>' +
-          '<p class="outcome">Digitálna evidencia dochádzky, dovoleniek a voľna na mieru vašich pravidiel, s exportom pre mzdové účtovníctvo.</p>' +
-          '<a href="rezervacia.html?produkt=dochadzka_system" class="btn btn-primary btn-block">Vybrať Dochádzkový systém</a>' +
-        '</div>' +
-      '</div>' +
-      '<div class="section-head" style="margin-top:56px; margin-bottom:28px;">' +
-        '<div class="eyebrow">Alebo vlastné riešenie</div>' +
-        '<p style="margin:0;">Potrebujete niečo úplne na mieru? Postavíme vám softvér alebo aplikáciu od nuly.</p>' +
-      '</div>' +
-      '<div class="branch-grid">' +
-        '<div class="branch-card compact">' +
-          '<div class="eyebrow">Softvér na mieru</div>' +
-          '<p class="outcome">Interný systém na mieru, ktorý nahrádza manuálne procesy a drahé SaaS nástroje vo vašej firme.</p>' +
-          '<a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-ghost btn-block">Vybrať Softvér na mieru</a>' +
-        '</div>' +
-        '<div class="branch-card compact">' +
-          '<div class="eyebrow">Webová a mobilná aplikácia</div>' +
-          '<p class="outcome">Weby, e-shopy a mobilné aplikácie navrhnuté a vyvinuté na mieru vášho biznisu — od analýzy až po nasadenie.</p>' +
-          '<a href="rezervacia.html?produkt=web_mobile_app" class="btn btn-ghost btn-block">Vybrať Webovú a mobilnú aplikáciu</a>' +
-        '</div>' +
-      '</div>';
-  }
-
-  function initBooking(app, produktKey) {
-    var produktLabel = PRODUKT_LABELS[produktKey];
+  function initBooking(app) {
     var selectedSlot = null;
     var today = new Date().toISOString().slice(0, 10);
 
     app.innerHTML =
       '<div id="step-heading" style="text-align:center; margin-bottom:20px;">' +
         '<p style="color:var(--ink-faint); font-size:1.05rem; font-weight:500; margin-bottom:14px;">Posledný krok k uskutočneniu vašej vízie — vyberte si termín.</p>' +
-        '<div class="eyebrow green">' + produktLabel + '</div>' +
+        '<div class="eyebrow green">Data Compass</div>' +
       '</div>' +
       '<div id="slot-area"><p>Načítavam dostupné termíny…</p></div>' +
       '<div id="form-area"></div>';
@@ -270,13 +213,54 @@
     function renderForm() {
       if (!selectedSlot) return;
       var summary = formatDate(selectedSlot.datum) + ', ' + selectedSlot.cas_od.slice(0, 5) + '–' + selectedSlot.cas_do.slice(0, 5);
+      var isFirstRender = !formArea.querySelector('form');
 
-      if (!formArea.querySelector('form')) {
-        formArea.innerHTML = buildFormHtml(produktLabel);
-        wireForm(summary);
+      if (isFirstRender) {
+        formArea.innerHTML = buildFormHtml();
+        wireForm();
       }
       var summaryEl = document.getElementById('selected-slot-summary');
       if (summaryEl) summaryEl.textContent = summary;
+
+      scrollToFormIfNeeded(isFirstRender);
+    }
+
+    // Always jump to the form on the very first slot pick (that's the
+    // whole point — no manual scrolling). On later re-picks (user changes
+    // their mind about the time) only re-scroll if the form has actually
+    // scrolled out of view — otherwise it'd yank the page around every
+    // time someone taps a different slot while already looking at the form.
+    function scrollToFormIfNeeded(isFirstRender) {
+      var firstInput = formArea.querySelector('#f-meno');
+      if (!firstInput) return;
+      if (!isFirstRender && isInViewport(firstInput)) return;
+
+      firstInput.style.scrollMarginTop = '90px'; // clears the sticky nav
+      firstInput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      var focused = false;
+      function doFocus() {
+        if (focused) return;
+        focused = true;
+        firstInput.focus({ preventScroll: true });
+      }
+      // Fires as soon as the smooth-scroll animation actually settles;
+      // the timeout is just a fallback for browsers without 'scrollend'
+      // (in which case it's the only thing that fires).
+      if ('onscrollend' in window) {
+        window.addEventListener('scrollend', doFocus, { once: true });
+      }
+      setTimeout(doFocus, 700);
+    }
+
+    // "Already there" has to mean more than "technically overlaps the
+    // viewport" — a field barely peeking in at the very bottom edge
+    // isn't usable and should still trigger a scroll. Require it to sit
+    // in the upper half, roughly where our own scroll-margin-top:90
+    // would place it anyway.
+    function isInViewport(el) {
+      var top = el.getBoundingClientRect().top;
+      return top >= -100 && top <= window.innerHeight * 0.5;
     }
 
     function wireForm() {
@@ -327,7 +311,6 @@
           p_pozicia: values.pozicia,
           p_email: values.email,
           p_telefon: values.telefon,
-          p_produkt: produktKey,
           p_rozpocet: values.rozpocet,
           p_urgencia: values.urgencia,
           p_popis_projektu: values.popis_projektu,
@@ -367,7 +350,7 @@
         '<div class="confirm-card">' +
           '<div class="confirm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="var(--money)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>' +
           '<h3>Rezervácia potvrdená, ' + escapeHtml(values.meno_priezvisko) + '!</h3>' +
-          '<p>Váš strategy call na <strong>' + produktLabel + '</strong> je rezervovaný na <strong>' + summary + '</strong>.</p>' +
+          '<p>Váš strategy call je rezervovaný na <strong>' + summary + '</strong>.</p>' +
           '<p>Ozveme sa vám do 1 pracovného dňa na ' + escapeHtml(values.email) + ' alebo ' + escapeHtml(values.telefon) + ' s potvrdením detailov.</p>' +
         '</div>';
     }
@@ -398,7 +381,7 @@
     return div.innerHTML;
   }
 
-  function buildFormHtml(produktLabel) {
+  function buildFormHtml() {
     return (
       '<div class="form-card" style="max-width:640px;margin:40px auto 0;">' +
         '<h3>Krok 2 — Vaše údaje</h3>' +
@@ -431,15 +414,11 @@
             '<span class="field-error">Zadajte prosím telefónne číslo.</span>' +
           '</div>' +
           '<div class="form-row">' +
-            '<label for="f-produkt">Produkt</label>' +
-            '<input type="text" id="f-produkt" name="produkt" value="' + produktLabel + '" readonly>' +
-          '</div>' +
-          '<div class="form-row">' +
             '<label for="f-rozpocet">Orientačný rozpočet</label>' +
             '<select id="f-rozpocet" name="rozpocet">' +
-              '<option value="<10k">&lt;10k €</option>' +
-              '<option value="10-20k">10-20k €</option>' +
-              '<option value="20k+">20k+ €</option>' +
+              '<option value="do 2 000 €">Do 2 000 €</option>' +
+              '<option value="2 000 – 6 000 €">2 000 – 6 000 €</option>' +
+              '<option value="neviem odhadnúť">Neviem odhadnúť</option>' +
             '</select>' +
           '</div>' +
           '<div class="form-row">' +

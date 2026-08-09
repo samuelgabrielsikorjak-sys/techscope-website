@@ -17,7 +17,6 @@ create extension if not exists "pgcrypto";
 -- ----------------------------------------------------------------------------
 -- ENUM typy
 -- ----------------------------------------------------------------------------
-create type produkt_typ as enum ('web_mobile_app', 'softver_na_mieru');
 create type lead_status as enum ('novy', 'kontaktovany', 'uzavrety');
 
 -- ----------------------------------------------------------------------------
@@ -48,7 +47,9 @@ create table leads (
   pozicia text not null,
   email text not null,
   telefon text not null,
-  produkt produkt_typ not null,
+  -- Jediný produkt (Data Compass) — stĺpec ostáva kvôli histórii/reportingu,
+  -- ale klient už jeho hodnotu neposiela, dopĺňa sa automaticky defaultom.
+  produkt text not null default 'data_compass',
   rozpocet text not null,
   urgencia text not null,
   popis_projektu text not null,
@@ -115,7 +116,6 @@ create or replace function public.vytvorit_rezervaciu(
   p_pozicia text,
   p_email text,
   p_telefon text,
-  p_produkt produkt_typ,
   p_rozpocet text,
   p_urgencia text,
   p_popis_projektu text,
@@ -147,13 +147,15 @@ begin
 
   insert into leads (
     meno_priezvisko, nazov_firmy, pozicia, email, telefon,
-    produkt, rozpocet, urgencia, popis_projektu, zdroj,
+    rozpocet, urgencia, popis_projektu, zdroj,
     gdpr_suhlas, slot_id, status
   ) values (
     p_meno_priezvisko, p_nazov_firmy, p_pozicia, p_email, p_telefon,
-    p_produkt, p_rozpocet, p_urgencia, p_popis_projektu, p_zdroj,
+    p_rozpocet, p_urgencia, p_popis_projektu, p_zdroj,
     p_gdpr_suhlas, p_slot_id, 'novy'
   )
+  -- produkt stĺpec sa nevkladá explicitne — použije sa jeho table default
+  -- ('data_compass'), keďže existuje len jeden produkt.
   returning id into v_lead_id;
 
   update call_slots
@@ -171,7 +173,7 @@ $$;
 -- v tomto bugu.
 
 grant execute on function public.vytvorit_rezervaciu(
-  text, text, text, text, text, produkt_typ, text, text, text, text, boolean, uuid
+  text, text, text, text, text, text, text, text, text, boolean, uuid
 ) to anon, authenticated;
 
 -- ============================================================================
