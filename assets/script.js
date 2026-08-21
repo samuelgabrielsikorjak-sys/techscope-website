@@ -197,20 +197,106 @@ document.addEventListener('DOMContentLoaded', function () {
     for (var cj = 0; cj < countEls.length; cj++) countIo.observe(countEls[cj]);
   }
 
-  // Shared "typing accordion" — a button+panel pair whose panel height
-  // animates via CSS grid-template-rows (0fr/1fr, see style.css) while its
-  // <p> text is revealed with a per-character typing effect, instead of a
-  // native <details> instant snap. Used by both the "ako pracujeme"
-  // step-cards and the level-2 items inside "Riešenia" — one implementation,
-  // reused, not duplicated. Opening sets .is-open (starts the height
-  // transition) AND clears the paragraph to empty in the same synchronous
-  // click handler, so the browser never paints the full original text
-  // first (that gap was the old "flash of full text" glitch). Highlighted
-  // phrases stay marked up in the source (<strong class="step-hl">) and
-  // are flattened once, up front, into a single ordered char stream so
-  // they type at the same steady pace as the rest of the sentence.
-  // `card` (optional) gets .is-open toggled too, for the outer bordered
-  // card/row's own hover-adjacent open styling.
+  // "pain points" carousel — 5 cards, one visible at a time via a
+  // translateX'd flex track. Autoplay is a setInterval; any interaction
+  // (hover, focus, click, touch/swipe) stops it immediately and schedules
+  // a resume a few seconds later, so it never fights someone reading a
+  // card or fires again mid-swipe. Dots give direct access to any card.
+  var painCarousel = document.querySelector('.pain-carousel');
+  if (painCarousel) {
+    var painTrack = painCarousel.querySelector('.pain-carousel-track');
+    var painSlides = painCarousel.querySelectorAll('.pain-card');
+    var painDotsWrap = painCarousel.querySelector('.pain-carousel-dots');
+    var painPrevBtn = painCarousel.querySelector('.pain-carousel-prev');
+    var painNextBtn = painCarousel.querySelector('.pain-carousel-next');
+    var painCount = painSlides.length;
+    var painReduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var painAutoMs = 4500;
+    var painResumeMs = 3000;
+    var painIndex = 0;
+    var painTimer = null;
+    var painResumeTimer = null;
+    var painDots = [];
+
+    for (var pd = 0; pd < painCount; pd++) {
+      (function (idx) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pain-carousel-dot';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Zobraziť kartu ' + (idx + 1) + ' z ' + painCount);
+        dot.addEventListener('click', function () { painGoTo(idx, true); });
+        painDotsWrap.appendChild(dot);
+        painDots.push(dot);
+      })(pd);
+    }
+
+    function painRender() {
+      painTrack.style.transform = 'translateX(-' + (painIndex * 100) + '%)';
+      for (var i = 0; i < painCount; i++) {
+        painDots[i].classList.toggle('is-active', i === painIndex);
+        painDots[i].setAttribute('aria-selected', i === painIndex ? 'true' : 'false');
+      }
+    }
+
+    function painGoTo(idx, isManual) {
+      painIndex = (idx + painCount) % painCount;
+      painRender();
+      if (isManual) painPauseThenResume();
+    }
+
+    function painStopAuto() {
+      if (painTimer) { clearInterval(painTimer); painTimer = null; }
+      if (painResumeTimer) { clearTimeout(painResumeTimer); painResumeTimer = null; }
+    }
+    function painStartAuto() {
+      if (painReduceMotion) return;
+      painStopAuto();
+      painTimer = setInterval(function () { painGoTo(painIndex + 1); }, painAutoMs);
+    }
+    function painPauseThenResume() {
+      painStopAuto();
+      painResumeTimer = setTimeout(painStartAuto, painResumeMs);
+    }
+
+    if (painPrevBtn) painPrevBtn.addEventListener('click', function () { painGoTo(painIndex - 1, true); });
+    if (painNextBtn) painNextBtn.addEventListener('click', function () { painGoTo(painIndex + 1, true); });
+
+    painCarousel.addEventListener('mouseenter', painStopAuto);
+    painCarousel.addEventListener('mouseleave', painPauseThenResume);
+    painCarousel.addEventListener('focusin', painStopAuto);
+    painCarousel.addEventListener('focusout', painPauseThenResume);
+
+    var painTouchStartX = null;
+    painCarousel.addEventListener('touchstart', function (e) {
+      painTouchStartX = e.touches[0].clientX;
+      painStopAuto();
+    }, { passive: true });
+    painCarousel.addEventListener('touchend', function (e) {
+      if (painTouchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - painTouchStartX;
+      painTouchStartX = null;
+      if (Math.abs(dx) > 40) painGoTo(painIndex + (dx < 0 ? 1 : -1), true);
+      else painPauseThenResume();
+    });
+
+    painRender();
+    painStartAuto();
+  }
+
+  // Shared accordion — a button+panel pair whose panel height animates via
+  // CSS grid-template-rows (0fr/1fr, see style.css) instead of a native
+  // <details> instant snap. Used by both the "ako pracujeme" step-cards
+  // and the level-2 items inside "Riešenia" — one implementation, reused,
+  // not duplicated. Highlighted phrases stay marked up in the source
+  // (<strong class="step-hl">) and are flattened once, up front, into a
+  // single ordered char stream. `card` (optional) gets .is-open toggled
+  // too, for the outer bordered card/row's own hover-adjacent open styling.
+  // `instant` (optional) skips the per-character typing effect entirely —
+  // the full (highlighted) text renders in one shot and just fades in via
+  // CSS (.step-card-panel-inner p transitions opacity on .is-open, see
+  // style.css) instead of typing out. Used by the step-cards; solu-items
+  // still get the full typing effect.
   var reduceMotionUI = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function escapeHtmlChar(ch) {
@@ -220,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return ch;
   }
 
-  function initTypingAccordion(card, trigger, panel) {
+  function initTypingAccordion(card, trigger, panel, instant) {
     var p = panel ? panel.querySelector('p') : null;
     if (!trigger || !panel || !p) return null;
 
@@ -319,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (card) card.classList.add('is-open');
       trigger.setAttribute('aria-expanded', 'true');
       panel.classList.add('is-open');
-      if (reduceMotionUI) {
+      if (instant || reduceMotionUI) {
         typingToken++;
         renderChars(chars.length, false, false);
       } else {
@@ -345,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var stepCardEls = document.querySelectorAll('.step-card');
   for (var sc = 0; sc < stepCardEls.length; sc++) {
     var stepCard = stepCardEls[sc];
-    initTypingAccordion(stepCard, stepCard.querySelector('.step-card-trigger'), stepCard.querySelector('.step-card-panel'));
+    initTypingAccordion(stepCard, stepCard.querySelector('.step-card-trigger'), stepCard.querySelector('.step-card-panel'), true);
   }
 
   // "riešenia" two-level accordion — level 1 (.solu-category) is a plain
@@ -398,21 +484,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // "value wheel" — 8 benefit nodes arranged in a circle around a static
   // "RAST" hub. Node rest-positions are computed by trigonometry (angle =
-  // index * 360/8, x/y = cos/sin * radius), then a CSS animation spins the
-  // whole ring while each node's inner wrapper runs the identical-duration
-  // animation in reverse so the two cancel out and node text stays upright
-  // — see the .value-nodes/.value-node-counter rules in style.css for the
-  // mechanism. Opening a node pauses both animations (freezing wherever
-  // the ring currently is) and draws a connecting line from the hub using
-  // real getBoundingClientRect() coordinates, so it's correct regardless
-  // of the frozen angle. Below the 768px breakpoint this is skipped
-  // entirely — CSS replaces the circle with a plain vertical list.
+  // index * 360/8, x/y = cos/sin * radius) once on load/resize — never
+  // per animation frame. Three independent layers then sit on top of
+  // each other, each animated with plain CSS transform/opacity:
+  //   .value-orbit-rings — static guide circles, pure CSS, JS never
+  //     touches them (sized as fixed % of .value-wheel).
+  //   .value-spokes — one SVG <line> per node, hub → that node's rest
+  //     position (endpoints set once by valueLayout(), same trig as the
+  //     node positions so they can never drift apart).
+  //   .value-nodes — the node markers/cards.
+  // .value-spokes and .value-nodes both get the *same* rotate animation
+  // (see valueSetSpinning) started in the same tick, so they stay in
+  // lockstep without being nested — that's what lets spokes render
+  // *behind* the hub while node cards render *above* it. Each node's own
+  // .value-node-counter runs that rotation in reverse at the same
+  // duration so its marker+label cancels the spin and stays upright —
+  // only its position orbits, never its content.
+  //
+  // Opening a node pauses all three rotations (freezing wherever the
+  // ring currently is) and opens a floating detail panel. Whichever node
+  // is nearest 12 o'clock gets a highlight (.is-top — see style.css):
+  // since rotation is CSS-driven and linear, we don't need to read the
+  // animated transform back — VALUE_ROTATE_MS (kept equal to the CSS
+  // animation-duration) plus elapsed time since the ring last restarted
+  // is enough to compute which of the 8 evenly-spaced nodes is currently
+  // closest to the top, the same trigonometry valueLayout() uses for
+  // rest positions. A manually-opened node (.is-open) reuses the exact
+  // same highlight treatment, applied to both the node and its spoke via
+  // valueSetSpokeLit(). Below 768px there's no ring to track, so a plain
+  // round-robin timer cycles the highlight down the static list instead
+  // — the "no physical rotation" fallback. Either mode is fully off
+  // under prefers-reduced-motion (one node stays highlighted, static).
   var valueWheelEl = document.querySelector('.value-wheel');
   if (valueWheelEl) {
     var valueRing = valueWheelEl.querySelector('.value-nodes');
-    var valueHub = valueWheelEl.querySelector('.value-hub');
-    var valueRaySvg = valueWheelEl.querySelector('.value-wheel-ray');
-    var valueRayLine = valueRaySvg ? valueRaySvg.querySelector('line') : null;
+    var valueSpokesSvg = valueWheelEl.querySelector('.value-spokes');
+    var valueSpokeGradient = valueWheelEl.querySelector('#value-spoke-gradient');
+    var valueSpokeEls = Array.prototype.slice.call(valueWheelEl.querySelectorAll('.value-spoke'));
     var valueNodeEls = Array.prototype.slice.call(valueWheelEl.querySelectorAll('.value-node'));
     var valueOpenNode = null;
 
@@ -426,6 +534,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var radius = size / 2 - size * 0.15;
       var cx = size / 2;
       var cy = size / 2;
+      if (valueSpokeGradient) {
+        valueSpokeGradient.setAttribute('cx', cx);
+        valueSpokeGradient.setAttribute('cy', cy);
+        valueSpokeGradient.setAttribute('r', radius);
+      }
       for (var i = 0; i < valueNodeEls.length; i++) {
         var angleDeg = i * (360 / valueNodeEls.length) - 90;
         var angleRad = angleDeg * Math.PI / 180;
@@ -436,43 +549,116 @@ document.addEventListener('DOMContentLoaded', function () {
         var cos = Math.cos(angleRad);
         var side = cos > 0.3 ? 'right' : (cos < -0.3 ? 'left' : 'center');
         valueNodeEls[i].setAttribute('data-side', side);
+        // "center" (top or bottom of the circle) needs to know which,
+        // so its marker can sit on the hub-facing edge of the card —
+        // see [data-vpos="top"] in style.css.
+        if (side === 'center') valueNodeEls[i].setAttribute('data-vpos', Math.sin(angleRad) < 0 ? 'top' : 'bottom');
+        else valueNodeEls[i].removeAttribute('data-vpos');
+        if (valueSpokeEls[i]) {
+          valueSpokeEls[i].setAttribute('x1', cx);
+          valueSpokeEls[i].setAttribute('y1', cy);
+          valueSpokeEls[i].setAttribute('x2', x);
+          valueSpokeEls[i].setAttribute('y2', y);
+        }
       }
     }
     valueLayout();
 
     function valueSetSpinning(on) {
       if (!valueRing) return;
-      if (reduceMotionUI || !valueIsDesktop()) { valueRing.classList.remove('is-spinning'); return; }
+      if (reduceMotionUI || !valueIsDesktop()) {
+        valueRing.classList.remove('is-spinning');
+        if (valueSpokesSvg) valueSpokesSvg.classList.remove('is-spinning');
+        return;
+      }
       valueRing.classList.toggle('is-spinning', on);
+      if (valueSpokesSvg) valueSpokesSvg.classList.toggle('is-spinning', on);
     }
     valueSetSpinning(true);
+
+    function valueSetSpokeLit(idx, on) {
+      if (valueSpokeEls[idx]) valueSpokeEls[idx].classList.toggle('is-lit', on);
+    }
+
+    // must match .value-nodes.is-spinning's animation-duration in style.css —
+    // this is how valueRefreshHighlightCycle() derives the ring's current
+    // rotation without reading the animated transform back from the DOM.
+    var VALUE_ROTATE_MS = 56000;
+    var VALUE_MOBILE_CYCLE_MS = 3500;
+    var valueHighlightTimer = null;
+    var valueHighlightIndex = -1;
+
+    function valueApplyHighlight(idx) {
+      if (idx === valueHighlightIndex) return;
+      if (valueHighlightIndex !== -1) valueSetSpokeLit(valueHighlightIndex, false);
+      valueHighlightIndex = idx;
+      for (var i = 0; i < valueNodeEls.length; i++) {
+        valueNodeEls[i].classList.toggle('is-top', i === idx);
+      }
+      valueSetSpokeLit(idx, true);
+    }
+
+    function valueStopHighlightCycle() {
+      if (valueHighlightTimer) { clearInterval(valueHighlightTimer); valueHighlightTimer = null; }
+    }
+
+    // desktop: the ring's CSS rotation restarts from 0deg every time
+    // valueSetSpinning(true) (re)applies .is-spinning, so `epoch` tracks
+    // that same restart — elapsed/VALUE_ROTATE_MS*360 is then the ring's
+    // current rotation, and node i's rest angle (identical formula to
+    // valueLayout()) plus that rotation gives its live angle. Polling
+    // every 400ms is plenty for a 7s-per-node changeover; the actual
+    // visual crossfade comes from the CSS transition on .is-top.
+    function valueStartRingHighlight() {
+      var epoch = performance.now();
+      function tick() {
+        var elapsed = performance.now() - epoch;
+        var rotationDeg = (elapsed / VALUE_ROTATE_MS) * 360 % 360;
+        var best = 0, bestDist = Infinity;
+        for (var i = 0; i < valueNodeEls.length; i++) {
+          var restAngle = i * (360 / valueNodeEls.length) - 90;
+          var liveAngle = (restAngle + rotationDeg) % 360;
+          if (liveAngle < 0) liveAngle += 360;
+          var dist = Math.abs(liveAngle - 270);
+          dist = Math.min(dist, 360 - dist);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        valueApplyHighlight(best);
+      }
+      tick();
+      valueHighlightTimer = setInterval(tick, 400);
+    }
+
+    // mobile: no ring to track, so just cycle down the static list —
+    // the "cyclic fade without physical rotation" fallback.
+    function valueStartListHighlight() {
+      var idx = 0;
+      valueApplyHighlight(idx);
+      valueHighlightTimer = setInterval(function () {
+        idx = (idx + 1) % valueNodeEls.length;
+        valueApplyHighlight(idx);
+      }, VALUE_MOBILE_CYCLE_MS);
+    }
+
+    function valueRefreshHighlightCycle() {
+      valueStopHighlightCycle();
+      if (valueOpenNode) return;
+      if (reduceMotionUI) { valueApplyHighlight(0); return; }
+      if (valueIsDesktop()) valueStartRingHighlight(); else valueStartListHighlight();
+    }
+    valueRefreshHighlightCycle();
 
     window.addEventListener('resize', function () {
       valueLayout();
       valueSetSpinning(!valueOpenNode);
+      valueRefreshHighlightCycle();
     });
-
-    function valueShowRay(node) {
-      if (!valueRaySvg || !valueRayLine || !valueHub || !valueIsDesktop()) return;
-      var wheelRect = valueWheelEl.getBoundingClientRect();
-      var hubRect = valueHub.getBoundingClientRect();
-      var dot = node.querySelector('.value-node-dot');
-      var dotRect = dot.getBoundingClientRect();
-      valueRayLine.setAttribute('x1', hubRect.left + hubRect.width / 2 - wheelRect.left);
-      valueRayLine.setAttribute('y1', hubRect.top + hubRect.height / 2 - wheelRect.top);
-      valueRayLine.setAttribute('x2', dotRect.left + dotRect.width / 2 - wheelRect.left);
-      valueRayLine.setAttribute('y2', dotRect.top + dotRect.height / 2 - wheelRect.top);
-      valueRaySvg.classList.add('is-visible');
-    }
-    function valueHideRay() {
-      if (valueRaySvg) valueRaySvg.classList.remove('is-visible');
-    }
 
     function valuePositionPanel(node) {
       var panel = node.querySelector('.value-node-panel');
       if (!valueIsDesktop()) { panel.removeAttribute('data-placement'); return; }
       var wheelRect = valueWheelEl.getBoundingClientRect();
-      var dotRect = node.querySelector('.value-node-dot').getBoundingClientRect();
+      var dotRect = node.querySelector('.value-node-trigger').getBoundingClientRect();
       var relY = dotRect.top - wheelRect.top;
       panel.setAttribute('data-placement', relY < wheelRect.height / 2 ? 'below' : 'above');
     }
@@ -497,6 +683,12 @@ document.addEventListener('DOMContentLoaded', function () {
       trigger.setAttribute('aria-expanded', 'false');
       panel.classList.remove('is-open');
       panel.style.transform = '';
+      // only unlight this node's spoke if it isn't also the current
+      // rotation-highlight winner — closing shouldn't dim a spoke that
+      // valueApplyHighlight() is independently keeping lit.
+      if (parseInt(node.getAttribute('data-index'), 10) !== valueHighlightIndex) {
+        valueSetSpokeLit(node.getAttribute('data-index'), false);
+      }
     }
 
     function valueOpenNodeFn(node) {
@@ -504,12 +696,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var trigger = node.querySelector('.value-node-trigger');
       var panel = node.querySelector('.value-node-panel');
       valueSetSpinning(false);
+      valueStopHighlightCycle();
       valuePositionPanel(node);
       node.classList.add('is-open');
       trigger.setAttribute('aria-expanded', 'true');
       panel.classList.add('is-open');
       valueOpenNode = node;
-      valueShowRay(node);
+      valueSetSpokeLit(node.getAttribute('data-index'), true);
       valueClampPanel(node);
     }
 
@@ -521,8 +714,8 @@ document.addEventListener('DOMContentLoaded', function () {
           if (node.classList.contains('is-open')) {
             valueCloseNode(node);
             valueOpenNode = null;
-            valueHideRay();
             valueSetSpinning(true);
+            valueRefreshHighlightCycle();
           } else {
             valueOpenNodeFn(node);
           }
@@ -534,8 +727,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (valueOpenNode && !valueWheelEl.contains(e.target)) {
         valueCloseNode(valueOpenNode);
         valueOpenNode = null;
-        valueHideRay();
         valueSetSpinning(true);
+        valueRefreshHighlightCycle();
       }
     });
   }

@@ -24,6 +24,8 @@
   --scene-blue:var(--accent);
 
   --bg-rgb:10,14,26;
+  --bg-elevated-rgb:21,27,46;
+  --line-rgb:35,43,66;
   --accent-rgb:59,130,246;
   --money-rgb:16,185,129;
   --gold-rgb:245,179,36;
@@ -376,27 +378,54 @@ section{ padding:80px 0; }
 
 /* ---------- value wheel ("koleso hodnoty") ----------
    8 nodes positioned by trigonometry (JS: angle = index * 360/8, x/y via
-   cos/sin) around a static central "RAST" hub. .value-nodes (the ring)
-   spins ambiently via a CSS animation; each node's .value-node-counter
-   runs the exact same-duration animation in reverse so the two rotations
-   cancel out and the dot+label stay upright the whole time — only the
-   ring's rotate() moves nodes around the circle, nothing rotates their
-   content. Clicking a node pauses both animations (freezing the layout
-   exactly where it is) and opens a small floating panel; a thin SVG line
-   is drawn from the hub to the open node using getBoundingClientRect(),
-   so it's correct regardless of which angle the ring froze at. */
-#hodnota{ padding:28px 0 32px; }
+   cos/sin) around a static central "RAST" hub. Three independent layers
+   sit on top of each other, all pure CSS transform/opacity animations —
+   JS only ever computes rest-position geometry once (on load/resize), it
+   never drives the rotation frame-by-frame:
+     .value-orbit-rings  — static, non-rotating guide circles (context only)
+     .value-spokes        — SVG lines, hub → each node's rest position,
+                             behind the hub (z-index 1)
+     .value-nodes          — the node markers/cards, above the hub (z-index 3)
+   .value-spokes and .value-nodes both get the identical value-wheel-spin
+   animation (same duration/easing, started in the same JS tick via
+   valueSetSpinning), so they stay perfectly in lockstep without being
+   nested — that's what lets spokes render *behind* the hub while nodes
+   render *above* it, instead of forcing one shared stacking order.
+   Each node's own .value-node-counter runs that rotation in reverse at
+   the same duration so its marker+label content cancels the spin and
+   stays upright — only its *position* orbits, never its content.
+   Clicking a node pauses everything (freezing wherever the ring is) and
+   opens a floating detail panel. Whichever node is currently nearest the
+   12-o'clock position gets .is-top (see valueRefreshHighlightCycle() in
+   script.js) — brighter label, accent card border, lit spoke/marker —
+   and the same treatment is reused for a manually-opened node (.is-open).
+   Both are pure color/glow/opacity changes, never layout, so they can't
+   desync the trigonometric positions and stay cheap to animate. */
+#hodnota{ padding:40px 0 48px; }
 #hodnota .section-head{ margin-bottom:20px; }
 
 .value-wheel{
   position:relative; width:min(1080px,94vw); aspect-ratio:1/1; margin:0 auto;
+  background:radial-gradient(circle at 50% 50%, rgba(var(--scene-blue-rgb),0.06), transparent 62%);
 }
-.value-wheel-ray{
-  position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none;
-  opacity:0; transition:opacity .25s ease;
+
+.value-orbit-rings{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+.value-orbit-ring{
+  position:absolute; top:50%; left:50%; border-radius:50%; transform:translate(-50%,-50%);
+  border:1px solid rgba(var(--scene-blue-rgb),0.12);
 }
-.value-wheel-ray.is-visible{ opacity:1; }
-.value-wheel-ray line{ stroke:var(--scene-blue); stroke-width:1.5; }
+.value-orbit-ring--outer{ width:70%; height:70%; }
+.value-orbit-ring--inner{ width:45%; height:45%; border-color:rgba(var(--scene-blue-rgb),0.08); }
+
+.value-spokes{ position:absolute; inset:0; z-index:1; overflow:visible; pointer-events:none; }
+.value-spokes.is-spinning{ animation:value-wheel-spin 56s linear infinite; }
+.value-spoke{
+  stroke:url(#value-spoke-gradient); stroke-width:1.25; stroke-linecap:round;
+  opacity:.4; transition:opacity .5s ease;
+}
+.value-spoke.is-lit{ opacity:1; filter:drop-shadow(0 0 3px rgba(var(--scene-blue-rgb),0.7)); }
+#value-spoke-gradient stop:first-child{ stop-color:var(--scene-blue); stop-opacity:0.85; }
+#value-spoke-gradient stop:last-child{ stop-color:var(--scene-blue); stop-opacity:0; }
 
 .value-hub{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
@@ -406,10 +435,22 @@ section{ padding:80px 0; }
   border:2px solid var(--scene-blue);
   box-shadow:0 0 46px -6px rgba(var(--scene-blue-rgb),0.55), inset 0 0 0 1px rgba(var(--scene-blue-rgb),0.18);
 }
+.value-hub::before{
+  content:''; position:absolute; inset:-26%; z-index:-2; border-radius:50%;
+  background:radial-gradient(circle, rgba(var(--scene-blue-rgb),0.3), transparent 68%);
+  filter:blur(4px);
+  animation:value-hub-pulse 3.6s ease-in-out infinite;
+}
+.value-hub::after{
+  content:''; position:absolute; inset:-3px; z-index:-1; border-radius:50%; opacity:.6;
+  background:conic-gradient(from 120deg, rgba(var(--scene-blue-rgb),0.9), rgba(var(--scene-blue-rgb),0.1) 40%, rgba(var(--scene-blue-rgb),0.85) 80%, rgba(var(--scene-blue-rgb),0.9));
+  animation:value-hub-pulse 3.6s ease-in-out infinite alternate;
+}
 .value-hub span{
   font-family:var(--font-display); font-weight:800; letter-spacing:0.03em;
   font-size:clamp(1.75rem,4vw,2.3rem); color:var(--ink);
 }
+@keyframes value-hub-pulse{ 0%,100%{ opacity:.5; } 50%{ opacity:1; } }
 
 .value-nodes{ position:absolute; inset:0; z-index:3; transform-origin:50% 50%; }
 .value-nodes.is-spinning{ animation:value-wheel-spin 56s linear infinite; }
@@ -420,32 +461,58 @@ section{ padding:80px 0; }
 .value-node-counter{ transform-origin:50% 50%; position:relative; }
 .value-nodes.is-spinning .value-node-counter{ animation:value-wheel-spin-reverse 56s linear infinite; }
 
+.value-node-marker{
+  width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--scene-blue);
+  box-shadow:0 0 6px rgba(var(--scene-blue-rgb),0.55);
+  transition:box-shadow .35s ease;
+  animation:value-marker-breathe 4.5s ease-in-out infinite;
+}
+@keyframes value-marker-breathe{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.16); } }
+
 .value-node-trigger{
-  all:unset; box-sizing:border-box; display:flex; align-items:center; gap:8px; cursor:pointer;
-  padding:6px 8px; border-radius:20px; transition:background .2s ease;
+  box-sizing:border-box; display:flex; align-items:center; gap:9px; cursor:pointer;
+  padding:9px 14px; border-radius:8px; text-align:left;
+  border:1px solid rgba(var(--line-rgb),0.8);
+  background:rgba(var(--bg-elevated-rgb),0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  transition:background .35s ease, border-color .35s ease, box-shadow .35s ease;
 }
 .value-node[data-side="left"] .value-node-trigger{ flex-direction:row-reverse; }
-.value-node[data-side="center"] .value-node-trigger{ flex-direction:column; gap:6px; text-align:center; }
-.value-node-dot{
-  width:9px; height:9px; border-radius:50%; background:var(--ink-faint); flex-shrink:0;
-  transition:background .2s ease, box-shadow .2s ease, transform .2s ease;
-}
+.value-node[data-side="center"] .value-node-trigger{ flex-direction:column; text-align:center; }
+.value-node[data-vpos="top"] .value-node-trigger{ flex-direction:column-reverse; }
 .value-node-label{
-  max-width:132px; font-size:0.8rem; font-weight:700; line-height:1.28; color:var(--ink-soft);
-  transition:color .2s ease;
+  max-width:148px; font-size:1rem; font-weight:600; line-height:1.3; color:var(--ink-soft);
+  transition:color .35s ease, text-shadow .35s ease;
 }
 .value-node[data-side="left"] .value-node-label{ text-align:right; }
 .value-node[data-side="right"] .value-node-label{ text-align:left; }
 .value-node[data-side="center"] .value-node-label{ text-align:center; }
 
-.value-node-trigger:hover .value-node-dot,
-.value-node.is-open .value-node-dot{
-  background:var(--scene-blue); box-shadow:0 0 10px rgba(var(--scene-blue-rgb),0.7); transform:scale(1.35);
+.value-node-trigger:hover,
+.value-node.is-open .value-node-trigger{
+  border-color:var(--scene-blue); background:rgba(var(--bg-elevated-rgb),0.75);
 }
 .value-node-trigger:hover .value-node-label,
 .value-node.is-open .value-node-label{ color:var(--ink); }
-.value-node.is-open .value-node-trigger{ background:rgba(var(--scene-blue-rgb),0.12); }
 .value-node-trigger:focus-visible{ outline:2px solid var(--scene-blue); outline-offset:2px; }
+
+/* the node currently nearest the 12-o'clock position as the ring rotates
+   (desktop) or the node currently "up" in the mobile cycle — see the
+   valueRefreshHighlightCycle()/valueApplyHighlight() JS. Reused for a
+   manually-opened node too (.is-open). */
+.value-node.is-top .value-node-label,
+.value-node.is-open .value-node-label{
+  color:var(--ink); text-shadow:0 0 12px rgba(var(--scene-blue-rgb),0.55);
+}
+.value-node.is-top .value-node-trigger,
+.value-node.is-open .value-node-trigger{
+  border-color:var(--scene-blue); background:rgba(var(--bg-elevated-rgb),0.75);
+  box-shadow:0 0 24px -8px rgba(var(--scene-blue-rgb),0.55);
+}
+.value-node.is-top .value-node-marker,
+.value-node.is-open .value-node-marker{
+  box-shadow:0 0 16px rgba(var(--scene-blue-rgb),0.9), 0 0 4px rgba(var(--scene-blue-rgb),1);
+}
 
 .value-node-panel{
   position:absolute; top:100%; left:50%; transform:translateX(-50%); margin-top:8px;
@@ -463,32 +530,47 @@ section{ padding:80px 0; }
 }
 
 .value-wheel-note{
-  max-width:56ch; margin:20px auto 0; text-align:center; font-size:0.92rem; color:var(--ink-soft);
+  max-width:56ch; margin:28px auto 0; text-align:center; font-size:0.92rem; color:var(--ink-soft);
 }
 
-/* mobile: replace the circle with a plain vertical list, same expand
-   mechanism, no rotation. JS skips computing node positions below the
-   768px breakpoint, so these overrides are all this needs. */
+@media (prefers-reduced-motion:reduce){
+  .value-hub::before, .value-hub::after, .value-node-marker{ animation:none; }
+}
+
+/* mobile: replace the circle with a plain vertical list of the same
+   glass cards, no orbit geometry — trigger+panel share one rounded card
+   (.value-node-counter) so the expanding detail stays visually contained.
+   JS skips computing node positions below the 768px breakpoint, so these
+   overrides are all this needs. */
 @media (max-width:767px){
-  .value-wheel{ width:100%; aspect-ratio:auto; }
-  .value-wheel-ray{ display:none; }
+  .value-wheel{ width:100%; aspect-ratio:auto; background:none; }
+  .value-orbit-rings, .value-spokes{ display:none; }
   .value-hub{
     position:static; transform:none; width:auto; height:auto; margin:0 0 24px; border:none;
     background:none; box-shadow:none; border-radius:0;
   }
+  .value-hub::before, .value-hub::after{ display:none; }
   .value-hub span{ font-size:1.5rem; }
-  .value-nodes{ position:static; display:flex; flex-direction:column; gap:2px; }
+  .value-nodes{ position:static; display:flex; flex-direction:column; gap:10px; }
   .value-node{ position:static !important; transform:none; }
-  .value-node-counter{ animation:none !important; }
-  .value-node-trigger, .value-node[data-side] .value-node-trigger{
-    flex-direction:row; width:100%; padding:14px 4px; border-radius:0;
-    border-bottom:1px solid var(--line);
+  .value-node-counter{
+    animation:none !important; overflow:hidden; border-radius:10px;
+    border:1px solid rgba(var(--line-rgb),0.8); background:rgba(var(--bg-elevated-rgb),0.4);
+    transition:background .35s ease, border-color .35s ease;
   }
-  .value-node-label, .value-node[data-side] .value-node-label{ max-width:none; text-align:left; flex:1; font-size:0.92rem; }
+  .value-node.is-top .value-node-counter,
+  .value-node.is-open .value-node-counter{
+    border-color:var(--scene-blue); background:rgba(var(--bg-elevated-rgb),0.75);
+  }
+  .value-node-trigger, .value-node[data-side] .value-node-trigger, .value-node[data-vpos] .value-node-trigger{
+    flex-direction:row; width:100%; padding:14px 16px; border-radius:0; border:none; background:none;
+  }
+  .value-node-trigger:hover, .value-node.is-open .value-node-trigger{ background:none; }
+  .value-node-label, .value-node[data-side] .value-node-label{ max-width:none; text-align:left; flex:1; font-size:1rem; }
   .value-node-panel, .value-node-panel[data-placement="above"]{
     position:static; width:auto; margin:0; transform:none; bottom:auto;
   }
-  .value-node-panel-inner p{ border:none; border-radius:0; background:none; padding:0 0 14px; }
+  .value-node-panel-inner p{ border:none; border-radius:0; background:none; padding:0 16px 14px; }
 }
 
 /* ---------- value equation ---------- */
@@ -549,7 +631,8 @@ section{ padding:80px 0; }
 }
 .step-card-panel.is-open{ grid-template-rows:1fr; }
 .step-card-panel-inner{ overflow:hidden; min-height:0; }
-.step-card-panel-inner p{ margin:16px 0 0; font-size:0.9rem; color:var(--ink-soft); }
+.step-card-panel-inner p{ margin:16px 0 0; font-size:0.9rem; color:var(--ink-soft); opacity:0; transition:opacity .4s ease; }
+.step-card-panel.is-open .step-card-panel-inner p{ opacity:1; }
 .step-card-panel-inner p .step-hl{ color:var(--scene-blue); font-weight:800; }
 .step-card-panel-inner p .type-char-new{
   color:var(--ink); text-shadow:0 0 8px rgba(var(--scene-blue-rgb),0.55);
@@ -558,6 +641,9 @@ section{ padding:80px 0; }
 .step-typing-cursor{
   display:inline-block; width:2px; height:0.95em; margin-left:1px; vertical-align:-0.12em;
   background:var(--scene-blue); animation:cursor-blink 1s step-end infinite;
+}
+@media (prefers-reduced-motion:reduce){
+  .step-card-panel-inner p{ transition:none; }
 }
 
 .step-card.reveal{
@@ -836,13 +922,33 @@ section{ padding:80px 0; }
 /* ---------- section head ---------- */
 .section-head{ max-width:680px; margin:0 auto 48px; text-align:center; }
 
-/* ---------- pain points ---------- */
-.pain-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-@media (max-width:720px){ .pain-grid{ grid-template-columns:1fr; } }
-.pain-card{ padding:22px 24px; border-left:3px solid var(--accent); background:var(--bg-soft); border-radius:0 var(--radius) var(--radius) 0; transition:transform .2s ease, box-shadow .2s ease; }
+/* ---------- pain points carousel ---------- */
+.pain-carousel{ max-width:620px; margin:0 auto; }
+.pain-carousel-viewport{ overflow:hidden; border-radius:0 var(--radius) var(--radius) 0; }
+.pain-carousel-track{ display:flex; transition:transform .5s cubic-bezier(.16,1,.3,1); }
+.pain-carousel-track .pain-card{ flex:0 0 100%; width:100%; box-sizing:border-box; }
+.pain-card{ padding:22px 24px; border-left:3px solid var(--accent); background:var(--bg-soft); border-radius:0 var(--radius) var(--radius) 0; transition:transform .2s ease, box-shadow .2s ease; min-height:118px; }
 .pain-card:hover{ transform:translateY(-3px) translateX(2px); box-shadow:0 14px 26px -20px rgba(17,17,20,.28); }
 .pain-card h4{ font-family:var(--font-body); font-weight:800; margin:0 0 6px; font-size:1rem; }
 .pain-card p{ margin:0; font-size:0.92rem; }
+.pain-card-list{ margin:0; padding-left:18px; font-size:0.92rem; color:var(--ink); }
+.pain-card-list li{ margin:0 0 4px; }
+.pain-card-list li:last-child{ margin-bottom:0; }
+
+.pain-carousel-controls{ display:flex; align-items:center; justify-content:center; gap:18px; margin-top:18px; }
+.pain-carousel-arrow{
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:50%;
+  border:1px solid var(--line); background:transparent; color:var(--scene-blue);
+  cursor:pointer; transition:background .2s ease, border-color .2s ease;
+}
+.pain-carousel-arrow:hover{ background:rgba(var(--scene-blue-rgb),0.1); border-color:var(--scene-blue); }
+.pain-carousel-arrow:focus-visible{ outline:2px solid var(--scene-blue); outline-offset:2px; }
+.pain-carousel-dots{ display:flex; align-items:center; gap:8px; }
+.pain-carousel-dot{ width:8px; height:8px; padding:0; border:none; border-radius:50%; background:var(--line); cursor:pointer; transition:background .2s ease, transform .2s ease; }
+.pain-carousel-dot:hover{ background:var(--ink-faint); }
+.pain-carousel-dot.is-active{ background:var(--scene-blue); transform:scale(1.35); }
+.pain-carousel-dot:focus-visible{ outline:2px solid var(--scene-blue); outline-offset:2px; }
 
 /* ---------- dark cta band ---------- */
 .band-dark{ background:var(--dark); color:#fff; }

@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /sluzby-faktury.html
+Disallow: /sluzby-asistent.html
+Disallow: /sluzby-dochadzka.html
+Disallow: /sluzby-softver.html
+Disallow: /produkt-apps.html
 
 Sitemap: https://techscope.sk/sitemap.xml
