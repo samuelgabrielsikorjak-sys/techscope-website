@@ -118,6 +118,11 @@ section{ padding:80px 0; }
 .nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--accent); transition:right .22s ease; }
 .nav-links a:hover{ color:var(--ink); }
 .nav-links a:hover::after{ right:0; }
+/* Explicit flex row (not just relying on inline whitespace between the
+   two <a> buttons + <button> toggle) — without this, the block-level
+   .nav-cta's fit-content width calculation was wrapping the toggle onto
+   its own line on narrow phones even though there was room for it. */
+.nav-cta{ display:flex; align-items:center; gap:10px; }
 .nav-toggle{ display:none; background:none; color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:8px 10px; cursor:pointer; transition:border-color .16s ease; }
 .nav-toggle:hover{ border-color:var(--accent); }
 /* rezervacia.html: nav-links centered in the bar on desktop (no nav-cta
@@ -135,6 +140,45 @@ section{ padding:80px 0; }
   .nav-links a::after{ display:none; }
   .nav-toggle{ display:block; }
   .nav-cta .btn-primary{ display:none; }
+  /* .btn-secondary ("Klientská zóna") stays visible here, unlike the
+     primary CTA — it's the only nav-cta button left once the primary
+     hides, so it gets a smaller footprint to sit comfortably next to the
+     hamburger instead of crowding it. */
+  .nav-cta .btn-secondary{ padding:8px 14px; font-size:0.82rem; }
+}
+
+/* ---------- nav "Služby" dropdown ----------
+   Desktop: hover/focus reveals a small floating menu under the trigger —
+   the trigger itself stays a real link to index.html#sluzby, so the
+   dropdown is a shortcut on top of a working fallback, not a replacement
+   for one. Mobile (<=880px, same breakpoint as the rest of the nav's
+   collapse): no hover, so the submenu just renders inline/static, indented
+   under "Služby", inside the already-open .nav-links panel. */
+.nav-dropdown{ position:relative; }
+.nav-dropdown-menu{
+  position:absolute; top:100%; left:0; min-width:230px; margin:6px 0 0; padding:8px; list-style:none;
+  background:var(--bg-elevated); border:1px solid var(--line); border-radius:10px;
+  box-shadow:0 16px 30px -20px rgba(17,17,20,.35);
+  opacity:0; visibility:hidden; transform:translateY(6px); pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease, visibility .18s;
+  z-index:60;
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu{
+  opacity:1; visibility:visible; transform:translateY(0); pointer-events:auto;
+}
+.nav-dropdown-menu li{ width:auto; }
+.nav-dropdown-menu a{
+  display:block; padding:10px 12px; border-radius:6px; font-size:0.88rem; font-weight:600; color:var(--ink-soft);
+}
+.nav-dropdown-menu a::after{ display:none; }
+.nav-dropdown-menu a:hover{ background:rgba(var(--scene-blue-rgb),0.08); color:var(--ink); }
+@media (max-width:880px){
+  .nav-dropdown-menu{
+    position:static; margin:0; padding:0 0 0 16px; opacity:1; visibility:visible; transform:none; pointer-events:auto;
+    background:transparent; border:none; box-shadow:none;
+  }
+  .nav-dropdown-menu a{ padding:14px 24px; border-bottom:1px solid var(--line); border-radius:0; }
 }
 
 /* ---------- buttons ----------
@@ -156,6 +200,21 @@ section{ padding:80px 0; }
 }
 .btn-ghost:hover{ color:var(--ink); background-size:100% 1px; }
 .btn-block{ width:100%; }
+
+/* nav-only secondary CTA ("Klientská zóna") — same size/shape as
+   .btn-primary so the two sit level in the header, but a thin faint line
+   colored border + muted text instead of the bold ink outline keeps it
+   clearly the less prominent of the two. */
+.btn-secondary{ background:transparent; color:var(--ink-soft); border-color:var(--line); }
+.btn-secondary:hover{ color:var(--ink); border-color:var(--scene-blue); background:rgba(var(--scene-blue-rgb),0.06); }
+.btn-secondary:active{ color:var(--ink); border-color:var(--scene-blue); background:rgba(var(--scene-blue-rgb),0.1); }
+
+/* destructive admin action (e.g. "Zmazať projekt") — thin danger-colored
+   outline, deliberately smaller than the full-size primary CTA so it never
+   reads as the "main" button in a card header. */
+.btn-danger{ background:transparent; color:var(--danger); border-color:rgba(var(--danger-rgb),.4); padding:10px 18px; font-size:0.85rem; font-weight:700; flex-shrink:0; }
+.btn-danger:hover{ background:var(--danger-soft); border-color:var(--danger); }
+.btn-danger:active{ background:rgba(var(--danger-rgb),.15); }
 
 /* ---------- eyebrow / tags ---------- */
 .eyebrow{ display:inline-flex; align-items:center; gap:7px; font-weight:800; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
@@ -353,6 +412,144 @@ section{ padding:80px 0; }
   .hero-subheadline{ max-width:none; }
   .hero-code-block{ font-size:0.72rem; height:clamp(140px, 26vh, 190px); padding:12px 14px; }
 }
+
+/* ---------- hero, centered hub variant ----------
+   Hub page (index.html): same full-bleed ambient canvas as the product
+   pages' hero-viz, but no two-column code terminal — just a single
+   centered copy block, since the hero's job here is to route into the 4
+   service pages, not sell one product. .hero-editor stays in the DOM
+   (assets/hero-viz.js requires .hero-code-block to exist to start at
+   all) but visually hidden via .visually-hidden. */
+/* .hero.hero-split.hero-hub (all three classes, matching the actual
+   markup exactly) is deliberate, not decoration: .hero.hero-split alone
+   sets text-align:left at (0,2,0) specificity for the other 4 hero-split
+   pages, which otherwise silently beats a plain .hero-hub{text-align:
+   center} at (0,1,0) — the H1 LOOKED centered before only because its box
+   happened to fill its already-centered parent exactly, while the actual
+   text inside stayed left-aligned (visible as soon as it wraps to two
+   uneven lines). (0,3,0) here wins outright, no source-order gamble. */
+.hero.hero-split.hero-hub{ text-align:center; }
+.hero-hub .hero-copy-center{ max-width:720px; margin:0 auto; }
+.hero-hub .hero-copy-center .eyebrow{ justify-content:center; color:var(--scene-blue); }
+.hero-hub .hero-copy-center .eyebrow::before{ content:"+"; opacity:0.7; }
+/* H1 gets its own max-width + margin:0 auto (not just inherited
+   text-align) so it self-centers as its own block, independent of
+   .hero-copy-center's width — matches every other centered element here. */
+.hero-hub .hero-title-main{ max-width:680px; margin:0 auto 20px; text-align:center; }
+.hero-hub .hero-subheadline{ margin:0 auto; text-align:center; }
+.hero-hub .hero-ctas{ justify-content:center; margin-top:clamp(24px,4vh,36px); }
+
+/* ---------- "skillset spine" — hub hero only ----------
+   A thin vertical line with 4 lit nodes (one per service), each showing
+   a small monospace label that cross-fades through 2-3 related
+   skills/technologies (assets/skillset-spine.js). Purely ambient — sits
+   off to the side so it never competes with the centered H1/subheadline,
+   z-index'd with the canvas layer (below .hero-inner's text) and clipped
+   by .hero's own overflow:hidden. Hidden below ~960px: there isn't
+   enough side margin next to the centered copy on tablet/mobile for a
+   decorative side element without it either overlapping text or feeling
+   cramped, and the hero already has the ambient canvas doing this job.
+
+   .skillset-area is the outer positioned box (wide enough for the drifting
+   background symbols and the outer arc to have room to breathe); the line
+   + 4 nodes that used to BE .skillset-spine now live inside it unchanged,
+   just reparented one level down. Paint order (back to front, all same
+   z-index stacking context so DOM order decides): ambient code symbols,
+   the outer arc connecting node 1 <-> node 4, then the spine itself. */
+.skillset-area{
+  position:absolute; z-index:1; top:50%; right:6%; transform:translateY(-50%);
+  height:62%; width:210px; pointer-events:none;
+}
+.skillset-spine{
+  position:absolute; left:0; top:0; height:100%; display:flex; align-items:stretch;
+}
+.skillset-line{
+  width:1px; flex-shrink:0;
+  background:linear-gradient(to bottom, transparent, rgba(var(--scene-blue-rgb),0.4) 12%, rgba(var(--scene-blue-rgb),0.4) 88%, transparent);
+}
+.skillset-nodes{
+  display:flex; flex-direction:column; justify-content:space-between;
+  margin-left:-5px;
+}
+.skillset-node{ display:flex; align-items:center; gap:11px; }
+.skillset-dot{
+  position:relative; width:10px; height:10px; border-radius:50%; flex-shrink:0;
+  background:var(--bg); border:2px solid var(--scene-blue);
+  box-shadow:0 0 10px -1px rgba(var(--scene-blue-rgb),0.6);
+}
+/* glow pulse — assets/skillset-spine.js toggles .is-pulsing on the dot at
+   the exact moment its label swaps to the next skill, so the ring "marks"
+   the change instead of it happening silently. Re-triggerable: the JS
+   removes+reflows+re-adds the class every cycle so the animation restarts
+   each time rather than only playing once. */
+.skillset-dot::after{
+  content:""; position:absolute; inset:-6px; border-radius:50%;
+  background:rgba(var(--scene-blue-rgb),0.55); opacity:0; pointer-events:none;
+}
+.skillset-dot.is-pulsing::after{ animation:skillset-pulse .8s ease-out; }
+@keyframes skillset-pulse{
+  0%{ opacity:0.55; transform:scale(0.4); }
+  100%{ opacity:0; transform:scale(2.4); }
+}
+.skillset-label{
+  font-family:var(--font-mono); font-size:0.76rem; font-weight:600;
+  color:var(--ink-soft); white-space:nowrap; opacity:1; transition:opacity .35s ease;
+}
+.skillset-label.is-swapping{ opacity:0; }
+
+/* ambient background symbols — sparse, very low-opacity programming
+   glyphs drifting independently of the node cycling, so the area around
+   the spine reads as "full" rather than empty air. Each gets its own
+   duration/delay inline (see index.html) so they don't move in lockstep. */
+.skillset-ambient{ position:absolute; inset:0; overflow:visible; }
+.skillset-symbol{
+  position:absolute; font-family:var(--font-mono); font-weight:600;
+  color:var(--ink); opacity:0.07; white-space:nowrap; user-select:none;
+  animation-name:skillset-symbol-drift; animation-timing-function:ease-in-out; animation-iteration-count:infinite;
+}
+@keyframes skillset-symbol-drift{
+  0%,100%{ transform:translate(0,0) rotate(0deg); }
+  50%{ transform:translate(7px,-9px) rotate(4deg); }
+}
+
+/* outer arc — one thin bowed connector from the first node to the last
+   (Data Compass <-> AI riešenia), bulging past the labels on the right
+   so it never crosses the text, hinting the 4 services interconnect
+   rather than reading as a strictly linear list. viewBox 0 0 100 100 +
+   preserveAspectRatio="none" makes the path coordinates behave like
+   percentages of whatever box the svg actually renders at. */
+.skillset-arc{ position:absolute; inset:0; overflow:visible; }
+.skillset-arc-path{ fill:none; stroke:var(--scene-blue); stroke-width:0.6; opacity:0.16; vector-effect:non-scaling-stroke; }
+
+@media (max-width:960px){ .skillset-area{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .skillset-label{ transition:none; }
+  .skillset-symbol{ animation:none; }
+  .skillset-dot.is-pulsing::after{ animation:none; opacity:0; }
+}
+
+/* ---------- "commit graph" ambient — hub hero only, left side ----------
+   Mirrors the skillset spine's positioning on the opposite side of the
+   centered hero copy, but reads as its own thing: a faint git-branch
+   graph (trunk + one fork/merge) sitting behind the text, deliberately
+   dimmer and slower than the skillset side (see the opacity/duration
+   values below vs. .skillset-*) since its only job is background depth,
+   not a secondary focal point. One small dot travels the trunk on a
+   native SVG <animateMotion> loop — cheap, no extra JS/canvas needed;
+   hidden outright under reduced-motion (see index.html) while the static
+   graph underneath it stays. */
+.commitgraph-area{
+  position:absolute; z-index:1; top:50%; left:6%; transform:translateY(-50%);
+  height:58%; width:180px; pointer-events:none; overflow:visible;
+}
+.commitgraph-svg{ position:absolute; inset:0; }
+.commitgraph-edge{ fill:none; stroke:var(--ink); stroke-width:0.6; opacity:0.07; vector-effect:non-scaling-stroke; }
+.commitgraph-edge--branch{ stroke:var(--scene-blue); opacity:0.08; }
+.commitgraph-node{ fill:var(--ink); opacity:0.14; }
+.commitgraph-node--branch{ fill:var(--scene-blue); opacity:0.16; }
+.commitgraph-pulse{ fill:var(--scene-blue); opacity:0.4; }
+@media (max-width:960px){ .commitgraph-area{ display:none; } }
+@media (prefers-reduced-motion: reduce){ .commitgraph-pulse{ display:none; } }
 
 .hero h1{ max-width:23ch; margin:0 auto 16px; font-size:clamp(1.7rem, 3.6vw, 2.7rem); line-height:1.12; }
 .hero h1 mark{ background:none; color:var(--accent); }
@@ -597,6 +794,15 @@ section{ padding:80px 0; }
 @media (max-width:880px){ .steps-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width:520px){ .steps-grid{ grid-template-columns:1fr; } }
 
+/* ---------- compact (non-expanding) process grid — hub page ----------
+   Reuses .eq-card (already defined below) for a plain number+title+text
+   card, no accordion — the hub only needs a quick overview, the full
+   step-by-step detail lives on each service page. */
+.eq-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+@media (max-width:1024px){ .eq-grid{ grid-template-columns:1fr 1fr 1fr; } }
+@media (max-width:640px){ .eq-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:420px){ .eq-grid{ grid-template-columns:1fr; } }
+
 .step-card{
   position:relative; overflow:hidden;
   background:linear-gradient(165deg, var(--bg-elevated), var(--bg-soft));
@@ -742,6 +948,32 @@ section{ padding:80px 0; }
 .pkg-group strong{ display:block; font-size:0.85rem; font-weight:800; color:var(--ink); margin-bottom:8px; }
 .pkg-group ul{ margin-bottom:0; }
 
+/* ---------- service cards (hub page — 4 services) ----------
+   Same thin-border / lift-on-hover / scene-blue-border language as .pkg,
+   reused here as its own component since it's a distinct repeating unit
+   (number + name + one-line pitch + link) that shows up on the hub and
+   will likely show up again wherever services get cross-linked. */
+.services-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+@media (max-width:768px){ .services-grid{ grid-template-columns:1fr; } }
+.service-card{
+  background:var(--bg-elevated); border:1px solid var(--line); border-radius:var(--radius);
+  padding:32px 28px; display:flex; flex-direction:column;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.service-card:hover, .service-card.reveal:hover{
+  transform:translateY(-3px); box-shadow:0 16px 30px -20px rgba(17,17,20,.3); border-color:var(--scene-blue);
+}
+.service-card .service-card-num{
+  font-family:var(--font-display); font-weight:700; font-size:1.7rem; color:var(--scene-blue); margin-bottom:14px;
+}
+.service-card h3{ margin:0 0 10px; font-family:var(--font-body); font-weight:800; font-size:1.15rem; }
+.service-card p{ margin:0 0 20px; color:var(--ink-soft); font-size:0.94rem; flex:1; }
+.service-card .service-card-link{
+  display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:0.9rem;
+  color:var(--scene-blue); text-decoration:none;
+}
+.service-card .service-card-link:hover{ text-decoration:underline; }
+
 /* ---------- product branches (2-product offer) ---------- */
 .branch-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
 @media (max-width:880px){ .branch-grid{ grid-template-columns:1fr; } }
@@ -819,6 +1051,90 @@ section{ padding:80px 0; }
 .status-badge{ display:inline-block; padding:3px 9px; border-radius:4px; border:1px solid; background:none; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; letter-spacing:0.02em; white-space:nowrap; }
 .status-badge.dostupny{ color:var(--money); border-color:var(--money); }
 .status-badge.rezervovany{ color:var(--danger); border-color:var(--danger); }
+.status-badge.aktivny{ color:var(--money); border-color:var(--money); }
+.status-badge.pozastaveny{ color:var(--gold); border-color:var(--gold); }
+.status-badge.dokonceny{ color:var(--scene-blue); border-color:var(--scene-blue); }
+
+/* project rows in the admin "Prehľad zákaziek" table (assets/admin.js) —
+   clickable, with the currently-open one visually pinned so it's obvious
+   which row the detail panel below belongs to. */
+.project-row{ cursor:pointer; }
+.project-row.is-open td{ background:var(--bg-soft); box-shadow:inset 2px 0 0 var(--scene-blue); }
+.admin-textarea{
+  width:100%; min-height:70px; border:1.5px solid var(--line); border-radius:6px;
+  padding:10px 12px; background:var(--bg-elevated); color:var(--ink);
+  font-family:var(--font-body); font-size:0.9rem; resize:vertical;
+}
+.admin-textarea:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+
+/* ---------- client portal (klient.html) ----------
+   Same "internal tool" register as .admin-* above (plain cards, outline
+   badges, no filled pills), plus one component unique to this page: the
+   6-phase progress tracker, deliberately the most visually prominent
+   thing on the page since its entire job is "show the client at a glance
+   where their project actually is". Desktop: dots in a row with a filled
+   line behind them (width set inline by assets/klient.js from the
+   project's current phase index — see renderPhaseTracker()). Mobile: the
+   same steps stack vertically with a short vertical connector instead,
+   since a horizontal line has no room to read once labels wrap. */
+.portal-card{ background:var(--bg-elevated); border:1px solid var(--line); border-radius:var(--radius); padding:28px; }
+.portal-card + .portal-card{ margin-top:28px; }
+.portal-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.portal-header h2{ margin:0 0 6px; }
+.portal-service{ color:var(--ink-soft); font-size:0.92rem; }
+
+.phase-tracker{ position:relative; display:flex; align-items:flex-start; justify-content:space-between; margin:28px 0 4px; }
+.phase-tracker-line{ position:absolute; top:15px; left:26px; right:26px; height:2px; background:var(--line); z-index:0; }
+.phase-tracker-fill{ position:absolute; top:15px; left:26px; height:2px; background:var(--scene-blue); z-index:0; transition:width .5s ease; }
+.phase-step{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; text-align:center; padding:0 4px; }
+.phase-step-dot{
+  width:30px; height:30px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--line); background:var(--bg-soft); color:var(--ink-faint);
+  font-family:var(--font-mono); font-size:0.78rem; font-weight:700;
+}
+.phase-step.is-done .phase-step-dot{ border-color:var(--scene-blue); background:var(--scene-blue); color:var(--bg); }
+.phase-step.is-done .phase-step-dot svg{ width:14px; height:14px; }
+.phase-step.is-current .phase-step-dot{ border-color:var(--scene-blue); color:var(--scene-blue); box-shadow:0 0 0 4px rgba(var(--scene-blue-rgb),0.16); }
+.phase-step-label{ font-size:0.78rem; font-weight:600; color:var(--ink-faint); max-width:12ch; line-height:1.3; }
+.phase-step.is-done .phase-step-label, .phase-step.is-current .phase-step-label{ color:var(--ink); }
+@media (max-width:640px){
+  .phase-tracker{ flex-direction:column; align-items:stretch; gap:0; margin-top:20px; }
+  .phase-tracker-line, .phase-tracker-fill{ display:none; }
+  .phase-step{ flex-direction:row; align-items:center; text-align:left; gap:14px; padding:9px 0; }
+  .phase-step-label{ max-width:none; }
+  .phase-step:not(:last-child){ position:relative; }
+  .phase-step:not(:last-child)::after{ content:""; position:absolute; left:14px; top:38px; bottom:-9px; width:2px; background:var(--line); z-index:0; }
+  .phase-step.is-done:not(:last-child)::after{ background:var(--scene-blue); }
+}
+
+.project-pick-btn{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; text-align:left;
+  background:var(--bg-elevated); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;
+  font-family:var(--font-body); cursor:pointer; transition:border-color .15s ease;
+}
+.project-pick-btn:hover{ border-color:var(--scene-blue); }
+.project-pick-btn strong{ color:var(--ink); font-size:1rem; }
+.project-pick-btn span{ color:var(--ink-faint); font-size:0.85rem; }
+
+.update-row{ padding:14px 0; border-bottom:1px solid var(--line); }
+.update-row:last-child{ border-bottom:none; }
+.update-row-date{ font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-faint); margin-bottom:5px; }
+.update-row p{ margin:0; font-size:0.92rem; color:var(--ink); }
+
+.doc-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); }
+.doc-row:last-child{ border-bottom:none; }
+.doc-row-name{ font-weight:600; font-size:0.92rem; }
+.doc-row-date{ font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-faint); margin-top:3px; }
+
+.question-card{ border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; margin-bottom:14px; background:var(--bg-soft); }
+.question-card:last-child{ margin-bottom:0; }
+.question-card p.question-text{ margin:0 0 12px; font-weight:600; color:var(--ink); }
+.question-card textarea{ width:100%; border:1.5px solid var(--line); border-radius:6px; padding:10px 12px; font-family:var(--font-body); font-size:0.9rem; background:var(--bg-elevated); color:var(--ink); resize:vertical; min-height:70px; }
+.question-card textarea:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+.question-card .btn{ margin-top:10px; padding:10px 20px; font-size:0.88rem; }
+.question-card.is-answered{ background:transparent; opacity:0.8; }
+.question-card .answer-text{ margin:8px 0 0; padding-top:10px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:0.9rem; }
+.question-card .answered-at{ font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-faint); margin-top:8px; }
 
 /* ---------- guarantee ---------- */
 .guarantee{ background:var(--dark); color:#fff; border-radius:16px; padding:48px 40px; display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center; }

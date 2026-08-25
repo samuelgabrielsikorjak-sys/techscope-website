@@ -1,7 +1,13 @@
-// TECH-SCOPE — homepage hero "Pretvárame surové dáta na ___" cyclic typing
-// effect. Types each phrase from HERO_TYPING_PHRASES character by character,
-// holds it, backspaces it, then moves to the next (looping forever). The
-// fixed lead-in text never changes — only .hero-typing-variable's content.
+// TECH-SCOPE — hero "<fixed lead-in> ___" cyclic typing effect, shared
+// across every page's hero (data-compass.html, index.html, and the other
+// three service pages). Types each phrase from .hero-typing-variable's
+// data-phrases attribute (pipe-separated) character by character, holds
+// it, backspaces it, then moves to the next (looping forever). The fixed
+// lead-in text lives in .hero-typing-fixed's own markup and never changes
+// here — only .hero-typing-variable's content. One script, per-page
+// wording supplied entirely through the data attribute rather than a
+// hardcoded array, so this file doesn't need forking per page the way
+// the hero-viz canvas scenes do.
 // Respects prefers-reduced-motion: renders the first phrase statically with
 // no cursor and no timers.
 
@@ -9,7 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var variableEl = document.querySelector('.hero-typing-variable');
   if (!variableEl) return;
 
-  var phrases = ['váš úspech', 'váš rast', 'optimalizáciu procesov', 'lídrov v odbore'];
+  var phrases = (variableEl.getAttribute('data-phrases') || '')
+    .split('|')
+    .map(function (s) { return s.trim(); })
+    .filter(Boolean);
+  if (!phrases.length) phrases = ['váš úspech', 'váš rast', 'optimalizáciu procesov', 'lídrov v odbore'];
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) {

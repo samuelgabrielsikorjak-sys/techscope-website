@@ -18,6 +18,24 @@
   };
   var STATUS_LABELS = { novy: 'Nový', kontaktovany: 'Kontaktovaný', uzavrety: 'Uzavretý' };
 
+  // Služby ponúkané na produktových stránkach (projects.sluzba) — odlišné
+  // od PRODUKT_LABELS vyššie, ktorá patrí len historickému leads.produkt.
+  var SLUZBA_LABELS = {
+    data_compass: 'Data Compass',
+    web_mobile: 'Web & Mobilné aplikácie',
+    softver_na_mieru: 'Softvér na mieru',
+    ai_riesenia: 'AI riešenia'
+  };
+  var PROJECT_STATUS_LABELS = { aktivny: 'Aktívny', pozastaveny: 'Pozastavený', dokonceny: 'Dokončený' };
+  var FAZY = [
+    { key: 'vstupna_analyza', label: 'Vstupná analýza' },
+    { key: 'definicia_metrik', label: 'Definícia metrík a cieľov' },
+    { key: 'navrh_architektury', label: 'Návrh architektúry' },
+    { key: 'vyvoj', label: 'Vývoj' },
+    { key: 'testovanie_review', label: 'Testovanie a review' },
+    { key: 'odovzdanie_zaskolenie', label: 'Odovzdanie a zaškolenie' }
+  ];
+
   document.addEventListener('DOMContentLoaded', function () {
     var loginSection = document.getElementById('login-section');
     var adminContent = document.getElementById('admin-content');
@@ -48,6 +66,8 @@
       loadSlots();
       loadLeads();
       loadExitLeads();
+      loadProjects();
+      loadClientsForDropdown();
     }
 
     // onAuthStateChange vyšle aktuálny stav (session alebo null) hneď po
@@ -422,6 +442,492 @@ function loadSlots() {
             loadLeads();
           });
         });
+      });
+    }
+
+    // ---------------- ZÁKAZKY (projects) ----------------
+    var projectsTbody = document.getElementById('projects-tbody');
+    var projectDetailEl = document.getElementById('project-detail');
+    var newProjectToggleBtn = document.getElementById('new-project-toggle-btn');
+    var newProjectCard = document.getElementById('new-project-card');
+    var newProjectForm = document.getElementById('new-project-form');
+    var newProjectError = document.getElementById('new-project-error');
+    var npKlientSelect = document.getElementById('np-klient');
+    var npNewClientFields = document.getElementById('np-new-client-fields');
+    var currentProjects = [];
+    var openProjectId = null;
+
+    if (newProjectToggleBtn) {
+      newProjectToggleBtn.addEventListener('click', function () {
+        newProjectCard.style.display = (newProjectCard.style.display === 'none') ? '' : 'none';
+      });
+    }
+
+    if (npKlientSelect) {
+      npKlientSelect.addEventListener('change', function () {
+        npNewClientFields.style.display = (npKlientSelect.value === '__new__') ? '' : 'none';
+      });
+    }
+
+    function loadProjects() {
+      if (!projectsTbody) return;
+      projectsTbody.innerHTML = '<tr><td colspan="5">Načítavam…</td></tr>';
+      window.supabaseClient
+        .from('projects')
+        .select('id,nazov_projektu,sluzba,status,faza,client_id,clients(meno_priezvisko,nazov_firmy)')
+        .order('created_at', { ascending: false })
+        .then(function (res) {
+          if (res.error) {
+            projectsTbody.innerHTML = '<tr><td colspan="5">Zákazky sa nepodarilo načítať.</td></tr>';
+            return;
+          }
+          currentProjects = res.data || [];
+          renderProjects();
+        });
+    }
+
+    function fazaLabel(key) {
+      for (var i = 0; i < FAZY.length; i++) { if (FAZY[i].key === key) return FAZY[i].label; }
+      return key;
+    }
+
+    function fazaOptionsHtml(selected) {
+      var html = '';
+      for (var i = 0; i < FAZY.length; i++) {
+        html += '<option value="' + FAZY[i].key + '"' + (FAZY[i].key === selected ? ' selected' : '') + '>' + FAZY[i].label + '</option>';
+      }
+      return html;
+    }
+
+    function projectStatusOptionsHtml(selected) {
+      var keys = ['aktivny', 'pozastaveny', 'dokonceny'];
+      var html = '';
+      for (var i = 0; i < keys.length; i++) {
+        html += '<option value="' + keys[i] + '"' + (keys[i] === selected ? ' selected' : '') + '>' + PROJECT_STATUS_LABELS[keys[i]] + '</option>';
+      }
+      return html;
+    }
+
+    function clientDisplayName(clients) {
+      if (!clients) return '—';
+      return clients.meno_priezvisko + (clients.nazov_firmy ? ' — ' + clients.nazov_firmy : '');
+    }
+
+    function renderProjects() {
+      if (!projectsTbody) return;
+      if (!currentProjects.length) {
+        projectsTbody.innerHTML = '<tr><td colspan="5">Zatiaľ žiadne zákazky.</td></tr>';
+        return;
+      }
+      var html = '';
+      for (var i = 0; i < currentProjects.length; i++) {
+        var p = currentProjects[i];
+        html += '<tr class="project-row' + (p.id === openProjectId ? ' is-open' : '') + '" data-id="' + p.id + '">' +
+          '<td>' + escapeHtml(p.nazov_projektu) + '</td>' +
+          '<td>' + escapeHtml(clientDisplayName(p.clients)) + '</td>' +
+          '<td>' + escapeHtml(SLUZBA_LABELS[p.sluzba] || p.sluzba) + '</td>' +
+          '<td>' + escapeHtml(fazaLabel(p.faza)) + '</td>' +
+          '<td><span class="status-badge ' + p.status + '">' + (PROJECT_STATUS_LABELS[p.status] || p.status) + '</span></td>' +
+        '</tr>';
+      }
+      projectsTbody.innerHTML = html;
+
+      var rows = projectsTbody.querySelectorAll('.project-row');
+      for (var r = 0; r < rows.length; r++) {
+        rows[r].addEventListener('click', function () {
+          var id = this.getAttribute('data-id');
+          openProjectId = (openProjectId === id) ? null : id;
+          renderProjects();
+          if (openProjectId) {
+            var project = currentProjects.filter(function (pp) { return pp.id === openProjectId; })[0];
+            renderProjectDetail(project);
+            projectDetailEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            projectDetailEl.innerHTML = '';
+          }
+        });
+      }
+    }
+
+    function renderProjectDetail(project) {
+      projectDetailEl.innerHTML =
+        '<div class="portal-card">' +
+          '<div class="portal-header">' +
+            '<div><h3 style="margin:0 0 4px;">' + escapeHtml(project.nazov_projektu) + '</h3><div class="portal-service">' + escapeHtml(clientDisplayName(project.clients)) + '</div></div>' +
+            '<button type="button" class="btn btn-danger" id="pd-delete-project-btn">Zmazať projekt</button>' +
+          '</div>' +
+          '<div class="admin-toolbar" style="margin-top:20px;">' +
+            '<div class="form-row"><label for="pd-faza">Fáza</label><select id="pd-faza">' + fazaOptionsHtml(project.faza) + '</select></div>' +
+            '<div class="form-row"><label for="pd-status">Status</label><select id="pd-status">' + projectStatusOptionsHtml(project.status) + '</select></div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="portal-card">' +
+          '<h4 style="margin:0 0 14px;">Aktualizácie</h4>' +
+          '<div class="form-row"><textarea id="pd-update-text" class="admin-textarea" placeholder="Nová aktualizácia pre klienta…"></textarea></div>' +
+          '<button type="button" class="btn btn-primary" id="pd-add-update-btn">Pridať aktualizáciu</button>' +
+          '<div id="pd-updates-list" style="margin-top:18px;"><p style="color:var(--ink-faint);">Načítavam…</p></div>' +
+        '</div>' +
+
+        '<div class="portal-card">' +
+          '<h4 style="margin:0 0 14px;">Dokumenty</h4>' +
+          '<div class="admin-toolbar" style="margin-bottom:6px;">' +
+            '<div class="form-row"><label for="pd-doc-name">Názov dokumentu</label><input type="text" id="pd-doc-name"></div>' +
+            '<div class="form-row"><label for="pd-doc-file">Súbor</label><input type="file" id="pd-doc-file"></div>' +
+            '<button type="button" class="btn btn-primary" id="pd-upload-doc-btn">Nahrať</button>' +
+          '</div>' +
+          '<div class="form-banner-error" id="pd-doc-error"></div>' +
+          '<div id="pd-documents-list" style="margin-top:10px;"><p style="color:var(--ink-faint);">Načítavam…</p></div>' +
+        '</div>' +
+
+        '<div class="portal-card">' +
+          '<h4 style="margin:0 0 14px;">Doplňujúce otázky pre klienta</h4>' +
+          '<div class="form-row"><textarea id="pd-question-text" class="admin-textarea" style="min-height:56px;" placeholder="Otázka pre klienta…"></textarea></div>' +
+          '<button type="button" class="btn btn-primary" id="pd-add-question-btn">Poslať otázku klientovi</button>' +
+          '<div id="pd-questions-list" style="margin-top:18px;"><p style="color:var(--ink-faint);">Načítavam…</p></div>' +
+        '</div>';
+
+      wireProjectDetail(project);
+      loadProjectUpdates(project.id);
+      loadProjectDocuments(project.id);
+      loadProjectQuestions(project.id);
+    }
+
+    function wireProjectDetail(project) {
+      var fazaSelect = document.getElementById('pd-faza');
+      fazaSelect.addEventListener('change', function () {
+        var val = fazaSelect.value;
+        var previous = project.faza;
+        fazaSelect.disabled = true;
+        window.supabaseClient.from('projects').update({ faza: val, updated_at: new Date().toISOString() }).eq('id', project.id).then(function (res) {
+          fazaSelect.disabled = false;
+          if (res.error) {
+            window.alert('Fázu sa nepodarilo uložiť: ' + res.error.message);
+            fazaSelect.value = previous;
+            return;
+          }
+          project.faza = val;
+          loadProjects();
+        });
+      });
+
+      var statusSelect = document.getElementById('pd-status');
+      statusSelect.addEventListener('change', function () {
+        var val = statusSelect.value;
+        var previous = project.status;
+        statusSelect.disabled = true;
+        window.supabaseClient.from('projects').update({ status: val, updated_at: new Date().toISOString() }).eq('id', project.id).then(function (res) {
+          statusSelect.disabled = false;
+          if (res.error) {
+            window.alert('Status sa nepodarilo uložiť: ' + res.error.message);
+            statusSelect.value = previous;
+            return;
+          }
+          project.status = val;
+          loadProjects();
+        });
+      });
+
+      document.getElementById('pd-add-update-btn').addEventListener('click', function () {
+        var btn = this;
+        var textarea = document.getElementById('pd-update-text');
+        var text = textarea.value.trim();
+        if (!text) { window.alert('Napíšte prosím text aktualizácie.'); return; }
+        btn.disabled = true;
+        window.supabaseClient.from('project_updates').insert({ project_id: project.id, text: text }).then(function (res) {
+          btn.disabled = false;
+          if (res.error) { window.alert('Aktualizáciu sa nepodarilo pridať: ' + res.error.message); return; }
+          textarea.value = '';
+          loadProjectUpdates(project.id);
+        });
+      });
+
+      document.getElementById('pd-upload-doc-btn').addEventListener('click', function () {
+        var btn = this;
+        var nameInput = document.getElementById('pd-doc-name');
+        var fileInput = document.getElementById('pd-doc-file');
+        var errorEl = document.getElementById('pd-doc-error');
+        errorEl.classList.remove('show');
+
+        var file = fileInput.files && fileInput.files[0];
+        var nazov = nameInput.value.trim();
+        if (!file) { errorEl.textContent = 'Vyberte prosím súbor.'; errorEl.classList.add('show'); return; }
+        if (!nazov) { errorEl.textContent = 'Zadajte prosím názov dokumentu.'; errorEl.classList.add('show'); return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Nahrávam…';
+
+        var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        var path = project.id + '/' + Date.now() + '_' + safeName;
+
+        window.supabaseClient.storage.from('project-documents').upload(path, file).then(function (uploadRes) {
+          if (uploadRes.error) {
+            btn.disabled = false;
+            btn.textContent = 'Nahrať';
+            errorEl.textContent = 'Súbor sa nepodarilo nahrať: ' + uploadRes.error.message;
+            errorEl.classList.add('show');
+            return;
+          }
+          window.supabaseClient.from('project_documents').insert({ project_id: project.id, nazov: nazov, storage_path: path }).then(function (res) {
+            btn.disabled = false;
+            btn.textContent = 'Nahrať';
+            if (res.error) {
+              errorEl.textContent = 'Súbor sa nahral, ale záznam sa nepodarilo uložiť: ' + res.error.message;
+              errorEl.classList.add('show');
+              return;
+            }
+            nameInput.value = '';
+            fileInput.value = '';
+            loadProjectDocuments(project.id);
+          });
+        });
+      });
+
+      document.getElementById('pd-add-question-btn').addEventListener('click', function () {
+        var btn = this;
+        var textarea = document.getElementById('pd-question-text');
+        var text = textarea.value.trim();
+        if (!text) { window.alert('Napíšte prosím text otázky.'); return; }
+        btn.disabled = true;
+        window.supabaseClient.from('project_questions').insert({ project_id: project.id, otazka: text, zodpovedane: false }).then(function (res) {
+          btn.disabled = false;
+          if (res.error) { window.alert('Otázku sa nepodarilo pridať: ' + res.error.message); return; }
+          textarea.value = '';
+          loadProjectQuestions(project.id);
+        });
+      });
+
+      document.getElementById('pd-delete-project-btn').addEventListener('click', function () {
+        var deleteBtn = this;
+        var confirmed = window.confirm(
+          "Naozaj chcete natrvalo zmazať projekt '" + project.nazov_projektu + "'? " +
+          'Zmažú sa aj všetky jeho aktualizácie, dokumenty a otázky. Táto akcia sa nedá vrátiť.'
+        );
+        if (!confirmed) return;
+
+        deleteBtn.disabled = true;
+        deleteBtn.textContent = 'Mažem…';
+
+        function deleteProjectRow() {
+          window.supabaseClient.from('projects').delete().eq('id', project.id).then(function (res) {
+            if (res.error) {
+              deleteBtn.disabled = false;
+              deleteBtn.textContent = 'Zmazať projekt';
+              window.alert('Projekt sa nepodarilo zmazať: ' + res.error.message);
+              return;
+            }
+            currentProjects = currentProjects.filter(function (p) { return p.id !== project.id; });
+            openProjectId = null;
+            projectDetailEl.innerHTML = '';
+            renderProjects();
+          });
+        }
+
+        // CASCADE v DB zmaže len riadky project_documents, nie reálne súbory
+        // v Storage bucket-e — tie treba zmazať explicitne, inak zostanú
+        // "osirotené" (zaberajú miesto, nie sú z ničoho dostupné).
+        window.supabaseClient
+          .from('project_documents')
+          .select('storage_path')
+          .eq('project_id', project.id)
+          .then(function (docsRes) {
+            if (docsRes.error) {
+              deleteBtn.disabled = false;
+              deleteBtn.textContent = 'Zmazať projekt';
+              window.alert('Nepodarilo sa načítať dokumenty projektu, mazanie prerušené: ' + docsRes.error.message);
+              return;
+            }
+            var paths = (docsRes.data || []).map(function (d) { return d.storage_path; });
+
+            if (!paths.length) {
+              deleteProjectRow();
+              return;
+            }
+
+            window.supabaseClient.storage.from('project-documents').remove(paths).then(function (removeRes) {
+              if (removeRes.error) {
+                deleteBtn.disabled = false;
+                deleteBtn.textContent = 'Zmazať projekt';
+                window.alert('Súbory v Storage sa nepodarilo zmazať, projekt NEBOL zmazaný: ' + removeRes.error.message);
+                return;
+              }
+              deleteProjectRow();
+            });
+          });
+      });
+    }
+
+    function loadProjectUpdates(projectId) {
+      var el = document.getElementById('pd-updates-list');
+      if (!el) return;
+      window.supabaseClient
+        .from('project_updates')
+        .select('id,text,created_at')
+        .eq('project_id', projectId)
+        .order('created_at', { ascending: false })
+        .then(function (res) {
+          if (res.error) { el.innerHTML = '<p style="color:var(--ink-faint);">Aktualizácie sa nepodarilo načítať.</p>'; return; }
+          var rows = res.data || [];
+          if (!rows.length) { el.innerHTML = '<p style="color:var(--ink-faint);">Zatiaľ žiadne aktualizácie.</p>'; return; }
+          var html = '';
+          for (var i = 0; i < rows.length; i++) {
+            html += '<div class="update-row"><div class="update-row-date">' + formatDateTime(rows[i].created_at) + '</div><p>' + escapeHtml(rows[i].text) + '</p></div>';
+          }
+          el.innerHTML = html;
+        });
+    }
+
+    function loadProjectDocuments(projectId) {
+      var el = document.getElementById('pd-documents-list');
+      if (!el) return;
+      window.supabaseClient
+        .from('project_documents')
+        .select('id,nazov,storage_path,created_at')
+        .eq('project_id', projectId)
+        .order('created_at', { ascending: false })
+        .then(function (res) {
+          if (res.error) { el.innerHTML = '<p style="color:var(--ink-faint);">Dokumenty sa nepodarilo načítať.</p>'; return; }
+          var rows = res.data || [];
+          if (!rows.length) { el.innerHTML = '<p style="color:var(--ink-faint);">Zatiaľ žiadne dokumenty.</p>'; return; }
+          var html = '';
+          for (var i = 0; i < rows.length; i++) {
+            html += '<div class="doc-row"><div><div class="doc-row-name">' + escapeHtml(rows[i].nazov) + '</div><div class="doc-row-date">' + formatDateTime(rows[i].created_at) + '</div></div>' +
+              '<button type="button" class="btn btn-ghost doc-admin-delete-btn" data-id="' + rows[i].id + '" data-path="' + escapeHtml(rows[i].storage_path) + '">Zmazať</button></div>';
+          }
+          el.innerHTML = html;
+
+          var delBtns = el.querySelectorAll('.doc-admin-delete-btn');
+          for (var b = 0; b < delBtns.length; b++) {
+            delBtns[b].addEventListener('click', function () {
+              var btn = this;
+              if (!window.confirm('Naozaj zmazať tento dokument?')) return;
+              var docId = btn.getAttribute('data-id');
+              var path = btn.getAttribute('data-path');
+              btn.disabled = true;
+              window.supabaseClient.storage.from('project-documents').remove([path]).then(function () {
+                window.supabaseClient.from('project_documents').delete().eq('id', docId).then(function (res) {
+                  if (res.error) { btn.disabled = false; window.alert('Dokument sa nepodarilo zmazať: ' + res.error.message); return; }
+                  loadProjectDocuments(projectId);
+                });
+              });
+            });
+          }
+        });
+    }
+
+    function loadProjectQuestions(projectId) {
+      var el = document.getElementById('pd-questions-list');
+      if (!el) return;
+      window.supabaseClient
+        .from('project_questions')
+        .select('id,otazka,odpoved,zodpovedane,created_at,zodpovedane_at')
+        .eq('project_id', projectId)
+        .order('created_at', { ascending: false })
+        .then(function (res) {
+          if (res.error) { el.innerHTML = '<p style="color:var(--ink-faint);">Otázky sa nepodarilo načítať.</p>'; return; }
+          var rows = res.data || [];
+          if (!rows.length) { el.innerHTML = '<p style="color:var(--ink-faint);">Zatiaľ žiadne otázky.</p>'; return; }
+          var html = '';
+          for (var i = 0; i < rows.length; i++) {
+            var q = rows[i];
+            if (q.zodpovedane) {
+              html += '<div class="question-card is-answered"><p class="question-text">' + escapeHtml(q.otazka) + '</p>' +
+                '<p class="answer-text">' + escapeHtml(q.odpoved || '') + '</p>' +
+                '<div class="answered-at">Zodpovedané ' + formatDateTime(q.zodpovedane_at || q.created_at) + '</div></div>';
+            } else {
+              html += '<div class="question-card"><p class="question-text">' + escapeHtml(q.otazka) + '</p>' +
+                '<span class="status-badge pozastaveny" style="margin-top:6px; display:inline-block;">Čaká na odpoveď</span></div>';
+            }
+          }
+          el.innerHTML = html;
+        });
+    }
+
+    function loadClientsForDropdown() {
+      if (!npKlientSelect) return;
+      window.supabaseClient
+        .from('clients')
+        .select('id,meno_priezvisko,nazov_firmy')
+        .order('meno_priezvisko', { ascending: true })
+        .then(function (res) {
+          if (res.error) return;
+          var clients = res.data || [];
+          var html = '<option value="">— Vyberte klienta —</option>';
+          for (var i = 0; i < clients.length; i++) {
+            html += '<option value="' + clients[i].id + '">' + escapeHtml(clientDisplayName(clients[i])) + '</option>';
+          }
+          html += '<option value="__new__">+ Nový klient</option>';
+          npKlientSelect.innerHTML = html;
+        });
+    }
+
+    if (newProjectForm) {
+      newProjectForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        newProjectError.classList.remove('show');
+
+        var nazov = document.getElementById('np-nazov').value.trim();
+        var klientVal = npKlientSelect.value;
+        var sluzba = document.getElementById('np-sluzba').value;
+        var faza = document.getElementById('np-faza').value;
+
+        if (!nazov) { newProjectError.textContent = 'Zadajte prosím názov projektu.'; newProjectError.classList.add('show'); return; }
+        if (!klientVal) { newProjectError.textContent = 'Vyberte prosím klienta.'; newProjectError.classList.add('show'); return; }
+
+        var submitBtn = newProjectForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Vytváram…';
+
+        function createProjectForClient(clientId, isNewClient) {
+          window.supabaseClient.from('projects').insert({
+            nazov_projektu: nazov, client_id: clientId, sluzba: sluzba, faza: faza, status: 'aktivny'
+          }).then(function (res) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Vytvoriť projekt';
+            if (res.error) {
+              newProjectError.textContent = 'Projekt sa nepodarilo vytvoriť: ' + res.error.message;
+              newProjectError.classList.add('show');
+              return;
+            }
+            newProjectForm.reset();
+            npNewClientFields.style.display = 'none';
+            newProjectCard.style.display = 'none';
+            loadClientsForDropdown();
+            loadProjects();
+            if (isNewClient) {
+              window.alert('Projekt aj profil klienta boli vytvorené.\n\nNEZABUDNITE: klientovi ešte treba manuálne vytvoriť prihlasovací účet v Supabase dashboarde (Authentication → Add user) a prepojiť ho s profilom cez stĺpec clients.auth_user_id — presne ako pri admin účte. Bez tohto prepojenia sa klient do klient.html neprihlási / uvidí prázdny portál.');
+            }
+          });
+        }
+
+        if (klientVal === '__new__') {
+          var meno = document.getElementById('np-klient-meno').value.trim();
+          var firma = document.getElementById('np-klient-firma').value.trim();
+          var email = document.getElementById('np-klient-email').value.trim();
+          if (!meno) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Vytvoriť projekt';
+            newProjectError.textContent = 'Zadajte prosím meno nového klienta.';
+            newProjectError.classList.add('show');
+            return;
+          }
+          window.supabaseClient
+            .from('clients')
+            .insert({ meno_priezvisko: meno, nazov_firmy: firma || null, email: email || null })
+            .select()
+            .then(function (res) {
+              if (res.error || !res.data || !res.data[0]) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Vytvoriť projekt';
+                newProjectError.textContent = 'Nového klienta sa nepodarilo vytvoriť: ' + (res.error ? res.error.message : 'neznáma chyba');
+                newProjectError.classList.add('show');
+                return;
+              }
+              createProjectForClient(res.data[0].id, true);
+            });
+        } else {
+          createProjectForClient(klientVal, false);
+        }
       });
     }
 

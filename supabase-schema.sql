@@ -271,3 +271,340 @@ create policy "Admin moze mazat exit leady"
   for delete
   to authenticated
   using (true);
+
+-- ============================================================================
+-- klient.html — portál pre klientov (projects, project_updates,
+-- project_documents, project_questions) + OPRAVA admin/klient rolí
+-- ============================================================================
+-- KRITICKÉ: pred touto sekciou boli VŠETKY "admin" politiky vyššie napísané
+-- ako "to authenticated using (true)" — teda "ktokoľvek prihlásený", nie
+-- "len admin". Kým existoval jediný typ prihláseného účtu (admin.html), to
+-- fungovalo. Teraz, keď klient.html zavádza DRUHÝ typ prihláseného účtu
+-- (klienti, cez rovnaký supabase.auth), by tie isté politiky umožnili
+-- ktorémukoľvek prihlásenému klientovi cez devtools/priamy dotaz vidieť
+-- VŠETKY leady, VŠETKY call_slots aj VŠETKY exit_leads — nielen svoje dáta.
+-- Nižšie preto: (1) tabuľka `admins` + is_admin() helper, (2) prepísanie
+-- všetkých doterajších "using (true)" admin politík na "using (is_admin())".
+--
+-- Po spustení tejto migrácie MUSÍŠ ručne pridať aspoň jeden riadok do
+-- `admins` (id nájdeš v Supabase dashboard → Authentication → Users):
+--   insert into admins (user_id) values ('<uuid-tvojho-admin-uctu>');
+-- Bez toho admin.html prestane vidieť leady/sloty (is_admin() vráti false).
+
+create table admins (
+  user_id uuid primary key references auth.users (id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+
+-- Zámerne ŽIADNE RLS politiky na `admins` — nikto (ani authenticated) ju
+-- nevie cez klientský SDK čítať/meniť, len is_admin() nižšie (SECURITY
+-- DEFINER obchádza RLS) a service_role v Supabase dashboarde.
+alter table admins enable row level security;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (select 1 from admins where user_id = auth.uid());
+$$;
+
+grant execute on function public.is_admin() to authenticated;
+
+-- ---- prepísanie pôvodných "using (true)" admin politík na is_admin() ----
+drop policy if exists "Admin moze citat vsetky leady" on leads;
+create policy "Admin moze citat vsetky leady"
+  on leads for select to authenticated using (is_admin());
+
+drop policy if exists "Admin moze upravovat leady" on leads;
+create policy "Admin moze upravovat leady"
+  on leads for update to authenticated using (is_admin()) with check (is_admin());
+
+drop policy if exists "Admin moze mazat leady" on leads;
+create policy "Admin moze mazat leady"
+  on leads for delete to authenticated using (is_admin());
+
+drop policy if exists "Admin moze citat vsetky sloty" on call_slots;
+create policy "Admin moze citat vsetky sloty"
+  on call_slots for select to authenticated using (is_admin());
+
+drop policy if exists "Admin moze pridavat sloty" on call_slots;
+create policy "Admin moze pridavat sloty"
+  on call_slots for insert to authenticated with check (is_admin());
+
+drop policy if exists "Admin moze mazat sloty" on call_slots;
+create policy "Admin moze mazat sloty"
+  on call_slots for delete to authenticated using (is_admin());
+
+drop policy if exists "Admin moze citat exit leady" on exit_leads;
+create policy "Admin moze citat exit leady"
+  on exit_leads for select to authenticated using (is_admin());
+
+drop policy if exists "Admin moze mazat exit leady" on exit_leads;
+create policy "Admin moze mazat exit leady"
+  on exit_leads for delete to authenticated using (is_admin());
+
+-- ----------------------------------------------------------------------------
+-- Tabuľka: clients — profil klienta, NEZÁVISLE od jeho prihlasovacieho účtu
+-- ----------------------------------------------------------------------------
+-- Admin vie v admin.html vytvoriť profil klienta (meno, firma, email) a
+-- rovno mu založiť projekt ešte predtým, než pre neho existuje prihlasovací
+-- účet — preto `id` NIE JE naviazané na auth.users pri vzniku riadku.
+-- `auth_user_id` je nullable a dopĺňa sa AŽ KEĎ admin ručne založí účet v
+-- Supabase dashboard → Authentication → Add user (rovnako ako pri admin
+-- účte) a sem prilepí jeho UUID. Bez tohto prepojenia klient.html vidí
+-- prázdny portál ("žiadny projekt"), pretože RLS nižšie ho vyžaduje.
+create table clients (
+  id uuid primary key default gen_random_uuid(),
+  auth_user_id uuid null unique references auth.users (id) on delete set null,
+  meno_priezvisko text not null,
+  nazov_firmy text null,
+  email text null,
+  created_at timestamptz not null default now()
+);
+
+alter table clients enable row level security;
+
+create policy "Admin cita vsetkych klientov"
+  on clients for select to authenticated using (is_admin());
+
+create policy "Admin vklada klientov"
+  on clients for insert to authenticated with check (is_admin());
+
+create policy "Admin upravuje klientov"
+  on clients for update to authenticated using (is_admin()) with check (is_admin());
+
+create policy "Admin maze klientov"
+  on clients for delete to authenticated using (is_admin());
+
+-- ----------------------------------------------------------------------------
+-- Tabuľka: projects
+-- ----------------------------------------------------------------------------
+create type project_status as enum ('aktivny', 'pozastaveny', 'dokonceny');
+
+-- Fázy zdieľané naprieč všetkými 4 službami (rovnaký 6-fázový postup, aký
+-- web-copy sľubuje na produktových stránkach v sekcii "Ako pracujeme").
+create type project_faza as enum (
+  'vstupna_analyza',
+  'definicia_metrik',
+  'navrh_architektury',
+  'vyvoj',
+  'testovanie_review',
+  'odovzdanie_zaskolenie'
+);
+
+create table projects (
+  id uuid primary key default gen_random_uuid(),
+  client_id uuid not null references clients (id) on delete cascade,
+  nazov_projektu text not null,
+  -- 'data_compass' | 'web_mobile' | 'softver_na_mieru' | 'ai_riesenia'
+  sluzba text not null,
+  status project_status not null default 'aktivny',
+  faza project_faza not null default 'vstupna_analyza',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index idx_projects_client_id on projects (client_id);
+
+alter table projects enable row level security;
+
+-- Klient je prihlásený ako auth.users, ale projects.client_id ukazuje na
+-- clients.id (stabilný profil) — spojenie ide cez clients.auth_user_id.
+create policy "Klient cita vlastne projekty"
+  on projects for select to authenticated
+  using (
+    exists (
+      select 1 from clients c
+      where c.id = projects.client_id and c.auth_user_id = auth.uid()
+    )
+  );
+
+create policy "Admin cita vsetky projekty"
+  on projects for select to authenticated using (is_admin());
+
+create policy "Admin vklada projekty"
+  on projects for insert to authenticated with check (is_admin());
+
+create policy "Admin upravuje projekty"
+  on projects for update to authenticated using (is_admin()) with check (is_admin());
+
+create policy "Admin maze projekty"
+  on projects for delete to authenticated using (is_admin());
+
+-- Helper: "patrí tento project_id prihlásenému klientovi" — používajú ho
+-- SELECT politiky na project_updates/project_documents/project_questions
+-- nižšie namiesto opakovania toho istého "exists (select ... from projects
+-- join clients)" poddotazu na troch miestach.
+create or replace function public.owns_project(p_project_id uuid)
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1
+    from projects p
+    join clients c on c.id = p.client_id
+    where p.id = p_project_id and c.auth_user_id = auth.uid()
+  );
+$$;
+
+grant execute on function public.owns_project(uuid) to authenticated;
+
+-- ----------------------------------------------------------------------------
+-- Tabuľka: project_updates — priebežný "log" pre klienta (len na čítanie)
+-- ----------------------------------------------------------------------------
+create table project_updates (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references projects (id) on delete cascade,
+  text text not null,
+  created_at timestamptz not null default now()
+);
+
+create index idx_project_updates_project_id on project_updates (project_id);
+
+alter table project_updates enable row level security;
+
+create policy "Klient cita updates vlastnych projektov"
+  on project_updates for select to authenticated
+  using (owns_project(project_id));
+
+create policy "Admin cita vsetky updates"
+  on project_updates for select to authenticated using (is_admin());
+
+create policy "Admin vklada updates"
+  on project_updates for insert to authenticated with check (is_admin());
+
+create policy "Admin maze updates"
+  on project_updates for delete to authenticated using (is_admin());
+
+-- ----------------------------------------------------------------------------
+-- Tabuľka: project_documents — metadáta k súborom v Storage bucket-e
+-- 'project-documents' (privátny — sťahovanie len cez createSignedUrl)
+-- ----------------------------------------------------------------------------
+create table project_documents (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references projects (id) on delete cascade,
+  nazov text not null,
+  -- cesta k súboru v bucket-e 'project-documents', napr. '<project_id>/zmluva.pdf'
+  storage_path text not null,
+  created_at timestamptz not null default now()
+);
+
+create index idx_project_documents_project_id on project_documents (project_id);
+
+alter table project_documents enable row level security;
+
+create policy "Klient cita dokumenty vlastnych projektov"
+  on project_documents for select to authenticated
+  using (owns_project(project_id));
+
+create policy "Admin cita vsetky dokumenty"
+  on project_documents for select to authenticated using (is_admin());
+
+create policy "Admin vklada dokumenty"
+  on project_documents for insert to authenticated with check (is_admin());
+
+create policy "Admin maze dokumenty"
+  on project_documents for delete to authenticated using (is_admin());
+
+-- Storage bucket 'project-documents' — privátny (public=false), aby súbory
+-- neboli dostupné na hádateľnej URL bez podpisu. Dá sa vytvoriť aj cez
+-- Dashboard → Storage → New bucket namiesto tohto insertu.
+insert into storage.buckets (id, name, public)
+values ('project-documents', 'project-documents', false)
+on conflict (id) do nothing;
+
+-- createSignedUrl() vyžaduje, aby volajúci prešiel RLS na storage.objects
+-- pre SELECT — bez politiky nižšie by generovanie podpísanej URL zlyhalo aj
+-- pre vlastníka dokumentu. storage.objects.name = plná cesta v buckete,
+-- porovnávame ju s project_documents.storage_path.
+create policy "Klient stahuje dokumenty vlastnych projektov"
+  on storage.objects for select to authenticated
+  using (
+    bucket_id = 'project-documents'
+    and exists (
+      select 1 from project_documents pd
+      where pd.storage_path = storage.objects.name
+        and owns_project(pd.project_id)
+    )
+  );
+
+create policy "Admin spravuje vsetky dokumenty v buckete"
+  on storage.objects for all to authenticated
+  using (bucket_id = 'project-documents' and is_admin())
+  with check (bucket_id = 'project-documents' and is_admin());
+
+-- ----------------------------------------------------------------------------
+-- Tabuľka: project_questions — doplňujúce otázky od nás ku klientovi
+-- ----------------------------------------------------------------------------
+create table project_questions (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references projects (id) on delete cascade,
+  otazka text not null,
+  odpoved text null,
+  zodpovedane boolean not null default false,
+  created_at timestamptz not null default now(),
+  zodpovedane_at timestamptz null
+);
+
+create index idx_project_questions_project_id on project_questions (project_id);
+
+alter table project_questions enable row level security;
+
+create policy "Klient cita otazky vlastnych projektov"
+  on project_questions for select to authenticated
+  using (owns_project(project_id));
+
+create policy "Admin cita vsetky otazky"
+  on project_questions for select to authenticated using (is_admin());
+
+create policy "Admin vklada otazky"
+  on project_questions for insert to authenticated with check (is_admin());
+
+create policy "Admin maze otazky"
+  on project_questions for delete to authenticated using (is_admin());
+
+-- Klient NEMÁ priamu UPDATE politiku na project_questions — jediný spôsob,
+-- ako môže zapísať odpoveď, je RPC nižšie. To zaručuje, že vie zmeniť len
+-- `odpoved`/`zodpovedane`/`zodpovedane_at` na SVOJEJ nezodpovedanej otázke,
+-- nikdy text otázky samotnej ani cudziu otázku (RLS je len na úrovni
+-- riadkov, nie stĺpcov, takže priama UPDATE politika by toto nevedela
+-- obmedziť tak presne ako táto funkcia).
+create or replace function public.odpovedat_na_otazku(
+  p_question_id uuid,
+  p_odpoved text
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_owns boolean;
+begin
+  select exists (
+    select 1
+    from project_questions pq
+    where pq.id = p_question_id
+      and pq.zodpovedane = false
+      and owns_project(pq.project_id)
+  ) into v_owns;
+
+  if not v_owns then
+    raise exception 'otazka_nenajdena_alebo_uz_zodpovedana';
+  end if;
+
+  update project_questions
+  set odpoved = p_odpoved,
+      zodpovedane = true,
+      zodpovedane_at = now()
+  where id = p_question_id;
+end;
+$$;
+
+grant execute on function public.odpovedat_na_otazku(uuid, text) to authenticated;

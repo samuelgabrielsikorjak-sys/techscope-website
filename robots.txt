@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /klient.html
 Disallow: /sluzby-faktury.html
 Disallow: /sluzby-asistent.html
 Disallow: /sluzby-dochadzka.html

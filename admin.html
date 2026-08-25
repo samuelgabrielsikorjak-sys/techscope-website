@@ -17,7 +17,24 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a><span class="logo-admin-tag">admin</span>
-    <div class="nav-cta" id="admin-nav-actions"></div>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="index.html#sluzby" class="nav-dropdown-trigger">Služby</a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="data-compass.html">Data Compass</a></li>
+          <li><a href="web-mobile.html">Web &amp; Mobilné aplikácie</a></li>
+          <li><a href="softver-na-mieru.html">Softvér na mieru</a></li>
+          <li><a href="ai-riesenia.html">AI riešenia</a></li>
+        </ul>
+      </li>
+      <li><a href="index.html#ako-to-funguje">Ako pracujeme</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <span id="admin-nav-actions"></span>
+      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -125,11 +142,83 @@
       </div>
     </div>
 
+    <div class="admin-section" id="projects-section">
+      <div class="section-head" style="text-align:left; margin:0 0 24px;">
+        <div class="eyebrow">Správa zákaziek</div>
+        <h2>Prehľad zákaziek</h2>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="new-project-toggle-btn">+ Nový projekt</button>
+
+      <div class="form-card" id="new-project-card" style="display:none; margin-top:16px; max-width:560px;">
+        <div class="form-banner-error" id="new-project-error"></div>
+        <form id="new-project-form" novalidate>
+          <div class="form-row">
+            <label for="np-nazov">Názov projektu</label>
+            <input type="text" id="np-nazov" required>
+          </div>
+          <div class="form-row">
+            <label for="np-klient">Klient</label>
+            <select id="np-klient">
+              <option value="">— Vyberte klienta —</option>
+            </select>
+          </div>
+          <div id="np-new-client-fields" style="display:none;">
+            <div class="form-row">
+              <label for="np-klient-meno">Meno a priezvisko (nový klient)</label>
+              <input type="text" id="np-klient-meno">
+            </div>
+            <div class="form-row">
+              <label for="np-klient-firma">Názov firmy</label>
+              <input type="text" id="np-klient-firma">
+            </div>
+            <div class="form-row">
+              <label for="np-klient-email">Email</label>
+              <input type="email" id="np-klient-email">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="np-sluzba">Služba</label>
+            <select id="np-sluzba">
+              <option value="data_compass">Data Compass</option>
+              <option value="web_mobile">Web &amp; Mobilné aplikácie</option>
+              <option value="softver_na_mieru">Softvér na mieru</option>
+              <option value="ai_riesenia">AI riešenia</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="np-faza">Počiatočná fáza</label>
+            <select id="np-faza">
+              <option value="vstupna_analyza">Vstupná analýza</option>
+              <option value="definicia_metrik">Definícia metrík a cieľov</option>
+              <option value="navrh_architektury">Návrh architektúry</option>
+              <option value="vyvoj">Vývoj</option>
+              <option value="testovanie_review">Testovanie a review</option>
+              <option value="odovzdanie_zaskolenie">Odovzdanie a zaškolenie</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Vytvoriť projekt</button>
+        </form>
+      </div>
+
+      <div class="admin-table-wrap" style="margin-top:24px;">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Názov</th><th>Klient</th><th>Služba</th><th>Fáza</th><th>Status</th></tr>
+          </thead>
+          <tbody id="projects-tbody"><tr><td colspan="5">Načítavam…</td></tr></tbody>
+        </table>
+      </div>
+
+      <div id="project-detail" style="margin-top:28px;"></div>
+    </div>
+
   </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/supabase-client.js"></script>
+<script src="assets/script.js"></script>
 <script src="assets/admin.js"></script>
 </body>
 </html>
