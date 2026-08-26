@@ -243,9 +243,9 @@
       var el = document.getElementById('documents-list');
       window.supabaseClient
         .from('project_documents')
-        .select('id,nazov,storage_path,created_at')
+        .select('id,nazov,file_url,uploaded_at')
         .eq('project_id', projectId)
-        .order('created_at', { ascending: false })
+        .order('uploaded_at', { ascending: false })
         .then(function (res) {
           if (res.error) { el.innerHTML = '<p style="color:var(--ink-faint);">Dokumenty sa nepodarilo načítať.</p>'; return; }
           var rows = res.data || [];
@@ -256,9 +256,9 @@
               '<div class="doc-row">' +
                 '<div>' +
                   '<div class="doc-row-name">' + escapeHtml(rows[i].nazov) + '</div>' +
-                  '<div class="doc-row-date">' + formatDateTime(rows[i].created_at) + '</div>' +
+                  '<div class="doc-row-date">' + formatDateTime(rows[i].uploaded_at) + '</div>' +
                 '</div>' +
-                '<button type="button" class="btn btn-ghost doc-download-btn" data-path="' + escapeHtml(rows[i].storage_path) + '">Stiahnuť</button>' +
+                '<button type="button" class="btn btn-ghost doc-download-btn" data-path="' + escapeHtml(rows[i].file_url) + '">Stiahnuť</button>' +
               '</div>';
           }
           el.innerHTML = html;

@@ -490,9 +490,13 @@ create table project_documents (
   id uuid primary key default gen_random_uuid(),
   project_id uuid not null references projects (id) on delete cascade,
   nazov text not null,
-  -- cesta k súboru v bucket-e 'project-documents', napr. '<project_id>/zmluva.pdf'
-  storage_path text not null,
-  created_at timestamptz not null default now()
+  -- Napriek názvu NEJDE o hotovú/verejnú URL — bucket je privátny (public=false),
+  -- takže sem sa ukladá len cesta k súboru v bucket-e 'project-documents'
+  -- (napr. '<project_id>/zmluva.pdf'), rovnako ako predtým pod menom storage_path.
+  -- Skutočná URL na stiahnutie sa generuje až za behu cez createSignedUrl(file_url, ...),
+  -- keďže podpísaná URL má platnosť len obmedzenú dobu a nedá sa uložiť natrvalo.
+  file_url text not null,
+  uploaded_at timestamptz not null default now()
 );
 
 create index idx_project_documents_project_id on project_documents (project_id);
@@ -522,14 +526,15 @@ on conflict (id) do nothing;
 -- createSignedUrl() vyžaduje, aby volajúci prešiel RLS na storage.objects
 -- pre SELECT — bez politiky nižšie by generovanie podpísanej URL zlyhalo aj
 -- pre vlastníka dokumentu. storage.objects.name = plná cesta v buckete,
--- porovnávame ju s project_documents.storage_path.
+-- porovnávame ju s project_documents.file_url (ktorý napriek názvu obsahuje
+-- cestu v buckete, nie hotovú URL — pozri komentár pri create table vyššie).
 create policy "Klient stahuje dokumenty vlastnych projektov"
   on storage.objects for select to authenticated
   using (
     bucket_id = 'project-documents'
     and exists (
       select 1 from project_documents pd
-      where pd.storage_path = storage.objects.name
+      where pd.file_url = storage.objects.name
         and owns_project(pd.project_id)
     )
   );

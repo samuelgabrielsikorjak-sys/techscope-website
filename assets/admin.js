@@ -668,7 +668,7 @@ function loadSlots() {
             errorEl.classList.add('show');
             return;
           }
-          window.supabaseClient.from('project_documents').insert({ project_id: project.id, nazov: nazov, storage_path: path }).then(function (res) {
+          window.supabaseClient.from('project_documents').insert({ project_id: project.id, nazov: nazov, file_url: path }).then(function (res) {
             btn.disabled = false;
             btn.textContent = 'Nahrať';
             if (res.error) {
@@ -728,7 +728,7 @@ function loadSlots() {
         // "osirotené" (zaberajú miesto, nie sú z ničoho dostupné).
         window.supabaseClient
           .from('project_documents')
-          .select('storage_path')
+          .select('file_url')
           .eq('project_id', project.id)
           .then(function (docsRes) {
             if (docsRes.error) {
@@ -737,7 +737,7 @@ function loadSlots() {
               window.alert('Nepodarilo sa načítať dokumenty projektu, mazanie prerušené: ' + docsRes.error.message);
               return;
             }
-            var paths = (docsRes.data || []).map(function (d) { return d.storage_path; });
+            var paths = (docsRes.data || []).map(function (d) { return d.file_url; });
 
             if (!paths.length) {
               deleteProjectRow();
@@ -782,17 +782,17 @@ function loadSlots() {
       if (!el) return;
       window.supabaseClient
         .from('project_documents')
-        .select('id,nazov,storage_path,created_at')
+        .select('id,nazov,file_url,uploaded_at')
         .eq('project_id', projectId)
-        .order('created_at', { ascending: false })
+        .order('uploaded_at', { ascending: false })
         .then(function (res) {
           if (res.error) { el.innerHTML = '<p style="color:var(--ink-faint);">Dokumenty sa nepodarilo načítať.</p>'; return; }
           var rows = res.data || [];
           if (!rows.length) { el.innerHTML = '<p style="color:var(--ink-faint);">Zatiaľ žiadne dokumenty.</p>'; return; }
           var html = '';
           for (var i = 0; i < rows.length; i++) {
-            html += '<div class="doc-row"><div><div class="doc-row-name">' + escapeHtml(rows[i].nazov) + '</div><div class="doc-row-date">' + formatDateTime(rows[i].created_at) + '</div></div>' +
-              '<button type="button" class="btn btn-ghost doc-admin-delete-btn" data-id="' + rows[i].id + '" data-path="' + escapeHtml(rows[i].storage_path) + '">Zmazať</button></div>';
+            html += '<div class="doc-row"><div><div class="doc-row-name">' + escapeHtml(rows[i].nazov) + '</div><div class="doc-row-date">' + formatDateTime(rows[i].uploaded_at) + '</div></div>' +
+              '<button type="button" class="btn btn-ghost doc-admin-delete-btn" data-id="' + rows[i].id + '" data-path="' + escapeHtml(rows[i].file_url) + '">Zmazať</button></div>';
           }
           el.innerHTML = html;
 
