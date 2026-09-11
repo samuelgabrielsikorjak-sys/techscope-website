@@ -7,9 +7,9 @@
 <title>Admin — TECH-SCOPE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
@@ -18,22 +18,21 @@
   <div class="nav-inner">
     <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a><span class="logo-admin-tag">admin</span>
     <ul class="nav-links">
-      <li class="nav-dropdown">
-        <a href="index.html#sluzby" class="nav-dropdown-trigger">Služby</a>
-        <ul class="nav-dropdown-menu">
-          <li><a href="data-compass.html">Data Compass</a></li>
-          <li><a href="web-mobile.html">Web &amp; Mobilné aplikácie</a></li>
-          <li><a href="softver-na-mieru.html">Softvér na mieru</a></li>
-          <li><a href="ai-riesenia.html">AI riešenia</a></li>
-        </ul>
+      <li class="nav-dd">
+        <a href="index.html#sluzby" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Služby<svg class="nav-dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dd-panel" role="menu">
+          <a href="softver-na-mieru.html" role="menuitem"><span>Softvér na mieru</span><small>Interné systémy presne na váš proces</small></a>
+          <a href="ai-riesenia.html" role="menuitem"><span>AI riešenia</span><small>Automatizácie a AI agenti, čo uberú prácu</small></a>
+          <a href="web-mobile.html" role="menuitem"><span>Web &amp; Mobilné aplikácie</span><small>Weby a appky na mieru, ktoré ľudia používajú</small></a>
+          <a href="data-compass.html" role="menuitem"><span>Dátový manažment a analýzy</span><small>Dátové a predikčné modely firmy</small></a>
+        </div>
       </li>
-      <li><a href="index.html#ako-to-funguje">Ako pracujeme</a></li>
-      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#proces">Proces</a></li>
       <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
     <div class="nav-cta">
       <span id="admin-nav-actions"></span>
-      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false">☰</button>
+      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </nav>
@@ -63,6 +62,14 @@
 
 <section id="admin-content" style="display:none;">
   <div class="container">
+
+    <nav class="admin-subnav">
+      <a href="#slots-section">Call sloty</a>
+      <a href="#leads-section">Leady</a>
+      <a href="#exit-leads-section">Exit Leady</a>
+      <a href="#crm-section">CRM / Leady</a>
+      <a href="#projects-section">Prehľad zákaziek</a>
+    </nav>
 
     <div class="admin-section" id="slots-section">
       <div class="section-head" style="text-align:left; margin:0 0 24px;">
@@ -142,6 +149,74 @@
       </div>
     </div>
 
+    <div class="admin-section" id="crm-section">
+      <div class="section-head" style="text-align:left; margin:0 0 24px;">
+        <div class="eyebrow">CRM</div>
+        <h2>CRM / Leady</h2>
+      </div>
+
+      <div class="form-banner-error" id="crm-error"></div>
+
+      <button type="button" class="btn btn-primary" id="crm-new-toggle-btn">+ Nový lead</button>
+
+      <div class="form-card" id="crm-new-card" style="display:none; margin-top:16px; max-width:560px;">
+        <div class="form-banner-error" id="crm-new-error"></div>
+        <form id="crm-new-form" novalidate>
+          <div class="form-row">
+            <label for="crm-firma">Firma</label>
+            <input type="text" id="crm-firma">
+          </div>
+          <div class="form-row">
+            <label for="crm-osoba">Kontaktná osoba</label>
+            <input type="text" id="crm-osoba">
+          </div>
+          <div class="form-row">
+            <label for="crm-email">Email</label>
+            <input type="email" id="crm-email">
+          </div>
+          <div class="form-row">
+            <label for="crm-telefon">Telefón</label>
+            <input type="tel" id="crm-telefon">
+          </div>
+          <div class="form-row">
+            <label for="crm-poznamky">Poznámky</label>
+            <textarea id="crm-poznamky" class="admin-textarea"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="crm-status">Status</label>
+            <select id="crm-status">
+              <option value="zaujemca" selected>Záujemca</option>
+              <option value="strategy_call">Strategy Call</option>
+              <option value="odoslana_ponuka">Odoslaná ponuka</option>
+              <option value="uzavrety">Uzavretý</option>
+              <option value="zruseny">Zrušený</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Vytvoriť lead</button>
+        </form>
+      </div>
+
+      <div class="crm-tabs" id="crm-tabs" style="margin-top:24px;">
+        <button type="button" class="crm-tab is-active" data-status="">Všetky</button>
+        <button type="button" class="crm-tab" data-status="zaujemca">Záujemca</button>
+        <button type="button" class="crm-tab" data-status="strategy_call">Strategy Call</button>
+        <button type="button" class="crm-tab" data-status="odoslana_ponuka">Odoslaná ponuka</button>
+        <button type="button" class="crm-tab" data-status="uzavrety">Uzavretý</button>
+        <button type="button" class="crm-tab" data-status="zruseny">Zrušený</button>
+      </div>
+
+      <div class="admin-table-wrap" style="margin-top:16px;">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Firma</th><th>Kontaktná osoba</th><th>Status</th><th>Zdroj</th><th>Vytvorené</th></tr>
+          </thead>
+          <tbody id="crm-tbody"><tr><td colspan="5">Načítavam…</td></tr></tbody>
+        </table>
+      </div>
+
+      <div id="crm-detail" style="margin-top:28px;"></div>
+    </div>
+
     <div class="admin-section" id="projects-section">
       <div class="section-head" style="text-align:left; margin:0 0 24px;">
         <div class="eyebrow">Správa zákaziek</div>
@@ -217,8 +292,11 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="assets/supabase-client.js"></script>
-<script src="assets/script.js"></script>
-<script src="assets/admin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/invoice-pdf.js"></script>
+<script src="assets/js/admin.js"></script>
 </body>
 </html>

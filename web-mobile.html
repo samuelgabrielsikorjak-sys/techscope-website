@@ -9,25 +9,25 @@
 <link rel="canonical" href="https://techscope.sk/web-mobile.html">
 <meta property="og:title" content="Web &amp; Mobilné aplikácie na mieru — TECH-SCOPE">
 <meta property="og:description" content="Weby, e-shopy a mobilné aplikácie na mieru — od návrhu po nasadenie, s fixnou cenou a garantovaným termínom.">
-<meta property="og:image" content="https://techscope.sk/assets/og-image.png">
+<meta property="og:image" content="https://techscope.sk/assets/img/og-image.png">
 <meta property="og:url" content="https://techscope.sk/web-mobile.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Web &amp; Mobilné aplikácie na mieru — TECH-SCOPE">
 <meta name="twitter:description" content="Weby, e-shopy a mobilné aplikácie na mieru — od návrhu po nasadenie, s fixnou cenou a garantovaným termínom.">
-<meta name="twitter:image" content="https://techscope.sk/assets/og-image.png">
+<meta name="twitter:image" content="https://techscope.sk/assets/img/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
 <link rel="manifest" href="/site.webmanifest">
-<noscript><style>.reveal{opacity:1!important;transform:none!important;} .step-card-panel{display:block!important;grid-template-rows:none!important;} .step-card-panel-inner{overflow:visible!important;} .step-card-arrow{display:none!important;}</style></noscript>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,62 +47,52 @@
 </head>
 <body>
 
-<script>
-  // Táto stránka nemá vlastný splash intro (ten beží len na hlavnej
-  // stránke) — assets/hero-viz.js na svoje spustenie čaká buď na splash,
-  // alebo na tento príznak, takže bez neho by ambientné pozadie hrdinu
-  // nikdy nenaštartovalo.
-  window.__tsSplashSkip = true;
-</script>
-
 <div class="urgency-bar">Berieme maximálne <span>3 projekty mesačne</span> naprieč všetkými službami — aktuálne obsadené: 2/3</div>
 
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a>
     <ul class="nav-links">
-      <li class="nav-dropdown">
-        <a href="index.html#sluzby" class="nav-dropdown-trigger">Služby</a>
-        <ul class="nav-dropdown-menu">
-          <li><a href="data-compass.html">Data Compass</a></li>
-          <li><a href="web-mobile.html">Web &amp; Mobilné aplikácie</a></li>
-          <li><a href="softver-na-mieru.html">Softvér na mieru</a></li>
-          <li><a href="ai-riesenia.html">AI riešenia</a></li>
-        </ul>
+      <li class="nav-dd">
+        <a href="index.html#sluzby" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Služby<svg class="nav-dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dd-panel" role="menu">
+          <a href="softver-na-mieru.html" role="menuitem"><span>Softvér na mieru</span><small>Interné systémy presne na váš proces</small></a>
+          <a href="ai-riesenia.html" role="menuitem"><span>AI riešenia</span><small>Automatizácie a AI agenti, čo uberú prácu</small></a>
+          <a href="web-mobile.html" role="menuitem"><span>Web &amp; Mobilné aplikácie</span><small>Weby a appky na mieru, ktoré ľudia používajú</small></a>
+          <a href="data-compass.html" role="menuitem"><span>Dátový manažment a analýzy</span><small>Dátové a predikčné modely firmy</small></a>
+        </div>
       </li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="index.html#pripadove-studie">Prípadové štúdie</a></li>
+      <li><a href="index.html#proces">Proces</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
     <div class="nav-cta">
       <a href="klient.html" class="btn btn-secondary">Klientská zóna</a>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false">☰</button>
+      <a href="rezervacia.html" class="btn btn-primary">Rezervovať hovor</a>
+      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </nav>
 
 <!-- HOOK -->
 <header class="hero hero-split">
-  <div class="geo-bg" aria-hidden="true"></div>
-  <div class="hero-bg-canvas-wrap" aria-hidden="true">
-    <canvas class="hero-viz-canvas"></canvas>
-  </div>
   <div class="hero-inner">
     <div class="hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow">
-          <svg class="eyebrow-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M15.3 8.7l-2.15 5.05-5.05 2.15 2.15-5.05 5.05-2.15z" stroke-linejoin="round"/>
-          </svg>
-          Web &amp; Mobilné aplikácie
-        </div>
-        <h1 class="hero-title-main">Aplikácie, ktoré vaši zákazníci naozaj používajú.</h1>
-        <p class="hero-subheadline">Weby, e-shopy a mobilné aplikácie na mieru — od návrhu po nasadenie, s fixnou cenou a garantovaným termínom.</p>
+        <h1 class="hero-title-main">Aplikácie, ktoré si váš tím a zákazníci obľúbia .</h1>
+        <p class="hero-subheadline">Aplikácie na mieru so špecializovaným UX a komplexnými riešeniami — od návrhu po nasadenie, s fixnou cenou a garantovaným termínom.</p>
       </div>
       <div class="hero-editor">
-        <div class="hero-editor-tab"><span class="hero-editor-filename">analysis.py</span></div>
-        <div class="hero-code-block"></div>
+        <div class="hero-editor-tab"><span class="hero-editor-filename">checkout.tsx</span></div>
+        <div class="hero-code-block" aria-hidden="true">
+          <div class="code-line"><span class="code-line-num">1</span><span class="code-line-code"><span class="kw">export</span> <span class="kw">function</span> Checkout() {</span></div>
+          <div class="code-line"><span class="code-line-num">2</span><span class="code-line-code">  <span class="kw">const</span> { items, total } = useCart()</span></div>
+          <div class="code-line"><span class="code-line-num">3</span><span class="code-line-code"> </span></div>
+          <div class="code-line"><span class="code-line-num">4</span><span class="code-line-code">  <span class="kw">return</span> (</span></div>
+          <div class="code-line"><span class="code-line-num">5</span><span class="code-line-code">    &lt;Summary items={items} total={total} /&gt;</span></div>
+          <div class="code-line"><span class="code-line-num">6</span><span class="code-line-code">  )</span></div>
+          <div class="code-line"><span class="code-line-num">7</span><span class="code-line-code">}</span></div>
+        </div>
       </div>
     </div>
     <p class="hero-typing-phrase" aria-hidden="true">
@@ -116,105 +106,66 @@
   </div>
 </header>
 
-<!-- STORY BRIDGE -->
-<section class="story">
-  <div class="container story-inner">
-    <h2 class="reveal">Väčšina webov a aplikácií nezlyháva na technológii. Zlyháva na tom, že ich nikto nepoužíva tak, ako by mal.</h2>
-    <p class="reveal">Pekný dizajn bez premyslenej cesty používateľa je len obrázok. Navrhujeme tak, aby zákazník urobil to, čo od neho čakáte — nákup, registráciu, rezerváciu — nie aby len obdivoval rozhranie.</p>
+<!-- 2 · PROBLÉM -> HODNOTA -->
+<section id="prehlad" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal"><h2>Kde dnes strácate zákazníkov</h2></div>
+    <div class="hx-pv">
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Návštevníci prídu na stránku a odídu bez toho, aby niečo urobili.</p>
+        <p class="hx-pv-gain">Navrhneme cestu k nákupu tak, aby ďalší krok bol vždy zrejmý — a zmeriame, kde ľudia odpadávajú.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Aplikácia funguje, ale používanie pôsobí ťažkopádne.</p>
+        <p class="hx-pv-gain">Prejdeme každú obrazovku a odstránime trenie, ktoré používateľa spomaľuje alebo mätie.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Stránka sa načítava pomaly a ľudia odchádzajú skôr, než ju uvidia.</p>
+        <p class="hx-pv-gain">Postavíme rýchlu codebase — načítanie v sekundách, nie po častiach.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Appka na telefóne pôsobí ako zmenšená verzia webu, nie ako appka.</p>
+        <p class="hx-pv-gain">iOS aj Android z jednej codebase, s natívnym pocitom ovládania.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- AKO PRACUJEME -->
+<!-- 3 · ČO DOSTANETE (value stack) -->
+<section id="balik">
+  <div class="container">
+    <div class="section-head reveal"><h2>Čo presne dostanete</h2></div>
+    <ul class="hx-stack reveal">
+      <li class="is-free"><div><b>Návrh architektúry a MVP úplne zadarmo</b><span>Prejdeme váš web či appku a dostanete návrh jednoduchého MVP už na druhom stretnutí.</span></div></li>
+      <li><div><b>Web alebo aplikácia na mieru</b><span>Postavené presne podľa schváleného návrhu — žiadna šablóna.</span></div></li>
+      <li><div><b>Dizajn a vývoj pod jednou strechou</b><span>UX, UI aj kód od jedného tímu — bez prekladu medzi dodávateľmi.</span></div></li>
+      <li><div><b>iOS, Android aj web z jednej codebase</b><span>Jedna údržba namiesto troch, konzistentný zážitok všade.</span></div></li>
+      <li><div><b>Analytika a zaškolenie</b><span>Vidíte správanie používateľov a viete si obsah spravovať sami.</span></div></li>
+      <li><div><b>Fixný termín a garancia funkčného výstupu</b><span>Cena aj termín sú dané pred štartom.</span></div></li>
+    </ul>
+    <div class="hx-stack-cta reveal">
+      <p>Všetko za jednu fixnú cenu, ktorú si potvrdíte na strategy calle.</p>
+      <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · AKO TO PREBIEHA -->
 <section id="ako-to-funguje" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Proces</div>
-      <h2>Ako pracujeme?</h2>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">01</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-1" id="step-trigger-1">
-          <span class="step-name">Analýza a wireframe</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-1" role="region" aria-labelledby="step-trigger-1">
-          <div class="step-card-panel-inner">
-            <p>Zmapujeme cieľovú skupinu a cestu používateľa, navrhneme štruktúru pred akýmkoľvek dizajnom.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">02</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-2" id="step-trigger-2">
-          <span class="step-name">UX/UI dizajn</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-2" role="region" aria-labelledby="step-trigger-2">
-          <div class="step-card-panel-inner">
-            <p>Vizuálny návrh na mieru vašej značky, s dôrazom na konverziu, nie len estetiku.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">03</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-3" id="step-trigger-3">
-          <span class="step-name">Frontend vývoj</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-3" role="region" aria-labelledby="step-trigger-3">
-          <div class="step-card-panel-inner">
-            <p>Postavíme rozhranie presne podľa schváleného dizajnu, responzívne na všetkých zariadeniach.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">04</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-4" id="step-trigger-4">
-          <span class="step-name">Backend a integrácie</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-4" role="region" aria-labelledby="step-trigger-4">
-          <div class="step-card-panel-inner">
-            <p>Napojenie na platby, sklad, CRM alebo iné systémy podľa potreby.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">05</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-5" id="step-trigger-5">
-          <span class="step-name">Testovanie naprieč zariadeniami</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-5" role="region" aria-labelledby="step-trigger-5">
-          <div class="step-card-panel-inner">
-            <p>Overenie funkčnosti na rôznych prehliadačoch, telefónoch a rozlíšeniach pred odovzdaním.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">06</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-6" id="step-trigger-6">
-          <span class="step-name">Nasadenie a zaškolenie</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-6" role="region" aria-labelledby="step-trigger-6">
-          <div class="step-card-panel-inner">
-            <p>Appka/web ide live, vy dostanete prístup a zaškolenie na správu obsahu.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="section-head reveal"><h2>Ako to prebieha</h2></div>
+    <ol class="hx-timeline reveal">
+      <li><span class="hx-tl-num">01</span><h4>Analýza a wireframe</h4><p>Zmapujeme cieľovú skupinu a cestu používateľa, navrhneme štruktúru pred dizajnom.</p></li>
+      <li><span class="hx-tl-num">02</span><h4>UX/UI dizajn</h4><p>Vizuálny návrh na mieru značky, s dôrazom na konverziu, nie len estetiku.</p></li>
+      <li><span class="hx-tl-num">03</span><h4>Frontend vývoj</h4><p>Postavíme rozhranie presne podľa dizajnu, responzívne na všetkých zariadeniach.</p></li>
+      <li><span class="hx-tl-num">04</span><h4>Backend a integrácie</h4><p>Napojenie na platby, sklad, CRM alebo iné systémy podľa potreby.</p></li>
+      <li><span class="hx-tl-num">05</span><h4>Testovanie naprieč zariadeniami</h4><p>Overenie na rôznych prehliadačoch, telefónoch a rozlíšeniach pred odovzdaním.</p></li>
+      <li><span class="hx-tl-num">06</span><h4>Nasadenie a zaškolenie</h4><p>Appka či web ide live, dostanete prístup a zaškolenie na správu obsahu.</p></li>
+    </ol>
   </div>
 </section>
 
-<!-- GUARANTEE -->
+<!-- 5 · GARANCIA -->
 <section id="garancia">
   <div class="container">
     <div class="guarantee reveal">
@@ -232,560 +183,34 @@
   </div>
 </section>
 
-<!-- RIEŠENIA -->
-<section id="ponuka">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Riešenia</div>
-      <h2>Kde presne appka najviac stráca zákazníkov?</h2>
-    </div>
-    <div class="solu-list">
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-konverzia" id="solu-trigger-konverzia">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Konverzia</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Návštevníci prídu na stránku a odídu bez toho, aby niečo urobili.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-konverzia" role="region" aria-labelledby="solu-trigger-konverzia">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-konverzia-1" id="solu-item-trigger-konverzia-1">
-                  <span class="solu-item-name">Košík opúšťajú tesne pred platbou</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-konverzia-1" role="region" aria-labelledby="solu-item-trigger-konverzia-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Zjednodušíme checkout na minimum krokov a odstránime miesta, kde ľudia najčastejšie váhajú.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-konverzia-2" id="solu-item-trigger-konverzia-2">
-                  <span class="solu-item-name">Formulár na kontakt vypĺňa len zlomok návštevníkov</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-konverzia-2" role="region" aria-labelledby="solu-item-trigger-konverzia-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Skrátime formulár na to podstatné a umiestnime ho tam, kde ho ľudia reálne hľadajú.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-konverzia-3" id="solu-item-trigger-konverzia-3">
-                  <span class="solu-item-name">Tlačidlo na akciu si nikto nevšimne</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-konverzia-3" role="region" aria-labelledby="solu-item-trigger-konverzia-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Navrhneme jasnú vizuálnu hierarchiu, kde je ďalší krok vždy zrejmý.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-konverzia-4" id="solu-item-trigger-konverzia-4">
-                  <span class="solu-item-name">Neviete, kde presne stránku opúšťajú</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-konverzia-4" role="region" aria-labelledby="solu-item-trigger-konverzia-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Nastavíme sledovanie konverzného lievika, aby ste videli presný bod odchodu.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-ux" id="solu-trigger-ux">
-          <span class="solu-category-top">
-            <span class="solu-category-name">UX</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Aplikácia funguje, ale používanie pôsobí ťažkopádne.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-ux" role="region" aria-labelledby="solu-trigger-ux">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-ux-1" id="solu-item-trigger-ux-1">
-                  <span class="solu-item-name">Používatelia sa strácajú v menu</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-ux-1" role="region" aria-labelledby="solu-item-trigger-ux-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Zjednodušíme navigáciu na štruktúru, ktorú pochopíte na prvý pohľad.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-ux-2" id="solu-item-trigger-ux-2">
-                  <span class="solu-item-name">Registrácia odradí skôr, než sa dokončí</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-ux-2" role="region" aria-labelledby="solu-item-trigger-ux-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Znížime počet krokov na minimum a ukážeme hodnotu skôr, než sa používateľ zaregistruje.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-ux-3" id="solu-item-trigger-ux-3">
-                  <span class="solu-item-name">Rozhranie vyzerá inak na telefóne a na počítači</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-ux-3" role="region" aria-labelledby="solu-item-trigger-ux-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Navrhneme jeden konzistentný dizajnový systém pre všetky zariadenia.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-ux-4" id="solu-item-trigger-ux-4">
-                  <span class="solu-item-name">Zákazníci sa pýtajú na veci, ktoré by mali byť zjavné</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-ux-4" role="region" aria-labelledby="solu-item-trigger-ux-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Otestujeme rozhranie s reálnymi používateľmi pred spustením, nie po ňom.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-vykon" id="solu-trigger-vykon">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Výkon</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Stránka sa načítava pomaly a ľudia odchádzajú skôr, než ju uvidia.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-vykon" role="region" aria-labelledby="solu-trigger-vykon">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-vykon-1" id="solu-item-trigger-vykon-1">
-                  <span class="solu-item-name">Načítanie trvá viac ako pár sekúnd</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-vykon-1" role="region" aria-labelledby="solu-item-trigger-vykon-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Optimalizujeme obrázky, kód aj infraštruktúru na rýchle prvé zobrazenie.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-vykon-2" id="solu-item-trigger-vykon-2">
-                  <span class="solu-item-name">Appka na sekundu zamrzne pri každej akcii</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-vykon-2" role="region" aria-labelledby="solu-item-trigger-vykon-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Odstránime zbytočné výpočty a načítavanie dát, ktoré blokuje rozhranie.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-vykon-3" id="solu-item-trigger-vykon-3">
-                  <span class="solu-item-name">Na mobilných dátach appka sotva funguje</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-vykon-3" role="region" aria-labelledby="solu-item-trigger-vykon-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Otestujeme a doladíme výkon aj na slabšom pripojení, nie len na wifi v kancelárii.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-vykon-4" id="solu-item-trigger-vykon-4">
-                  <span class="solu-item-name">Vyhľadávače penalizujú pomalý web</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-vykon-4" role="region" aria-labelledby="solu-item-trigger-vykon-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Zladíme technické parametre stránky s tým, čo vyhľadávače aj používatelia očakávajú.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-mobil" id="solu-trigger-mobil">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Mobilná skúsenosť</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Appka na telefóne pôsobí ako zmenšená verzia webu, nie ako appka.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-mobil" role="region" aria-labelledby="solu-trigger-mobil">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-mobil-1" id="solu-item-trigger-mobil-1">
-                  <span class="solu-item-name">Ovládacie prvky sú príliš malé na dotyk</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-mobil-1" role="region" aria-labelledby="solu-item-trigger-mobil-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Navrhneme rozhranie od začiatku pre prst, nie pre kurzor myši.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-mobil-2" id="solu-item-trigger-mobil-2">
-                  <span class="solu-item-name">Appka nefunguje offline ani čiastočne</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-mobil-2" role="region" aria-labelledby="solu-item-trigger-mobil-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Pridáme základnú offline podporu tam, kde to dáva zmysel.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-mobil-3" id="solu-item-trigger-mobil-3">
-                  <span class="solu-item-name">Push notifikácie buď chýbajú, alebo otravujú</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-mobil-3" role="region" aria-labelledby="solu-item-trigger-mobil-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Nastavíme notifikácie, ktoré prídu v správnom momente, nie náhodne.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-mobil-4" id="solu-item-trigger-mobil-4">
-                  <span class="solu-item-name">Appka nie je v App Store ani Google Play</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-mobil-4" role="region" aria-labelledby="solu-item-trigger-mobil-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Prevedieme vás celým procesom publikovania na oboch platformách.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-dovera" id="solu-trigger-dovera">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Dôvera</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Zákazník si nie je istý, či vám má dať svoje údaje alebo platobnú kartu.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-dovera" role="region" aria-labelledby="solu-trigger-dovera">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-dovera-1" id="solu-item-trigger-dovera-1">
-                  <span class="solu-item-name">Chýbajú jasné informácie o firme a kontakte</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-dovera-1" role="region" aria-labelledby="solu-item-trigger-dovera-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Doplníme viditeľné kontaktné údaje a informácie o firme tam, kde ich zákazník hľadá.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-dovera-2" id="solu-item-trigger-dovera-2">
-                  <span class="solu-item-name">Platba pôsobí neisto alebo neprofesionálne</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-dovera-2" role="region" aria-labelledby="solu-item-trigger-dovera-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Napojíme overené platobné brány s dôveryhodným vzhľadom platobného procesu.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-dovera-3" id="solu-item-trigger-dovera-3">
-                  <span class="solu-item-name">Recenzie a referencie nie sú nikde vidieť</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-dovera-3" role="region" aria-labelledby="solu-item-trigger-dovera-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Vytvoríme priestor na zobrazenie hodnotení tam, kde rozhodujú o nákupe.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-dovera-4" id="solu-item-trigger-dovera-4">
-                  <span class="solu-item-name">Stránka pôsobí zastarano oproti konkurencii</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-dovera-4" role="region" aria-labelledby="solu-item-trigger-dovera-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Modernizujeme vizuál tak, aby zodpovedal úrovni, akú zákazník od vás očakáva.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="reveal" style="text-align:center; margin-top:44px;">
-      <a href="rezervacia.html" class="btn btn-primary">Poďme prebrať váš prípad na strategy calle</a>
-    </div>
-  </div>
-</section>
-
-<!-- VALUE WHEEL -->
-<section id="hodnota">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Prínosy</div>
-      <h2>Toto všetko dostanete s appkou na mieru</h2>
-    </div>
-
-    <div class="value-wheel reveal">
-      <div class="value-orbit-rings" aria-hidden="true">
-        <span class="value-orbit-ring value-orbit-ring--outer"></span>
-        <span class="value-orbit-ring value-orbit-ring--inner"></span>
-      </div>
-      <svg class="value-spokes" aria-hidden="true">
-        <defs>
-          <radialGradient id="value-spoke-gradient" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"></stop>
-            <stop offset="100%"></stop>
-          </radialGradient>
-        </defs>
-        <line class="value-spoke" data-index="0"></line>
-        <line class="value-spoke" data-index="1"></line>
-        <line class="value-spoke" data-index="2"></line>
-        <line class="value-spoke" data-index="3"></line>
-        <line class="value-spoke" data-index="4"></line>
-        <line class="value-spoke" data-index="5"></line>
-        <line class="value-spoke" data-index="6"></line>
-        <line class="value-spoke" data-index="7"></line>
-      </svg>
-      <div class="value-hub" aria-hidden="true"><span>KONVERZIA</span></div>
-      <div class="value-nodes">
-        <div class="value-node" data-index="0">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-0" id="value-trigger-0">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Rýchlejšie načítanie stránky</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-0" role="region" aria-labelledby="value-trigger-0">
-              <div class="value-node-panel-inner"><p>— návštevník neodíde skôr, než appku uvidí.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="1">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-1" id="value-trigger-1">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Jasnejšia cesta k nákupu</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-1" role="region" aria-labelledby="value-trigger-1">
-              <div class="value-node-panel-inner"><p>— menej krokov medzi záujmom a objednávkou.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="2">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-2" id="value-trigger-2">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Responzívny dizajn na každom zariadení</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-2" role="region" aria-labelledby="value-trigger-2">
-              <div class="value-node-panel-inner"><p>— rovnaká skúsenosť na telefóne aj počítači.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="3">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-3" id="value-trigger-3">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Merateľné správanie používateľov</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-3" role="region" aria-labelledby="value-trigger-3">
-              <div class="value-node-panel-inner"><p>— viete presne, kde appka stráca ľudí.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="4">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-4" id="value-trigger-4">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Dôveryhodný vzhľad platby</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-4" role="region" aria-labelledby="value-trigger-4">
-              <div class="value-node-panel-inner"><p>— zákazník dokončí nákup bez váhania.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="5">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-5" id="value-trigger-5">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Fixný termín a garancia</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-5" role="region" aria-labelledby="value-trigger-5">
-              <div class="value-node-panel-inner"><p>— presne viete, kedy appka ide live.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="6">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-6" id="value-trigger-6">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Appka, ktorú viete spravovať sami</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-6" role="region" aria-labelledby="value-trigger-6">
-              <div class="value-node-panel-inner"><p>— bez závislosti na nás po odovzdaní.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="7">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-7" id="value-trigger-7">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Priebežná starostlivosť</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-7" role="region" aria-labelledby="value-trigger-7">
-              <div class="value-node-panel-inner"><p>— appka, ktorá sa vyvíja s vaším biznisom.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="reveal value-wheel-note">Toto všetko za jednu fixnú cenu, ktorú si potvrdíte priamo na strategy calle.</p>
-    <div class="reveal" style="text-align:center; margin-top:14px;">
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-    </div>
-  </div>
-</section>
-
-<!-- FAKTY, NIE SĽUBY -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Fakty, nie sľuby</div>
-      <h2>Prečo appka na mieru, nie lacná šablóna</h2>
-    </div>
-    <div class="compare-table" style="max-width:900px; margin:0 auto;">
-      <div class="compare-head reveal">
-        <div class="compare-head-col compare-col-us">S nami</div>
-        <div class="compare-head-col compare-col-them">S lacnou šablónou alebo freelancerom</div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Appka postavená presne na váš proces
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Lacná šablóna alebo freelancer</span>
-          <span class="mark">–</span>Šablóna upravená tak, aby vyzerala inak
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Vlastníte zdrojový kód natrvalo
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Lacná šablóna alebo freelancer</span>
-          <span class="mark">–</span>Kód patrí platforme alebo dodávateľovi
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Fixný termín a garancia dodania
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Lacná šablóna alebo freelancer</span>
-          <span class="mark">–</span>Termín sa posúva, kým appka nie je hotová
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Jeden zodpovedný tím od začiatku do konca
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Lacná šablóna alebo freelancer</span>
-          <span class="mark">–</span>Freelancer zmizne uprostred projektu
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Appka rastie s vaším biznisom
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Lacná šablóna alebo freelancer</span>
-          <span class="mark">–</span>Šablóna má strop, cez ktorý sa nedá prerásť
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Testovanie naprieč zariadeniami pred odovzdaním
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Lacná šablóna alebo freelancer</span>
-          <span class="mark">–</span>Chyby objavíte až po spustení
-        </div>
-      </div>
-    </div>
-    <div class="reveal" style="text-align:center; margin-top:32px;">
-      <a href="rezervacia.html" class="btn btn-primary">Chcem appku na mieru</a>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
+<!-- 6 · FAQ -->
 <section id="faq" style="background:var(--bg-soft); border-top:1px solid var(--line);">
   <div class="container" style="max-width:820px;">
-    <div class="section-head reveal">
-      <div class="eyebrow">Časté otázky</div>
-      <h2>Predtým, než zavoláte</h2>
-    </div>
+    <div class="section-head reveal"><h2>Predtým, než zavoláte</h2></div>
     <div class="reveal">
       <details class="faq-item">
-        <summary>Dodávate aj texty a fotografie?</summary>
-        <p>Základné balíky počítajú s tým, že obsah dodáte vy. Copywriting a fotenie vieme dokúpiť ako doplnkovú službu.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Viete appku publikovať na App Store a Google Play?</summary>
-        <p>Áno. Pri natívnych mobilných appkách je potrebný dodatočný čas na App Store review proces (najmä pri iOS) — poplatky za publikovanie (Apple Developer Program, Google Play) hradí klient samostatne.</p>
+        <summary>Prečo na stránke nevidím cenu?</summary>
+        <p>Cena závisí od rozsahu. Na bezplatnom strategy calle prejdeme, čo potrebujete, a dostanete fixnú, nezáväznú ponuku s termínom.</p>
       </details>
       <details class="faq-item">
         <summary>Kto vlastní zdrojový kód?</summary>
-        <p>Vy, po úplnom zaplatení ceny. Žiadny vendor lock-in.</p>
+        <p>Vy. Po úplnom zaplatení dostanete celý zdrojový kód aj prístupy, bez vendor lock-inu.</p>
       </details>
       <details class="faq-item">
-        <summary>Ako dlho trvá bežný projekt?</summary>
-        <p>Závisí od rozsahu — presný fixný termín potvrdíme na strategy calle po spoznaní vašich požiadaviek.</p>
+        <summary>Čo ak sa rozsah počas projektu zmení?</summary>
+        <p>Zmeny nad rámec scope dokumentu riešime ako samostatnú, vopred odsúhlasenú fixed-price ponuku. Pôvodná cena aj termín zostávajú platné.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Viete appku publikovať na App Store a Google Play?</summary>
+        <p>Áno — publikovanie aj prvé nastavenie účtov je súčasť dodávky.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- 7 · FINÁLNE CTA -->
 <section class="band-dark" id="hovor">
   <div class="container cta-band reveal">
-    <div class="eyebrow dark">Posledný krok</div>
     <h2>Poďme postaviť appku, ktorú budú vaši zákazníci naozaj používať.</h2>
     <p>Bezplatný strategy call, bez záväzku. Na konci konkrétny návrh riešenia.</p>
     <div class="hero-ctas" style="justify-content:center;">
@@ -827,10 +252,9 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="assets/supabase-client.js"></script>
-<script src="assets/script.js"></script>
-<script src="assets/hero-viz-web-mobile.js"></script>
-<script src="assets/hero-typing-phrase.js"></script>
-<script src="assets/exit-popup.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/hero-typing-phrase.js"></script>
+<script src="assets/js/exit-popup.js"></script>
 </body>
 </html>

@@ -9,25 +9,25 @@
 <link rel="canonical" href="https://techscope.sk/softver-na-mieru.html">
 <meta property="og:title" content="Softvér na mieru — TECH-SCOPE">
 <meta property="og:description" content="Interné systémy na mieru presne podľa vášho procesu — role a prístupy, napojenie na existujúce firemné nástroje, škálovateľná architektúra.">
-<meta property="og:image" content="https://techscope.sk/assets/og-image.png">
+<meta property="og:image" content="https://techscope.sk/assets/img/og-image.png">
 <meta property="og:url" content="https://techscope.sk/softver-na-mieru.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Softvér na mieru — TECH-SCOPE">
 <meta name="twitter:description" content="Interné systémy na mieru presne podľa vášho procesu — role a prístupy, napojenie na existujúce firemné nástroje, škálovateľná architektúra.">
-<meta name="twitter:image" content="https://techscope.sk/assets/og-image.png">
+<meta name="twitter:image" content="https://techscope.sk/assets/img/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
 <link rel="manifest" href="/site.webmanifest">
-<noscript><style>.reveal{opacity:1!important;transform:none!important;} .step-card-panel{display:block!important;grid-template-rows:none!important;} .step-card-panel-inner{overflow:visible!important;} .step-card-arrow{display:none!important;}</style></noscript>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,62 +47,51 @@
 </head>
 <body>
 
-<script>
-  // Táto stránka nemá vlastný splash intro (ten beží len na hlavnej
-  // stránke) — assets/hero-viz-softver.js na svoje spustenie čaká buď na
-  // splash, alebo na tento príznak, takže bez neho by ambientné pozadie
-  // hrdinu nikdy nenaštartovalo.
-  window.__tsSplashSkip = true;
-</script>
-
 <div class="urgency-bar">Berieme maximálne <span>3 projekty mesačne</span> naprieč všetkými službami — aktuálne obsadené: 2/3</div>
 
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a>
     <ul class="nav-links">
-      <li class="nav-dropdown">
-        <a href="index.html#sluzby" class="nav-dropdown-trigger">Služby</a>
-        <ul class="nav-dropdown-menu">
-          <li><a href="data-compass.html">Data Compass</a></li>
-          <li><a href="web-mobile.html">Web &amp; Mobilné aplikácie</a></li>
-          <li><a href="softver-na-mieru.html">Softvér na mieru</a></li>
-          <li><a href="ai-riesenia.html">AI riešenia</a></li>
-        </ul>
+      <li class="nav-dd">
+        <a href="index.html#sluzby" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Služby<svg class="nav-dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dd-panel" role="menu">
+          <a href="softver-na-mieru.html" role="menuitem"><span>Softvér na mieru</span><small>Interné systémy presne na váš proces</small></a>
+          <a href="ai-riesenia.html" role="menuitem"><span>AI riešenia</span><small>Automatizácie a AI agenti, čo uberú prácu</small></a>
+          <a href="web-mobile.html" role="menuitem"><span>Web &amp; Mobilné aplikácie</span><small>Weby a appky na mieru, ktoré ľudia používajú</small></a>
+          <a href="data-compass.html" role="menuitem"><span>Dátový manažment a analýzy</span><small>Dátové a predikčné modely firmy</small></a>
+        </div>
       </li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="index.html#pripadove-studie">Prípadové štúdie</a></li>
+      <li><a href="index.html#proces">Proces</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
     <div class="nav-cta">
       <a href="klient.html" class="btn btn-secondary">Klientská zóna</a>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false">☰</button>
+      <a href="rezervacia.html" class="btn btn-primary">Rezervovať hovor</a>
+      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </nav>
 
 <!-- HOOK -->
 <header class="hero hero-split">
-  <div class="geo-bg" aria-hidden="true"></div>
-  <div class="hero-bg-canvas-wrap" aria-hidden="true">
-    <canvas class="hero-viz-canvas"></canvas>
-  </div>
   <div class="hero-inner">
     <div class="hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow">
-          <svg class="eyebrow-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M15.3 8.7l-2.15 5.05-5.05 2.15 2.15-5.05 5.05-2.15z" stroke-linejoin="round"/>
-          </svg>
-          Softvér na mieru
-        </div>
-        <h1 class="hero-title-main">Systém, ktorý sedí presne na váš proces.</h1>
-        <p class="hero-subheadline">Interné systémy, evidencie a firemné nástroje na mieru — navrhnuté podľa toho, ako reálne pracujete, nie podľa toho, čo vám dovolí univerzálny softvér.</p>
+        <h1 class="hero-title-main">Softvér na mieru</h1>
+        <p class="hero-subheadline">Moderné interné systémy, evidencie a firemné nástroje na mieru, navrhnuté podľa toho, ako reálne pracujete, ale aj komplexné riešenia podľa vašich požiadaviek.</p>
       </div>
       <div class="hero-editor">
         <div class="hero-editor-tab"><span class="hero-editor-filename">process.py</span></div>
-        <div class="hero-code-block"></div>
+        <div class="hero-code-block" aria-hidden="true">
+          <div class="code-line"><span class="code-line-num">1</span><span class="code-line-code">@app.route(&quot;/schvalit/&lt;uid&gt;&quot;)</span></div>
+          <div class="code-line"><span class="code-line-num">2</span><span class="code-line-code"><span class="kw">def</span> schvalit(uid):</span></div>
+          <div class="code-line"><span class="code-line-num">3</span><span class="code-line-code">    krok = Proces.nacitaj(uid)</span></div>
+          <div class="code-line"><span class="code-line-num">4</span><span class="code-line-code">    krok.potvrdit(pouzivatel)</span></div>
+          <div class="code-line"><span class="code-line-num">5</span><span class="code-line-code"> </span></div>
+          <div class="code-line"><span class="code-line-num">6</span><span class="code-line-code">    <span class="kw">return</span> krok.posun_dalej()</span></div>
+        </div>
       </div>
     </div>
     <p class="hero-typing-phrase" aria-hidden="true">
@@ -116,105 +105,71 @@
   </div>
 </header>
 
-<!-- STORY BRIDGE -->
-<section class="story">
-  <div class="container story-inner">
-    <h2 class="reveal">Univerzálny softvér sa vždy niekde láme na to, ako vy skutočne pracujete.</h2>
-    <p class="reveal">Krabicové riešenie vás núti prispôsobiť proces nástroju. Navrhujeme systém okolo vášho procesu — s rolami, prístupmi a prepojeniami, aké reálne potrebujete.</p>
+<!-- 2 · PROBLÉM -> HODNOTA -->
+<section id="prehlad" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal"><h2>Čo vám vlastný softvér prinesie?</h2></div>
+    <div class="hx-pv">
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Tím rieši ten istý proces zakaždým inak, podľa toho, kto práve robí.</p>
+        <p class="hx-pv-gain">Systém vedie každého rovnakým efektívnym postupom - eliminácia chýb.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Dáta sedia v piatich nástrojoch, ktoré si navzájom nerozumejú.</p>
+        <p class="hx-pv-gain">Napojíme existujúce nástroje do jedného systému.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Systém, ktorý fungoval pre päť ľudí, sa láme pri päťdesiatich.</p>
+        <p class="hx-pv-gain">Postavíme architektúru, ktorá rastie s firmou bez prepisovania od nuly.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Každý v systéme vidí a môže všetko, aj to, čo nemá.</p>
+        <p class="hx-pv-gain">Jasné role a prístupy — každý vidí presne to, čo k práci potrebuje.</p>
+      </div>
+      <div class="hx-pv-row reveal">
+        <p class="hx-pv-pain">Špecifické požiadavky niesú možné vykonať a musíte sa im venovať individuálne.</p>
+        <p class="hx-pv-gain">Komplexné úlohy a špeciálne požiadavky na softvér vieme jednoducho zapracovať do systému.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- AKO PRACUJEME -->
+<!-- 3 · ČO DOSTANETE (value stack) -->
+<section id="balik">
+  <div class="container">
+    <div class="section-head reveal"><h2>Čo presne dostanete</h2></div>
+    <ul class="hx-stack reveal">
+      <li class="is-free"><div><b>Konzultácia a proces audit zadarmo</b><span>Zmapujeme jeden váš proces a ukážeme, ktoré kroky vie softvér prevziať a koľko hodín to ušetrí.</span></div></li>
+      <li><div><b>Interný systém na mieru</b><span>Postavený okolo vášho procesu — beží u vás a patrí vám.</span></div></li>
+      <li><div><b>Špecializované komplexné riešenia</b><span>Navrhneme a vytvoríme pre Vás aj komplexnejšie úlohy, ktoré bude softvér vykonávať.</span></div></li>
+      <li><div><b>Napojenie na existujúce nástroje</b><span>CRM, účtovníctvo, sklad — systém ich spojí, nie nahradí naslepo.</span></div></li>
+      <li><div><b>Jasné role a prístupy</b><span>Nastavené tak, aby každý videl a mohol presne to, čo má.</span></div></li>
+      <li><div><b>Dokumentácia a zaškolenie</b><span>Tím vie systém používať samostatne, máte ho zdokumentovaný.</span></div></li>
+      <li><div><b>Fixný termín a garancia funkčného výstupu</b><span>Rozsah, cena aj termín podľa Zmluvy o dielo — ak nezaberie, vrátime peniaze.</span></div></li>
+    </ul>
+    <div class="hx-stack-cta reveal">
+      <p>Všetko za jednu fixnú cenu podľa Zmluvy o dielo, ktorú si potvrdíte po strategy calle.</p>
+      <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · AKO TO PREBIEHA -->
 <section id="ako-to-funguje" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Proces</div>
-      <h2>Ako pracujeme?</h2>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">01</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-1" id="step-trigger-1">
-          <span class="step-name">Mapovanie procesu</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-1" role="region" aria-labelledby="step-trigger-1">
-          <div class="step-card-panel-inner">
-            <p>Zanalyzujeme váš existujúci pracovný postup a nájdeme miesta, kde vás najviac spomaľuje.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">02</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-2" id="step-trigger-2">
-          <span class="step-name">Návrh architektúry</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-2" role="region" aria-labelledby="step-trigger-2">
-          <div class="step-card-panel-inner">
-            <p>Navrhneme technickú štruktúru systému — rozhranie, logiku aj dátovú vrstvu.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">03</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-3" id="step-trigger-3">
-          <span class="step-name">Definovanie rolí a prístupov</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-3" role="region" aria-labelledby="step-trigger-3">
-          <div class="step-card-panel-inner">
-            <p>Nastavíme, kto v systéme čo vidí a čo môže robiť.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">04</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-4" id="step-trigger-4">
-          <span class="step-name">Vývoj</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-4" role="region" aria-labelledby="step-trigger-4">
-          <div class="step-card-panel-inner">
-            <p>Postavíme systém presne podľa schváleného návrhu a scope dokumentu.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">05</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-5" id="step-trigger-5">
-          <span class="step-name">Testovanie</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-5" role="region" aria-labelledby="step-trigger-5">
-          <div class="step-card-panel-inner">
-            <p>Overíme funkčnosť naprieč scenármi použitia pred odovzdaním.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step-card reveal">
-        <span class="step-card-num-bg" aria-hidden="true">06</span>
-        <button class="step-card-trigger" aria-expanded="false" aria-controls="step-panel-6" id="step-trigger-6">
-          <span class="step-name">Nasadenie a zaškolenie</span>
-          <span class="step-card-label"></span>
-          <svg class="step-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="step-card-panel" id="step-panel-6" role="region" aria-labelledby="step-trigger-6">
-          <div class="step-card-panel-inner">
-            <p>Systém ide do prevádzky, tím dostane zaškolenie a dokumentáciu.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="section-head reveal"><h2>Ako to prebieha</h2></div>
+    <ol class="hx-timeline reveal">
+      <li><span class="hx-tl-num">01</span><h4>Mapovanie procesu</h4><p>Zanalyzujeme váš pracovný postup a nájdeme miesta, kde vás najviac spomaľuje.</p></li>
+      <li><span class="hx-tl-num">02</span><h4>Návrh architektúry</h4><p>Navrhneme technickú štruktúru systému — rozhranie, logiku aj dátovú vrstvu.</p></li>
+      <li><span class="hx-tl-num">03</span><h4>Definovanie rolí a prístupov</h4><p>Nastavíme, kto v systéme čo vidí a čo môže robiť.</p></li>
+      <li><span class="hx-tl-num">04</span><h4>Vývoj</h4><p>Postavíme systém presne podľa schváleného návrhu a scope dokumentu.</p></li>
+      <li><span class="hx-tl-num">05</span><h4>Testovanie</h4><p>Overíme funkčnosť naprieč scenármi použitia pred odovzdaním.</p></li>
+      <li><span class="hx-tl-num">06</span><h4>Nasadenie a zaškolenie</h4><p>Systém ide do prevádzky, tím dostane zaškolenie a dokumentáciu.</p></li>
+    </ol>
   </div>
 </section>
 
-<!-- GUARANTEE -->
+<!-- 5 · GARANCIA -->
 <section id="garancia">
   <div class="container">
     <div class="guarantee reveal">
@@ -232,560 +187,34 @@
   </div>
 </section>
 
-<!-- RIEŠENIA -->
-<section id="ponuka">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Riešenia</div>
-      <h2>Kde presne váš proces stráca najviac času?</h2>
-    </div>
-    <div class="solu-list">
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-procesy" id="solu-trigger-procesy">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Procesy</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Tím rieši ten istý proces zakaždým inak, podľa toho, kto práve robí.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-procesy" role="region" aria-labelledby="solu-trigger-procesy">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-procesy-1" id="solu-item-trigger-procesy-1">
-                  <span class="solu-item-name">Kroky procesu existujú len v hlavách ľudí</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-procesy-1" role="region" aria-labelledby="solu-item-trigger-procesy-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Zmapujeme proces a zapíšeme ho do systému, ktorý ho vynucuje rovnako vždy.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-procesy-2" id="solu-item-trigger-procesy-2">
-                  <span class="solu-item-name">Schvaľovanie beží cez emaily a čaká sa dni</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-procesy-2" role="region" aria-labelledby="solu-item-trigger-procesy-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Postavíme schvaľovací tok priamo v systéme s jasným vlastníkom každého kroku.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-procesy-3" id="solu-item-trigger-procesy-3">
-                  <span class="solu-item-name">Chyby sa opakujú, lebo krok niekto vynechá</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-procesy-3" role="region" aria-labelledby="solu-item-trigger-procesy-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Systém nedovolí prejsť ďalej, kým nie je predchádzajúci krok hotový.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-procesy-4" id="solu-item-trigger-procesy-4">
-                  <span class="solu-item-name">Nový človek sa proces učí týždne</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-procesy-4" role="region" aria-labelledby="solu-item-trigger-procesy-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Proces v systéme je sám o sebe návodom — nový človek ho pochopí za deň.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-integracie" id="solu-trigger-integracie">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Integrácie</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Dáta sedia v piatich rôznych nástrojoch, ktoré si navzájom nerozumejú.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-integracie" role="region" aria-labelledby="solu-trigger-integracie">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-integracie-1" id="solu-item-trigger-integracie-1">
-                  <span class="solu-item-name">Údaje prepisujete ručne z jedného systému do druhého</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-integracie-1" role="region" aria-labelledby="solu-item-trigger-integracie-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Napojíme systémy cez API, aby dáta tiekli automaticky.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-integracie-2" id="solu-item-trigger-integracie-2">
-                  <span class="solu-item-name">Účtovníctvo a sklad si navzájom nerozumejú</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-integracie-2" role="region" aria-labelledby="solu-item-trigger-integracie-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Prepojíme systém s vaším účtovným aj skladovým riešením.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-integracie-3" id="solu-item-trigger-integracie-3">
-                  <span class="solu-item-name">Excel je posledné miesto, kde je pravda</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-integracie-3" role="region" aria-labelledby="solu-item-trigger-integracie-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Postavíme jeden systém, ktorý nahradí roztrúsené tabuľky.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-integracie-4" id="solu-item-trigger-integracie-4">
-                  <span class="solu-item-name">Starý systém sa nedá jednoducho vymeniť</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-integracie-4" role="region" aria-labelledby="solu-item-trigger-integracie-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Napojíme sa naň tak, aby ste ho mohli postupne nahrádzať, nie naraz.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-skalovanie" id="solu-trigger-skalovanie">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Škálovanie</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Systém, ktorý fungoval pre päť ľudí, sa láme pri päťdesiatich.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-skalovanie" role="region" aria-labelledby="solu-trigger-skalovanie">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-skalovanie-1" id="solu-item-trigger-skalovanie-1">
-                  <span class="solu-item-name">Pridanie nového používateľa vyžaduje zásah IT</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-skalovanie-1" role="region" aria-labelledby="solu-item-trigger-skalovanie-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Postavíme správu používateľov, ktorú zvládne aj netechnický administrátor.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-skalovanie-2" id="solu-item-trigger-skalovanie-2">
-                  <span class="solu-item-name">Systém spomaľuje s pribúdajúcimi dátami</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-skalovanie-2" role="region" aria-labelledby="solu-item-trigger-skalovanie-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Navrhneme architektúru, ktorá počíta s rastom objemu dát od začiatku.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-skalovanie-3" id="solu-item-trigger-skalovanie-3">
-                  <span class="solu-item-name">Pridanie novej pobočky znamená mesiace práce</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-skalovanie-3" role="region" aria-labelledby="solu-item-trigger-skalovanie-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Postavíme štruktúru, kde je pridanie novej jednotky otázkou konfigurácie.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-skalovanie-4" id="solu-item-trigger-skalovanie-4">
-                  <span class="solu-item-name">Neviete, či systém zvládne budúci rast</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-skalovanie-4" role="region" aria-labelledby="solu-item-trigger-skalovanie-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Navrhneme architektúru s rezervou, nie na hrane súčasných potrieb.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-pristupy" id="solu-trigger-pristupy">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Prístupy a role</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Každý v systéme vidí a môže všetko, aj to, čo nemá.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-pristupy" role="region" aria-labelledby="solu-trigger-pristupy">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-pristupy-1" id="solu-item-trigger-pristupy-1">
-                  <span class="solu-item-name">Bývalý zamestnanec má stále prístup k dátam</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-pristupy-1" role="region" aria-labelledby="solu-item-trigger-pristupy-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Postavíme správu prístupov, ktorú viete okamžite odobrať.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-pristupy-2" id="solu-item-trigger-pristupy-2">
-                  <span class="solu-item-name">Junior kolega môže omylom zmazať dôležité dáta</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-pristupy-2" role="region" aria-labelledby="solu-item-trigger-pristupy-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Nastavíme role tak, aby každý videl a robil len to, čo má.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-pristupy-3" id="solu-item-trigger-pristupy-3">
-                  <span class="solu-item-name">Neviete spätne dohľadať, kto akú zmenu urobil</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-pristupy-3" role="region" aria-labelledby="solu-item-trigger-pristupy-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Pridáme audit log, ktorý zaznamená každú zmenu a jej autora.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-pristupy-4" id="solu-item-trigger-pristupy-4">
-                  <span class="solu-item-name">Externí partneri potrebujú obmedzený prístup</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-pristupy-4" role="region" aria-labelledby="solu-item-trigger-pristupy-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Vytvoríme samostatnú úroveň prístupu presne na mieru spolupráce.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solu-category reveal">
-        <button class="solu-category-trigger" aria-expanded="false" aria-controls="solu-panel-data" id="solu-trigger-data">
-          <span class="solu-category-top">
-            <span class="solu-category-name">Dáta</span>
-            <svg class="solu-category-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-          <span class="solu-category-pain">Rozhodnutia sa robia na základe čísel, ktorým nikto úplne nedôveruje.</span>
-        </button>
-        <div class="solu-category-panel" id="solu-panel-data" role="region" aria-labelledby="solu-trigger-data">
-          <div class="solu-category-panel-inner">
-            <div class="solu-items">
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-data-1" id="solu-item-trigger-data-1">
-                  <span class="solu-item-name">Rovnaké číslo vyzerá inak v dvoch rôznych reportoch</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-data-1" role="region" aria-labelledby="solu-item-trigger-data-1">
-                  <div class="solu-item-panel-inner">
-                    <p>Zjednotíme zdroj pravdy, aby report vždy sedel s realitou.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-data-2" id="solu-item-trigger-data-2">
-                  <span class="solu-item-name">Zálohovanie dát je vecou náhody</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-data-2" role="region" aria-labelledby="solu-item-trigger-data-2">
-                  <div class="solu-item-panel-inner">
-                    <p>Nastavíme automatické zálohovanie, na ktoré sa môžete spoľahnúť.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-data-3" id="solu-item-trigger-data-3">
-                  <span class="solu-item-name">Export dát z jedného systému trvá hodiny</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-data-3" role="region" aria-labelledby="solu-item-trigger-data-3">
-                  <div class="solu-item-panel-inner">
-                    <p>Postavíme export a reporty priamo v systéme, na pár klikov.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="solu-item">
-                <button class="solu-item-trigger" aria-expanded="false" aria-controls="solu-item-panel-data-4" id="solu-item-trigger-data-4">
-                  <span class="solu-item-name">Citlivé dáta nie sú nijako chránené</span>
-                  <svg class="solu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="solu-item-panel" id="solu-item-panel-data-4" role="region" aria-labelledby="solu-item-trigger-data-4">
-                  <div class="solu-item-panel-inner">
-                    <p>Zabezpečíme dáta podľa štandardov, ktoré váš odbor vyžaduje.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="reveal" style="text-align:center; margin-top:44px;">
-      <a href="rezervacia.html" class="btn btn-primary">Poďme prebrať váš prípad na strategy calle</a>
-    </div>
-  </div>
-</section>
-
-<!-- VALUE WHEEL -->
-<section id="hodnota">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Prínosy</div>
-      <h2>Toto všetko dostanete so systémom na mieru</h2>
-    </div>
-
-    <div class="value-wheel reveal">
-      <div class="value-orbit-rings" aria-hidden="true">
-        <span class="value-orbit-ring value-orbit-ring--outer"></span>
-        <span class="value-orbit-ring value-orbit-ring--inner"></span>
-      </div>
-      <svg class="value-spokes" aria-hidden="true">
-        <defs>
-          <radialGradient id="value-spoke-gradient" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"></stop>
-            <stop offset="100%"></stop>
-          </radialGradient>
-        </defs>
-        <line class="value-spoke" data-index="0"></line>
-        <line class="value-spoke" data-index="1"></line>
-        <line class="value-spoke" data-index="2"></line>
-        <line class="value-spoke" data-index="3"></line>
-        <line class="value-spoke" data-index="4"></line>
-        <line class="value-spoke" data-index="5"></line>
-        <line class="value-spoke" data-index="6"></line>
-        <line class="value-spoke" data-index="7"></line>
-      </svg>
-      <div class="value-hub" aria-hidden="true"><span>KONTROLA</span></div>
-      <div class="value-nodes">
-        <div class="value-node" data-index="0">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-0" id="value-trigger-0">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Menej manuálnej práce</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-0" role="region" aria-labelledby="value-trigger-0">
-              <div class="value-node-panel-inner"><p>— systém robí opakujúce sa kroky za váš tím.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="1">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-1" id="value-trigger-1">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Presné dáta na jednom mieste</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-1" role="region" aria-labelledby="value-trigger-1">
-              <div class="value-node-panel-inner"><p>— žiadne rozdiely medzi tabuľkami a realitou.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="2">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-2" id="value-trigger-2">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Škálovateľná architektúra</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-2" role="region" aria-labelledby="value-trigger-2">
-              <div class="value-node-panel-inner"><p>— systém rastie s vaším tímom, nie proti nemu.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="3">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-3" id="value-trigger-3">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Jasné role a prístupy</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-3" role="region" aria-labelledby="value-trigger-3">
-              <div class="value-node-panel-inner"><p>— každý vidí len to, čo má.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="4">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-4" id="value-trigger-4">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Napojenie na existujúce nástroje</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-4" role="region" aria-labelledby="value-trigger-4">
-              <div class="value-node-panel-inner"><p>— žiadne ručné prepisovanie medzi systémami.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="5">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-5" id="value-trigger-5">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Fixný termín a garancia</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-5" role="region" aria-labelledby="value-trigger-5">
-              <div class="value-node-panel-inner"><p>— presne viete, kedy systém ide do prevádzky.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="6">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-6" id="value-trigger-6">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Dokumentácia a zaškolenie</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-6" role="region" aria-labelledby="value-trigger-6">
-              <div class="value-node-panel-inner"><p>— tím vie systém používať od prvého dňa.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="value-node" data-index="7">
-          <div class="value-node-counter">
-            <button class="value-node-trigger" aria-expanded="false" aria-controls="value-panel-7" id="value-trigger-7">
-              <span class="value-node-marker" aria-hidden="true"></span>
-              <span class="value-node-label">Systém, ktorý vám patrí</span>
-            </button>
-            <div class="value-node-panel" id="value-panel-7" role="region" aria-labelledby="value-trigger-7">
-              <div class="value-node-panel-inner"><p>— žiadny mesačný poplatok tretej strane.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="reveal value-wheel-note">Toto všetko za jednu fixnú cenu, ktorú si potvrdíte priamo na strategy calle.</p>
-    <div class="reveal" style="text-align:center; margin-top:14px;">
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-    </div>
-  </div>
-</section>
-
-<!-- FAKTY, NIE SĽUBY -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Fakty, nie sľuby</div>
-      <h2>Prečo systém na mieru, nie univerzálny nástroj</h2>
-    </div>
-    <div class="compare-table" style="max-width:900px; margin:0 auto;">
-      <div class="compare-head reveal">
-        <div class="compare-head-col compare-col-us">S nami</div>
-        <div class="compare-head-col compare-col-them">S univerzálnym nástrojom</div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Systém postavený presne na váš proces
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Univerzálny nástroj</span>
-          <span class="mark">–</span>Proces musíte prispôsobiť nástroju
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Vlastníte systém aj dáta natrvalo
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Univerzálny nástroj</span>
-          <span class="mark">–</span>Dáta zostávajú uzamknuté v cudzej platforme
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Platíte raz, nie mesačne navždy
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Univerzálny nástroj</span>
-          <span class="mark">–</span>Predplatné rastie s každým novým používateľom
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Fixný termín a garancia dodania
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Univerzálny nástroj</span>
-          <span class="mark">–</span>Implementácia sa naťahuje bez záruky
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Funkcie, ktoré reálne používate
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Univerzálny nástroj</span>
-          <span class="mark">–</span>Rozhranie plné funkcií, ktoré nikdy nevyužijete
-        </div>
-      </div>
-      <div class="compare-row reveal">
-        <div class="compare-cell compare-col-us">
-          <span class="compare-tag">S nami</span>
-          <span class="mark">✓</span>Podpora priamo od tímu, ktorý systém postavil
-        </div>
-        <div class="compare-cell compare-col-them">
-          <span class="compare-tag">Univerzálny nástroj</span>
-          <span class="mark">–</span>Podpora cez tiket frontu bez znalosti vášho procesu
-        </div>
-      </div>
-    </div>
-    <div class="reveal" style="text-align:center; margin-top:32px;">
-      <a href="rezervacia.html" class="btn btn-primary">Chcem systém na mieru</a>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
+<!-- 6 · FAQ -->
 <section id="faq" style="background:var(--bg-soft); border-top:1px solid var(--line);">
   <div class="container" style="max-width:820px;">
-    <div class="section-head reveal">
-      <div class="eyebrow">Časté otázky</div>
-      <h2>Predtým, než zavoláte</h2>
-    </div>
+    <div class="section-head reveal"><h2>Predtým, než zavoláte</h2></div>
     <div class="reveal">
       <details class="faq-item">
-        <summary>Aký typ softvéru viete postaviť?</summary>
-        <p>Interné systémy na mieru — od dochádzkových a evidenčných systémov po komplexné firemné nástroje prepojené s vašimi existujúcimi systémami.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Viete systém napojiť na naše existujúce nástroje?</summary>
-        <p>Áno, pokiaľ majú API alebo iný spôsob integrácie — prepojíme systém na účtovníctvo, CRM, sklad alebo iné firemné nástroje.</p>
+        <summary>Prečo na stránke nevidím cenu?</summary>
+        <p>Cena závisí od rozsahu procesu. Na bezplatnom strategy calle ho prejdeme a dostanete fixnú, nezáväznú ponuku s termínom podľa Zmluvy o dielo.</p>
       </details>
       <details class="faq-item">
         <summary>Kto vlastní zdrojový kód?</summary>
-        <p>Vy, po úplnom zaplatení ceny. Žiadny vendor lock-in.</p>
+        <p>Vy. Po úplnom zaplatení dostanete celý zdrojový kód aj prístupy, bez vendor lock-inu.</p>
       </details>
       <details class="faq-item">
-        <summary>Ako dlho trvá bežný projekt?</summary>
-        <p>Závisí od rozsahu — presný fixný termín potvrdíme na strategy calle po spoznaní vašich požiadaviek.</p>
+        <summary>Čo ak sa rozsah počas projektu zmení?</summary>
+        <p>Zmeny nad rámec scope dokumentu riešime ako samostatnú, vopred odsúhlasenú fixed-price ponuku. Pôvodná cena aj termín zostávajú platné.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Viete systém napojiť na naše existujúce nástroje?</summary>
+        <p>Áno — napojenie na CRM, účtovníctvo, sklad či ďalšie systémy je bežná súčasť projektu.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- 7 · FINÁLNE CTA -->
 <section class="band-dark" id="hovor">
   <div class="container cta-band reveal">
-    <div class="eyebrow dark">Posledný krok</div>
     <h2>Poďme postaviť systém, ktorý sedí presne na váš proces.</h2>
     <p>Bezplatný strategy call, bez záväzku. Na konci konkrétny návrh riešenia.</p>
     <div class="hero-ctas" style="justify-content:center;">
@@ -827,10 +256,9 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="assets/supabase-client.js"></script>
-<script src="assets/script.js"></script>
-<script src="assets/hero-viz-softver.js"></script>
-<script src="assets/hero-typing-phrase.js"></script>
-<script src="assets/exit-popup.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/hero-typing-phrase.js"></script>
+<script src="assets/js/exit-popup.js"></script>
 </body>
 </html>
