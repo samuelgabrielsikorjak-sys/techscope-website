@@ -879,3 +879,137 @@ create policy "Admin spravuje faktury v buckete"
 --   raise notice 'vytvorené: %, %, %  | po zmazaní %: ďalšie číslo = %', a, b, c, b, d;
 --   delete from invoices where cislo_faktury in (a, c, d);        -- upraceme (b už nie je)
 -- end $$;
+
+-- ============================================================================
+-- AUTOMATIZÁCIA call_slots — pravidelné generovanie + čistenie, bez zásahu
+-- v admin.html. Spustiť celý tento blok naraz v Supabase SQL editore.
+-- ============================================================================
+
+-- ---- generovanie: naplní rolujúci 4-týždňový výhľad dopredu ---------------
+-- Vzor (rovnaký každý týždeň):
+--   Pondelok (isodow=1): 14:00–14:45, 15:00–15:45, 16:00–16:45
+--   Utorok   (isodow=2): 14:00–14:45, 15:00–15:45, 16:00–16:45
+--   Sobota   (isodow=6): 09:00–09:45, 10:00–10:45
+--
+-- Idempotentné: pred každým insertom overí, či slot na presne ten istý
+-- datum+cas_od+cas_do už existuje — opakované spustenie (aj v ten istý deň)
+-- nič neduplikuje. Beží od zajtrajška (nie od dneška), aby nikdy nevytvorilo
+-- slot na dnešok v hodine, ktorá už prešla. Vracia počet novo pridaných
+-- slotov, aby sa dalo po spustení skontrolovať, že niečo reálne pribudlo.
+create or replace function public.generuj_tyzdenne_sloty()
+returns int
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_horizont_dni constant int := 28; -- 4 týždne dopredu — nikdy nedôjdu
+  v_den date;
+  v_vzor record;
+  v_pridane int := 0;
+begin
+  for v_den in
+    select d::date from generate_series(
+      current_date + 1, current_date + v_horizont_dni, interval '1 day'
+    ) as d
+  loop
+    for v_vzor in
+      select * from (values
+        (1, time '14:00', time '14:45'),
+        (1, time '15:00', time '15:45'),
+        (1, time '16:00', time '16:45'),
+        (2, time '14:00', time '14:45'),
+        (2, time '15:00', time '15:45'),
+        (2, time '16:00', time '16:45'),
+        (6, time '09:00', time '09:45'),
+        (6, time '10:00', time '10:45')
+      ) as t(dow, cas_od, cas_do)
+      where t.dow = extract(isodow from v_den)::int
+    loop
+      if not exists (
+        select 1 from call_slots
+        where datum = v_den and cas_od = v_vzor.cas_od and cas_do = v_vzor.cas_do
+      ) then
+        insert into call_slots (datum, cas_od, cas_do, dostupny)
+        values (v_den, v_vzor.cas_od, v_vzor.cas_do, true);
+        v_pridane := v_pridane + 1;
+      end if;
+    end loop;
+  end loop;
+  return v_pridane;
+end;
+$$;
+
+-- ---- čistenie: zmaže len MINULÉ a NEOBSADENÉ sloty -------------------------
+-- dostupny = true  =>  nikto si ho nerezervoval (rezervácia prepína na false),
+-- takže obsadené/minulé sloty s históriou leadu ostávajú netknuté. Časová
+-- zóna: cas_od/datum sú uložené ako miestny (Europe/Bratislava) čas bez zóny,
+-- preto sa pred porovnaním s now() prevádzajú cez `at time zone`, inak by pri
+-- letnom/zimnom čase mazalo o hodinu skôr/neskôr, než treba. Vracia počet
+-- zmazaných riadkov.
+create or replace function public.vycisti_stare_sloty()
+returns int
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_pocet int;
+begin
+  delete from call_slots
+  where dostupny = true
+    and rezervovany_lead_id is null
+    and ((datum + cas_od) at time zone 'Europe/Bratislava') < now();
+  get diagnostics v_pocet = row_count;
+  return v_pocet;
+end;
+$$;
+
+-- ---- práva: zamedziť volaniu z prehliadača -------------------------------
+-- Postgres pri CREATE FUNCTION automaticky pridá EXECUTE pre PUBLIC — bez
+-- explicitného revoke by tak PostgREST vystavil obe funkcie ako RPC endpoint
+-- volateľný hocikým s anon/authenticated kľúčom (teda z webu, aj bez
+-- prihlásenia). To nechceme: tieto funkcie majú bežať len z SQL editora
+-- (postgres rola) a z pg_cron / Edge Function fallbacku (service_role).
+revoke execute on function public.generuj_tyzdenne_sloty() from public, anon, authenticated;
+revoke execute on function public.vycisti_stare_sloty() from public, anon, authenticated;
+
+-- Grant pre Edge Function fallback (POUŽIJE SA LEN AK pg_cron nie je
+-- dostupný — pozri časť "Ak pg_cron nie je v pláne dostupný" nižšie). Edge
+-- Function volá tieto funkcie cez service_role kľúč (server-side, nikdy nie
+-- z prehliadača), takže tento grant je bezpečný.
+grant execute on function public.generuj_tyzdenne_sloty() to service_role;
+grant execute on function public.vycisti_stare_sloty() to service_role;
+
+-- ---- pg_cron plánovanie ----------------------------------------------------
+-- Ak extension pg_cron ešte nie je zapnutá (over v Database → Extensions,
+-- alebo skús SQL nižšie — na Supabase to zvyčajne ide priamo z SQL editora
+-- bez potreby superuser práv):
+create extension if not exists pg_cron;
+
+-- Každú nedeľu o 19:00 UTC (~20:00 SEČ / 21:00 SELČ) doplní výhľad o ďalší
+-- týždeň dopredu — vďaka idempotencii je bezpečné, že beží nad celým
+-- 4-týždňovým oknom nanovo, nie len nad "novým" týždňom.
+select cron.schedule(
+  'weekly-generuj-sloty',
+  '0 19 * * 0',
+  $$ select public.generuj_tyzdenne_sloty(); $$
+);
+
+-- Každý deň o 02:00 UTC zmaže preteknuté neobsadené sloty.
+select cron.schedule(
+  'daily-vycisti-sloty',
+  '0 2 * * *',
+  $$ select public.vycisti_stare_sloty(); $$
+);
+
+-- ---- kontrola naplánovaných jobov / história behov -------------------------
+-- select * from cron.job;
+-- select * from cron.job_run_details order by start_time desc limit 20;
+-- select cron.unschedule('weekly-generuj-sloty');  -- zrušenie, ak treba
+-- select cron.unschedule('daily-vycisti-sloty');
+
+-- ---- MANUÁLNE OVERENIE (spusti hneď po vytvorení funkcií) ------------------
+-- select public.generuj_tyzdenne_sloty();   -- má vrátiť > 0 pri prvom behu
+-- select public.generuj_tyzdenne_sloty();   -- druhý beh ihneď po prvom má vrátiť 0 (idempotencia)
+-- select count(*) from call_slots where datum > current_date;

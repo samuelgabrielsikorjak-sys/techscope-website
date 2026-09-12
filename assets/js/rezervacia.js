@@ -334,6 +334,38 @@
           }
           var summary = formatDate(selectedSlot.datum) + ', ' + selectedSlot.cas_od.slice(0, 5) + '–' + selectedSlot.cas_do.slice(0, 5);
           renderConfirmation(values, summary);
+
+          // Vytvorenie Google Meet eventu (Edge Function "create-meet-event").
+          // Database Webhook na INSERT do leads v tomto projekte nefunguje
+          // (chýbajúca/poškodená supabase_functions.http_request()), preto ju
+          // voláme rovno odtiaľto — hneď po úspešnom vytvor_rezervaciu, ale
+          // zámerne BEZ await a mimo hlavného .then/.catch reťazca vyššie:
+          // rezervácia je v DB už hotová a potvrdenie je zobrazené, takže
+          // pomalá alebo zlyhaná Meet-integrácia nesmie užívateľa nijako
+          // zdržať ani mu zobraziť chybu. Payload kopíruje tvar, aký by inak
+          // poslal Database Webhook (type/table/schema/record/old_record),
+          // aby create-meet-event vedela čítať rovnaké record.* polia.
+          window.supabaseClient.functions.invoke('create-meet-event', {
+            body: {
+              type: 'INSERT',
+              table: 'leads',
+              schema: 'public',
+              record: {
+                id: res.data,
+                slot_id: selectedSlot.id,
+                meno_priezvisko: values.meno_priezvisko,
+                nazov_firmy: values.nazov_firmy,
+                email: values.email
+              },
+              old_record: null
+            }
+          }).then(function (meetRes) {
+            if (meetRes.error) {
+              console.error('create-meet-event vrátila chybu (rezervácia je napriek tomu v poriadku):', meetRes.error);
+            }
+          }).catch(function (err) {
+            console.error('create-meet-event volanie zlyhalo (rezervácia je napriek tomu v poriadku):', err);
+          });
         }).catch(function () {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Odoslať rezerváciu';
@@ -418,7 +450,9 @@
             '<select id="f-rozpocet" name="rozpocet">' +
               '<option value="do 2 000 €">Do 2 000 €</option>' +
               '<option value="2 000 – 6 000 €">2 000 – 6 000 €</option>' +
-              '<option value="neviem odhadnúť">Neviem odhadnúť</option>' +
+              '<option value="6 000 – 10 000 €">6 000 – 10 000 €</option>' +
+              '<option value="10 000 – 15 000 €">10 000 – 15 000 €</option>' +
+              '<option value="15 000+ €">15 000+ €</option>' +
             '</select>' +
           '</div>' +
           '<div class="form-row">' +
