@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>LeadEngine — ukážka</title>
+<style>
+:root{
+  --bg:#F7F7F5; --surface:#fff; --line:#E5E5E1; --line-2:#D6D6D0;
+  --ink:#1C1D1B; --ink-2:#5E605B; --ink-3:#92948E;
+  --accent:#2F7A62; --accent-soft:#E6F1EC;
+  --prog:#4A6FA5; --prog-soft:#EAF0F8;
+  --ease:cubic-bezier(.65,0,.35,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg)}
+body{font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1200px;height:700px;overflow:hidden;transform:translate(-50%,-50%) scale(var(--s,1))}
+.wc{will-change:transform,opacity}
+.reset,.reset *{transition:none!important;animation:none!important}
+
+/* shared */
+.fx{opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s cubic-bezier(.2,.7,.2,1)}
+.fx.on{opacity:1;transform:none}
+.swap{display:grid}
+.swap>*{grid-area:1/1;transition:opacity .3s ease}
+.swap>:last-child{opacity:0}
+.swap.on>:first-child{opacity:0}
+.swap.on>:last-child{opacity:1}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.label{font-size:11.5px;color:var(--ink-3)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:7px;background:var(--surface);font-size:12px;font-weight:500;color:var(--ink-2)}
+.chip .d{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.av{flex:none;width:30px;height:30px;border-radius:50%;background:#EFEFEC;color:var(--ink-2);font-size:11px;font-weight:650;display:grid;place-items:center}
+
+/* header, captions */
+.top{position:absolute;inset:0 0 auto;height:60px;padding:0 40px;display:flex;align-items:stretch;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:15px}
+.logo{width:24px;height:24px;border-radius:6px;background:var(--accent);display:grid;place-items:center}
+.steps{position:relative;display:flex;font-size:13px;font-weight:500}
+.step{width:120px;display:flex;align-items:center;justify-content:center;opacity:.45;transition:opacity .3s}
+.step.cur{opacity:1}
+.steps-bar{position:absolute;left:24px;bottom:-1px;width:72px;height:2px;background:var(--ink);transition:transform .5s var(--ease)}
+.cap{position:absolute;left:0;right:0;top:86px;margin:0;text-align:center;font-size:17px;color:var(--ink-2);opacity:0;transition:opacity .25s}
+.cap b{color:var(--ink);font-weight:600}
+.cap.on{opacity:1;transition:opacity .4s .2s}
+
+/* scenes */
+.scene{position:absolute;inset:0;opacity:0;transform:translateX(40px);transition:opacity .5s ease,transform .5s var(--ease)}
+.scene.on{opacity:1;transform:none}
+.scene.out{opacity:0;transform:translateX(-40px)}
+#s1:not(.out),#s3.out{transform:none}
+
+/* act 1 — script editor */
+.editor{position:absolute;left:310px;top:150px;width:580px;opacity:0;transform:scale(.96);transition:opacity .3s ease,transform .3s ease}
+.editor.on{opacity:1;transform:none}
+.ed-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;border-bottom:1px solid var(--line)}
+.ed-left{display:flex;align-items:center;gap:18px;height:100%}
+.ed-title{font-size:15px;font-weight:650}
+.tabs{display:flex;gap:4px;height:100%}
+.tab{position:relative;display:flex;align-items:center;padding:0 8px;font-size:12.5px;color:var(--ink-3)}
+.tab.cur{color:var(--ink);font-weight:600}
+.tab.cur::after{content:"";position:absolute;left:6px;right:6px;bottom:-1px;height:2px;background:var(--ink)}
+.ed-body{padding:18px 20px 20px;display:grid;gap:10px;font-size:14.5px;line-height:1.6}
+.subject{display:flex;gap:10px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.subject .label{font-size:13px;line-height:1.6;width:52px}
+.var{padding:1px 4px;border-radius:4px;background:var(--prog-soft);color:var(--prog);font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:13px}
+.val{color:var(--ink);font-weight:600;box-shadow:inset 0 -1.5px 0 var(--accent)}
+.pv{position:relative;display:inline-grid}
+.pv .swap{display:inline-grid}
+.pv .swap>*{justify-self:start}
+.caret{position:absolute;left:0;top:3px;bottom:3px;width:1.5px;background:var(--ink);opacity:0}
+.pv.typing .caret{animation:caret .7s ease forwards}
+@keyframes caret{
+  0%{opacity:0;transform:translateX(0)}
+  15%{opacity:1;transform:translateX(0)}
+  70%{opacity:1;transform:translateX(var(--w))}
+  100%{opacity:0;transform:translateX(var(--w))}
+}
+.ed-foot{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--line);background:#FAFAF8;border-radius:0 0 14px 14px;font-size:12px;color:var(--ink-3)}
+.below{position:absolute;left:310px;top:470px;display:flex;gap:8px}
+
+/* act 2 — import + sending */
+.src{position:absolute;left:130px;top:292px;width:270px;padding:18px}
+.src-head{display:flex;align-items:center;gap:12px}
+.doc{flex:none;width:36px;height:42px;display:grid;place-items:center}
+.fname{font-size:14px;font-weight:600}
+.bar{position:relative;height:4px;margin:16px 0 8px;border-radius:2px;background:var(--line);overflow:hidden}
+.bar i{position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease)}
+.bar i.on{transform:none}
+.src .swap{font-size:12px;color:var(--ink-2)}
+.apollo{position:absolute;left:130px;top:470px;display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-3)}
+.apollo::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--line-2)}
+.guide{position:absolute;left:0;top:0;width:1200px;height:700px;pointer-events:none}
+.guide line{stroke:var(--line-2);stroke-width:1.5;stroke-dasharray:4 6}
+.ai{position:absolute;left:505px;top:238px;display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:8px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:500}
+.ai i{width:6px;height:6px;border-radius:50%;background:#8FD1B5}
+.ai.on{animation:breathe 2.4s ease-in-out .4s infinite;will-change:transform}
+@keyframes breathe{50%{transform:scale(1.03)}}
+.inbox{position:absolute;left:770px;top:196px;width:300px;overflow:hidden}
+.in-head{display:flex;justify-content:space-between;align-items:center;height:46px;padding:0 16px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:600}
+.in-list{display:grid}
+.irow{display:flex;align-items:center;gap:10px;height:60px;padding:0 16px;border-bottom:1px solid var(--line);opacity:0;transition:opacity .25s ease}
+.irow:last-child{border-bottom:0}
+.irow.on{opacity:1;animation:land .35s ease-out}
+@keyframes land{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:scale(1)}}
+.who{display:grid;font-size:13px;font-weight:600}
+.who small{font-size:12px;font-weight:400;color:var(--ink-3)}
+.irow .sent{margin-left:auto;font-size:12px;color:var(--ink-3)}
+.env{position:absolute;opacity:0}
+.env svg{display:block;fill:var(--surface);stroke:var(--ink-2);stroke-width:1.5;stroke-linejoin:round}
+.env.fly{animation:flyX .9s cubic-bezier(.3,0,.7,1) forwards}
+.env.fly svg{animation:flyY .9s linear forwards}
+@keyframes flyX{
+  0%{opacity:0;transform:translateX(0)}
+  15%{opacity:1}
+  85%{opacity:1}
+  100%{opacity:0;transform:translateX(var(--dx))}
+}
+@keyframes flyY{
+  0%{transform:translateY(0);animation-timing-function:ease-out}
+  50%{transform:translateY(calc(var(--dy) / 2 - 36px));animation-timing-function:ease-in}
+  100%{transform:translateY(var(--dy))}
+}
+
+/* act 3 — mailbox */
+.box{position:absolute;left:150px;top:170px;width:900px}
+.box-head{display:flex;justify-content:space-between;align-items:center;padding:16px 24px}
+.box-title{font-size:16px;font-weight:650;margin-bottom:6px}
+.trend{display:grid;justify-items:end;gap:2px}
+.trend svg{overflow:visible}
+.tline{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s var(--ease)}
+.tline.on{stroke-dashoffset:0}
+.tbase{stroke:var(--line);stroke-width:1}
+.tdot{fill:var(--surface);stroke:var(--accent);stroke-width:2;opacity:0;transition:opacity .25s}
+.tdot.on{opacity:1}
+.grid{position:relative;display:grid;grid-template-columns:1.5fr 2fr 1fr;align-items:center;gap:16px;padding:0 24px}
+.thead{height:34px;font-size:11.5px;color:var(--ink-3);background:#FAFAF8;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.thead span:last-child{text-align:right}
+.mrow{position:relative;height:58px;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.lead{display:flex;align-items:center;gap:10px}
+.subj{font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stc{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.pill{display:grid}
+.pill>span{grid-area:1/1;opacity:0;padding:3px 9px;border-radius:6px;font-size:12px;font-weight:600;text-align:center;transition:opacity .3s ease}
+.pill .sent{background:#EFEFEC;color:var(--ink-3)}
+.pill .recv{background:#EFEFEC;color:var(--ink-2)}
+.pill .open{background:var(--prog-soft);color:var(--prog)}
+.pill .reply{background:var(--accent-soft);color:var(--accent)}
+.pill[data-st=sent] .sent,.pill[data-st=recv] .recv,.pill[data-st=open] .open,.pill[data-st=reply] .reply{opacity:1}
+.pill[data-st=recv],.pill[data-st=open]{animation:pp .4s ease}
+.pill[data-st=reply]{animation:pp2 .55s ease}
+@keyframes pp{50%{transform:scale(1.06)}}
+@keyframes pp2{40%{transform:scale(1.12)}}
+.learn{display:flex;color:var(--accent)}
+.bubble{position:absolute;right:150px;top:13px;z-index:2;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:9px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:500;white-space:nowrap}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <header class="top">
+    <div class="brand">
+      <span class="logo"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M14.5 1.5L1.5 7l5 2 2 5z"/><path d="M14.5 1.5L6.5 9"/></svg></span>
+      LeadEngine
+    </div>
+    <nav class="steps">
+      <span class="step">1 · Script</span><span class="step">2 · Odosielanie</span><span class="step">3 · Schránka</span>
+      <i class="steps-bar"></i>
+    </nav>
+  </header>
+
+  <p class="cap"><b>Script</b> je fixná kostra emailu. AI personalizuje len premenné pre konkrétny lead.</p>
+  <p class="cap">Leady z <b>CSV</b> sa napárujú na script — AI doplní premenné a email odošle.</p>
+  <p class="cap"><b>Schránka</b> sleduje stavy. Model sa učí z odpovedí, ktorý script funguje najlepšie.</p>
+
+  <!-- DEJSTVO 1 -->
+  <section id="s1" class="scene">
+    <div class="card editor">
+      <div class="ed-head">
+        <div class="ed-left">
+          <span class="ed-title">Script</span>
+          <div class="tabs"><span class="tab">#1</span><span class="tab">#2</span><span class="tab cur">#3</span></div>
+        </div>
+        <span class="chip">ICP: výrobné firmy 50–200 zam.</span>
+      </div>
+      <div class="ed-body">
+        <div class="subject fx"><span class="label">Predmet</span><span><span class="var">{{firma}}</span> a kratšie dodávky</span></div>
+        <div class="fx">Dobrý deň <span class="var">{{meno}}</span>,</div>
+        <div class="fx">všimol som si, že <span class="pv"><span class="swap"><span class="var">{{firma}}</span><span class="val">Slovnaft</span></span><i class="caret"></i></span> rozširuje výrobu v <span class="var">{{mesto}}</span>.</div>
+        <div class="fx">Pomáhame výrobným firmám skrátiť čas dodávok. Dáva zmysel 15-minútový hovor budúci týždeň?</div>
+      </div>
+      <div class="ed-foot fx">
+        <span>Premenné: meno, firma, mesto</span>
+        <span>AI mení len premenné, text scriptu ostáva</span>
+      </div>
+    </div>
+    <div class="below">
+      <span class="chip fx"><i class="d"></i>Script #3 · aktívny</span>
+      <span class="chip fx">Rotácia: 3 scripty</span>
+    </div>
+  </section>
+
+  <!-- DEJSTVO 2 -->
+  <section id="s2" class="scene">
+    <svg class="guide" viewBox="0 0 1200 700" aria-hidden="true"><line x1="412" y1="367" x2="758" y2="367"/></svg>
+
+    <div class="card src fx">
+      <div class="src-head">
+        <span class="doc"><svg width="30" height="38" viewBox="0 0 30 38" fill="none"><path d="M2 3a2 2 0 0 1 2-2h15l9 9v25a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z" stroke="#92948E" stroke-width="1.5"/><path d="M19 1v9h9" stroke="#92948E" stroke-width="1.5"/><text x="15" y="29" text-anchor="middle" font-size="8" font-weight="700" fill="#2F7A62" font-family="-apple-system,Segoe UI,sans-serif">CSV</text></svg></span>
+        <div><div class="fname">leady_vyroba.csv</div><div class="label">ICP: výrobné firmy</div></div>
+      </div>
+      <div class="bar"><i></i></div>
+      <span class="swap"><span>Importujem leady…</span><span>248 leadov importovaných</span></span>
+    </div>
+    <div class="apollo fx">alebo napojenie na Apollo API</div>
+
+    <div class="ai fx"><i></i>AI personalizuje →</div>
+
+    <div class="card inbox fx">
+      <div class="in-head"><span>Odoslané</span><span class="label">Script #3</span></div>
+      <div class="in-list">
+        <div class="irow"><span class="av">PH</span><span class="who">Peter Horák<small>Slovnaft</small></span><span class="sent">Odoslané</span></div>
+        <div class="irow"><span class="av">LM</span><span class="who">Lucia Mináriková<small>Hydrotech Nitra</small></span><span class="sent">Odoslané</span></div>
+        <div class="irow"><span class="av">TK</span><span class="who">Tomáš Kráľ<small>Kovex Žilina</small></span><span class="sent">Odoslané</span></div>
+        <div class="irow"><span class="av">MŠ</span><span class="who">Martina Šimková<small>Agrostav Trnava</small></span><span class="sent">Odoslané</span></div>
+        <div class="irow"><span class="av">JB</span><span class="who">Juraj Bednár<small>Elprom Prešov</small></span><span class="sent">Odoslané</span></div>
+      </div>
+    </div>
+
+    <div class="env"><svg width="22" height="16" viewBox="0 0 22 16"><rect x=".75" y=".75" width="20.5" height="14.5" rx="2"/><path d="M2 2.5L11 9l9-6.5" fill="none"/></svg></div>
+    <div class="env"><svg width="22" height="16" viewBox="0 0 22 16"><rect x=".75" y=".75" width="20.5" height="14.5" rx="2"/><path d="M2 2.5L11 9l9-6.5" fill="none"/></svg></div>
+    <div class="env"><svg width="22" height="16" viewBox="0 0 22 16"><rect x=".75" y=".75" width="20.5" height="14.5" rx="2"/><path d="M2 2.5L11 9l9-6.5" fill="none"/></svg></div>
+    <div class="env"><svg width="22" height="16" viewBox="0 0 22 16"><rect x=".75" y=".75" width="20.5" height="14.5" rx="2"/><path d="M2 2.5L11 9l9-6.5" fill="none"/></svg></div>
+    <div class="env"><svg width="22" height="16" viewBox="0 0 22 16"><rect x=".75" y=".75" width="20.5" height="14.5" rx="2"/><path d="M2 2.5L11 9l9-6.5" fill="none"/></svg></div>
+  </section>
+
+  <!-- DEJSTVO 3 -->
+  <section id="s3" class="scene">
+    <div class="card box">
+      <div class="box-head">
+        <div>
+          <div class="box-title">Kampaň · výrobné firmy</div>
+          <span class="chip">Script #3</span> <span class="label pref fx">· uprednostnený modelom</span>
+        </div>
+        <div class="trend">
+          <span class="label">Miera odpovedí · posledné 3 kampane</span>
+          <svg width="150" height="40" viewBox="0 0 150 40" aria-hidden="true">
+            <line class="tbase" x1="0" y1="38" x2="150" y2="38"/>
+            <path class="tline" pathLength="1" d="M6 31 L75 24 L144 9"/>
+            <circle class="tdot" cx="6" cy="31" r="3"/><circle class="tdot" cx="75" cy="24" r="3"/><circle class="tdot" cx="144" cy="9" r="3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="grid thead"><span>Lead</span><span>Predmet</span><span>Stav</span></div>
+
+      <div class="mrow grid">
+        <span class="lead"><span class="av">PH</span><span class="who">Peter Horák<small>Slovnaft</small></span></span>
+        <span class="subj">Slovnaft a kratšie dodávky</span>
+        <span class="stc">
+          <span class="learn fx"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12.5l4-4 3 3 6-6.5"/><path d="M10.5 5h4v4"/></svg></span>
+          <span class="pill" data-st="sent"><span class="sent">Odoslané</span><span class="recv">Doručené</span><span class="open">Otvorené</span><span class="reply">Odpovedané</span></span>
+        </span>
+        <span class="bubble fx">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#8FD1B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12.5l4-4 3 3 6-6.5"/><path d="M10.5 5h4v4"/></svg>
+          Model sa učí z tejto odpovede
+        </span>
+      </div>
+      <div class="mrow grid">
+        <span class="lead"><span class="av">LM</span><span class="who">Lucia Mináriková<small>Hydrotech Nitra</small></span></span>
+        <span class="subj">Hydrotech Nitra a kratšie dodávky</span>
+        <span class="stc"><span class="pill" data-st="sent"><span class="sent">Odoslané</span><span class="recv">Doručené</span><span class="open">Otvorené</span><span class="reply">Odpovedané</span></span></span>
+      </div>
+      <div class="mrow grid">
+        <span class="lead"><span class="av">TK</span><span class="who">Tomáš Kráľ<small>Kovex Žilina</small></span></span>
+        <span class="subj">Kovex Žilina a kratšie dodávky</span>
+        <span class="stc"><span class="pill" data-st="sent"><span class="sent">Odoslané</span><span class="recv">Doručené</span><span class="open">Otvorené</span><span class="reply">Odpovedané</span></span></span>
+      </div>
+      <div class="mrow grid">
+        <span class="lead"><span class="av">MŠ</span><span class="who">Martina Šimková<small>Agrostav Trnava</small></span></span>
+        <span class="subj">Agrostav Trnava a kratšie dodávky</span>
+        <span class="stc"><span class="pill" data-st="sent"><span class="sent">Odoslané</span><span class="recv">Doručené</span><span class="open">Otvorené</span><span class="reply">Odpovedané</span></span></span>
+      </div>
+      <div class="mrow grid">
+        <span class="lead"><span class="av">JB</span><span class="who">Juraj Bednár<small>Elprom Prešov</small></span></span>
+        <span class="subj">Elprom Prešov a kratšie dodávky</span>
+        <span class="stc"><span class="pill" data-st="sent"><span class="sent">Odoslané</span><span class="recv">Doručené</span><span class="open">Otvorené</span><span class="reply">Odpovedané</span></span></span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const q = s => document.querySelector(s);
+const qa = s => [...document.querySelectorAll(s)];
+const stage = q('#stage');
+const S = qa('.scene'), caps = qa('.cap'), steps = qa('.step'), bar = q('.steps-bar');
+const envs = qa('.env'), rows = qa('.irow'), pills = qa('.pill');
+const LOOP = 27000;
+
+function fit(){ stage.style.setProperty('--s', Math.min(innerWidth / 1200, innerHeight / 700)); }
+addEventListener('resize', fit); fit();
+
+// will-change only while something moves
+stage.addEventListener('transitionend', e => e.target.classList.remove('wc'));
+stage.addEventListener('animationend', e => e.target.classList.remove('wc'));
+function on(el, c = 'on'){ el.classList.add('wc'); requestAnimationFrame(() => el.classList.add(c)); }
+function off(el, c = 'on'){ el.classList.add('wc'); el.classList.remove(c); }
+function status(i, st){ pills[i].classList.add('wc'); pills[i].dataset.st = st; }
+
+function act(n){
+  caps.forEach((c, i) => c.classList.toggle('on', i === n));
+  steps.forEach((s, i) => s.classList.toggle('cur', i === n));
+  bar.style.transform = `translateX(${n * 120}px)`;
+}
+function show(n){ S[n].classList.remove('out'); on(S[n]); }
+function hide(n){ off(S[n]); S[n].classList.add('out'); }
+
+// snap a hidden scene back to its initial state, no transitions
+function reset(n){
+  const sc = S[n];
+  sc.classList.add('reset');
+  sc.classList.remove('on', 'out', 'wc');
+  const cls = ['on', 'fly', 'typing', 'wc'];
+  sc.querySelectorAll(cls.map(c => '.' + c).join()).forEach(el => el.classList.remove(...cls));
+  if (n === 2) pills.forEach(p => { p.dataset.st = 'sent'; });
+  void sc.offsetWidth;
+  sc.classList.remove('reset');
+}
+
+// static geometry: caret sweep width, envelope start points and flight vectors
+const pv = q('.pv');
+pv.style.setProperty('--w', pv.offsetWidth + 'px');
+const src = q('.src'), inbox = q('.inbox');
+const sx = src.offsetLeft + src.offsetWidth + 14, sy = src.offsetTop + src.offsetHeight / 2;
+envs.forEach((env, i) => {
+  const row = rows[i];
+  env.style.left = sx - 11 + 'px';
+  env.style.top = sy - 8 + 'px';
+  env.style.setProperty('--dx', inbox.offsetLeft + row.offsetLeft + 16 - sx + 'px');
+  env.style.setProperty('--dy', inbox.offsetTop + row.offsetTop + row.offsetHeight / 2 - sy + 'px');
+});
+
+// timeline: [ms from loop start, step]
+const T = [];
+const at = (t, f) => T.push([t, f]);
+
+// act 1 — script
+at(0, () => { if (S[2].classList.contains('on')) hide(2); act(0); show(0); on(q('.editor')); });
+qa('.editor .fx').forEach((el, i) => at(350 + i * 110, () => on(el)));
+at(700, () => reset(2));
+qa('.below .fx').forEach((el, i) => at(1500 + i * 120, () => on(el)));
+at(2900, () => on(pv, 'typing'));
+at(3150, () => on(q('.pv .swap')));
+at(5100, () => off(q('.pv .swap')));
+
+// act 2 — import + sending
+at(7000, () => { hide(0); act(1); show(1); });
+at(7300, () => on(src));
+at(7450, () => on(inbox));
+at(7600, () => on(q('.apollo')));
+at(7800, () => on(q('.bar i')));
+at(8600, () => on(q('.src .swap')));
+at(8700, () => on(q('.ai')));
+envs.forEach((env, i) => {
+  at(9200 + i * 180, () => on(env, 'fly'));
+  at(9200 + i * 180 + 830, () => on(rows[i]));
+});
+
+// act 3 — mailbox
+at(17800, () => { hide(1); act(2); show(2); reset(0); });
+at(18500, () => reset(1));
+at(19000, () => status(0, 'open'));
+at(19400, () => status(1, 'recv'));
+at(19800, () => status(2, 'open'));
+at(20200, () => status(3, 'recv'));
+at(20600, () => status(4, 'open'));
+at(21300, () => status(0, 'reply'));
+at(21600, () => { on(q('.learn')); on(q('.bubble')); });
+at(22000, () => on(q('.tline')));
+at(22900, () => qa('.tdot').forEach(d => on(d)));
+at(23100, () => off(q('.bubble')));
+at(23300, () => on(q(".pref")));
+
+T.sort((a, b) => a[0] - b[0]);
+
+// single director: one setTimeout chain, drift-corrected against loop base
+let i = 0, base = 0, timer;
+function tick(){
+  T[i][1]();
+  if (++i === T.length){ i = 0; base += LOOP; }
+  timer = setTimeout(tick, Math.max(0, base + T[i][0] - performance.now()));
+}
+function start(){
+  clearTimeout(timer);
+  S.forEach((_, n) => reset(n));
+  i = 0; base = performance.now();
+  tick();
+}
+document.addEventListener('visibilitychange', () => document.hidden ? clearTimeout(timer) : start());
+start();
+</script>
+</body>
+</html>

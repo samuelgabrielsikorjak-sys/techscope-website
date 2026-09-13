@@ -271,18 +271,37 @@
 <section id="pripadove-studie" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="container">
     <div class="hx-head reveal">
-      <h2>Čo práve staviame</h2>
-      <p>Portfólio ešte len budujeme. Radšej ukážeme rozrobenú prácu narovinu než vymyslené čísla.</p>
+      <h2>Case Studies</h2>
+      <p>Momentálne pracujeme na týchto projektoch, Case Studies budú dostupné po ich spustení a nasadení.</p>
     </div>
 
     <div class="hx-case-grid">
-      <article class="hx-case reveal">
-        <div class="hx-case-media">
-          <span class="hx-case-status">Prípadová štúdia — čoskoro</span>
-        </div>
+      <article class="hx-case reveal" data-demo="medi-ready-demo.html">
+        <button type="button" class="hx-case-media hx-case-media--phone" aria-haspopup="dialog" aria-label="Pozrieť ukážku aplikácie Medi Ready">
+          <span class="hx-case-status">Vo vývoji</span>
+          <span class="hx-case-phone"><img src="icons/mediready_logo.jpeg" alt=""></span>
+          <span class="hx-case-cta">Pozrieť ukážku →</span>
+        </button>
         <div class="hx-case-body">
           <h3>Medi Ready</h3>
-          <p>Staviame aplikáciu na nasadzovanie a rozpisy zdravotníkov na futbalových zápasoch — od žiadostí a schvaľovania zmien po dochádzku a výkazy na jednom mieste. Aplikácia zatiaľ nie je verejne spustená.</p>
+          <p>Staviame aplikáciu na nasadzovanie a rozpisy zdravotníkov na futbalových zápasoch — od žiadostí a schvaľovania zmien po dochádzku a výkazy na jednom mieste. Aplikácia je vo vývoji a zatiaľ nie je verejne spustená.</p>
+          <dl class="hx-case-result">
+            <dt>Výsledok</dt>
+            <dd>Konkrétne čísla a celú prípadovú štúdiu doplníme po spustení.</dd>
+          </dl>
+          <a href="rezervacia.html" class="hx-textlink">Chcete podobné riešenie?</a>
+        </div>
+      </article>
+
+      <article class="hx-case reveal" data-demo="leadengine-demo.html">
+        <button type="button" class="hx-case-media hx-case-media--laptop" aria-haspopup="dialog" aria-label="Pozrieť ukážku nástroja LeadEngine">
+          <span class="hx-case-status">Vo vývoji</span>
+          <span class="hx-case-laptop"><span class="hx-case-laptop-screen"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 1.5L1.5 7l5 2 2 5z"/><path d="M14.5 1.5L6.5 9"/></svg></i>LeadEngine</span></span>
+          <span class="hx-case-cta">Pozrieť ukážku →</span>
+        </button>
+        <div class="hx-case-body">
+          <h3>LeadEngine</h3>
+          <p>LeadEngine je interný B2B tool vo vývoji, ktorý rieši automatizáciu a personalizáciu cold emailov, analýzu a nastavenie optimalizačného modelu, ktorý sa aktívne učí a pomáha vytvárať scripty s každou novou odpoveďou.</p>
           <dl class="hx-case-result">
             <dt>Výsledok</dt>
             <dd>Konkrétne čísla a celú prípadovú štúdiu doplníme po spustení.</dd>
@@ -291,6 +310,33 @@
         </div>
       </article>
     </div>
+
+    <dialog id="case-dialog" class="hx-case-dialog" aria-labelledby="case-dialog-title">
+      <div class="hx-case-dialog-head">
+        <h3 id="case-dialog-title"></h3>
+        <p>Vo vývoji — toto je iba ukážka, zvyšok bude dostupný po zverejnení.</p>
+        <button type="button" class="exit-popup-close" aria-label="Zavrieť">&times;</button>
+      </div>
+      <iframe title="Ukážka"></iframe>
+    </dialog>
+    <script>
+      (function(){
+        var d = document.getElementById('case-dialog'), f = d.querySelector('iframe'), t = d.querySelector('h3');
+        document.querySelectorAll('.hx-case[data-demo]').forEach(function(card){
+          card.addEventListener('click', function(e){
+            if (e.target.closest('a')) return;
+            t.textContent = card.querySelector('h3').textContent;
+            f.title = 'Ukážka — ' + t.textContent;
+            // src až pri otvorení, aby animácia vždy začala od začiatku
+            f.src = card.dataset.demo;
+            d.showModal();
+          });
+        });
+        d.querySelector('.exit-popup-close').addEventListener('click', function(){ d.close(); });
+        d.addEventListener('click', function(e){ if (e.target === d) d.close(); });
+        d.addEventListener('close', function(){ f.src = 'about:blank'; });
+      })();
+    </script>
   </div>
 </section>
 

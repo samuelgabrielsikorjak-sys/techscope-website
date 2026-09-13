@@ -29,8 +29,7 @@
 
     app.innerHTML =
       '<div id="step-heading" style="text-align:center; margin-bottom:20px;">' +
-        '<p style="color:var(--ink-faint); font-size:1.05rem; font-weight:500; margin-bottom:14px;">Posledný krok k uskutočneniu vašej vízie — vyberte si termín.</p>' +
-        '<div class="eyebrow green">Data Compass</div>' +
+        '<p style="color:var(--ink-faint); font-size:1.05rem; font-weight:500; margin-bottom:14px;"><strong style="color:var(--ink); font-size:1.4rem; font-weight:700; display:block; margin-bottom:6px;">Posledný krok k uskutočneniu vašej vízie</strong>Vyberte si termín.</p>' +
       '</div>' +
       '<div id="slot-area"><p>Načítavam dostupné termíny…</p></div>' +
       '<div id="form-area"></div>';
