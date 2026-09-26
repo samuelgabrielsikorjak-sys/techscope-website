@@ -7,6 +7,12 @@
       "skillPath": "skills/ai-seo/SKILL.md",
       "computedHash": "de09eb5f5ebaeb5c4e1c5967d90432c442cdcf83fbeca8e5ce8999bbb0e6c8b7"
     },
+    "design-taste-frontend": {
+      "source": "leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "899b84384f74f540ea5284d9b2e9234e050998b42eacc805410b518d4226c0b3"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",

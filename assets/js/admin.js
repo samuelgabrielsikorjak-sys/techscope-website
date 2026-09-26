@@ -5,16 +5,17 @@
 // (účty sa vytvárajú len ručne v Supabase dashboarde).
 
 (function () {
-  // softver_na_mieru a web_mobile_app už nie sú aktívne produkty (zrušené),
-  // ale mapovanie ostáva kvôli historickým leadom uloženým v databáze pred
-  // prechodom na jediný produkt Data Compass.
+  // Aktívne kľúče = PRODUKTY v rezervacia.js (leads.produkt). Staršie kľúče
+  // ostávajú kvôli historickým leadom v databáze.
   var PRODUKT_LABELS = {
+    data_compass: 'Data Compass',
+    web_mobile: 'Web & Mobilné aplikácie',
+    softver_na_mieru: 'Softvér na mieru',
+    ai_riesenia: 'AI riešenia',
     ai_faktury: 'AI spracovanie faktúr',
     ai_asistent: 'AI zákaznícky asistent',
     dochadzka_system: 'Dochádzkový systém',
-    softver_na_mieru: 'Softvér na mieru (zrušené)',
-    web_mobile_app: 'Webová a mobilná aplikácia (zrušené)',
-    data_compass: 'Data Compass'
+    web_mobile_app: 'Webová a mobilná aplikácia (zrušené)'
   };
   var STATUS_LABELS = { novy: 'Nový', kontaktovany: 'Kontaktovaný', uzavrety: 'Uzavretý' };
 

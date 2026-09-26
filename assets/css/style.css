@@ -1942,3 +1942,15 @@ footer .footer-logo .logo-punct{ color:var(--accent); }
   .hx-timeline h4{ margin-top:5px; }
   .hx-timeline h4, .hx-timeline p{ grid-column:2; }
 }
+
+/* ---- GEO: faktické odseky + breadcrumbs (index + produktové stránky) ---- */
+.hx-about{ padding:clamp(28px,3.5vw,44px) 0 0; }
+.fact-lede{ max-width:760px; margin:0 auto; text-align:center; color:var(--ink-soft); font-size:clamp(1rem,1.15vw,1.1rem); line-height:1.65; }
+.fact-lede strong{ color:var(--ink); font-weight:700; }
+.hero-fact{ margin-top:14px; font-size:clamp(0.95rem,1.05vw,1.02rem); color:var(--ink-faint); }
+.breadcrumb{ margin:0 0 18px; font-family:var(--font-mono); font-size:0.78rem; font-weight:500; color:var(--ink-faint); }
+.breadcrumb ol{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+.breadcrumb li+li::before{ content:"›"; margin-right:6px; color:var(--ink-faint); }
+.breadcrumb a{ color:var(--ink-faint); text-decoration:none; }
+.breadcrumb a:hover{ color:var(--scene-blue); }
+.breadcrumb [aria-current="page"]{ color:var(--ink); }

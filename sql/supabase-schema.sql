@@ -52,7 +52,7 @@ create table leads (
   produkt text not null default 'data_compass',
   rozpocet text not null,
   urgencia text not null,
-  popis_projektu text not null,
+  popis_projektu text null,  -- nepovinné od 2026-09-26 (migrácia: alter table leads alter column popis_projektu drop not null)
   zdroj text null,
   gdpr_suhlas boolean not null default false,
   slot_id uuid null references call_slots (id) on delete set null,
@@ -110,6 +110,15 @@ grant execute on function public.pocet_rezervovanych_slotov_tento_mesiac() to an
 -- ============================================================================
 -- RPC: vytvorenie rezervácie (insert do leads + update call_slots atomicky)
 -- ============================================================================
+-- MIGRÁCIA (2026-09-26, pridanie p_produkt): stará 11-parametrová signatúra
+-- sa musí zahodiť, inak by PostgREST videl dve preťažené funkcie a volanie
+-- by skončilo chybou "could not choose the best candidate function".
+-- Poradie nasadenia: najprv tento SQL, až potom nový rezervacia.js (ktorý už
+-- posiela p_produkt). Vďaka default hodnote p_produkt funguje aj starý JS.
+drop function if exists public.vytvorit_rezervaciu(
+  text, text, text, text, text, text, text, text, text, boolean, uuid
+);
+
 create or replace function public.vytvorit_rezervaciu(
   p_meno_priezvisko text,
   p_nazov_firmy text,
@@ -121,7 +130,8 @@ create or replace function public.vytvorit_rezervaciu(
   p_popis_projektu text,
   p_zdroj text,
   p_gdpr_suhlas boolean,
-  p_slot_id uuid
+  p_slot_id uuid,
+  p_produkt text default 'data_compass'
 )
 returns uuid
 language plpgsql
@@ -148,14 +158,12 @@ begin
   insert into leads (
     meno_priezvisko, nazov_firmy, pozicia, email, telefon,
     rozpocet, urgencia, popis_projektu, zdroj,
-    gdpr_suhlas, slot_id, status
+    gdpr_suhlas, slot_id, status, produkt
   ) values (
     p_meno_priezvisko, p_nazov_firmy, p_pozicia, p_email, p_telefon,
     p_rozpocet, p_urgencia, p_popis_projektu, p_zdroj,
-    p_gdpr_suhlas, p_slot_id, 'novy'
+    p_gdpr_suhlas, p_slot_id, 'novy', coalesce(nullif(p_produkt, ''), 'data_compass')
   )
-  -- produkt stĺpec sa nevkladá explicitne — použije sa jeho table default
-  -- ('data_compass'), keďže existuje len jeden produkt.
   returning id into v_lead_id;
 
   update call_slots
@@ -173,7 +181,7 @@ $$;
 -- v tomto bugu.
 
 grant execute on function public.vytvorit_rezervaciu(
-  text, text, text, text, text, text, text, text, text, boolean, uuid
+  text, text, text, text, text, text, text, text, text, boolean, uuid, text
 ) to anon, authenticated;
 
 -- ============================================================================
@@ -1013,3 +1021,42 @@ select cron.schedule(
 -- select public.generuj_tyzdenne_sloty();   -- má vrátiť > 0 pri prvom behu
 -- select public.generuj_tyzdenne_sloty();   -- druhý beh ihneď po prvom má vrátiť 0 (idempotencia)
 -- select count(*) from call_slots where datum > current_date;
+
+-- ============================================================================
+-- MIGRÁCIA 2026-09-26: oprava preťažení vytvorit_rezervaciu + nepovinný popis
+-- ============================================================================
+-- Živá DB obsahovala dve staršie verzie vytvorit_rezervaciu s parametrom
+-- p_produkt typu enum public.produkt_typ (v tomto súbore nikdy neboli).
+-- Spolu s novou verziou (p_produkt text) PostgREST nevedel vybrať kandidáta
+-- (PGRST203) a KAŽDÁ rezervácia zlyhala. Ostáva len verzia s p_produkt text.
+drop function if exists public.vytvorit_rezervaciu(
+  text, text, text, text, text, public.produkt_typ, text, text, text, text, boolean, uuid
+);
+drop function if exists public.vytvorit_rezervaciu(
+  text, text, text, text, text, text, text, text, text, boolean, uuid, public.produkt_typ
+);
+
+-- leads.produkt musí byť text (nové kľúče web_mobile / ai_riesenia nie sú
+-- v enume). Ak už je text, príkazy sú neškodné.
+alter table public.leads alter column produkt drop default;
+alter table public.leads alter column produkt type text using produkt::text;
+alter table public.leads alter column produkt set default 'data_compass';
+
+-- Popis projektu je vo formulári nepovinný, JS posiela null.
+alter table public.leads alter column popis_projektu drop not null;
+
+notify pgrst, 'reload schema';
+
+
+drop function if exists public.vytvorit_rezervaciu(
+  text, text, text, text, text, public.produkt_typ, text, text, text, text, boolean, uuid
+);
+drop function if exists public.vytvorit_rezervaciu(
+  text, text, text, text, text, text, text, text, text, boolean, uuid, public.produkt_typ
+);
+
+alter table public.leads alter column produkt drop default;
+alter table public.leads alter column produkt type text using produkt::text;
+alter table public.leads alter column produkt set default 'data_compass';
+
+alter table public.leads alter column popis_projektu drop not null;

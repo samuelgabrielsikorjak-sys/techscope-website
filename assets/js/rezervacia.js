@@ -6,9 +6,8 @@
 // prvky prítomné v DOM pri DOMContentLoaded, takže neskôr pridané .reveal
 // prvky by ostali navždy neviditeľné (opacity:0).
 //
-// Jediný produkt (Data Compass) — formulár sa už nepýta, o ktorý produkt má
-// klient záujem (cenová hladina Data Compass / Data Compass Plus sa určuje
-// až na strategy calle podľa rozpočtu a rozsahu dátových zdrojov klienta).
+// Služba (leads.produkt): select vo formulári, predvyplnený z URL parametra
+// ?produkt=<kľúč PRODUKTY> — CTA odkazy na produktových stránkach ho nastavujú.
 
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
@@ -23,14 +22,20 @@
     initBooking(app);
   });
 
+  var PRODUKTY = {
+    data_compass: 'Data Compass',
+    web_mobile: 'Web & Mobilné aplikácie',
+    softver_na_mieru: 'Softvér na mieru',
+    ai_riesenia: 'AI riešenia'
+  };
+
   function initBooking(app) {
     var selectedSlot = null;
     var today = new Date().toISOString().slice(0, 10);
 
+    // Nadpis (#step-heading s <h1>) je statický v rezervacia.html kvôli SEO;
+    // JS ho už nevkladá, len ho skryje po potvrdení rezervácie.
     app.innerHTML =
-      '<div id="step-heading" style="text-align:center; margin-bottom:20px;">' +
-        '<p style="color:var(--ink-faint); font-size:1.05rem; font-weight:500; margin-bottom:14px;"><strong style="color:var(--ink); font-size:1.4rem; font-weight:700; display:block; margin-bottom:6px;">Posledný krok k uskutočneniu vašej vízie</strong>Vyberte si termín.</p>' +
-      '</div>' +
       '<div id="slot-area"><p>Načítavam dostupné termíny…</p></div>' +
       '<div id="form-area"></div>';
 
@@ -281,6 +286,7 @@
           meno_priezvisko: form.meno_priezvisko.value.trim(),
           nazov_firmy: form.nazov_firmy.value.trim(),
           pozicia: form.pozicia.value.trim(),
+          produkt: form.produkt.value,
           email: form.email.value.trim(),
           telefon: form.telefon.value.trim(),
           rozpocet: form.rozpocet.value,
@@ -294,9 +300,9 @@
         valid = validateField(form.meno_priezvisko, values.meno_priezvisko !== '') && valid;
         valid = validateField(form.nazov_firmy, values.nazov_firmy !== '') && valid;
         valid = validateField(form.pozicia, values.pozicia !== '') && valid;
+        valid = validateField(form.produkt, values.produkt !== '') && valid;
         valid = validateField(form.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) && valid;
         valid = validateField(form.telefon, values.telefon !== '') && valid;
-        valid = validateField(form.popis_projektu, values.popis_projektu !== '') && valid;
         valid = validateCheckbox(form.gdpr_suhlas) && valid;
 
         if (!valid) return;
@@ -308,11 +314,12 @@
           p_meno_priezvisko: values.meno_priezvisko,
           p_nazov_firmy: values.nazov_firmy,
           p_pozicia: values.pozicia,
+          p_produkt: values.produkt,
           p_email: values.email,
           p_telefon: values.telefon,
           p_rozpocet: values.rozpocet,
           p_urgencia: values.urgencia,
-          p_popis_projektu: values.popis_projektu,
+          p_popis_projektu: values.popis_projektu || null,
           p_zdroj: values.zdroj || null,
           p_gdpr_suhlas: values.gdpr_suhlas,
           p_slot_id: selectedSlot.id
@@ -387,6 +394,13 @@
     }
   }
 
+  function produktOptionsHtml() {
+    var fromUrl = new URLSearchParams(window.location.search).get('produkt');
+    return Object.keys(PRODUKTY).map(function (key) {
+      return '<option value="' + key + '"' + (key === fromUrl ? ' selected' : '') + '>' + PRODUKTY[key] + '</option>';
+    }).join('');
+  }
+
   function validateField(input, isValid) {
     var row = input.closest('.form-row');
     if (row) row.classList.toggle('invalid', !isValid);
@@ -448,10 +462,10 @@
             '<label for="f-rozpocet">Orientačný rozpočet</label>' +
             '<select id="f-rozpocet" name="rozpocet">' +
               '<option value="do 2 000 €">Do 2 000 €</option>' +
-              '<option value="2 000 – 6 000 €">2 000 – 6 000 €</option>' +
-              '<option value="6 000 – 10 000 €">6 000 – 10 000 €</option>' +
+              '<option value="2 000 – 10 000 €">2 000 – 10 000 €</option>' +
               '<option value="10 000 – 15 000 €">10 000 – 15 000 €</option>' +
-              '<option value="15 000+ €">15 000+ €</option>' +
+              '<option value="15 000 – 25 000 €">15 000 – 25 000 €</option>' +
+              '<option value="25 000 € a viac">25 000 € a viac</option>' +
             '</select>' +
           '</div>' +
           '<div class="form-row">' +
@@ -463,9 +477,16 @@
             '</select>' +
           '</div>' +
           '<div class="form-row">' +
-            '<label for="f-popis">Popis projektu *</label>' +
-            '<textarea id="f-popis" name="popis_projektu" rows="4" required></textarea>' +
-            '<span class="field-error">Opíšte prosím krátko váš projekt.</span>' +
+            '<label for="f-produkt">O ktorú službu máte záujem? *</label>' +
+            '<select id="f-produkt" name="produkt" required>' +
+              '<option value="">— Vyberte —</option>' +
+              produktOptionsHtml() +
+            '</select>' +
+            '<span class="field-error">Vyberte prosím službu.</span>' +
+          '</div>' +
+          '<div class="form-row">' +
+            '<label for="f-popis">Popis projektu (nepovinné)</label>' +
+            '<textarea id="f-popis" name="popis_projektu" rows="4"></textarea>' +
           '</div>' +
           '<div class="form-row">' +
             '<label for="f-zdroj">Ako ste sa o nás dozvedeli? (nepovinné)</label>' +
