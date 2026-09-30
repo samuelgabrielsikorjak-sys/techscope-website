@@ -88,8 +88,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }, { threshold: 0.12 });
     for (var j = 0; j < revealEls.length; j++) { io.observe(revealEls[j]); }
-    // fallback: force-reveal anything still hidden after 1.5s
-    setTimeout(revealAll, 1500);
+    // fallback: force-reveal anything still hidden after 1.5s. On body.fx
+    // pages only what's already in/above the viewport — revealing everything
+    // would pop below-the-fold content in off-screen and kill the scroll reveal.
+    setTimeout(function () {
+      if (!document.body.classList.contains('fx')) { revealAll(); return; }
+      for (var i = 0; i < revealEls.length; i++) {
+        if (revealEls[i].getBoundingClientRect().top < window.innerHeight) revealEls[i].classList.add('in');
+      }
+    }, 1500);
   } else {
     revealAll();
   }

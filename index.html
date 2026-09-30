@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
 <link rel="manifest" href="/site.webmanifest">
-<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -148,7 +148,7 @@
           "name": "Prečo by som mal ísť do externého vývoja namiesto interného tímu?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Interný tím sa nedá naklonovať — keď má plné ruky práce, váš nápad čaká. My prídeme presne vtedy, keď to potrebujete, bez toho, aby ste museli niekoho najímať na plný úväzok."
+            "text": "Interný tím sa nedá naklonovať. Keď má plné ruky práce, váš nápad čaká. My prídeme presne vtedy, keď to potrebujete, bez toho, aby ste museli niekoho najímať na plný úväzok."
           }
         },
         {
@@ -161,10 +161,10 @@
         },
         {
           "@type": "Question",
-          "name": "Nemáte ešte veľa referencií — ako viem, že to zvládnete?",
+          "name": "Nemáte ešte veľa referencií. Ako viem, že to zvládnete?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sme na začiatku budovania klientskeho portfólia, preto konkrétne ukážky práce radi ukážeme priamo na strategy calle — uvidíte presne, ako pracujeme, skôr než sa rozhodnete."
+            "text": "Sme na začiatku budovania klientskeho portfólia, preto konkrétne ukážky práce radi ukážeme priamo na strategy calle. Uvidíte presne, ako pracujeme, skôr než sa rozhodnete."
           }
         },
         {
@@ -172,7 +172,7 @@
           "name": "Koľko to bude stáť?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Cena projektu závisí od jeho rozsahu — preto je prvým krokom vždy bezplatný strategy call, na ktorom dostanete konkrétnu fixnú cenu, nie odhad od stola."
+            "text": "Cena projektu závisí od jeho rozsahu, preto je prvým krokom vždy bezplatný strategy call, na ktorom dostanete konkrétnu fixnú cenu, nie odhad od stola."
           }
         }
       ]
@@ -181,7 +181,7 @@
 }
 </script>
 </head>
-<body>
+<body class="fx">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -199,10 +199,11 @@
       <li><a href="#pripadove-studie">Case studies</a></li>
       <li><a href="#proces">Proces vývoja</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
+      <li class="nav-mobile-only"><a href="klient.html">Klientská zóna</a></li>
     </ul>
     <div class="nav-cta">
       <a href="klient.html" class="btn btn-secondary">Klientská zóna</a>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať hovor</a>
+      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
       <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
@@ -210,25 +211,24 @@
 
 <!-- HERO -->
 <header class="hx-hero">
+  <div class="hx-mesh" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="container">
     <div class="hx-hero-lead reveal">
-      <h1>Budujeme softvéry budúcnosti pre firmy, ktoré chcú byť lídrom na trhu.</h1>
-      <p class="hx-hero-sub">Technológia, ktorá mení odvetvie, potrebuje tím, ktorý ju vie postaviť.</p>
+      <h1>Technológia pre firmy, ktoré chcú byť lídrom na trhu.</h1>
+      <p class="hx-hero-sub">Softvér na mieru, dátová analytika, aplikácie a AI riešenia. Cena a termín dohodnuté vopred.</p>
       <div class="hx-hero-cta">
         <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call</a>
         <a href="#pripadove-studie" class="hx-textlink">Pozrieť, čo budujeme
         </a>
       </div>
     </div>
+  </div>
+</header>
 
-    <div class="hx-hero-terminal reveal" aria-hidden="true">
-      <div class="hx-term-bar">
-        <span class="hx-term-dot"></span><span class="hx-term-dot"></span><span class="hx-term-dot"></span>
-        <span class="hx-term-title">techscope — build</span>
-      </div>
-      <div class="hx-term-body"><div class="code-panel"></div></div>
-    </div>
-
+<!-- O FIRME (faktický odsek pre vyhľadávače a AI asistentov) -->
+<section class="hx-about" aria-label="O firme TECH-SCOPE">
+  <div class="container">
+    <p class="fact-lede"><strong>TECH-SCOPE</strong> je slovenská firma so sídlom v Senci, ktorá poskytuje dátovú analytiku (Data Compass), vývoj softvéru na mieru, webové a mobilné aplikácie a AI riešenia pre firmy na Slovensku a v Česku.</p>
     <nav class="hx-hero-index" aria-label="Naše služby">
       <a class="hx-svc-row reveal" href="softver-na-mieru.html">
         <span class="hx-svc-name">Softvér na mieru</span>
@@ -247,13 +247,6 @@
         <span class="hx-svc-desc">Dátové a predikčné modely, ktoré ukážu, čo sa vo firme naozaj deje.</span>
       </a>
     </nav>
-  </div>
-</header>
-
-<!-- O FIRME (faktický odsek pre vyhľadávače a AI asistentov) -->
-<section class="hx-about" aria-label="O firme TECH-SCOPE">
-  <div class="container">
-    <p class="fact-lede"><strong>TECH-SCOPE</strong> je slovenská firma so sídlom v Senci, ktorá poskytuje dátovú analytiku (Data Compass), vývoj softvéru na mieru, webové a mobilné aplikácie a AI riešenia pre firmy na Slovensku a v Česku.</p>
   </div>
 </section>
 
@@ -279,7 +272,7 @@
       <li class="hx-trust-item reveal">
         <span class="hx-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
         <span class="hx-trust-label">Max 3 projekty mesačne</span>
-        <span class="hx-trust-note">Kapacitný limit — každý projekt dostane plnú pozornosť tímu.</span>
+        <span class="hx-trust-note">Kapacitný limit, aby každý projekt dostal plnú pozornosť tímu.</span>
       </li>
     </ul>
   </div>
@@ -290,8 +283,9 @@
 <section id="free">
   <div class="container">
     <div class="hx-head reveal">
-      <h2>Každá dlhodobá spolupráca je založená na dôvere, my vám ju ukážeme takto: </h2>
-      <p>Skôr než čokoľvek podpíšete, dostanete konkrétny návrh na váš problém — bez záväzku.</p>
+      <span class="free-badge">Prvý krok je vždy zadarmo</span>
+      <h2>Skôr než čokoľvek podpíšete, dostanete konkrétny návrh na váš problém.</h2>
+      <p>Bez záväzku. Vyberte si službu nižšie alebo to preberieme na hovore.</p>
     </div>
     <ul class="hx-free-grid reveal">
       <li>
@@ -302,7 +296,7 @@
       <li>
         <a href="ai-riesenia.html" class="hx-free-tag">AI riešenia</a>
         <h3>Skúšobná doba automatizácie na 14 dní úplne zadarmo</h3>
-        <p>Navrhneme a postavíme vám celú automatizáciu — bez záväzku.</p>
+        <p>Navrhneme a postavíme vám celú automatizáciu, bez záväzku.</p>
       </li>
       <li>
         <a href="web-mobile.html" class="hx-free-tag">Web &amp; Mobilné aplikácie</a>
@@ -317,7 +311,7 @@
     </ul>
     <div class="hx-cta-inline reveal" style="margin-top:clamp(36px,5vw,52px);">
       <p>Neviete čo presne potrebujete? Na hovore preberieme, ktorý má pre vás najväčší zmysel.</p>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať bezplatný hovor</a>
+      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
     </div>
   </div>
 </section>
@@ -326,8 +320,8 @@
 <section id="sluzby">
   <div class="container">
     <div class="hx-head reveal">
-      <h2>Štyri spôsoby, ako predbehnúť konkurenciu inováciou</h2>
-      <p>Každá služba rieši konkrétne problémy — a každá začína bezplatným krokom, kde uvidíte návrh skôr, než čokoľvek podpíšete.</p>
+      <h2>Štyri služby, štyri konkrétne problémy</h2>
+      <p>Každá služba rieši konkrétny problém a každá začína bezplatným krokom: návrh uvidíte skôr, než čokoľvek podpíšete.</p>
     </div>
 
     <div class="hx-svc-cards">
@@ -342,10 +336,7 @@
         </svg>
         <h3>Firma beží na modernizovanom systéme, nie na roztrieštených softvéroch či tabuľkách</h3>
         <p class="hx-svc-card-mech">Zmapujeme váš proces a postavíme systém, ktorý bude napájať jednotlivé časti na seba inteligentne. Obohatený o automatizácie a modely, ktoré zefektívnia prácu vašich zamestnancov. Kód aj dáta zostávajú vaše.</p>
-        <div class="hx-svc-card-cta">
-          <a href="rezervacia.html" class="btn btn-primary">Chcem svoj návrh zadarmo!</a>
-          <a href="softver-na-mieru.html" class="hx-textlink">Softvér na mieru</a>
-        </div>
+        <a href="softver-na-mieru.html" class="hx-svc-more">Viac o softvéri na mieru <span aria-hidden="true">&rarr;</span></a>
       </article>
 
       <article class="hx-svc-card reveal">
@@ -364,10 +355,7 @@
         </svg>
         <h3>Zastavte rutinu, ktorá kradne vám a vášmu tímu hodiny práce</h3>
         <p class="hx-svc-card-mech">Zanalyzujeme váš proces, nájdeme slepé miesta s opakovanou náplňou práce a zautoamtizujeme ich. Automatizácie nasadzujeme na základe návratnosti v číslach nie ako experiment.</p>
-        <div class="hx-svc-card-cta">
-          <a href="rezervacia.html" class="btn btn-primary">Chcem svoju automatizáciu zadarmo!</a>
-          <a href="ai-riesenia.html" class="hx-textlink">AI riešenia</a>
-        </div>
+        <a href="ai-riesenia.html" class="hx-svc-more">Viac o AI riešeniach <span aria-hidden="true">&rarr;</span></a>
       </article>
 
       <article class="hx-svc-card reveal">
@@ -380,10 +368,7 @@
         </svg>
         <h3>Aplikácia, ktorú si zákazníci a váš tím obľúbia</h3>
         <p class="hx-svc-card-mech">Navrhneme aplikáciu pre najlepšiu UX pre používateľa, aj s komplexnými riešeniami, tak aby urobil to, čo od neho čakáte. Doručíme iOS, Android aj web z jednej codebase vo fixnom termíne.</p>
-        <div class="hx-svc-card-cta">
-          <a href="rezervacia.html" class="btn btn-primary">Chcem svoje MVP zadarmo!</a>
-          <a href="web-mobile.html" class="hx-textlink">Web &amp; Mobilné aplikácie</a>
-        </div>
+        <a href="web-mobile.html" class="hx-svc-more">Viac o webových a mobilných aplikáciách <span aria-hidden="true">&rarr;</span></a>
       </article>
 
       <article class="hx-svc-card reveal">
@@ -396,10 +381,7 @@
         </svg>
         <h3>Viete, čo sa vo firme deje a kde strácate na vašu konkurenciu?</h3>
         <p class="hx-svc-card-mech">Spojíme vaše dáta do jedného zdroja a postavíme predikčné modely prispôsobené presne vašej firme s mesačnými reportmi, ktoré vám prezradia viac ako nekonečné slepé optimalizácie.</p>
-        <div class="hx-svc-card-cta">
-          <a href="rezervacia.html" class="btn btn-primary">Chcem Free Data Audit</a>
-          <a href="data-compass.html" class="hx-textlink">Dátový manažment a analýzy</a>
-        </div>
+        <a href="data-compass.html" class="hx-svc-more">Viac o dátových analýzach <span aria-hidden="true">&rarr;</span></a>
       </article>
     </div>
 
@@ -411,23 +393,43 @@
 </section>
 
 <!-- PRÍPADOVÉ ŠTÚDIE -->
-<section id="pripadove-studie" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+<section id="pripadove-studie">
   <div class="container">
     <div class="hx-head reveal">
       <h2>Case Studies</h2>
-      <p>Momentálne pracujeme na týchto projektoch, Case Studies budú dostupné po ich spustení a nasadení.</p>
+      <p>Spustené projekty aj tie, na ktorých práve pracujeme. Pri projektoch vo vývoji doplníme čísla po ich spustení a nasadení.</p>
     </div>
 
     <div class="hx-case-grid">
+      <article class="hx-case reveal" data-demo="mybookmoves-demo.html" data-note="V prevádzke. Animovaná ukážka princípu aplikácie.">
+        <button type="button" class="hx-case-media" aria-haspopup="dialog" aria-label="Pozrieť ukážku aplikácie MyBookMoves">
+          <span class="hx-case-status">V prevádzke</span>
+          <span class="hx-case-laptop"><span class="hx-case-laptop-screen"><img src="icons/mybookmoves_logo.png" alt=""></span></span>
+          <span class="hx-case-cta">Pozrieť ukážku</span>
+        </button>
+        <div class="hx-case-body">
+          <h3>MyBookMoves</h3>
+          <p>MyBookMoves je tréningová aplikácia na šachové otvorenia. Namiesto knižnej teórie ukazuje ťahy, ktoré súperi na vašej úrovni ratingu naozaj hrajú, na základe reálnych partií z Lichess a Chess.com API. Odporúčané varianty sa menia s rastúcim ELO a hráči si vlastné repertoáre ukladajú, precvičujú a zdieľajú, napríklad tréner so žiakom.</p>
+          <!-- [SCREENSHOT: strom ťahov s frekvenciami podľa ratingu] -->
+          <!-- [SCREENSHOT: tréning uloženého repertoáru] -->
+          <!-- [SCREENSHOT: zdieľanie repertoáru s iným hráčom] -->
+          <dl class="hx-case-result">
+            <dt>Výsledok</dt>
+            <dd>Aplikácia je spustená a aktívne sa používa.<!-- [DOPLNIŤ: počet aktívnych používateľov / uložených repertoárov] --></dd>
+          </dl>
+          <a href="rezervacia.html" class="hx-textlink">Chcete podobné riešenie?</a>
+        </div>
+      </article>
+
       <article class="hx-case reveal" data-demo="medi-ready-demo.html">
         <button type="button" class="hx-case-media hx-case-media--phone" aria-haspopup="dialog" aria-label="Pozrieť ukážku aplikácie Medi Ready">
           <span class="hx-case-status">Vo vývoji</span>
           <span class="hx-case-phone"><img src="icons/mediready_logo.jpeg" alt=""></span>
-          <span class="hx-case-cta">Pozrieť ukážku →</span>
+          <span class="hx-case-cta">Pozrieť ukážku</span>
         </button>
         <div class="hx-case-body">
           <h3>Medi Ready</h3>
-          <p>Staviame aplikáciu na nasadzovanie a rozpisy zdravotníkov na futbalových zápasoch — od žiadostí a schvaľovania zmien po dochádzku a výkazy na jednom mieste. Aplikácia je vo vývoji a zatiaľ nie je verejne spustená.</p>
+          <p>Staviame aplikáciu na nasadzovanie a rozpisy zdravotníkov na futbalových zápasoch: od žiadostí a schvaľovania zmien po dochádzku a výkazy na jednom mieste. Aplikácia je vo vývoji a zatiaľ nie je verejne spustená.</p>
           <dl class="hx-case-result">
             <dt>Výsledok</dt>
             <dd>Konkrétne čísla a celú prípadovú štúdiu doplníme po spustení.</dd>
@@ -440,7 +442,7 @@
         <button type="button" class="hx-case-media hx-case-media--laptop" aria-haspopup="dialog" aria-label="Pozrieť ukážku nástroja LeadEngine">
           <span class="hx-case-status">Vo vývoji</span>
           <span class="hx-case-laptop"><span class="hx-case-laptop-screen"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 1.5L1.5 7l5 2 2 5z"/><path d="M14.5 1.5L6.5 9"/></svg></i>LeadEngine</span></span>
-          <span class="hx-case-cta">Pozrieť ukážku →</span>
+          <span class="hx-case-cta">Pozrieť ukážku</span>
         </button>
         <div class="hx-case-body">
           <h3>LeadEngine</h3>
@@ -457,7 +459,7 @@
     <dialog id="case-dialog" class="hx-case-dialog" aria-labelledby="case-dialog-title">
       <div class="hx-case-dialog-head">
         <h3 id="case-dialog-title"></h3>
-        <p>Vo vývoji — toto je iba ukážka, zvyšok bude dostupný po zverejnení.</p>
+        <p>Vo vývoji. Toto je iba ukážka, zvyšok bude dostupný po zverejnení.</p>
         <button type="button" class="exit-popup-close" aria-label="Zavrieť">&times;</button>
       </div>
       <iframe title="Ukážka"></iframe>
@@ -465,11 +467,13 @@
     <script>
       (function(){
         var d = document.getElementById('case-dialog'), f = d.querySelector('iframe'), t = d.querySelector('h3');
+        var n = d.querySelector('.hx-case-dialog-head p'), note = n.textContent;
         document.querySelectorAll('.hx-case[data-demo]').forEach(function(card){
           card.addEventListener('click', function(e){
             if (e.target.closest('a')) return;
             t.textContent = card.querySelector('h3').textContent;
-            f.title = 'Ukážka — ' + t.textContent;
+            n.textContent = card.dataset.note || note;
+            f.title = 'Ukážka: ' + t.textContent;
             // src až pri otvorení, aby animácia vždy začala od začiatku
             f.src = card.dataset.demo;
             d.showModal();
@@ -488,7 +492,7 @@
   <div class="container">
     <div class="hx-head reveal">
       <h2>Ako pracujeme</h2>
-      <p>Päť krokov od prvého hovoru po odovzdanie — cena a rozsah sú jasné skôr, než začneme.</p>
+      <p>Päť krokov od prvého hovoru po odovzdanie. Cena a rozsah sú jasné skôr, než začneme.</p>
     </div>
     <div class="eq-grid">
       <div class="eq-card reveal">
@@ -519,14 +523,14 @@
     </div>
 
     <div class="hx-cta-inline reveal" style="margin-top:clamp(40px,6vw,64px);">
-      <p>Prvý krok je vždy rovnaký — bezplatný hovor o vašom probléme.</p>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať hovor</a>
+      <p>Prvý krok je vždy rovnaký: bezplatný hovor o vašom probléme.</p>
+      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" style="background:var(--bg-soft); border-top:1px solid var(--line);">
+<section id="faq">
   <div class="container">
     <div class="hx-head reveal">
       <h2>Predtým, než zavoláte</h2>
@@ -534,24 +538,24 @@
     <div class="hx-narrow reveal">
       <details class="faq-item">
         <summary>Prečo by som mal ísť do externého vývoja namiesto interného tímu?</summary>
-        <p>Interný tím sa nedá naklonovať — keď má plné ruky práce, váš nápad čaká. My prídeme presne vtedy, keď to potrebujete, bez toho, aby ste museli niekoho najímať na plný úväzok.</p>
+        <p>Interný tím sa nedá naklonovať. Keď má plné ruky práce, váš nápad čaká. My prídeme presne vtedy, keď to potrebujete, bez toho, aby ste museli niekoho najímať na plný úväzok.</p>
       </details>
       <details class="faq-item">
         <summary>Čo ak sa rozsah počas projektu zmení?</summary>
         <p>Cenu a rozsah dohodneme na strategy calle skôr, než čokoľvek začneme. Zmeny riešime transparentne, nie skrytými dodatkami.</p>
       </details>
       <details class="faq-item">
-        <summary>Nemáte ešte veľa referencií — ako viem, že to zvládnete?</summary>
-        <p>Sme na začiatku budovania klientskeho portfólia, preto konkrétne ukážky práce radi ukážeme priamo na strategy calle — uvidíte presne, ako pracujeme, skôr než sa rozhodnete.</p>
+        <summary>Nemáte ešte veľa referencií. Ako viem, že to zvládnete?</summary>
+        <p>Sme na začiatku budovania klientskeho portfólia, preto konkrétne ukážky práce radi ukážeme priamo na strategy calle. Uvidíte presne, ako pracujeme, skôr než sa rozhodnete.</p>
       </details>
       <details class="faq-item">
         <summary>Koľko to bude stáť?</summary>
-        <p>Cena projektu závisí od jeho rozsahu — preto je prvým krokom vždy bezplatný strategy call, na ktorom dostanete konkrétnu fixnú cenu, nie odhad od stola.</p>
+        <p>Cena projektu závisí od jeho rozsahu, preto je prvým krokom vždy bezplatný strategy call, na ktorom dostanete konkrétnu fixnú cenu, nie odhad od stola.</p>
       </details>
     </div>
     <div class="hx-cta-inline reveal" style="margin-top:40px;">
       <p>Ostatné otázky vám vieme zodpovedať priamo na hovore.</p>
-      <a href="rezervacia.html" class="btn btn-primary">Mám ďalšiu otázku</a>
+      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
     </div>
   </div>
 </section>
@@ -559,7 +563,7 @@
 <!-- FINAL CTA -->
 <section class="band-dark" id="hovor">
   <div class="container cta-band reveal">
-    <h2>Vaša vízia si zaslúži tím, ktorý ju berie rovnako vážne ako vy.</h2>
+    <h2>Začnime hovorom o vašom projekte.</h2>
     <p>Bezplatný strategy call, bez záväzku. Na konci konkrétny návrh a fixná cena.</p>
     <div class="hero-ctas" style="justify-content:center;">
       <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call</a>
@@ -572,7 +576,7 @@
     <div class="footer-grid footer-grid-3">
       <div>
         <span class="footer-logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></span>
-        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Vlastný softvér na mieru pre firmy, ktoré chcú strategicky rásť.</p>
+        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Softvér, dátová analytika a AI riešenia na mieru pre firmy na Slovensku a v Česku.</p>
       </div>
       <div>
         <h5>Služby</h5>
@@ -601,43 +605,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
-<script>
-  window.CODE_SEQUENCES = [
-    { lines: [
-      'def spracuj_faktury(subor):',
-      '    data = ocr.extract(subor)',
-      '    return model.klasifikuj(data)'
-    ] },
-    { lines: [
-      'export async function getKlienti() {',
-      '  const { data } = await db',
-      "    .from('klienti').select('*')",
-      '  return data',
-      '}'
-    ] },
-    { lines: [
-      'select mesiac, sum(trzba) as spolu',
-      'from predaje',
-      'group by mesiac',
-      'order by spolu desc;'
-    ] },
-    { lines: [
-      'function Dashboard({ metriky }) {',
-      '  return metriky.map(m => (',
-      '    <Karta key={m.id} {...m} />',
-      '  ))',
-      '}'
-    ] },
-    { lines: [
-      '$ npm run build',
-      '  zbalené za 2.4s',
-      '$ deploy --env=prod',
-      '  nasadené · fixný termín'
-    ] }
-  ];
-</script>
-<script src="assets/js/code-typer.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="assets/js/exit-popup.js"></script>
+<script src="assets/js/fx.js"></script>
 </body>
 </html>

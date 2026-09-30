@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
 <link rel="manifest" href="/site.webmanifest">
-<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -111,7 +111,7 @@
           "name": "Je to bezpečné pre citlivé dáta?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Dáta spracúvame podľa dohodnutého režimu — vrátane možnosti behu vo vašej infraštruktúre, ak to vyžaduje citlivosť."
+            "text": "Dáta spracúvame podľa dohodnutého režimu, vrátane možnosti behu vo vašej infraštruktúre, ak to vyžaduje citlivosť."
           }
         }
       ]
@@ -120,9 +120,9 @@
 }
 </script>
 </head>
-<body>
+<body class="fx">
 
-<div class="urgency-bar">Berieme maximálne <span>3 projekty mesačne</span> naprieč všetkými službami — aktuálne obsadené: 2/3</div>
+<div class="urgency-bar">Berieme maximálne <span>3 projekty mesačne</span> naprieč všetkými službami, aktuálne obsadené: 2/3</div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -140,10 +140,11 @@
       <li><a href="index.html#pripadove-studie">Prípadové štúdie</a></li>
       <li><a href="index.html#proces">Proces</a></li>
       <li><a href="index.html#kontakt">Kontakt</a></li>
+      <li class="nav-mobile-only"><a href="klient.html">Klientská zóna</a></li>
     </ul>
     <div class="nav-cta">
       <a href="klient.html" class="btn btn-secondary">Klientská zóna</a>
-      <a href="rezervacia.html?produkt=ai_riesenia" class="btn btn-primary">Rezervovať hovor</a>
+      <a href="rezervacia.html?produkt=ai_riesenia" class="btn btn-primary">Rezervovať strategy call</a>
       <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
@@ -151,6 +152,7 @@
 
 <!-- HOOK -->
 <header class="hero hero-split">
+  <svg class="svc-art svc-art--flow" viewBox="0 0 420 320" aria-hidden="true" focusable="false"><path class="a-edge" d="M40 160C95 160 95 80 150 80"/><path class="a-edge" d="M40 160C95 160 95 240 150 240"/><path class="a-edge" d="M150 80C210 80 210 160 270 160"/><path class="a-edge" d="M150 240C210 240 210 160 270 160"/><path class="a-edge" d="M270 160H380"/><path class="a-flow" d="M40 160C95 160 95 80 150 80"/><path class="a-flow" d="M40 160C95 160 95 240 150 240"/><path class="a-flow" d="M150 80C210 80 210 160 270 160"/><path class="a-flow" d="M150 240C210 240 210 160 270 160"/><path class="a-flow" d="M270 160H380"/><circle class="a-ping" cx="40" cy="160" r="14" style="animation-delay:0s"/><circle class="a-frame" cx="40" cy="160" r="14"/><circle class="a-core" cx="40" cy="160" r="4"/><circle class="a-ping" cx="150" cy="80" r="14" style="animation-delay:0.5s"/><circle class="a-frame" cx="150" cy="80" r="14"/><circle class="a-core" cx="150" cy="80" r="4"/><circle class="a-ping" cx="150" cy="240" r="14" style="animation-delay:0.5s"/><circle class="a-frame" cx="150" cy="240" r="14"/><circle class="a-core" cx="150" cy="240" r="4"/><circle class="a-ping" cx="270" cy="160" r="14" style="animation-delay:1s"/><circle class="a-frame" cx="270" cy="160" r="14"/><circle class="a-core" cx="270" cy="160" r="4"/><circle class="a-ping" cx="380" cy="160" r="14" style="animation-delay:1.5s"/><circle class="a-frame" cx="380" cy="160" r="14"/><circle class="a-core" cx="380" cy="160" r="4"/></svg>
   <div class="hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
@@ -161,27 +163,10 @@
     </nav>
     <div class="hero-grid">
       <div class="hero-copy">
-        <h1 class="hero-title-main">AI automatizácie, ktoré šetrí čas vám a vášmu tímu.</h1>
-        <p class="hero-subheadline">Automatizácia, AI asistenti a inteligentné spracovanie dokumentov — postavené na základe analýzy, ktorá nám ukáže, kde skutočne strácate najvaic času a peňazí repetitívnou prácou.</p>
-        <p class="hero-subheadline hero-fact">AI riešenia sú služba TECH-SCOPE, v rámci ktorej firmám staviame AI asistentov, automatizáciu procesov a inteligentné spracovanie dokumentov napojené na ich dáta, s ľudskou kontrolou kvality (human-in-the-loop). Sú určené pre firmy na Slovensku a v Česku, ktoré chcú ušetriť čas tímu na opakovanej práci.</p>
-      </div>
-      <div class="hero-editor">
-        <div class="hero-editor-tab"><span class="hero-editor-filename">extract.py</span></div>
-        <div class="hero-code-block" aria-hidden="true">
-          <div class="code-line"><span class="code-line-num">1</span><span class="code-line-code">text = ocr.read(dokument)</span></div>
-          <div class="code-line"><span class="code-line-num">2</span><span class="code-line-code">data = llm.extract(text, schema)</span></div>
-          <div class="code-line"><span class="code-line-num">3</span><span class="code-line-code"> </span></div>
-          <div class="code-line"><span class="code-line-num">4</span><span class="code-line-code"><span class="kw">if</span> data.is_valid():</span></div>
-          <div class="code-line"><span class="code-line-num">5</span><span class="code-line-code">    crm.ulozit(data)</span></div>
-          <div class="code-line"><span class="code-line-num">6</span><span class="code-line-code">    notifikovat(tim)</span></div>
-        </div>
+        <h1 class="hero-title-main">AI automatizácie, ktoré prevezmú<br>opakovanú prácu vášho tímu.</h1>
+        <p class="hero-subheadline">Automatizácia, AI asistenti a inteligentné spracovanie dokumentov, postavené na analýze toho, kde skutočne strácate najviac času a peňazí opakovanou prácou.</p>
       </div>
     </div>
-    <p class="hero-typing-phrase" aria-hidden="true">
-      <span class="hero-typing-fixed">Pretvárame dáta na</span>
-      <span class="hero-typing-variable" data-phrases="rozhodnutia|automatizáciu|ušetrený čas|presné odpovede"></span><span class="hero-typing-cursor"></span>
-    </p>
-    <p class="visually-hidden">Pretvárame dáta na rozhodnutia, automatizáciu, ušetrený čas, presné odpovede.</p>
     <div class="hero-ctas">
       <a href="rezervacia.html?produkt=ai_riesenia" class="btn btn-primary btn-call">Rezervovať strategy call</a>
     </div>
@@ -189,21 +174,22 @@
 </header>
 
 <!-- 2 · PROBLÉM -> HODNOTA -->
-<section id="prehlad" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+<section id="prehlad">
   <div class="container">
+    <p class="fact-lede svc-fact reveal">AI riešenia sú služba TECH-SCOPE, v rámci ktorej firmám staviame AI asistentov, automatizáciu procesov a inteligentné spracovanie dokumentov napojené na ich dáta, s ľudskou kontrolou kvality (human-in-the-loop). Sú určené pre firmy na Slovensku a v Česku, ktoré chcú ušetriť čas tímu na opakovanej práci.</p>
     <div class="section-head reveal"><h2>Kde dnes tím robí prácu za systém</h2></div>
     <div class="hx-pv">
       <div class="hx-pv-row reveal">
         <p class="hx-pv-pain">Tím trávi hodiny týždenne opakujúcou sa prácou, ktorú by zvládol systém.</p>
-        <p class="hx-pv-gain">Automatizujeme rutinu tam, kde sa prínos overí na číslach — čas tímu ide na dôležitejšie.</p>
+        <p class="hx-pv-gain">Automatizujeme rutinu tam, kde sa prínos overí na číslach, čas tímu ide na dôležitejšie.</p>
       </div>
       <div class="hx-pv-row reveal">
         <p class="hx-pv-pain">Faktúry, zmluvy a formuláre spracúva niekto ručne, jeden po druhom.</p>
-        <p class="hx-pv-gain">AI vyťaží dáta z dokumentov a pripraví ich na kontrolu — človek už len potvrdí.</p>
+        <p class="hx-pv-gain">AI vyťaží dáta z dokumentov a pripraví ich na kontrolu, človek už len potvrdí.</p>
       </div>
       <div class="hx-pv-row reveal">
         <p class="hx-pv-pain">Rovnaké otázky, na ktoré musí tím dookola odpovedať.</p>
-        <p class="hx-pv-gain">AI asistent napojený na vaše podklady odpovie za tím — presne a konzistentne.</p>
+        <p class="hx-pv-gain">AI asistent napojený na vaše podklady odpovie za tím, presne a konzistentne.</p>
       </div>
       <div class="hx-pv-row reveal">
         <p class="hx-pv-pain">Chyby v dátach či výstupoch odhalíte, až keď spôsobia problém.</p>
@@ -222,8 +208,8 @@
   <div class="container">
     <div class="section-head reveal"><h2>Čo presne dostanete</h2></div>
     <ul class="hx-stack reveal">
-      <li class="is-free"><div><b>14 dní skušobná doba zadarmo!</b><span>Povieme narovinu, kde má automatizácia najväčší dopad, s odhadom prínosu — bez záväzku.</span></div></li>
-      <li><div><b>Riešenie napojené na vaše reálne dáta</b><span>Nie všeobecný chatbot — systém pracuje s vašimi dokumentmi a procesmi.</span></div></li>
+      <li class="is-free"><div><b>14 dní skúšobná doba zadarmo</b><span>Povieme narovinu, kde má automatizácia najväčší dopad, s odhadom prínosu, bez záväzku.</span></div></li>
+      <li><div><b>Riešenie napojené na vaše reálne dáta</b><span>Nie všeobecný chatbot: systém pracuje s vašimi dokumentmi a procesmi.</span></div></li>
       <li><div><b>Kontrola pred odoslaním</b><span>Výstupy prechádzajú kontrolou kvality, aby sa chyba nedostala von.</span></div></li>
       <li><div><b>Priebežné meranie presnosti</b><span>Vidíte, ako presne systém funguje, a viete, kedy zasiahnuť.</span></div></li>
       <li><div><b>Zaškolenie tímu</b><span>Tím vie s riešením pracovať a rozumie, čo od neho čakať.</span></div></li>
@@ -237,7 +223,7 @@
 </section>
 
 <!-- 4 · AKO TO PREBIEHA -->
-<section id="ako-to-funguje" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+<section id="ako-to-funguje">
   <div class="container">
     <div class="section-head reveal"><h2>Ako to prebieha</h2></div>
     <ol class="hx-timeline reveal">
@@ -255,14 +241,14 @@
 <section id="garancia">
   <div class="container">
     <div class="guarantee reveal">
-      <div class="guarantee-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      <div class="guarantee-badge" aria-hidden="true">
+        <span class="guarantee-num">90</span><span class="guarantee-unit">dní garancie</span>
       </div>
       <div>
         <h3>Garancia funkčného výstupu</h3>
         <p>Ak nedodáme dohodnutý rozsah do fixného termínu, dostanete peniaze späť.</p>
         <div class="reveal" style="margin-top:22px;">
-          <a href="rezervacia.html?produkt=ai_riesenia" class="btn btn-primary">Rezervovať bez rizika</a>
+          <a href="rezervacia.html?produkt=ai_riesenia" class="btn btn-primary">Rezervovať strategy call</a>
         </div>
       </div>
     </div>
@@ -270,7 +256,7 @@
 </section>
 
 <!-- 6 · FAQ -->
-<section id="faq" style="background:var(--bg-soft); border-top:1px solid var(--line);">
+<section id="faq">
   <div class="container" style="max-width:820px;">
     <div class="section-head reveal"><h2>Predtým, než zavoláte</h2></div>
     <div class="reveal">
@@ -288,7 +274,7 @@
       </details>
       <details class="faq-item">
         <summary>Je to bezpečné pre citlivé dáta?</summary>
-        <p>Dáta spracúvame podľa dohodnutého režimu — vrátane možnosti behu vo vašej infraštruktúre, ak to vyžaduje citlivosť.</p>
+        <p>Dáta spracúvame podľa dohodnutého režimu, vrátane možnosti behu vo vašej infraštruktúre, ak to vyžaduje citlivosť.</p>
       </details>
     </div>
   </div>
@@ -310,7 +296,7 @@
     <div class="footer-grid footer-grid-3">
       <div>
         <span class="footer-logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></span>
-        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Vlastný softvér na mieru pre firmy, ktoré chcú strategicky rásť.</p>
+        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Softvér, dátová analytika a AI riešenia na mieru pre firmy na Slovensku a v Česku.</p>
       </div>
       <div>
         <h5>Služby</h5>
@@ -340,7 +326,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/script.js"></script>
-<script src="assets/js/hero-typing-phrase.js"></script>
 <script src="assets/js/exit-popup.js"></script>
+<script src="assets/js/fx.js"></script>
 </body>
 </html>

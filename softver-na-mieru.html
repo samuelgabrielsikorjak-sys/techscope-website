@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
 <link rel="manifest" href="/site.webmanifest">
-<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -111,7 +111,7 @@
           "name": "Viete systém napojiť na naše existujúce nástroje?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Áno — napojenie na CRM, účtovníctvo, sklad či ďalšie systémy je bežná súčasť projektu."
+            "text": "Áno, napojenie na CRM, účtovníctvo, sklad či ďalšie systémy je bežná súčasť projektu."
           }
         }
       ]
@@ -120,9 +120,9 @@
 }
 </script>
 </head>
-<body>
+<body class="fx">
 
-<div class="urgency-bar">Berieme maximálne <span>3 projekty mesačne</span> naprieč všetkými službami — aktuálne obsadené: 2/3</div>
+<div class="urgency-bar">Berieme maximálne <span>3 projekty mesačne</span> naprieč všetkými službami, aktuálne obsadené: 2/3</div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -140,10 +140,11 @@
       <li><a href="index.html#pripadove-studie">Prípadové štúdie</a></li>
       <li><a href="index.html#proces">Proces</a></li>
       <li><a href="index.html#kontakt">Kontakt</a></li>
+      <li class="nav-mobile-only"><a href="klient.html">Klientská zóna</a></li>
     </ul>
     <div class="nav-cta">
       <a href="klient.html" class="btn btn-secondary">Klientská zóna</a>
-      <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary">Rezervovať hovor</a>
+      <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary">Rezervovať strategy call</a>
       <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
@@ -151,6 +152,7 @@
 
 <!-- HOOK -->
 <header class="hero hero-split">
+  <svg class="svc-art svc-art--soft" viewBox="0 0 420 320" aria-hidden="true" focusable="false"><g class="a-gear a-gear--1"><circle class="a-teeth" cx="118" cy="138" r="58.0" stroke-dasharray="13.02 13.02"/><circle cx="118" cy="138" r="46.0"/><circle cx="118" cy="138" r="14.5"/></g><g class="a-gear a-gear--2"><circle class="a-teeth" cx="191" cy="199" r="37.3" stroke-dasharray="13.02 13.02"/><circle cx="191" cy="199" r="25.3"/><circle cx="191" cy="199" r="9.3"/></g><g class="a-mod"><rect class="a-frame" x="280" y="36" width="124" height="44" rx="8"/><path d="M296 52h40M296 64h74"/><path class="a-accent" d="M384 52l-6 6 6 6"/></g><g class="a-mod"><rect class="a-frame" x="280" y="96" width="124" height="44" rx="8"/><path d="M296 112h40M296 124h74"/><path class="a-accent" d="M384 112l-6 6 6 6"/></g><g class="a-mod"><rect class="a-frame" x="280" y="156" width="124" height="44" rx="8"/><path d="M296 172h40M296 184h74"/><path class="a-accent" d="M384 172l-6 6 6 6"/></g><g class="a-mod"><rect class="a-frame" x="280" y="216" width="124" height="44" rx="8"/><path d="M296 232h40M296 244h74"/><path class="a-accent" d="M384 232l-6 6 6 6"/></g><path class="a-link" d="M176 138H280M222 199H280"/></svg>
   <div class="hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
@@ -163,25 +165,8 @@
       <div class="hero-copy">
         <h1 class="hero-title-main">Softvér na mieru</h1>
         <p class="hero-subheadline">Moderné interné systémy, evidencie a firemné nástroje na mieru, navrhnuté podľa toho, ako reálne pracujete, ale aj komplexné riešenia podľa vašich požiadaviek.</p>
-        <p class="hero-subheadline hero-fact">Softvér na mieru je služba TECH-SCOPE, v rámci ktorej firmám vyvíjame interné systémy, evidencie a firemné nástroje presne podľa ich procesov, s napojením na CRM, účtovníctvo či sklad. Je určená pre firmy na Slovensku a v Česku, ktorým krabicové riešenia nestačia a chcú softvér, ktorý im patrí.</p>
-      </div>
-      <div class="hero-editor">
-        <div class="hero-editor-tab"><span class="hero-editor-filename">process.py</span></div>
-        <div class="hero-code-block" aria-hidden="true">
-          <div class="code-line"><span class="code-line-num">1</span><span class="code-line-code">@app.route(&quot;/schvalit/&lt;uid&gt;&quot;)</span></div>
-          <div class="code-line"><span class="code-line-num">2</span><span class="code-line-code"><span class="kw">def</span> schvalit(uid):</span></div>
-          <div class="code-line"><span class="code-line-num">3</span><span class="code-line-code">    krok = Proces.nacitaj(uid)</span></div>
-          <div class="code-line"><span class="code-line-num">4</span><span class="code-line-code">    krok.potvrdit(pouzivatel)</span></div>
-          <div class="code-line"><span class="code-line-num">5</span><span class="code-line-code"> </span></div>
-          <div class="code-line"><span class="code-line-num">6</span><span class="code-line-code">    <span class="kw">return</span> krok.posun_dalej()</span></div>
-        </div>
       </div>
     </div>
-    <p class="hero-typing-phrase" aria-hidden="true">
-      <span class="hero-typing-fixed">Pretvárame váš proces na</span>
-      <span class="hero-typing-variable" data-phrases="systém|úsporu času|poriadok|kontrolu"></span><span class="hero-typing-cursor"></span>
-    </p>
-    <p class="visually-hidden">Pretvárame váš proces na systém, úsporu času, poriadok, kontrolu.</p>
     <div class="hero-ctas">
       <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary btn-call">Rezervovať strategy call</a>
     </div>
@@ -189,8 +174,9 @@
 </header>
 
 <!-- 2 · PROBLÉM -> HODNOTA -->
-<section id="prehlad" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+<section id="prehlad">
   <div class="container">
+    <p class="fact-lede svc-fact reveal">Softvér na mieru je služba TECH-SCOPE, v rámci ktorej firmám vyvíjame interné systémy, evidencie a firemné nástroje presne podľa ich procesov, s napojením na CRM, účtovníctvo či sklad. Je určená pre firmy na Slovensku a v Česku, ktorým krabicové riešenia nestačia a chcú softvér, ktorý im patrí.</p>
     <div class="section-head reveal"><h2>Čo vám vlastný softvér prinesie?</h2></div>
     <div class="hx-pv">
       <div class="hx-pv-row reveal">
@@ -207,7 +193,7 @@
       </div>
       <div class="hx-pv-row reveal">
         <p class="hx-pv-pain">Každý v systéme vidí a môže všetko, aj to, čo nemá.</p>
-        <p class="hx-pv-gain">Jasné role a prístupy — každý vidí presne to, čo k práci potrebuje.</p>
+        <p class="hx-pv-gain">Jasné role a prístupy: každý vidí presne to, čo k práci potrebuje.</p>
       </div>
       <div class="hx-pv-row reveal">
         <p class="hx-pv-pain">Špecifické požiadavky niesú možné vykonať a musíte sa im venovať individuálne.</p>
@@ -223,12 +209,12 @@
     <div class="section-head reveal"><h2>Čo presne dostanete</h2></div>
     <ul class="hx-stack reveal">
       <li class="is-free"><div><b>Konzultácia a proces audit zadarmo</b><span>Zmapujeme jeden váš proces a ukážeme, ktoré kroky vie softvér prevziať a koľko hodín to ušetrí.</span></div></li>
-      <li><div><b>Interný systém na mieru</b><span>Postavený okolo vášho procesu — beží u vás a patrí vám.</span></div></li>
+      <li><div><b>Interný systém na mieru</b><span>Postavený okolo vášho procesu. Beží u vás a patrí vám.</span></div></li>
       <li><div><b>Špecializované komplexné riešenia</b><span>Navrhneme a vytvoríme pre Vás aj komplexnejšie úlohy, ktoré bude softvér vykonávať.</span></div></li>
-      <li><div><b>Napojenie na existujúce nástroje</b><span>CRM, účtovníctvo, sklad — systém ich spojí, nie nahradí naslepo.</span></div></li>
+      <li><div><b>Napojenie na existujúce nástroje</b><span>CRM, účtovníctvo, sklad: systém ich spojí, nie nahradí naslepo.</span></div></li>
       <li><div><b>Jasné role a prístupy</b><span>Nastavené tak, aby každý videl a mohol presne to, čo má.</span></div></li>
       <li><div><b>Dokumentácia a zaškolenie</b><span>Tím vie systém používať samostatne, máte ho zdokumentovaný.</span></div></li>
-      <li><div><b>Fixný termín a garancia funkčného výstupu</b><span>Rozsah, cena aj termín podľa Zmluvy o dielo — ak nezaberie, vrátime peniaze.</span></div></li>
+      <li><div><b>Fixný termín a garancia funkčného výstupu</b><span>Rozsah, cena aj termín podľa Zmluvy o dielo. Ak nezaberie, vrátime peniaze.</span></div></li>
     </ul>
     <div class="hx-stack-cta reveal">
       <p>Všetko za jednu fixnú cenu podľa Zmluvy o dielo, ktorú si potvrdíte po strategy calle.</p>
@@ -238,12 +224,12 @@
 </section>
 
 <!-- 4 · AKO TO PREBIEHA -->
-<section id="ako-to-funguje" style="background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+<section id="ako-to-funguje">
   <div class="container">
     <div class="section-head reveal"><h2>Ako to prebieha</h2></div>
     <ol class="hx-timeline reveal">
       <li><span class="hx-tl-num">01</span><h4>Mapovanie procesu</h4><p>Zanalyzujeme váš pracovný postup a nájdeme miesta, kde vás najviac spomaľuje.</p></li>
-      <li><span class="hx-tl-num">02</span><h4>Návrh architektúry</h4><p>Navrhneme technickú štruktúru systému — rozhranie, logiku aj dátovú vrstvu.</p></li>
+      <li><span class="hx-tl-num">02</span><h4>Návrh architektúry</h4><p>Navrhneme technickú štruktúru systému: rozhranie, logiku aj dátovú vrstvu.</p></li>
       <li><span class="hx-tl-num">03</span><h4>Definovanie rolí a prístupov</h4><p>Nastavíme, kto v systéme čo vidí a čo môže robiť.</p></li>
       <li><span class="hx-tl-num">04</span><h4>Vývoj</h4><p>Postavíme systém presne podľa schváleného návrhu a scope dokumentu.</p></li>
       <li><span class="hx-tl-num">05</span><h4>Testovanie</h4><p>Overíme funkčnosť naprieč scenármi použitia pred odovzdaním.</p></li>
@@ -256,14 +242,14 @@
 <section id="garancia">
   <div class="container">
     <div class="guarantee reveal">
-      <div class="guarantee-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      <div class="guarantee-badge" aria-hidden="true">
+        <span class="guarantee-num">90</span><span class="guarantee-unit">dní garancie</span>
       </div>
       <div>
         <h3>Garancia funkčného výstupu</h3>
         <p>Ak nedodáme dohodnutý rozsah do fixného termínu, dostanete peniaze späť.</p>
         <div class="reveal" style="margin-top:22px;">
-          <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary">Rezervovať bez rizika</a>
+          <a href="rezervacia.html?produkt=softver_na_mieru" class="btn btn-primary">Rezervovať strategy call</a>
         </div>
       </div>
     </div>
@@ -271,7 +257,7 @@
 </section>
 
 <!-- 6 · FAQ -->
-<section id="faq" style="background:var(--bg-soft); border-top:1px solid var(--line);">
+<section id="faq">
   <div class="container" style="max-width:820px;">
     <div class="section-head reveal"><h2>Predtým, než zavoláte</h2></div>
     <div class="reveal">
@@ -289,7 +275,7 @@
       </details>
       <details class="faq-item">
         <summary>Viete systém napojiť na naše existujúce nástroje?</summary>
-        <p>Áno — napojenie na CRM, účtovníctvo, sklad či ďalšie systémy je bežná súčasť projektu.</p>
+        <p>Áno, napojenie na CRM, účtovníctvo, sklad či ďalšie systémy je bežná súčasť projektu.</p>
       </details>
     </div>
   </div>
@@ -311,7 +297,7 @@
     <div class="footer-grid footer-grid-3">
       <div>
         <span class="footer-logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></span>
-        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Vlastný softvér na mieru pre firmy, ktoré chcú strategicky rásť.</p>
+        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Softvér, dátová analytika a AI riešenia na mieru pre firmy na Slovensku a v Česku.</p>
       </div>
       <div>
         <h5>Služby</h5>
@@ -341,7 +327,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/script.js"></script>
-<script src="assets/js/hero-typing-phrase.js"></script>
 <script src="assets/js/exit-popup.js"></script>
+<script src="assets/js/fx.js"></script>
 </body>
 </html>

@@ -67,7 +67,7 @@
         '<button type="button" class="exit-popup-close" aria-label="Zavrieť">&times;</button>' +
         '<div class="exit-popup-body">' +
           '<h3 id="exit-popup-title">Nechajte nám váš kontakt a my sa vám ozveme!</h3>' +
-          '<p>Žiadny záväzok — stačí email alebo telefón, ozveme sa do 1 pracovného dňa.</p>' +
+          '<p>Žiadny záväzok, stačí email alebo telefón. Ozveme sa do 1 pracovného dňa.</p>' +
           '<form id="exit-popup-form" novalidate>' +
             '<div class="form-row">' +
               '<label for="exit-popup-kontakt">E-mail alebo telefón *</label>' +

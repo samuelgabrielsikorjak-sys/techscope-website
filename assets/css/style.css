@@ -1646,7 +1646,14 @@ footer{ background:var(--dark); color:#9BABC4; padding:56px 0 24px; border-top:1
   color:var(--ink); max-width:18ch;
 }
 .hx-svc-card-mech{ margin:0; flex:1; color:var(--ink-soft); font-size:0.97rem; line-height:1.6; max-width:44ch; }
-.hx-svc-card-cta{ display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px; margin-top:4px; }
+/* jednotný textový odkaz na konci každej karty (namiesto CTA tlačidla) */
+.hx-svc-more{
+  align-self:flex-start; display:inline-flex; align-items:center; gap:8px; margin-top:4px;
+  font-weight:700; font-size:0.95rem; color:var(--accent); text-decoration:none;
+}
+.hx-svc-more span{ transition:transform .25s var(--ease); }
+.hx-svc-card:hover .hx-svc-more span, .hx-svc-more:focus-visible span{ transform:translateX(4px); }
+.hx-svc-more:hover{ color:var(--accent-dark); }
 
 /* per-card thematic scene: sits top-right, low-opacity, pure CSS transform/opacity */
 .hx-svc-scene{
@@ -1804,6 +1811,7 @@ footer{ background:var(--dark); color:#9BABC4; padding:56px 0 24px; border-top:1
   font-family:var(--font-headline); font-size:clamp(1.05rem,1.5vw,1.3rem); font-weight:700; letter-spacing:-0.01em; color:#1C1D1B;
 }
 .hx-case-laptop-screen i{ display:grid; place-items:center; width:32px; height:32px; border-radius:8px; background:#2F7A62; }
+.hx-case-laptop-screen img{ width:80%; height:auto; }
 .hx-case-laptop::after{
   content:""; display:block; height:11px; margin:0 -9%;
   background:linear-gradient(180deg, #DDE1E7, #AEB4BE); border-radius:0 0 14px 14px;
@@ -1947,10 +1955,297 @@ footer .footer-logo .logo-punct{ color:var(--accent); }
 .hx-about{ padding:clamp(28px,3.5vw,44px) 0 0; }
 .fact-lede{ max-width:760px; margin:0 auto; text-align:center; color:var(--ink-soft); font-size:clamp(1rem,1.15vw,1.1rem); line-height:1.65; }
 .fact-lede strong{ color:var(--ink); font-weight:700; }
-.hero-fact{ margin-top:14px; font-size:clamp(0.95rem,1.05vw,1.02rem); color:var(--ink-faint); }
+/* service stránky: faktický SEO odsek na začiatku prvej sekcie pod hero */
+.svc-fact{ margin-bottom:clamp(40px,5vw,64px); }
 .breadcrumb{ margin:0 0 18px; font-family:var(--font-mono); font-size:0.78rem; font-weight:500; color:var(--ink-faint); }
 .breadcrumb ol{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
 .breadcrumb li+li::before{ content:"›"; margin-right:6px; color:var(--ink-faint); }
 .breadcrumb a{ color:var(--ink-faint); text-decoration:none; }
 .breadcrumb a:hover{ color:var(--scene-blue); }
 .breadcrumb [aria-current="page"]{ color:var(--ink); }
+
+/* ============================================================
+   2026-09-27 anti-slop pass (overrides, kept in one block on purpose)
+   - green (--money) retired: checks/status/free-highlight use the accent
+   - icon bubbles, boxed cards, hover lifts, dot badges, arrows removed
+   - hero: code editor / terminal replaced by the ambient canvas scene
+   ============================================================ */
+:root{ --money:var(--accent); --money-rgb:var(--accent-rgb); }
+
+/* check marks: plain glyph, no tinted circle behind it */
+.hx-stack li::before{
+  width:18px; height:18px; flex-basis:18px; margin-top:3px; border-radius:0; background:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B4DFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-size:18px; background-repeat:no-repeat; background-position:center;
+}
+.hx-stack li.is-free{ background:rgba(var(--accent-rgb),0.05); box-shadow:inset 3px 0 0 var(--accent); }
+.hx-stack b{ font-family:var(--font-display); }
+
+/* free offers: a ruled ledger, not four identical boxes */
+.hx-free-grid{ gap:32px 40px; }
+.hx-free-grid li{ background:none; border:0; border-top:2px solid var(--ink); border-radius:0; padding:18px 0 0; }
+.hx-free-card{ border-top:2px solid var(--ink); box-shadow:none; }
+
+/* guarantee: the number is the visual, no circle-with-check badge */
+.guarantee{ border-radius:var(--radius); padding:clamp(36px,5vw,60px) clamp(28px,5vw,64px); gap:clamp(28px,5vw,64px); }
+.guarantee-badge{ width:auto; height:auto; border:0; border-radius:0; margin:0; display:flex; flex-direction:column; align-items:flex-start; }
+.guarantee-badge svg{ display:none; }
+.guarantee-num{ font-family:var(--font-headline); font-weight:700; font-size:clamp(4rem,9vw,7rem); line-height:.85; letter-spacing:-0.045em; color:var(--gold); font-variant-numeric:tabular-nums; }
+.guarantee-unit{ margin-top:12px; font-family:var(--font-mono); font-size:0.82rem; color:#C1CCDE; }
+@media (max-width:640px){ .guarantee-badge{ align-items:center; } }
+
+/* reservation confirmation: check without the ring */
+.confirm-badge{ width:auto; height:auto; border:0; border-radius:0; }
+
+/* homepage process: ruled columns with mono step numbers, no cards */
+.eq-grid{ grid-template-columns:repeat(5,1fr); gap:0 28px; }
+.eq-card, .eq-card:hover, .eq-card.reveal:hover{ background:none; border:0; border-top:1px solid var(--line); border-radius:0; padding:22px 0 0; transform:none; box-shadow:none; }
+.eq-card .num{ font-family:var(--font-mono); font-size:0.82rem; font-weight:700; color:var(--accent); margin-bottom:14px; }
+@media (max-width:880px){ .eq-grid{ grid-template-columns:1fr 1fr; gap:28px; } }
+@media (max-width:520px){ .eq-grid{ grid-template-columns:1fr; gap:22px; } }
+
+/* inline CTA rows: a rule, not a box */
+.hx-cta-inline{ background:none; border:0; border-top:1px solid var(--line); border-radius:0; padding:28px 0 0; }
+
+/* case-study status: plain text, no pill, no dot, no blur */
+.hx-case-status{ padding:0; border:0; border-radius:0; background:none; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none;
+  font-family:var(--font-body); font-size:0.78rem; font-weight:600; letter-spacing:0; text-transform:none; color:var(--ink-soft); }
+.hx-case-status::before{ content:none; }
+
+/* hover: colour shift only, no lifting every card */
+.pkg:hover, .pkg.reveal:hover, .hx-svc-card:hover, .pain-card:hover{ transform:none; box-shadow:none; }
+.btn:active{ transform:translateY(1px); }
+
+/* hero: single copy column, ambient scene lives in the right half */
+.hero-grid{ grid-template-columns:1fr; }
+.hero-copy{ max-width:640px; }
+.hero-split .hero-ctas{ justify-content:flex-start; margin-top:clamp(24px,3.5vh,36px); }
+.hero-bg-canvas-wrap{
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 40%, #000 68%);
+          mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 40%, #000 68%);
+}
+.hero-viz-canvas{ opacity:0.9; }
+.hx-hero .hero-bg-canvas-wrap{ z-index:0; }
+.hx-hero-lead{ max-width:720px; }
+@media (max-width:768px){
+  .hero-bg-canvas-wrap{
+    -webkit-mask-image:linear-gradient(180deg, transparent 25%, #000 85%);
+            mask-image:linear-gradient(180deg, transparent 25%, #000 85%);
+  }
+  .hero-viz-canvas{ opacity:0.55; }
+}
+
+/* homepage hero: scene confined to the lead area, fades out before the service index rows */
+.hx-hero .hero-bg-canvas-wrap{ bottom:auto; height:min(100%, 620px); }
+.hx-hero .hero-bg-canvas-wrap::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:200px;
+  background:linear-gradient(180deg, rgba(var(--bg-rgb),0), var(--bg));
+}
+
+/* footer on phones: .footer-grid-3 used to beat the 780px rule and force 3 columns (horizontal scroll) */
+@media (max-width:780px){ .footer-grid.footer-grid-3{ grid-template-columns:1fr 1fr; } }
+@media (max-width:480px){ .footer-grid, .footer-grid.footer-grid-3{ grid-template-columns:1fr; gap:24px; } }
+.footer-grid a{ overflow-wrap:anywhere; }
+
+/* phones: header = logo + hamburger only; "Klientská zóna" moves into the menu (no wrapped button) */
+.nav-mobile-only{ display:none; }
+@media (max-width:640px){
+  .nav-cta .btn-secondary{ display:none; }
+  .nav-mobile-only{ display:block; }
+}
+@media (max-width:640px){ .guarantee .btn{ width:100%; } }
+@media (max-width:420px){
+  .btn{ font-size:0.92rem; padding-left:18px; padding-right:18px; white-space:nowrap; }
+  .guarantee{ padding:32px 20px; }
+}
+
+/* ============================================================
+   2026-09-30 redizajn — vrstva pre <body class="fx"> (index + 4 service
+   stránky, správanie v assets/js/fx.js). Rezervácia/admin/klient túto
+   triedu nemajú, takže ich nič odtiaľto neovplyvní.
+   Animácie len cez transform/opacity; prefers-reduced-motion rieši
+   globálne pravidlo hore + výnimky nižšie.
+   ============================================================ */
+
+/* ---------- obrazovky + dynamické pozadie ---------- */
+body.fx{ --bg-dynamic:var(--bg); background-color:var(--bg-dynamic); transition:background-color .8s ease-in-out; }
+.fx > section:not(.band-dark){ background:transparent; }
+.fx > header + section, .fx > section + section{ border-top:1px solid rgba(var(--ink-rgb),0.07); }
+.fx .hx-hero{ border-bottom:0; }
+.fx .hx-trust{ border-bottom:0; }
+@media (min-width:761px) and (min-height:560px){
+  .fx > header, .fx > section:not(.hx-trust){
+    min-height:calc(100vh - 64px); min-height:calc(100svh - 64px);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .fx > section > .container, .fx > header > .container, .fx > header > .hero-inner{ width:100%; }
+}
+/* voliteľný scroll-snap (index.html?snap=1) — proximity, nie mandatory */
+html.snap{ scroll-snap-type:y proximity; scroll-padding-top:64px; }
+html.snap body.fx > header, html.snap body.fx > section{ scroll-snap-align:start; }
+
+/* ---------- homepage hero: iba headline, sub, CTA + pozadie ---------- */
+.hx-mesh{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+.hx-mesh i{ position:absolute; border-radius:50%; will-change:transform; animation:mesh-drift 28s ease-in-out infinite alternate; }
+.hx-mesh i:nth-child(1){ width:70vmax; height:70vmax; top:-38vmax; right:-22vmax; background:radial-gradient(circle, rgba(var(--accent-rgb),0.16), transparent 62%); }
+.hx-mesh i:nth-child(2){ width:60vmax; height:60vmax; bottom:-36vmax; left:-18vmax; background:radial-gradient(circle, rgba(110,155,236,0.2), transparent 62%); animation-duration:34s; animation-direction:alternate-reverse; }
+.hx-mesh i:nth-child(3){ width:44vmax; height:44vmax; top:18%; left:38%; background:radial-gradient(circle, rgba(var(--ink-rgb),0.05), transparent 60%); animation-duration:22s; }
+@keyframes mesh-drift{
+  0%{ transform:translate3d(0,0,0) scale(1); }
+  50%{ transform:translate3d(-8vmax,6vmax,0) scale(1.12); }
+  100%{ transform:translate3d(6vmax,-4vmax,0) scale(.94); }
+}
+.is-offscreen .hx-mesh i, .is-offscreen .svc-art *{ animation-play-state:paused; }
+
+/* "čo robíme" obrazovka — fakt o firme + index služieb (presunuté z hero) */
+.fx .hx-about{ padding:var(--section-y) 0; }
+.fx .hx-about .fact-lede{ margin:0; max-width:60ch; text-align:left; font-size:clamp(1.1rem,1.6vw,1.35rem); color:var(--ink); }
+
+/* ---------- scroll reveal: blur + scale-in, stagger ---------- */
+.fx .reveal{
+  opacity:0; transform:translate3d(0,24px,0) scale(.97); filter:blur(8px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease), filter .8s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.fx .reveal.in{ opacity:1; transform:none; filter:none; }
+.fx .hx-case.reveal.in:hover{ transform:translateY(-2px); }
+.fx .reveal.reveal-stagger{ opacity:1; transform:none; filter:none; }
+.fx .reveal-stagger > *{
+  opacity:0; transform:translate3d(0,14px,0);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+  transition-delay:calc(var(--i,0) * 90ms);
+}
+.fx .reveal-stagger.in > *{ opacity:1; transform:none; }
+@media (max-width:760px){ .fx .reveal{ filter:none; transform:translate3d(0,16px,0); } }
+
+/* ---------- "Prvý krok je vždy zadarmo" — pomalý glow pulz ---------- */
+.free-badge{
+  position:relative; display:inline-flex; align-items:center; gap:10px; margin-bottom:20px;
+  padding:7px 15px 7px 12px; border:1px solid rgba(var(--accent-rgb),0.3); border-radius:999px;
+  background:rgba(var(--accent-rgb),0.06); color:var(--accent);
+  font-family:var(--font-display); font-weight:700; font-size:0.86rem;
+}
+.free-badge::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); animation:badge-dot 3.2s ease-in-out infinite; }
+.free-badge::after{
+  content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; opacity:0;
+  box-shadow:0 0 0 4px rgba(var(--accent-rgb),0.1), 0 0 26px 2px rgba(var(--accent-rgb),0.35);
+  animation:badge-glow 3.2s ease-in-out infinite;
+}
+@keyframes badge-glow{ 0%,100%{ opacity:0; } 50%{ opacity:1; } }
+@keyframes badge-dot{ 0%,100%{ transform:scale(1); opacity:.6; } 50%{ transform:scale(1.35); opacity:1; } }
+
+/* ---------- flip tlačidlá (fx.js rozdelí obsah na front/back) ---------- */
+.fx .btn-flip{ perspective:600px; }
+.btn-flip-in{ display:inline-grid; transform-style:preserve-3d; transition:transform .55s var(--ease); }
+.btn-front, .btn-back{
+  grid-area:1/1; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+}
+.btn-back{ transform:rotateX(180deg); }
+@media (hover:hover) and (pointer:fine){
+  .fx .btn-flip:hover .btn-flip-in, .fx .btn-flip:focus-visible .btn-flip-in{ transform:rotateX(180deg); }
+}
+/* dotyk: žiadny flip, len jemný scale pri stlačení */
+@media (hover:none), (pointer:coarse){
+  .btn-back{ display:none; }
+  .fx .btn-flip{ transition:background .18s ease, color .18s ease, border-color .18s ease, transform .15s ease; }
+  .fx .btn-flip:active{ transform:scale(.97); }
+}
+@media (prefers-reduced-motion:reduce){
+  .btn-back{ display:none; }
+  .fx .btn-flip .btn-flip-in{ transform:none !important; }
+}
+
+/* ---------- case studies: spojovacia čiara + skladanie podľa scrollu ---------- */
+.fx .hx-case-grid{ position:relative; gap:clamp(56px,7vw,88px); }
+.fx .hx-case{ position:relative; z-index:1; --p:1; }
+.case-thread{
+  position:absolute; z-index:0; left:50%; top:-40px; bottom:calc(-1 * var(--section-y) - 48px);
+  width:2px; margin-left:-1px; pointer-events:none; background:rgba(var(--accent-rgb),0.12);
+  -webkit-mask-image:linear-gradient(180deg, transparent, #000 5%, #000 88%, transparent);
+          mask-image:linear-gradient(180deg, transparent, #000 5%, #000 88%, transparent);
+}
+.case-thread-fill{ position:absolute; inset:0; background:var(--accent); transform-origin:top; transform:scaleY(0); will-change:transform; }
+.case-thread-head{
+  position:absolute; left:50%; top:0; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 0 4px rgba(var(--accent-rgb),0.15), 0 0 18px rgba(var(--accent-rgb),0.6);
+  opacity:0; transition:opacity .3s ease; will-change:transform;
+}
+/* --p (0→1) nastavuje fx.js podľa polohy karty; bez JS / reduced-motion ostáva 1 = zložené */
+.fx .hx-case-laptop, .fx .hx-case-phone{ z-index:1; }
+.fx .hx-case-laptop{ scale:calc(.92 + var(--p) * .08); }
+.fx .hx-case-laptop-screen, .fx .hx-case-phone img{ translate:0 calc((1 - var(--p)) * -32px); opacity:calc(.15 + var(--p) * .85); }
+.fx .hx-case-laptop::after{ translate:0 calc((1 - var(--p)) * 36px); opacity:var(--p); }
+.fx .hx-case-phone{ rotate:calc((1 - var(--p)) * -10deg); scale:calc(.88 + var(--p) * .12); }
+.fx .hx-case-media::before{ scale:calc(1.3 - var(--p) * .3); opacity:var(--p); }
+.fx .hx-case-status{ translate:calc((1 - var(--p)) * -20px) 0; opacity:var(--p); }
+.fx .hx-case-cta{ opacity:var(--p); }
+.case-frag{
+  position:absolute; z-index:0; border-radius:6px; pointer-events:none;
+  background:rgba(var(--tint),0.1); border:1px solid rgba(var(--tint),0.28); opacity:calc(var(--p) * .9);
+}
+.case-frag--1{ width:24%; height:16%; left:7%; top:18%; translate:calc((1 - var(--p)) * -140px) calc((1 - var(--p)) * -50px); rotate:calc((1 - var(--p)) * -14deg); }
+.case-frag--2{ width:16%; height:26%; right:6%; top:12%; translate:calc((1 - var(--p)) * 120px) calc((1 - var(--p)) * -70px); rotate:calc((1 - var(--p)) * 10deg); }
+.case-frag--3{ width:32%; height:8%; right:10%; bottom:14%; translate:calc((1 - var(--p)) * 90px) calc((1 - var(--p)) * 100px); }
+@media (max-width:760px){ .case-frag{ display:none; } }
+
+/* ---------- service hero: tematická SVG animácia ---------- */
+/* staré .hero h1{margin:0 auto} centrovalo nadpis mimo zarovnania textu */
+.fx .hero-title-main{ margin-left:0; }
+.svc-art{
+  position:absolute; z-index:1; top:50%; right:clamp(8px,5vw,88px); translate:0 -50%;
+  width:clamp(300px,36vw,500px); height:auto; overflow:visible;
+  color:var(--accent); opacity:.6; pointer-events:none;
+}
+.svc-art path, .svc-art rect, .svc-art circle{ fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.svc-art .a-frame{ fill:var(--bg-elevated); }
+.svc-art .a-blk{ fill:currentColor; stroke:none; opacity:.14; }
+@media (max-width:1100px){ .svc-art{ opacity:.28; } }
+@media (max-width:900px){ .svc-art{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .svc-art *{ animation:none !important; } }
+
+/* web & mobile — wireframe okná sa skladajú, bloky sa vypĺňajú */
+.svc-art--web .a-win{ animation:a-win 10s var(--ease) infinite both; }
+.svc-art--web .a-win:nth-of-type(2){ animation-delay:.5s; }
+.svc-art--web .a-win:nth-of-type(3){ animation-delay:1s; }
+@keyframes a-win{ 0%{ opacity:0; transform:translate(var(--dx),var(--dy)); } 14%,86%{ opacity:1; transform:none; } 100%{ opacity:0; transform:none; } }
+.svc-art--web .a-blk{ animation:a-blk 10s ease infinite both; }
+.svc-art--web .a-blk:nth-of-type(3){ animation-delay:.25s; }
+.svc-art--web .a-blk:nth-of-type(4){ animation-delay:.5s; }
+.svc-art--web .a-blk:nth-of-type(5){ animation-delay:.75s; }
+.svc-art--web .a-blk:nth-of-type(6){ animation-delay:1s; }
+@keyframes a-blk{ 0%,12%{ opacity:0; } 22%,86%{ opacity:.16; } 100%{ opacity:0; } }
+
+/* softvér na mieru — ozubené kolesá + moduly, ktoré zapadajú */
+.svc-art--soft .a-gear{ transform-box:fill-box; transform-origin:center; animation:a-spin 28s linear infinite; }
+.svc-art--soft .a-gear--2{ animation-duration:18s; animation-direction:reverse; }
+.svc-art--soft .a-teeth{ stroke-width:12; stroke-linecap:butt; opacity:.8; }
+@keyframes a-spin{ to{ transform:rotate(360deg); } }
+.svc-art--soft .a-mod{ animation:a-mod 9s var(--ease) infinite both; }
+.svc-art--soft .a-mod:nth-of-type(4){ animation-delay:.35s; }
+.svc-art--soft .a-mod:nth-of-type(5){ animation-delay:.7s; }
+.svc-art--soft .a-mod:nth-of-type(6){ animation-delay:1.05s; }
+@keyframes a-mod{ 0%{ opacity:0; transform:translateX(36px); } 12%,84%{ opacity:1; transform:none; } 100%{ opacity:0; transform:none; } }
+.svc-art .a-accent{ stroke-width:2; }
+.svc-art--soft .a-link{ stroke-dasharray:4 6; opacity:.6; animation:a-dash 1.2s linear infinite; }
+@keyframes a-dash{ to{ stroke-dashoffset:-20; } }
+
+/* AI / automatizácia — pipeline s tečúcimi dátovými bodkami */
+.svc-art--flow .a-edge{ opacity:.35; }
+.svc-art--flow .a-flow{ stroke-width:4; stroke-dasharray:0 16; animation:a-flow 1.4s linear infinite; }
+@keyframes a-flow{ to{ stroke-dashoffset:-32; } }
+.svc-art--flow .a-core{ fill:currentColor; stroke:none; }
+.svc-art--flow .a-ping{ transform-box:fill-box; transform-origin:center; opacity:0; animation:a-ping 2.4s ease-out infinite; }
+@keyframes a-ping{ 0%{ opacity:.55; transform:scale(1); } 70%,100%{ opacity:0; transform:scale(2); } }
+
+/* dáta — neurónová sieť, signál postupuje vrstvami, trend sa kreslí */
+.svc-art--data .a-syn{ opacity:.12; animation:a-syn 3.6s ease-in-out infinite; }
+@keyframes a-syn{ 0%,60%,100%{ opacity:.1; } 30%{ opacity:.55; } }
+.svc-art--data .a-neu{ fill:var(--bg-elevated); animation:a-neu 3.6s ease-in-out infinite; }
+@keyframes a-neu{ 0%,50%,100%{ fill:var(--bg-elevated); } 25%{ fill:currentColor; } }
+.svc-art--data .a-trend{ stroke-width:2; opacity:.35; stroke-dasharray:1; stroke-dashoffset:0; animation:a-draw 7s var(--ease) infinite; }
+@keyframes a-draw{ 0%{ stroke-dashoffset:1; opacity:.35; } 45%,85%{ stroke-dashoffset:0; opacity:.35; } 100%{ stroke-dashoffset:0; opacity:0; } }
+
+/* ---------- FAQ — funkčne bez zmeny, len zladené s novým systémom ---------- */
+.fx .faq-item{ border-bottom-color:rgba(var(--ink-rgb),0.1); }
+.fx .faq-item summary{ transition:color .2s var(--ease); }
+.fx .faq-item summary:hover{ color:var(--accent); }
