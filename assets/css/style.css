@@ -782,19 +782,6 @@ section{ padding:var(--section-y) 0; }
   .value-node-panel-inner p{ border:none; border-radius:0; background:none; padding:0 16px 14px; }
 }
 
-/* ---------- value equation ---------- */
-.eq-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-@media (max-width:880px){ .eq-grid{ grid-template-columns:1fr 1fr; } }
-@media (max-width:520px){ .eq-grid{ grid-template-columns:1fr; } }
-.eq-card{ background:var(--bg-elevated); border:1px solid var(--line); border-radius:var(--radius); padding:24px 20px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-.eq-card:hover, .eq-card.reveal:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card); border-color:var(--scene-blue); }
-.eq-card .num{ font-family:var(--font-display); font-weight:700; font-size:1.6rem; color:var(--accent); margin-bottom:10px; }
-.eq-card h4{ font-family:var(--font-body); font-weight:800; font-size:1rem; margin:0 0 8px; }
-.eq-card p{ font-size:0.88rem; margin:0; }
-@media (min-width:881px){
-  .eq-grid{ position:relative; }
-}
-
 /* ---------- "ako pracujeme" steps — custom JS-driven accordion (button +
    panel, not native <details>): the panel height animates via the
    grid-template-rows 0fr/1fr trick, kept perfectly in sync with the
@@ -806,14 +793,6 @@ section{ padding:var(--section-y) 0; }
 @media (max-width:880px){ .steps-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width:520px){ .steps-grid{ grid-template-columns:1fr; } }
 
-/* ---------- compact (non-expanding) process grid — hub page ----------
-   Reuses .eq-card (already defined below) for a plain number+title+text
-   card, no accordion — the hub only needs a quick overview, the full
-   step-by-step detail lives on each service page. */
-.eq-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
-@media (max-width:1024px){ .eq-grid{ grid-template-columns:1fr 1fr 1fr; } }
-@media (max-width:640px){ .eq-grid{ grid-template-columns:1fr 1fr; } }
-@media (max-width:420px){ .eq-grid{ grid-template-columns:1fr; } }
 
 .step-card{
   position:relative; overflow:hidden;
@@ -1651,9 +1630,8 @@ footer{ background:var(--dark); color:#9BABC4; padding:56px 0 24px; border-top:1
   align-self:flex-start; display:inline-flex; align-items:center; gap:8px; margin-top:4px;
   font-weight:700; font-size:0.95rem; color:var(--accent); text-decoration:none;
 }
-.hx-svc-more span{ transition:transform .25s var(--ease); }
-.hx-svc-card:hover .hx-svc-more span, .hx-svc-more:focus-visible span{ transform:translateX(4px); }
-.hx-svc-more:hover{ color:var(--accent-dark); }
+.hx-svc-more{ box-shadow:inset 0 -1px 0 rgba(var(--accent-rgb),0.3); transition:box-shadow .2s var(--ease), color .2s var(--ease); }
+.hx-svc-more:hover{ color:var(--accent-dark); box-shadow:inset 0 -1px 0 var(--accent-dark); }
 
 /* per-card thematic scene: sits top-right, low-opacity, pure CSS transform/opacity */
 .hx-svc-scene{
@@ -1997,12 +1975,6 @@ footer .footer-logo .logo-punct{ color:var(--accent); }
 /* reservation confirmation: check without the ring */
 .confirm-badge{ width:auto; height:auto; border:0; border-radius:0; }
 
-/* homepage process: ruled columns with mono step numbers, no cards */
-.eq-grid{ grid-template-columns:repeat(5,1fr); gap:0 28px; }
-.eq-card, .eq-card:hover, .eq-card.reveal:hover{ background:none; border:0; border-top:1px solid var(--line); border-radius:0; padding:22px 0 0; transform:none; box-shadow:none; }
-.eq-card .num{ font-family:var(--font-mono); font-size:0.82rem; font-weight:700; color:var(--accent); margin-bottom:14px; }
-@media (max-width:880px){ .eq-grid{ grid-template-columns:1fr 1fr; gap:28px; } }
-@media (max-width:520px){ .eq-grid{ grid-template-columns:1fr; gap:22px; } }
 
 /* inline CTA rows: a rule, not a box */
 .hx-cta-inline{ background:none; border:0; border-top:1px solid var(--line); border-radius:0; padding:28px 0 0; }
@@ -2099,7 +2071,14 @@ html.snap body.fx > header, html.snap body.fx > section{ scroll-snap-align:start
 
 /* "čo robíme" obrazovka — fakt o firme + index služieb (presunuté z hero) */
 .fx .hx-about{ padding:var(--section-y) 0; }
-.fx .hx-about .fact-lede{ margin:0; max-width:60ch; text-align:left; font-size:clamp(1.1rem,1.6vw,1.35rem); color:var(--ink); }
+.fx .hx-about-head{ max-width:780px; margin:0 auto clamp(40px,5vw,64px); text-align:center; }
+.fx .hx-about-head h2{ margin:0; }
+/* malý label nad nadpisom — mono, akcentová farba */
+.fx-eyebrow{
+  display:inline-block; margin-bottom:16px;
+  font-family:var(--font-mono); font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  color:var(--accent);
+}
 
 /* ---------- scroll reveal: blur + scale-in, stagger ---------- */
 .fx .reveal{
@@ -2109,29 +2088,23 @@ html.snap body.fx > header, html.snap body.fx > section{ scroll-snap-align:start
 .fx .reveal.in{ opacity:1; transform:none; filter:none; }
 .fx .hx-case.reveal.in:hover{ transform:translateY(-2px); }
 .fx .reveal.reveal-stagger{ opacity:1; transform:none; filter:none; }
+/* deti zoznamov: rovnaký blur + scale-in ako samostatné karty, len postupne */
 .fx .reveal-stagger > *{
-  opacity:0; transform:translate3d(0,14px,0);
-  transition:opacity .6s var(--ease), transform .6s var(--ease);
+  opacity:0; transform:translate3d(0,20px,0) scale(.97); filter:blur(6px);
+  transition:opacity .7s var(--ease), transform .7s var(--ease), filter .7s var(--ease), border-color .3s var(--ease);
   transition-delay:calc(var(--i,0) * 90ms);
 }
-.fx .reveal-stagger.in > *{ opacity:1; transform:none; }
-@media (max-width:760px){ .fx .reveal{ filter:none; transform:translate3d(0,16px,0); } }
+.fx .reveal-stagger.in > *{ opacity:1; transform:none; filter:none; }
+@media (max-width:760px){
+  .fx .reveal{ filter:none; transform:translate3d(0,16px,0); }
+  .fx .reveal-stagger > *{ filter:none; }
+}
 
-/* ---------- "Prvý krok je vždy zadarmo" — pomalý glow pulz ---------- */
+/* ---------- "Prvý krok je vždy zadarmo" — statický štítok ---------- */
 .free-badge{
-  position:relative; display:inline-flex; align-items:center; gap:10px; margin-bottom:20px;
-  padding:7px 15px 7px 12px; border:1px solid rgba(var(--accent-rgb),0.3); border-radius:999px;
-  background:rgba(var(--accent-rgb),0.06); color:var(--accent);
-  font-family:var(--font-display); font-weight:700; font-size:0.86rem;
+  display:inline-block; margin-bottom:20px; padding:6px 14px; border:1px solid rgba(var(--accent-rgb),0.3); border-radius:999px;
+  color:var(--accent); font-family:var(--font-display); font-weight:700; font-size:0.86rem;
 }
-.free-badge::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); animation:badge-dot 3.2s ease-in-out infinite; }
-.free-badge::after{
-  content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; opacity:0;
-  box-shadow:0 0 0 4px rgba(var(--accent-rgb),0.1), 0 0 26px 2px rgba(var(--accent-rgb),0.35);
-  animation:badge-glow 3.2s ease-in-out infinite;
-}
-@keyframes badge-glow{ 0%,100%{ opacity:0; } 50%{ opacity:1; } }
-@keyframes badge-dot{ 0%,100%{ transform:scale(1); opacity:.6; } 50%{ transform:scale(1.35); opacity:1; } }
 
 /* ---------- flip tlačidlá (fx.js rozdelí obsah na front/back) ---------- */
 .fx .btn-flip{ perspective:600px; }
@@ -2167,8 +2140,7 @@ html.snap body.fx > header, html.snap body.fx > section{ scroll-snap-align:start
 .case-thread-fill{ position:absolute; inset:0; background:var(--accent); transform-origin:top; transform:scaleY(0); will-change:transform; }
 .case-thread-head{
   position:absolute; left:50%; top:0; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%;
-  background:var(--accent); box-shadow:0 0 0 4px rgba(var(--accent-rgb),0.15), 0 0 18px rgba(var(--accent-rgb),0.6);
-  opacity:0; transition:opacity .3s ease; will-change:transform;
+  background:var(--accent); opacity:0; transition:opacity .3s ease; will-change:transform;
 }
 /* --p (0→1) nastavuje fx.js podľa polohy karty; bez JS / reduced-motion ostáva 1 = zložené */
 .fx .hx-case-laptop, .fx .hx-case-phone{ z-index:1; }
@@ -2249,3 +2221,180 @@ html.snap body.fx > header, html.snap body.fx > section{ scroll-snap-align:start
 .fx .faq-item{ border-bottom-color:rgba(var(--ink-rgb),0.1); }
 .fx .faq-item summary{ transition:color .2s var(--ease); }
 .fx .faq-item summary:hover{ color:var(--accent); }
+
+/* ---------- "Ako pracujeme" — vertikálna timeline + sticky skladačka ----------
+   Default (bez JS, mobil, reduced-motion) = finálny stav: všetky kroky
+   viditeľné, čiara plná, skladačka zložená. fx.js pridá .is-live len na
+   desktope a riadi --proc (čiara) a --k (kúsky) jedným scroll progressom. */
+.proc{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,6vw,96px); }
+.proc-steps{ --proc:1; position:relative; list-style:none; margin:0; padding:0; }
+.proc-steps::before, .proc-steps::after{
+  content:""; position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:rgba(var(--ink-rgb),0.1);
+}
+.proc-steps::after{ background:var(--accent); transform-origin:top; transform:scaleY(var(--proc)); }
+.proc-step{ position:relative; padding:0 0 clamp(28px,4vw,40px) 44px; transition:opacity .45s var(--ease), transform .45s var(--ease); }
+.proc-step:last-child{ padding-bottom:0; }
+.proc-dot{
+  position:absolute; left:0; top:4px; width:16px; height:16px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--accent);
+  transition:transform .35s var(--ease), background-color .35s var(--ease);
+}
+.proc-num{ display:block; margin-bottom:6px; font-family:var(--font-mono); font-size:0.8rem; font-weight:700; color:var(--accent); }
+.proc-step h4{ margin:0 0 6px; font-family:var(--font-display); font-size:clamp(1.15rem,1.6vw,1.35rem); transition:color .35s var(--ease); }
+.proc-step p{ margin:0; max-width:40ch; }
+.proc-stage{ display:none; }
+
+.proc-puzzle{ width:100%; max-width:440px; height:auto; overflow:visible; color:var(--accent); }
+.proc-puzzle .pz-line{ fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.proc-puzzle .pz-dash{ stroke-dasharray:6 6; opacity:.55; }
+.proc-puzzle .pz-fill{ fill:rgba(var(--accent-rgb),0.08); stroke:currentColor; stroke-width:1.5; }
+.proc-puzzle .pz-solid{ fill:currentColor; }
+.proc-puzzle .pz-soft{ fill:currentColor; opacity:.2; }
+.proc-puzzle .pz-check{ fill:none; stroke:#fff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+/* --k: 0 = mimo (posunutý, pootočený, zmenšený, priehľadný) → 1 = zapadnutý */
+.proc-piece{
+  --k:1; transform-box:fill-box; transform-origin:center; opacity:var(--k);
+  translate:calc((1 - var(--k)) * var(--dx,0px)) calc((1 - var(--k)) * var(--dy,0px));
+  rotate:calc((1 - var(--k)) * var(--r,0deg));
+  scale:calc(.7 + var(--k) * .3);
+}
+
+@media (min-width:901px){
+  /* top pod sticky navom (64px), stage nemá z-index → nikdy neprekryje nav */
+  .proc-stage{
+    display:flex; align-items:center; justify-content:center; align-self:start;
+    position:sticky; top:max(96px, calc(50vh - 230px)); height:min(460px, 70vh);
+  }
+  /* stage (top ~50vh-230px, výška 460px) presahuje stred viewportu o ~230px.
+     Sticky je obmedzený svojou grid oblasťou (nie paddingom), preto stage
+     zaberá 2 riadky a druhý je prázdny priestor — inak by sa skladačka
+     odlepila skôr, než posledný krok dôjde do stredu. */
+  .proc.is-live::after{ content:""; grid-column:1; height:230px; }
+  .proc.is-live .proc-stage{ grid-column:2; grid-row:1 / span 2; }
+  .proc.is-live .proc-step{ min-height:32vh; padding-bottom:0; opacity:.25; transform:translate3d(0,12px,0); }
+  .proc.is-live .proc-step.is-past{ opacity:.5; transform:none; }
+  .proc.is-live .proc-step.is-active{ opacity:1; transform:none; }
+  .proc.is-live .proc-dot{ background:var(--bg-elevated); }
+  .proc.is-live .is-past .proc-dot{ background:var(--accent); }
+  .proc.is-live .is-active .proc-dot{ background:var(--accent); transform:scale(1.35); }
+  .proc.is-live .is-active h4{ color:var(--accent); }
+}
+@media (max-width:900px){ .proc{ grid-template-columns:1fr; } }
+
+/* ---------- hero: scroll-down indikátor ----------
+   Skrytie bez JS: script.js dáva .nav.is-scrolled po 8px scrollu a nav je
+   súrodenec pred hero, takže stačí selektor ~. */
+.hx-scroll-cue{
+  position:absolute; z-index:2; left:50%; bottom:clamp(20px,4vh,36px); width:1px; height:48px; margin-left:-0.5px;
+  overflow:hidden; background:rgba(var(--ink-rgb),0.14); pointer-events:none; transition:opacity .4s var(--ease);
+}
+.hx-scroll-cue::after{
+  content:""; position:absolute; left:0; top:0; width:1px; height:16px; background:var(--ink-soft);
+  animation:cue-run 2.4s var(--ease) infinite;
+}
+@keyframes cue-run{ 0%{ transform:translateY(-16px); } 70%,100%{ transform:translateY(48px); } }
+.nav.is-scrolled ~ .hx-hero .hx-scroll-cue{ opacity:0; }
+.is-offscreen .hx-scroll-cue::after{ animation-play-state:paused; }
+
+/* ---------- garancie: flip karty (rovnaký 3D princíp ako flip tlačidlá) ----------
+   Editoriálne: bez ikon a výplní, len vlasová linka, mono číslo hore a názov
+   dole. Zadná strana je jediné tmavé miesto — tam je vysvetlenie. */
+.fx .hx-trust-grid{ gap:16px; }
+.fx .hx-trust-grid .hx-trust-item{ border-left:0; padding:0; }
+.flip-card{ height:100%; perspective:1000px; border-radius:14px; outline:none; }
+.flip-card:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+.flip-inner{ display:grid; height:100%; min-height:220px; transform-style:preserve-3d; transition:transform .8s var(--ease); }
+.flip-front, .flip-back{
+  grid-area:1/1; display:flex; flex-direction:column; padding:24px 24px 26px; border-radius:14px;
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+}
+.flip-front{ justify-content:space-between; background:rgba(var(--bg-elevated-rgb),0.6); border:1px solid rgba(var(--ink-rgb),0.12); }
+.flip-idx{ font-family:var(--font-mono); font-size:0.75rem; font-weight:500; color:var(--ink-faint); }
+/* tematická ilustrácia na prednej strane — tenká linka, akcent, bez glow */
+.flip-art{ width:min(132px,70%); height:auto; margin:22px 0 26px; color:var(--accent); overflow:visible; }
+.flip-art .fa-fill{ fill:rgba(var(--accent-rgb),0.08); stroke:currentColor; stroke-width:1.5; stroke-linejoin:round; }
+.flip-art .fa-stroke{ fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.flip-art .fa-bold{ stroke-width:4; }
+.flip-art .fa-line{ fill:none; stroke:currentColor; stroke-width:3; stroke-linecap:round; opacity:.3; }
+.flip-art .fa-lens{ fill:var(--bg-elevated); stroke:currentColor; stroke-width:2.5; }
+.flip-art .fa-solid{ fill:currentColor; }
+.flip-art .fa-dash{ fill:none; stroke:currentColor; stroke-width:1.5; stroke-dasharray:4 4; }
+.flip-art .fa-text{ font-family:var(--font-mono); font-size:11px; fill:var(--ink-faint); }
+.flip-front .hx-trust-label{
+  margin:0; font-family:var(--font-headline); font-size:clamp(1.15rem,1.5vw,1.35rem); line-height:1.2; letter-spacing:-0.02em; max-width:12ch;
+}
+.flip-back{ justify-content:flex-end; transform:rotateY(180deg); background:var(--ink); }
+.flip-back .hx-trust-note{ color:#DCE4F2; font-size:0.95rem; line-height:1.55; }
+@media (hover:hover) and (pointer:fine){
+  .flip-card:hover .flip-inner, .flip-card:focus-visible .flip-inner{ transform:rotateY(180deg); }
+}
+/* dotyk / reduced-motion: žiadne otáčanie, obe strany pod sebou v jednej karte */
+@media (hover:none), (pointer:coarse), (prefers-reduced-motion:reduce){
+  .flip-inner{ display:flex; flex-direction:column; min-height:0; transform:none !important;
+    border:1px solid rgba(var(--ink-rgb),0.12); border-radius:14px; background:rgba(var(--bg-elevated-rgb),0.6); }
+  .flip-front, .flip-back{ border:0; background:none; transform:none; }
+  .flip-front{ gap:28px; padding-bottom:8px; }
+  .flip-back{ padding-top:0; }
+  .flip-back .hx-trust-note{ color:var(--ink-soft); font-size:0.92rem; }
+}
+
+/* ---------- bezplatné kroky: rovnaký editoriálny jazyk ako garancie ---------- */
+.fx .hx-free-grid{ gap:16px; counter-reset:free; }
+.fx .hx-free-grid li{
+  display:flex; flex-direction:column; padding:24px 24px 28px;
+  background:rgba(var(--bg-elevated-rgb),0.6); border:1px solid rgba(var(--ink-rgb),0.12); border-radius:14px;
+}
+.fx .hx-free-grid li::before{
+  counter-increment:free; content:"0" counter(free);
+  margin-bottom:40px; font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-faint);
+}
+.fx .reveal-stagger.in > li:hover{ border-color:rgba(var(--ink-rgb),0.3); transition-delay:0s; }
+.fx .hx-free-grid li .hx-free-tag{
+  order:2; align-self:flex-start; margin:auto 0 0; padding:18px 0 0; border:0; border-radius:0; background:none;
+  font-size:0.82rem; font-weight:600; color:var(--accent); box-shadow:none;
+}
+.fx .hx-free-grid li .hx-free-tag:hover{ background:none; color:var(--accent-dark); text-decoration:underline; text-underline-offset:3px; }
+.fx .hx-free-grid h3{ margin:0 0 10px; font-family:var(--font-headline); font-size:1.12rem; line-height:1.25; letter-spacing:-0.015em; }
+.fx .hx-free-grid p{ margin:0; font-size:0.92rem; line-height:1.55; }
+
+/* ---------- centrovaný CTA blok (nadpis, text, tlačidlo pod nimi) ---------- */
+.hx-cta-center{ max-width:640px; margin:clamp(48px,7vw,80px) auto 0; text-align:center; }
+.hx-cta-center h3{
+  margin:0 0 10px; font-family:var(--font-headline); font-weight:700; letter-spacing:-0.02em;
+  font-size:clamp(1.35rem,2.2vw,1.75rem); color:var(--ink);
+}
+.hx-cta-center p{ margin:0 auto 26px; max-width:50ch; font-size:1.02rem; }
+@media (max-width:560px){ .hx-cta-center .btn{ width:100%; } }
+
+/* ---------- voucher "Krok 00" — prvý krok zadarmo po "Ako pracujeme" ----------
+   Tmavá vstupenka: ústrižok s cenou 0 € je oddelený perforáciou (bodkovaná
+   linka + výrezy cez radial-gradient mask), text a CTA vpravo. Nadväzuje na
+   číslovanie krokov 01–05 ako krok, ktorý im predchádza. */
+.fx-voucher{
+  --notch:14px;
+  display:grid; grid-template-columns:minmax(180px,240px) minmax(0,1fr);
+  max-width:920px; margin:clamp(56px,8vw,96px) auto 0; background:var(--ink); color:#fff; border-radius:18px;
+  -webkit-mask:radial-gradient(circle var(--notch) at var(--cut,240px) 0, #0000 98%, #000) top/100% 51% no-repeat,
+               radial-gradient(circle var(--notch) at var(--cut,240px) 100%, #0000 98%, #000) bottom/100% 51% no-repeat;
+          mask:radial-gradient(circle var(--notch) at var(--cut,240px) 0, #0000 98%, #000) top/100% 51% no-repeat,
+               radial-gradient(circle var(--notch) at var(--cut,240px) 100%, #0000 98%, #000) bottom/100% 51% no-repeat;
+}
+.fx-voucher-stub{
+  display:flex; flex-direction:column; justify-content:space-between; gap:24px; padding:32px 28px;
+  border-right:2px dashed rgba(255,255,255,0.18);
+}
+.fx-voucher-label{ font-family:var(--font-mono); font-size:0.75rem; color:#9BABC4; }
+.fx-voucher-price{ font-family:var(--font-headline); font-weight:700; font-size:clamp(3.2rem,6vw,4.6rem); line-height:.9; letter-spacing:-0.04em; }
+.fx-voucher-note{ font-size:0.82rem; color:#9BABC4; }
+.fx-voucher-body{ padding:clamp(28px,4vw,44px) clamp(28px,4vw,48px); }
+.fx-voucher-body h3{ margin:0 0 12px; font-family:var(--font-headline); font-size:clamp(1.4rem,2.2vw,1.85rem); letter-spacing:-0.02em; color:#fff; }
+.fx-voucher-body p{ margin:0 0 26px; max-width:52ch; color:#C1CCDE; }
+.fx-voucher .btn-primary{ background:#fff; color:var(--ink); border-color:#fff; }
+.fx-voucher .btn-primary:hover{ background:var(--accent); color:#fff; border-color:var(--accent); }
+@media (max-width:760px){
+  /* na mobile ústrižok hore, perforácia vodorovne */
+  .fx-voucher{ grid-template-columns:1fr; -webkit-mask:none; mask:none; }
+  .fx-voucher-stub{ flex-direction:row; align-items:flex-end; flex-wrap:wrap; border-right:0; border-bottom:2px dashed rgba(255,255,255,0.18); }
+  .fx-voucher-price{ order:-1; }
+  .fx-voucher .btn{ width:100%; }
+}

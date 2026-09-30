@@ -12,6 +12,7 @@
     web_mobile: 'Web & Mobilné aplikácie',
     softver_na_mieru: 'Softvér na mieru',
     ai_riesenia: 'AI riešenia',
+    neurcene: 'Neviem ešte / poradíme sa na hovore',
     ai_faktury: 'AI spracovanie faktúr',
     ai_asistent: 'AI zákaznícky asistent',
     dochadzka_system: 'Dochádzkový systém',

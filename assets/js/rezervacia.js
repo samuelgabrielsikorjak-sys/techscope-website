@@ -26,7 +26,8 @@
     data_compass: 'Data Compass',
     web_mobile: 'Web & Mobilné aplikácie',
     softver_na_mieru: 'Softvér na mieru',
-    ai_riesenia: 'AI riešenia'
+    ai_riesenia: 'AI riešenia',
+    neurcene: 'Neviem ešte / poradíme sa na hovore'
   };
 
   function initBooking(app) {
@@ -187,7 +188,7 @@
         for (var s = 0; s < daySlots.length; s++) {
           var slot = daySlots[s];
           html += '<button type="button" class="slot-btn" data-slot-id="' + slot.id + '">' +
-            slot.cas_od.slice(0, 5) + '–' + slot.cas_do.slice(0, 5) + '</button>';
+            slot.cas_od.slice(0, 5) + '-' + slot.cas_do.slice(0, 5) + '</button>';
         }
         html += '</div>';
         calTimes.innerHTML = html;
@@ -216,7 +217,7 @@
 
     function renderForm() {
       if (!selectedSlot) return;
-      var summary = formatDate(selectedSlot.datum) + ', ' + selectedSlot.cas_od.slice(0, 5) + '–' + selectedSlot.cas_do.slice(0, 5);
+      var summary = formatDate(selectedSlot.datum) + ', ' + selectedSlot.cas_od.slice(0, 5) + '-' + selectedSlot.cas_do.slice(0, 5);
       var isFirstRender = !formArea.querySelector('form');
 
       if (isFirstRender) {
@@ -338,7 +339,7 @@
             }
             return;
           }
-          var summary = formatDate(selectedSlot.datum) + ', ' + selectedSlot.cas_od.slice(0, 5) + '–' + selectedSlot.cas_do.slice(0, 5);
+          var summary = formatDate(selectedSlot.datum) + ', ' + selectedSlot.cas_od.slice(0, 5) + '-' + selectedSlot.cas_do.slice(0, 5);
           renderConfirmation(values, summary);
 
           // Vytvorenie Google Meet eventu (Edge Function "create-meet-event").
@@ -395,9 +396,11 @@
   }
 
   function produktOptionsHtml() {
+    // Bez ?produkt= (homepage CTA) alebo s neznámym kľúčom je predvolené 'neurcene'.
     var fromUrl = new URLSearchParams(window.location.search).get('produkt');
+    var selected = PRODUKTY[fromUrl] ? fromUrl : 'neurcene';
     return Object.keys(PRODUKTY).map(function (key) {
-      return '<option value="' + key + '"' + (key === fromUrl ? ' selected' : '') + '>' + PRODUKTY[key] + '</option>';
+      return '<option value="' + key + '"' + (key === selected ? ' selected' : '') + '>' + PRODUKTY[key] + '</option>';
     }).join('');
   }
 
@@ -429,7 +432,7 @@
   function buildFormHtml() {
     return (
       '<div class="form-card" style="max-width:640px;margin:40px auto 0;">' +
-        '<h3>Krok 2 — Vaše údaje</h3>' +
+        '<h3>Krok 2: Vaše údaje</h3>' +
         '<p style="font-size:0.9rem;color:var(--ink-faint);margin-top:-10px;">Vybraný termín: <strong id="selected-slot-summary"></strong></p>' +
         '<div class="form-banner-error"></div>' +
         '<form novalidate>' +
@@ -479,7 +482,7 @@
           '<div class="form-row">' +
             '<label for="f-produkt">O ktorú službu máte záujem? *</label>' +
             '<select id="f-produkt" name="produkt" required>' +
-              '<option value="">— Vyberte —</option>' +
+              '<option value="">Vyberte</option>' +
               produktOptionsHtml() +
             '</select>' +
             '<span class="field-error">Vyberte prosím službu.</span>' +
@@ -491,7 +494,7 @@
           '<div class="form-row">' +
             '<label for="f-zdroj">Ako ste sa o nás dozvedeli? (nepovinné)</label>' +
             '<select id="f-zdroj" name="zdroj">' +
-              '<option value="">— Vyberte —</option>' +
+              '<option value="">Vyberte</option>' +
               '<option value="Google">Google</option>' +
               '<option value="LinkedIn">LinkedIn</option>' +
               '<option value="Odporúčanie">Odporúčanie</option>' +

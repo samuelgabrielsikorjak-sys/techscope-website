@@ -7,6 +7,7 @@
 //   3. flip tlačidlá (predná/zadná strana)
 //   4. case studies: spojovacia čiara + skladanie médií podľa scrollu
 //   5. pauza hero animácií mimo obrazovky
+//   6. "Ako pracujeme": timeline + sticky skladačka na jednom scroll progress
 //   ?snap=1 v URL zapne voliteľný scroll-snap (na porovnanie oboch verzií).
 
 (function () {
@@ -15,6 +16,7 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasIO = 'IntersectionObserver' in window;
   var each = function (list, fn) { Array.prototype.forEach.call(list, fn); };
+  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
 
   if (/[?&]snap=1\b/.test(location.search)) document.documentElement.classList.add('snap');
 
@@ -58,7 +60,7 @@
   each(document.querySelectorAll('a.btn-primary, a.btn-ghost'), function (b) {
     b.classList.add('btn-flip');
     b.innerHTML = '<span class="btn-flip-in"><span class="btn-front">' + b.innerHTML + '</span>' +
-      '<span class="btn-back" aria-hidden="true">' + (b.getAttribute('data-back') || 'Poďme na to →') + '</span></span>';
+      '<span class="btn-back" aria-hidden="true">' + (b.getAttribute('data-back') || 'Poďme na to') + '</span></span>';
   });
 
   // 4 · case studies
@@ -82,7 +84,6 @@
       }
     });
 
-    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
     var threadH = 0, ticking = false;
     var update = function () {
       ticking = false;
@@ -121,6 +122,58 @@
         }
       }, { rootMargin: '200px 0px' }).observe(cases);
     }
+  }
+
+  // 6 · "Ako pracujeme" — jeden progress (0→1) pre celý zoznam krokov
+  // riadi zároveň aktívny krok vľavo aj kúsky skladačky vpravo, takže
+  // krok N a kúsok N sa vždy objavia spolu. Kroky majú rovnakú výšku, preto
+  // floor(p * n) je presne krok, ktorý práve prechádza stredom viewportu.
+  // Len desktop (sticky stĺpec); mobil a reduced-motion = finálny stav z CSS.
+  var proc = document.querySelector('.proc');
+  if (proc && window.matchMedia) {
+    var procList = proc.querySelector('.proc-steps');
+    var procSteps = proc.querySelectorAll('.proc-step');
+    var procPieces = proc.querySelectorAll('.proc-piece');
+    var procWide = window.matchMedia('(min-width:901px)');
+    var procTick = false, procOn = false;
+    var procUpdate = function () {
+      procTick = false;
+      var vh = window.innerHeight, r = procList.getBoundingClientRect();
+      if (r.bottom < -vh || r.top > 2 * vh) return;
+      var n = procSteps.length;
+      var p = clamp((vh / 2 - r.top) / r.height);
+      var pos = p * n, active = Math.min(n - 1, Math.floor(pos));
+      procList.style.setProperty('--proc', p.toFixed(4));
+      // +0.35: kúsok zapadne skôr, než krok dôjde do stredu; *1.6: hotový v ~60 % kroku
+      each(procPieces, function (el, i) { el.style.setProperty('--k', clamp((pos - i + 0.35) * 1.6).toFixed(3)); });
+      each(procSteps, function (el, i) {
+        el.classList.toggle('is-active', i === active);
+        el.classList.toggle('is-past', i < active);
+      });
+    };
+    var procScroll = function () {
+      if (!procTick) { procTick = true; requestAnimationFrame(procUpdate); }
+    };
+    var procSet = function () {
+      var on = !reduce && procWide.matches;
+      if (on === procOn) return;
+      procOn = on;
+      proc.classList.toggle('is-live', on);
+      if (on) {
+        window.addEventListener('scroll', procScroll, { passive: true });
+        window.addEventListener('resize', procScroll);
+        procUpdate();
+      } else {
+        window.removeEventListener('scroll', procScroll);
+        window.removeEventListener('resize', procScroll);
+        procList.style.removeProperty('--proc');
+        each(procPieces, function (el) { el.style.removeProperty('--k'); });
+        each(procSteps, function (el) { el.classList.remove('is-active', 'is-past'); });
+      }
+    };
+    procSet();
+    if (procWide.addEventListener) procWide.addEventListener('change', procSet);
+    else procWide.addListener(procSet);
   }
 
   // 5 · hero animácie (mesh / service SVG) bežia len keď je hero vidieť
