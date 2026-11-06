@@ -166,6 +166,72 @@ img, svg { display: block; max-width: 100%; height: auto; }
 .logo:hover { color: var(--white); }
 .logo span { color: var(--blue-light); }
 
+/* ---------- Hlavička ---------- */
+.site-header {
+  position: relative;
+  z-index: 1;
+  background: var(--ink);
+  color: var(--white);
+}
+.site-header > .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+.site-nav__link { color: var(--muted-dark); }
+.site-nav__link:hover { color: var(--white); }
+@media (max-width: 759px) {
+  .site-nav { display: none; }
+}
+
+/* ---------- Pätička ---------- */
+.site-footer {
+  background: var(--ink);
+  color: var(--muted-dark);
+  font-size: var(--fs-small);
+  padding: var(--space-6) 0 var(--space-5);
+}
+.site-footer > .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  justify-content: space-between;
+}
+.site-footer a { color: var(--muted-dark); }
+.site-footer a:hover { color: var(--white); }
+.site-footer p { margin: 0; }
+.site-footer__brand {
+  flex: 1 1 256px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.site-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.site-footer__col > p:first-child {
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+.site-footer__legal {
+  flex-basis: 100%;
+  margin-top: var(--space-2);
+}
+
 /* ---------- Tlačidlá ---------- */
 .btn {
   display: inline-flex;
