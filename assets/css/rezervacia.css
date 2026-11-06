@@ -243,3 +243,34 @@
   .rz-form,
   .rz-confirm { padding: var(--space-3); }
 }
+
+/* ---------- Právne stránky ---------- */
+.legal { max-width: 44em; }
+.legal h1 { margin-bottom: var(--space-1); }
+.legal__meta { margin: 0 0 var(--space-6); font-size: var(--fs-small); color: var(--muted); }
+.legal h2 {
+  margin: var(--space-6) 0 var(--space-2);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.legal h3 { margin: var(--space-4) 0 var(--space-2); font-size: var(--fs-text); font-weight: 700; }
+.legal p, .legal ul, .legal ol { margin: 0 0 var(--space-2); color: var(--body-2); }
+.legal ul, .legal ol { padding-left: var(--space-3); }
+.legal li { margin-bottom: var(--space-1); }
+.legal__scroll { overflow-x: auto; margin: 0 0 var(--space-2); }
+.legal__table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+.legal__table th, .legal__table td {
+  padding: var(--space-1) var(--space-2);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--field);
+}
+.legal__table th { color: var(--ink); font-weight: 700; }
+.legal__table td { color: var(--body-2); }
+
+/* ---------- Obmedzený pohyb ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .rz-fade-in, .rz-times--in { animation: none; }
+  .rz-day, .rz-slot, .rz-calendar__nav-btn, .btn, .field { transition: none; }
+}
