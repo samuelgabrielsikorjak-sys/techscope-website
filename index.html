@@ -1,651 +1,183 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TECH-SCOPE — dátová analytika a vývoj softvéru na mieru | Slovensko</title>
-<meta name="description" content="TECH-SCOPE je slovenská firma pre dátovú analytiku (Data Compass), vývoj softvéru na mieru, webové a mobilné aplikácie a AI riešenia. Fixná cena, fixný termín.">
-<meta name="keywords" content="techscope, tech-scope, dátová analytika, vývoj softvéru, softvér na mieru, AI riešenia, webové aplikácie, mobilné aplikácie, dátová analytika Slovensko, vývoj softvéru Slovensko">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>techscope – softvér na mieru, klientske portály a integrácie</title>
+<meta name="description" content="Programujeme interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku. Menší systém odovzdáme za 4 až 6 týždňov, väčší za 2 až 3 mesiace. Cena a termín sú v zmluve.">
 <link rel="canonical" href="https://techscope.sk/">
-<meta property="og:title" content="TECH-SCOPE — dátová analytika a vývoj softvéru na mieru | Slovensko">
-<meta property="og:description" content="TECH-SCOPE je slovenská firma pre dátovú analytiku (Data Compass), vývoj softvéru na mieru, webové a mobilné aplikácie a AI riešenia. Fixná cena, fixný termín.">
-<meta property="og:image" content="https://techscope.sk/assets/img/og-image.png">
-<meta property="og:url" content="https://techscope.sk/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TECH-SCOPE — dátová analytika a vývoj softvéru na mieru | Slovensko">
-<meta name="twitter:description" content="TECH-SCOPE je slovenská firma pre dátovú analytiku (Data Compass), vývoj softvéru na mieru, webové a mobilné aplikácie a AI riešenia. Fixná cena, fixný termín.">
-<meta name="twitter:image" content="https://techscope.sk/assets/img/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
-<link rel="manifest" href="/site.webmanifest">
-<noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}</style></noscript>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": [
-        "Organization",
-        "ProfessionalService"
-      ],
-      "@id": "https://techscope.sk/#organization",
-      "name": "TECH-SCOPE",
-      "alternateName": [
-        "TechScope",
-        "techscope.sk"
-      ],
-      "legalName": "Samuel Gabriel Sikorjak",
-      "url": "https://techscope.sk/",
-      "logo": "https://techscope.sk/icons/android-chrome-192x192.png",
-      "image": "https://techscope.sk/assets/img/og-image.png",
-      "email": "contact@techscope.sk",
-      "description": "TECH-SCOPE je slovenská firma poskytujúca dátovú analytiku (Data Compass), vývoj softvéru na mieru, webové a mobilné aplikácie a AI riešenia pre firmy. Fixná cena, fixný termín, softvér ktorý vám patrí.",
-      "slogan": "Fixná cena, fixný termín, softvér ktorý vám patrí.",
-      "identifier": {
-        "@type": "PropertyValue",
-        "propertyID": "IČO",
-        "value": "56874812"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Žarnovova 1621/9",
-        "postalCode": "903 01",
-        "addressLocality": "Senec",
-        "addressCountry": "SK"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Slovensko"
-      },
-      "availableLanguage": [
-        "sk",
-        "en"
-      ],
-      "knowsAbout": [
-        "dátová analytika",
-        "dátové modelovanie",
-        "predikčné modely",
-        "business intelligence",
-        "vývoj softvéru na mieru",
-        "webové aplikácie",
-        "mobilné aplikácie",
-        "AI automatizácia",
-        "AI asistenti"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "email": "contact@techscope.sk",
-        "availableLanguage": [
-          "sk",
-          "en"
-        ]
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Služby TECH-SCOPE",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Data Compass — dátová analytika na mieru",
-              "url": "https://techscope.sk/data-compass.html"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Vývoj softvéru na mieru",
-              "url": "https://techscope.sk/softver-na-mieru.html"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Webové a mobilné aplikácie",
-              "url": "https://techscope.sk/web-mobile.html"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "AI riešenia a automatizácia",
-              "url": "https://techscope.sk/ai-riesenia.html"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://techscope.sk/#website",
-      "url": "https://techscope.sk/",
-      "name": "TECH-SCOPE",
-      "alternateName": "techscope",
-      "inLanguage": "sk",
-      "publisher": {
-        "@id": "https://techscope.sk/#organization"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Prečo by som mal ísť do externého vývoja namiesto interného tímu?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Interný tím sa nedá naklonovať. Keď má plné ruky práce, váš nápad čaká. My prídeme presne vtedy, keď to potrebujete, bez toho, aby ste museli niekoho najímať na plný úväzok."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Čo ak sa rozsah počas projektu zmení?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cenu a rozsah dohodneme na strategy calle skôr, než čokoľvek začneme. Zmeny riešime transparentne, nie skrytými dodatkami."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Nemáte ešte veľa referencií. Ako viem, že to zvládnete?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sme na začiatku budovania klientskeho portfólia, preto konkrétne ukážky práce radi ukážeme priamo na strategy calle. Uvidíte presne, ako pracujeme, skôr než sa rozhodnete."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Koľko to bude stáť?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cena projektu závisí od jeho rozsahu, preto je prvým krokom vždy bezplatný strategy call, na ktorom dostanete konkrétnu fixnú cenu, nie odhad od stola."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="assets/css/web.css">
 </head>
-<body class="fx">
+<body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></a>
-    <ul class="nav-links">
-      <li class="nav-dd">
-        <a href="#sluzby" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Služby<svg class="nav-dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
-        <div class="nav-dd-panel" role="menu">
-          <a href="softver-na-mieru.html" role="menuitem"><span>Softvér na mieru</span><small>Interné systémy presne na váš proces</small></a>
-          <a href="ai-riesenia.html" role="menuitem"><span>AI riešenia</span><small>Automatizácie a AI agenti, čo uberú prácu</small></a>
-          <a href="web-mobile.html" role="menuitem"><span>Web &amp; Mobilné aplikácie</span><small>Weby a appky na mieru, ktoré ľudia používajú</small></a>
-          <a href="data-compass.html" role="menuitem"><span>Dátový manažment a analýzy</span><small>Dátové a predikčné modely firmy</small></a>
-        </div>
-      </li>
-      <li><a href="#pripadove-studie">Case studies</a></li>
-      <li><a href="#proces">Proces vývoja</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
-      <li class="nav-mobile-only"><a href="klient.html">Klientská zóna</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="klient.html" class="btn btn-secondary">Klientská zóna</a>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-      <button class="nav-toggle" aria-label="Otvoriť menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hx-hero">
-  <div class="hx-mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+<header class="site-header">
   <div class="container">
-    <div class="hx-hero-lead reveal">
-      <h1>Technológia pre firmy, ktoré chcú byť lídrom na trhu</h1>
-      <p class="hx-hero-sub">Softvér na mieru, dátová analytika, aplikácie a AI riešenia pre firmy, ktoré chcú svoju víziu premeniť na realitu.</p>
-      <div class="hx-hero-cta">
-        <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call</a>
-        <a href="#pripadove-studie" class="hx-textlink">Pozrieť sa, na čom pracujeme
-        </a>
-      </div>
-    </div>
+    <a class="logo" href="#top"><span>&lt;</span>techscope<span>_</span></a>
+    <nav class="site-nav" aria-label="Hlavná navigácia">
+      <a class="site-nav__link" href="#sluzby">Služby</a>
+      <a class="site-nav__link" href="#postup">Postup</a>
+      <a class="site-nav__link" href="#referencie">Referencie</a>
+      <a class="site-nav__link" href="klient.html">Klientska zóna</a>
+    </nav>
+    <a class="btn btn--blue" href="rezervacia.html">Rezervovať stretnutie</a>
   </div>
-  <span class="hx-scroll-cue" aria-hidden="true"></span>
 </header>
 
-<!-- O FIRME (faktický odsek pre vyhľadávače a AI asistentov) -->
-<section class="hx-about" aria-label="O firme TECH-SCOPE">
-  <div class="container">
-    <div class="hx-about-head reveal">
-      <h2>Technológia, ktorá mení svet, potrebuje tím, ktorý ju vie postaviť.</h2>
+<main>
+
+<section class="section section--ink hero" id="top">
+  <div class="grid-bg--dark" aria-hidden="true"></div>
+  <div class="hero__mark" aria-hidden="true">&lt;</div>
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <h1 class="h1 hero__title"><span>Celý náš tím robí naraz iba na jednom projekte.</span> Na vašom.</h1>
+      <p class="lead hero__lead">Programujeme interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku. Menší systém odovzdáme za <strong>4 až 6 týždňov</strong>, väčší za <strong>2 až 3 mesiace</strong>. Cena a termín sú v zmluve.</p>
+      <div class="hero__actions">
+        <a class="btn btn--blue" href="rezervacia.html">Rezervovať stretnutie</a>
+        <a class="btn btn--white" href="#sluzby">Čo programujeme</a>
+      </div>
     </div>
-    <nav class="hx-hero-index" aria-label="Naše služby">
-      <a class="hx-svc-row reveal" href="softver-na-mieru.html">
-        <span class="hx-svc-name">Softvér na mieru</span>
-        <span class="hx-svc-desc">Interné systémy presne na váš proces, moderné riešenia pre šité priamo pre vašu firmu.</span>
-      </a>
-      <a class="hx-svc-row reveal" href="ai-riesenia.html">
-        <span class="hx-svc-name">AI riešenia</span>
-        <span class="hx-svc-desc">Automatizácie a AI pre opakované úlohy, ktoré zaberajú vašim zamestnancom zbytočne veľa času.</span>
-      </a>
-      <a class="hx-svc-row reveal" href="web-mobile.html">
-        <span class="hx-svc-name">Web &amp; Mobilné aplikácie</span>
-        <span class="hx-svc-desc">Webové a mobilné aplikácie na mieru, ktoré vaši zákazníci aj tím radi používajú.</span>
-      </a>
-      <a class="hx-svc-row reveal" href="data-compass.html">
-        <span class="hx-svc-name">Dátový manažment a analýzy</span>
-        <span class="hx-svc-desc">Dátové a predikčné modely, ktoré ukážu, čo sa vo firme naozaj deje.</span>
-      </a>
+    <aside class="slots" aria-labelledby="slots-title">
+      <h2 class="slots__title" id="slots-title">Najbližšie voľné termíny</h2>
+      <ul class="slots__list">
+        <li>Načítavam termíny…</li>
+      </ul>
+      <a class="btn btn--blue" href="rezervacia.html">Všetky termíny</a>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--paper" id="sluzby">
+  <div class="grid-bg--light" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2">Čo programujeme</h2>
+      <p class="lead">Väčšina našich projektov začína tabuľkou v Exceli, ktorú už nikto nechce otvárať.</p>
+    </div>
+    <div class="services">
+      <article class="block--blue services__main">
+        <div class="grid-bg--blue" aria-hidden="true"></div>
+        <div>
+          <h3>Softvér na mieru</h3>
+          <p>Systém postavený podľa toho, ako vaša firma reálne pracuje. Napríklad výpočet provízií pre sieť finančných agentov, plánovanie zmien personálu alebo evidencia zákaziek so schvaľovaním.</p>
+          <a class="btn btn--white" href="rezervacia.html">Opíšte nám svoj proces</a>
+        </div>
+      </article>
+      <div class="services__grid">
+        <div class="item"><h3>Klientske portály</h3><p>Klienti alebo agenti vidia stav, dokumenty a schvaľujú bez e-mailov tam a späť.</p></div>
+        <div class="item"><h3>Mobilné aplikácie</h3><p>Pre ľudí v teréne: vodičov, technikov, zdravotníkov. iOS aj Android.</p></div>
+        <div class="item"><h3>Integrácie</h3><p>Prepojíme účtovníctvo, CRM alebo e-shop, aby nikto neprepisoval čísla ručne.</p></div>
+        <div class="item"><h3>Náhrada starého systému</h3><p>Prenesieme dáta zo zastaraného programu a vypneme ho, až keď nový beží.</p></div>
+        <div class="item"><h3>Automatizácia s AI</h3><p>Čítanie faktúr a zmlúv, triedenie e-mailov, vyhľadávanie vo vlastných dokumentoch.</p></div>
+        <div class="item item--cta"><h3>Niečo iné?</h3><a class="btn btn--dark" href="rezervacia.html">Napíšte nám</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white" id="postup">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2">Od prvého stretnutia po spustenie</h2>
+      <p class="lead">Priebeh projektu vidíte počas celej spolupráce v klientskej zóne.</p>
+    </div>
+    <div class="steps">
+      <div class="item"><h3>Stretneme sa</h3><p>Online prejdeme váš proces a spočítame, koľko vás dnešný stav stojí.</p></div>
+      <div class="item"><h3>Navrhneme riešenie</h3><p>Do 7 dní vám ukážeme, ako bude systém fungovať. Vy ho opravíte.</p></div>
+      <div class="item"><h3>Podpíšeme zmluvu</h3><p>Zoznam modulov, fixná cena, dátum začatia a termín odovzdania.</p></div>
+      <div class="item"><h3>Programujeme</h3><p>Po moduloch. Každý hotový modul vám ukážeme a vy ho schválite.</p></div>
+      <div class="item"><h3>Odovzdáme</h3><p>Nasadíme, zaškolíme váš tím a potom sa o systém staráme v rámci Care alebo Care Plus.</p></div>
+    </div>
+    <a class="btn btn--blue" href="rezervacia.html">Začať prvým stretnutím</a>
+  </div>
+</section>
+
+<section class="section section--paper" id="referencie">
+  <div class="container">
+    <div class="case">
+      <h2 class="h2">Medi Ready</h2>
+      <p class="lead case__lead">Aplikácia, cez ktorú Medi Ready obsadzuje zdravotníkov na futbalové zápasy na Slovensku. Funkčnú webovú verziu sme odovzdali <strong>45 dní</strong> od začiatku vývoja.</p>
+      <a class="btn btn--dark" href="rezervacia.html">Chcem podobný systém</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink">
+  <div class="grid-bg--dark" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2">Pre koho najčastejšie staviame</h2>
+      <p class="lead">Firmy, v ktorých veľa ľudí robí ten istý proces každý deň.</p>
+    </div>
+    <div class="industries">
+      <article class="block--blue industries__main">
+        <div class="grid-bg--blue" aria-hidden="true"></div>
+        <div>
+          <h3>Finančné spoločnosti</h3>
+          <p>Siete finančných agentov, lízingové spoločnosti a nebankoví veritelia. Staviame výpočty provízií, portály pre agentov a klientov, schvaľovanie a záznam každej zmeny pre kontrolu NBS.</p>
+          <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt</a>
+        </div>
+      </article>
+      <div class="industries__list">
+        <div class="item"><h3>Doprava a špedícia</h3><p>Dispečing bez tabuliek, aplikácia pre vodičov, prepojenie s fakturáciou.</p></div>
+        <div class="item"><h3>Zdravotníctvo a personálne agentúry</h3><p>Plánovanie zmien a obsadzovanie ľudí na smeny a podujatia.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2">Podmienky spolupráce</h2>
+    </div>
+    <dl class="terms">
+      <div class="item"><dt>Fixná cena</dt><dd>Platí pre zoznam modulov v zmluve. Zmenu rozsahu vám najprv nacenime a vy ju písomne schválite.</dd></div>
+      <div class="item"><dt>Vrátenie peňazí</dt><dd>Ak nedodáme to, čo je v zmluvnom rozsahu, vrátime vám zaplatenú sumu.</dd></div>
+      <div class="item"><dt>Platba</dt><dd>90 % ceny vopred, alebo plná cena v splátkach 30, 20, 20 a 20 % počas vývoja.</dd></div>
+      <div class="item"><dt>Kód a dáta</dt><dd>Po finálnej platbe vám patria autorské práva ku kódu. Dáta hostujeme v EÚ.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section section--blue cta-band">
+  <div class="grid-bg--blue" aria-hidden="true"></div>
+  <div class="container cta-band__inner">
+    <p class="cta-band__text">Pošlite nám, čo dnes riešite v Exceli. Do 7 dní po stretnutí uvidíte návrh riešenia.</p>
+    <a class="btn btn--white" href="rezervacia.html">Rezervovať stretnutie</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__brand">
+      <p class="logo"><span>&lt;</span>techscope<span>_</span></p>
+      <p>Samuel Gabriel Sikorjak<br>Žarnovova 1621/9, 903 01 Senec<br>IČO: 56 874 812</p>
+    </div>
+    <div class="site-footer__col">
+      <p>Kontakt</p>
+      <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>
+    </div>
+    <nav class="site-footer__col" aria-label="Pätička">
+      <p>Odkazy</p>
+      <a href="#sluzby">Služby</a>
+      <a href="#postup">Postup</a>
+      <a href="#referencie">Referencie</a>
+      <a href="klient.html">Klientska zóna</a>
+      <a href="admin.html">Prihlásenie pre tím</a>
     </nav>
-  </div>
-</section>
-
-<!-- TRUST BAND -->
-<section class="hx-trust" aria-label="Ako staviame dôveru">
-  <div class="container">
-    <ul class="hx-trust-grid">
-      <li class="hx-trust-item reveal">
-        <div class="flip-card" tabindex="0">
-          <div class="flip-inner">
-            <div class="flip-front"><span class="flip-idx">01</span><svg class="flip-art" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><rect class="fa-fill" x="14" y="8" width="58" height="74" rx="6"/><path class="fa-line" d="M26 26h34M26 38h34M26 50h22"/><circle class="fa-lens" cx="80" cy="54" r="18"/><path class="fa-stroke" d="M93 67l13 13"/><path class="fa-line" d="M72 54h16"/></svg><span class="hx-trust-label">Bezplatný prvý krok</span></div>
-            <div class="flip-back"><span class="hx-trust-note">Pred akýmkoľvek záväzkom vám spravíme audit alebo vytvoríme návrh a architektúru úplne zadarmo.</span></div>
-          </div>
-        </div>
-      </li>
-      <li class="hx-trust-item reveal">
-        <div class="flip-card" tabindex="0">
-          <div class="flip-inner">
-            <div class="flip-front"><span class="flip-idx">02</span><svg class="flip-art" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path class="fa-fill" d="M18 8h54v72l-6.75-5-6.75 5-6.75-5-6.75 5-6.75-5-6.75 5-6.75-5L18 80z"/><path class="fa-line" d="M30 24h30M30 35h22"/><path class="fa-stroke" d="M30 54h30"/><path class="fa-stroke" d="M84 46v-8a9 9 0 0 1 18 0v8"/><rect class="fa-solid" x="78" y="46" width="30" height="26" rx="5"/></svg><span class="hx-trust-label">Fixná cena</span></div>
-            <div class="flip-back"><span class="hx-trust-note">Potvrdená na bezplatnom strategy calle.</span></div>
-          </div>
-        </div>
-      </li>
-      <li class="hx-trust-item reveal">
-        <div class="flip-card" tabindex="0">
-          <div class="flip-inner">
-            <div class="flip-front"><span class="flip-idx">03</span><svg class="flip-art" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path class="fa-fill" d="M60 6l32 12v22c0 21-14 35-32 42-18-7-32-21-32-42V18z"/><path class="fa-stroke fa-bold" d="M46 44l10 10 19-20"/></svg><span class="hx-trust-label">Garancia výsledku</span></div>
-            <div class="flip-back"><span class="hx-trust-note">Ak nedodáme dohodnutý rozsah v termíne, dostanete peniaze späť.</span></div>
-          </div>
-        </div>
-      </li>
-      <li class="hx-trust-item reveal">
-        <div class="flip-card" tabindex="0">
-          <div class="flip-inner">
-            <div class="flip-front"><span class="flip-idx">04</span><svg class="flip-art" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><rect class="fa-solid" x="10" y="14" width="28" height="50" rx="6"/><rect class="fa-solid" x="46" y="14" width="28" height="50" rx="6"/><rect class="fa-dash" x="82" y="14" width="28" height="50" rx="6"/><text class="fa-text" x="60" y="84" text-anchor="middle">2 / 3</text></svg><span class="hx-trust-label">Max 3 projekty mesačne</span></div>
-            <div class="flip-back"><span class="hx-trust-note">Kapacitný limit, aby každý projekt dostal plnú pozornosť tímu.</span></div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- PROBLÉM -->
-<!-- FREE PONUKY -->
-<section id="free">
-  <div class="container">
-    <div class="hx-head reveal">
-      <span class="free-badge">Prvý krok je vždy zadarmo</span>
-      <h2>Skôr než čokoľvek podpíšete, dostanete konkrétny návrh na váš problém.</h2>
-      <p>Na spoločnom stretnutí Vám vytvoríme nezáväznú ponuku.</p>
-    </div>
-    <ul class="hx-free-grid reveal">
-      <li>
-        <a href="softver-na-mieru.html" class="hx-free-tag">Softvér na mieru</a>
-        <h3>Konzultácia a proces audit zadarmo</h3>
-        <p>Zmapujeme jeden váš proces a ukážeme, ktoré kroky vie softvér prevziať a koľko hodín to ušetrí.</p>
-      </li>
-      <li>
-        <a href="ai-riesenia.html" class="hx-free-tag">AI riešenia</a>
-        <h3>Skúšobná doba automatizácie na 14 dní úplne zadarmo</h3>
-        <p>Navrhneme a postavíme vám celú automatizáciu, bez záväzku.</p>
-      </li>
-      <li>
-        <a href="web-mobile.html" class="hx-free-tag">Web &amp; Mobilné aplikácie</a>
-        <h3>Návrh architektúry a MVP úplne zadarmo</h3>
-        <p>Prejdeme váš web či appku a ukážeme konkrétne miesta, kde strácate zákazníkov.</p>
-      </li>
-      <li>
-        <a href="data-compass.html" class="hx-free-tag">Dátový manažment a analýzy</a>
-        <h3>Report a analýza s auditom úplne zadarmo</h3>
-        <p>Overíme vaše dáta a ukážeme prvé konkrétne zistenie ešte pred podpisom.</p>
-      </li>
-    </ul>
-    <div class="hx-cta-center reveal">
-      <h3>Neviete, čo presne potrebujete?</h3>
-      <p>Na hovore preberieme, ktorý bezplatný krok má pre vás najväčší zmysel.</p>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-    </div>
-  </div>
-</section>
-
-<!-- SLUŽBY -->
-<section id="sluzby">
-  <div class="container">
-    <div class="hx-head reveal">
-      <h2>Štyri služby, štyri personalizované riešenia.</h2>
-      <p>Každá služba rieši konkrétny problém a každá začína bezplatným krokom: návrh uvidíte skôr, než čokoľvek podpíšete.</p>
-    </div>
-
-    <div class="hx-svc-cards">
-      <article class="hx-svc-card reveal">
-        <svg class="hx-svc-scene s-proc" viewBox="0 0 120 120" aria-hidden="true">
-          <path class="s-edge" d="M18 22 H54 M54 22 V56 M54 56 H90 M90 56 V92"/>
-          <circle class="s-node" cx="18" cy="22" r="5"/>
-          <circle class="s-node" cx="54" cy="22" r="5"/>
-          <circle class="s-node" cx="54" cy="56" r="5"/>
-          <circle class="s-node" cx="90" cy="56" r="5"/>
-          <circle class="s-node" cx="90" cy="92" r="5"/>
-        </svg>
-        <h3>Firma beží na modernizovanom systéme, nie na roztrieštených softvéroch či tabuľkách</h3>
-        <p class="hx-svc-card-mech">Zmapujeme váš proces a postavíme systém, ktorý bude napájať jednotlivé časti na seba inteligentne. Obohatený o automatizácie a modely, ktoré zefektívnia prácu vašich zamestnancov. Kód aj dáta zostávajú vaše.</p>
-        <a href="softver-na-mieru.html" class="hx-svc-more">Viac o softvéri na mieru</a>
-      </article>
-
-      <article class="hx-svc-card reveal">
-        <svg class="hx-svc-scene s-ai" viewBox="0 0 120 120" aria-hidden="true">
-          <path class="s-edge" d="M14 60 H44"/>
-          <path class="s-edge" d="M44 60 L76 36"/>
-          <path class="s-edge" d="M44 60 L76 84"/>
-          <path class="s-edge" d="M76 36 L104 24"/>
-          <path class="s-edge" d="M76 84 L104 96"/>
-          <circle class="s-node" cx="14" cy="60" r="4.5"/>
-          <circle class="s-node" cx="44" cy="60" r="4.5"/>
-          <circle class="s-node" cx="76" cy="36" r="4.5"/>
-          <circle class="s-node" cx="76" cy="84" r="4.5"/>
-          <circle class="s-node" cx="104" cy="24" r="4.5"/>
-          <circle class="s-node" cx="104" cy="96" r="4.5"/>
-        </svg>
-        <h3>Zastavte rutinu, ktorá kradne vám a vášmu tímu hodiny práce</h3>
-        <p class="hx-svc-card-mech">Zanalyzujeme váš proces, nájdeme slepé miesta s opakovanou náplňou práce a zautoamtizujeme ich. Automatizácie nasadzujeme na základe návratnosti v číslach nie ako experiment.</p>
-        <a href="ai-riesenia.html" class="hx-svc-more">Viac o AI riešeniach</a>
-      </article>
-
-      <article class="hx-svc-card reveal">
-        <svg class="hx-svc-scene s-web" viewBox="0 0 120 120" aria-hidden="true">
-          <path class="s-edge" d="M45 14h30a6 6 0 0 1 6 6v80a6 6 0 0 1-6 6H45a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z"/>
-          <rect class="s-fill" x="47" y="26" width="26" height="7" rx="2"/>,
-          <rect class="s-fill" x="47" y="39" width="26" height="17" rx="2"/>
-          <rect class="s-fill" x="47" y="62" width="12" height="12" rx="2"/>
-          <rect class="s-fill" x="61" y="62" width="12" height="12" rx="2"/>
-        </svg>
-        <h3>Aplikácia, ktorú si zákazníci a váš tím obľúbia</h3>
-        <p class="hx-svc-card-mech">Navrhneme aplikáciu pre najlepšiu UX pre používateľa, aj s komplexnými riešeniami, tak aby urobil to, čo od neho čakáte. Doručíme iOS, Android aj web z jednej codebase vo fixnom termíne.</p>
-        <a href="web-mobile.html" class="hx-svc-more">Viac o webových a mobilných aplikáciách</a>
-      </article>
-
-      <article class="hx-svc-card reveal">
-        <svg class="hx-svc-scene s-data" viewBox="0 0 120 120" aria-hidden="true">
-          <rect class="s-bar" x="16" y="60" width="14" height="46"/>
-          <rect class="s-bar" x="38" y="44" width="14" height="62"/>
-          <rect class="s-bar" x="60" y="52" width="14" height="54"/>
-          <rect class="s-bar" x="82" y="30" width="14" height="76"/>
-          <path class="s-trend" d="M20 74 L45 58 L67 64 L100 34"/>
-        </svg>
-        <h3>Viete, čo sa vo firme deje a kde strácate na vašu konkurenciu?</h3>
-        <p class="hx-svc-card-mech">Spojíme vaše dáta do jedného zdroja a postavíme predikčné modely prispôsobené presne vašej firme s mesačnými reportmi, ktoré vám prezradia viac ako nekonečné slepé optimalizácie.</p>
-        <a href="data-compass.html" class="hx-svc-more">Viac o dátových analýzach</a>
-      </article>
-    </div>
-
-    <div class="hx-cta-inline reveal" style="margin-top:clamp(40px,6vw,64px);">
-      <p>Neviete, ktorá služba rieši váš problém? Poďme to prebrať na strategy calle.</p>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-    </div>
-  </div>
-</section>
-
-<!-- PRÍPADOVÉ ŠTÚDIE -->
-<section id="pripadove-studie">
-  <div class="container">
-    <div class="hx-head reveal">
-      <h2>Case Studies</h2>
-      <p>Spustené projekty aj tie, na ktorých práve pracujeme. Pri projektoch vo vývoji doplníme čísla po ich spustení a nasadení.</p>
-    </div>
-
-    <div class="hx-case-grid">
-      <article class="hx-case reveal" data-demo="mybookmoves-demo.html" data-note="V prevádzke. Animovaná ukážka princípu aplikácie.">
-        <button type="button" class="hx-case-media" aria-haspopup="dialog" aria-label="Pozrieť ukážku aplikácie MyBookMoves">
-          <span class="hx-case-status">V prevádzke</span>
-          <span class="hx-case-laptop"><span class="hx-case-laptop-screen"><img src="icons/mybookmoves_logo.png" alt=""></span></span>
-          <span class="hx-case-cta">Pozrieť ukážku</span>
-        </button>
-        <div class="hx-case-body">
-          <h3>MyBookMoves</h3>
-          <p>MyBookMoves je tréningová aplikácia na šachové otvorenia. Namiesto knižnej teórie ukazuje ťahy, ktoré súperi na vašej úrovni ratingu naozaj hrajú, na základe reálnych partií z Lichess a Chess.com API. Odporúčané varianty sa menia s rastúcim ELO a hráči si vlastné repertoáre ukladajú, precvičujú a zdieľajú, napríklad tréner so žiakom.</p>
-          <!-- [SCREENSHOT: strom ťahov s frekvenciami podľa ratingu] -->
-          <!-- [SCREENSHOT: tréning uloženého repertoáru] -->
-          <!-- [SCREENSHOT: zdieľanie repertoáru s iným hráčom] -->
-          <dl class="hx-case-result">
-            <dt>Výsledok</dt>
-            <dd>Aplikácia je spustená a aktívne sa používa.<!-- [DOPLNIŤ: počet aktívnych používateľov / uložených repertoárov] --></dd>
-          </dl>
-          <a href="rezervacia.html" class="hx-textlink">Chcete podobné riešenie?</a>
-        </div>
-      </article>
-
-      <article class="hx-case reveal" data-demo="medi-ready-demo.html">
-        <button type="button" class="hx-case-media hx-case-media--phone" aria-haspopup="dialog" aria-label="Pozrieť ukážku aplikácie Medi Ready">
-          <span class="hx-case-status">Vo vývoji</span>
-          <span class="hx-case-phone"><img src="icons/mediready_logo.jpeg" alt=""></span>
-          <span class="hx-case-cta">Pozrieť ukážku</span>
-        </button>
-        <div class="hx-case-body">
-          <h3>Medi Ready</h3>
-          <p>Staviame aplikáciu na nasadzovanie a rozpisy zdravotníkov na futbalových zápasoch: od žiadostí a schvaľovania zmien po dochádzku a výkazy na jednom mieste. Aplikácia je vo vývoji a zatiaľ nie je verejne spustená.</p>
-          <dl class="hx-case-result">
-            <dt>Výsledok</dt>
-            <dd>Konkrétne čísla a celú prípadovú štúdiu doplníme po spustení.</dd>
-          </dl>
-          <a href="rezervacia.html" class="hx-textlink">Chcete podobné riešenie?</a>
-        </div>
-      </article>
-
-      <article class="hx-case reveal" data-demo="leadengine-demo.html">
-        <button type="button" class="hx-case-media hx-case-media--laptop" aria-haspopup="dialog" aria-label="Pozrieť ukážku nástroja LeadEngine">
-          <span class="hx-case-status">Vo vývoji</span>
-          <span class="hx-case-laptop"><span class="hx-case-laptop-screen"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 1.5L1.5 7l5 2 2 5z"/><path d="M14.5 1.5L6.5 9"/></svg></i>LeadEngine</span></span>
-          <span class="hx-case-cta">Pozrieť ukážku</span>
-        </button>
-        <div class="hx-case-body">
-          <h3>LeadEngine</h3>
-          <p>LeadEngine je interný B2B tool vo vývoji, ktorý rieši automatizáciu a personalizáciu cold emailov, analýzu a nastavenie optimalizačného modelu, ktorý sa aktívne učí a pomáha vytvárať scripty s každou novou odpoveďou.</p>
-          <dl class="hx-case-result">
-            <dt>Výsledok</dt>
-            <dd>Konkrétne čísla a celú prípadovú štúdiu doplníme po spustení.</dd>
-          </dl>
-          <a href="rezervacia.html" class="hx-textlink">Chcete podobné riešenie?</a>
-        </div>
-      </article>
-    </div>
-
-    <dialog id="case-dialog" class="hx-case-dialog" aria-labelledby="case-dialog-title">
-      <div class="hx-case-dialog-head">
-        <h3 id="case-dialog-title"></h3>
-        <p>Vo vývoji. Toto je iba ukážka, zvyšok bude dostupný po zverejnení.</p>
-        <button type="button" class="exit-popup-close" aria-label="Zavrieť">&times;</button>
-      </div>
-      <iframe title="Ukážka"></iframe>
-    </dialog>
-    <script>
-      (function(){
-        var d = document.getElementById('case-dialog'), f = d.querySelector('iframe'), t = d.querySelector('h3');
-        var n = d.querySelector('.hx-case-dialog-head p'), note = n.textContent;
-        document.querySelectorAll('.hx-case[data-demo]').forEach(function(card){
-          card.addEventListener('click', function(e){
-            if (e.target.closest('a')) return;
-            t.textContent = card.querySelector('h3').textContent;
-            n.textContent = card.dataset.note || note;
-            f.title = 'Ukážka: ' + t.textContent;
-            // src až pri otvorení, aby animácia vždy začala od začiatku
-            f.src = card.dataset.demo;
-            d.showModal();
-          });
-        });
-        d.querySelector('.exit-popup-close').addEventListener('click', function(){ d.close(); });
-        d.addEventListener('click', function(e){ if (e.target === d) d.close(); });
-        d.addEventListener('close', function(){ f.src = 'about:blank'; });
-      })();
-    </script>
-  </div>
-</section>
-
-<!-- PROCES -->
-<section id="proces">
-  <div class="container">
-    <div class="hx-head reveal">
-      <h2>Ako pracujeme</h2>
-      <p>Päť krokov od prvého hovoru po odovzdanie. Cena a rozsah sú jasné skôr, než začneme.</p>
-    </div>
-    <div class="proc">
-      <ol class="proc-steps">
-        <li class="proc-step"><span class="proc-dot" aria-hidden="true"></span><span class="proc-num">01</span><h4>Analýza požiadaviek</h4><p>Spoznáme váš proces a definujeme presný rozsah.</p></li>
-        <li class="proc-step"><span class="proc-dot" aria-hidden="true"></span><span class="proc-num">02</span><h4>Návrh riešenia</h4><p>Konkrétny návrh a fixná cena ešte pred podpisom.</p></li>
-        <li class="proc-step"><span class="proc-dot" aria-hidden="true"></span><span class="proc-num">03</span><h4>Realizácia a testovanie</h4><p>Vývoj s pravidelnou komunikáciou a checkpointmi.</p></li>
-        <li class="proc-step"><span class="proc-dot" aria-hidden="true"></span><span class="proc-num">04</span><h4>Nasadenie</h4><p>Dielo odovzdané presne podľa scope dokumentu.</p></li>
-        <li class="proc-step"><span class="proc-dot" aria-hidden="true"></span><span class="proc-num">05</span><h4>Podpora po spustení</h4><p>Zaškolenie tímu a voliteľná priebežná starostlivosť.</p></li>
-      </ol>
-      <div class="proc-stage" aria-hidden="true">
-        <svg class="proc-puzzle" viewBox="0 0 400 400" focusable="false">
-          <g class="proc-piece" style="--dy:-50px">
-            <rect class="pz-line pz-dash" x="40" y="50" width="320" height="300" rx="16"/>
-          </g>
-          <g class="proc-piece" style="--dx:-90px;--r:-8deg">
-            <rect class="pz-fill" x="56" y="66" width="288" height="28" rx="6"/>
-            <rect class="pz-fill" x="56" y="106" width="72" height="228" rx="8"/>
-            <rect class="pz-soft" x="68" y="122" width="48" height="8" rx="3"/>
-            <rect class="pz-soft" x="68" y="140" width="36" height="8" rx="3"/>
-            <rect class="pz-soft" x="68" y="158" width="44" height="8" rx="3"/>
-          </g>
-          <g class="proc-piece" style="--dx:100px;--r:10deg">
-            <rect class="pz-solid" x="144" y="110" width="150" height="10" rx="4"/>
-            <rect class="pz-soft" x="160" y="130" width="110" height="10" rx="4"/>
-            <rect class="pz-soft" x="160" y="150" width="170" height="10" rx="4"/>
-            <rect class="pz-soft" x="144" y="170" width="90" height="10" rx="4"/>
-          </g>
-          <g class="proc-piece" style="--dy:100px;--r:-6deg">
-            <rect class="pz-fill" x="144" y="196" width="200" height="138" rx="10"/>
-            <rect class="pz-soft" x="164" y="286" width="22" height="32" rx="3"/>
-            <rect class="pz-soft" x="196" y="266" width="22" height="52" rx="3"/>
-            <rect class="pz-soft" x="228" y="276" width="22" height="42" rx="3"/>
-            <rect class="pz-soft" x="260" y="246" width="22" height="72" rx="3"/>
-            <rect class="pz-soft" x="292" y="226" width="22" height="92" rx="3"/>
-            <path class="pz-line" d="M166 270L206 246L238 256L270 224L314 206"/>
-          </g>
-          <g class="proc-piece" style="--dx:70px;--dy:-70px;--r:25deg">
-            <circle class="pz-solid" cx="344" cy="64" r="28"/>
-            <path class="pz-check" d="M332 64l8 8 16-16"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-
-    <div class="fx-voucher reveal">
-      <div class="fx-voucher-stub">
-        <span class="fx-voucher-label">Krok 00</span>
-        <span class="fx-voucher-price">0&nbsp;€</span>
-        <span class="fx-voucher-note">platí pre každý projekt</span>
-      </div>
-      <div class="fx-voucher-body">
-        <h3>Prvý krok je vždy zadarmo.</h3>
-        <p>Skôr než začne krok 01, prejdeme váš problém na bezplatnom strategy calle. Odchádzate s konkrétnym návrhom a fixnou cenou, bez záväzku.</p>
-        <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="hx-head reveal">
-      <h2>Predtým, než zavoláte</h2>
-    </div>
-    <div class="hx-narrow reveal">
-      <details class="faq-item">
-        <summary>Prečo by som mal ísť do externého vývoja namiesto interného tímu?</summary>
-        <p>Interný tím sa nedá naklonovať. Keď má plné ruky práce, váš nápad čaká. My prídeme presne vtedy, keď to potrebujete, bez toho, aby ste museli niekoho najímať na plný úväzok.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Čo ak sa rozsah počas projektu zmení?</summary>
-        <p>Cenu a rozsah dohodneme na strategy calle skôr, než čokoľvek začneme. Zmeny riešime transparentne, nie skrytými dodatkami.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Nemáte ešte veľa referencií. Ako viem, že to zvládnete?</summary>
-        <p>Sme na začiatku budovania klientskeho portfólia, preto konkrétne ukážky práce radi ukážeme priamo na strategy calle. Uvidíte presne, ako pracujeme, skôr než sa rozhodnete.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Koľko to bude stáť?</summary>
-        <p>Cena projektu závisí od jeho rozsahu, preto je prvým krokom vždy bezplatný strategy call, na ktorom dostanete konkrétnu fixnú cenu, nie odhad od stola.</p>
-      </details>
-    </div>
-    <div class="hx-cta-inline reveal" style="margin-top:40px;">
-      <p>Ostatné otázky vám vieme zodpovedať priamo na hovore.</p>
-      <a href="rezervacia.html" class="btn btn-primary">Rezervovať strategy call</a>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="band-dark" id="hovor">
-  <div class="container cta-band reveal">
-    <h2>Začnime hovorom o vašom projekte.</h2>
-    <p>Bezplatný strategy call, bez záväzku. Na konci konkrétny návrh a fixná cena.</p>
-    <div class="hero-ctas" style="justify-content:center;">
-      <a href="rezervacia.html" class="btn btn-primary btn-call">Rezervovať strategy call</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid footer-grid-3">
-      <div>
-        <span class="footer-logo"><span class="logo-punct">&lt;</span>techscope<span class="logo-punct logo-cursor">_</span></span>
-        <p style="color:var(--ink-faint); font-size:0.9rem; max-width:32ch;">Softvér, dátová analytika a AI riešenia na mieru pre firmy na Slovensku a v Česku.</p>
-      </div>
-      <div>
-        <h5>Služby</h5>
-        <ul>
-          <li><a href="softver-na-mieru.html">Softvér na mieru</a></li>
-          <li><a href="ai-riesenia.html">AI riešenia</a></li>
-          <li><a href="web-mobile.html">Web &amp; Mobilné aplikácie</a></li>
-          <li><a href="data-compass.html">Dátový manažment a analýzy</a></li>
-        </ul>
-      </div>
-      <div id="kontakt">
-        <h5>Kontakt</h5>
-        <ul>
-          <li><a href="mailto:contact@techscope.sk">contact@techscope.sk</a></li>
-          <li>Bratislava, Slovensko</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 TECH-SCOPE. Všetky práva vyhradené.</span>
-      <a href="obchodne-podmienky.html">Obchodné podmienky</a>
-      <a href="ochrana-udajov.html">Ochrana osobných údajov</a>
-    </div>
+    <p class="site-footer__legal">© 2026 techscope.sk · <a href="obchodne-podmienky.html">Obchodné podmienky</a> · <a href="ochrana-udajov.html">Ochrana osobných údajov</a></p>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="assets/js/supabase-client.js"></script>
-<script src="assets/js/script.js"></script>
-<script src="assets/js/exit-popup.js"></script>
-<script src="assets/js/fx.js"></script>
 </body>
 </html>
