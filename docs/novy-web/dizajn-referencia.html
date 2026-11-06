@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>techscope – Homepage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&amp;family=JetBrains+Mono:wght@800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111214}
+::selection{background:#2447F5;color:#FFFFFF}
+h1,h2,h3{text-wrap:balance}
+p,dd{text-wrap:pretty}
+a{color:#2447F5;text-decoration:none}
+a:hover{color:#1531C4}
+a:focus-visible,button:focus-visible{outline:2px solid #4D6BFF;outline-offset:4px}
+input,textarea,button{font:inherit}
+.field{border:0;border-bottom:2px solid transparent;border-radius:8px;background:#E9E8E2;padding:16px;font-size:17px;color:#111214;outline:none;transition:border-color .15s ease, background-color .15s ease}
+.field:hover{background:#E2E1DA}
+.field:focus{border-bottom-color:#2447F5;background:#FFFFFF}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;border-radius:999px;border:2px solid;font-weight:600;font-size:15px;cursor:pointer;box-sizing:border-box;transition:background-color .18s ease, color .18s ease, transform .1s ease}
+.btn:active{transform:translateY(2px)}
+.btn-blue{background:#2447F5;color:#FFFFFF;border-color:#2447F5}
+.btn-blue:hover{background:#FFFFFF;color:#2447F5}
+.btn-white{background:#FFFFFF;color:#111214;border-color:#FFFFFF}
+.btn-white:hover{background:#111214;color:#FFFFFF}
+.btn-dark{background:#111214;color:#FFFFFF;border-color:#111214}
+.btn-dark:hover{background:#FFFFFF;color:#111214}
+.navlink{color:#C9C9C2}
+.navlink:hover{color:#FFFFFF}
+.grid-dark{background-image:linear-gradient(#1F2127 1px,transparent 1px),linear-gradient(90deg,#1F2127 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 75%);mask-image:linear-gradient(100deg,transparent 25%,#000 75%)}
+.grid-blue{background-image:linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(200deg,#000 10%,transparent 70%);mask-image:linear-gradient(200deg,#000 10%,transparent 70%)}
+.grid-light{background-image:linear-gradient(#E6E5DF 1px,transparent 1px),linear-gradient(90deg,#E6E5DF 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent 60%);mask-image:linear-gradient(to bottom,#000,transparent 60%)}
+</style>
+</helmet>
+<div style="font-family: 'Archivo', system-ui, sans-serif; color: #111214; background: #F5F4F0; width: 100%; font-size: 17px; line-height: 1.55">
+
+<!-- NAV -->
+<header style="background: #111214; position: relative; z-index: 1">
+<div style="max-width: 1248px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<a href="#top" style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 24px; line-height: 1; color: #FFFFFF"><span style="color: #4D6BFF">&lt;</span>techscope<span style="color: #4D6BFF">_</span></a>
+<nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 32px; font-size: 15px; font-weight: 600">
+<a class="navlink" href="#sluzby">Služby</a>
+<a class="navlink" href="#postup">Postup</a>
+<a class="navlink" href="#referencie">Referencie</a>
+<a class="navlink" href="#tim">Tím</a>
+<a class="navlink" href="ClientZone.dc.html">Klientska zóna</a>
+</nav>
+<a class="btn btn-blue" href="#kontakt">Kontakt</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="position: relative; overflow: hidden; background: #111214; color: #FFFFFF; padding: 64px 24px 96px">
+<div aria-hidden="true" class="grid-dark" style="position: absolute; inset: 0"></div>
+<div aria-hidden="true" style="position: absolute; right: -64px; bottom: -160px; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 560px; line-height: 1; color: #16181D">&lt;</div>
+<div style="position: relative; max-width: 1248px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: flex-end">
+<div style="flex: 999 1 560px; min-width: 0">
+<h1 style="font-stretch: 125%; font-weight: 800; font-size: clamp(40px, 5.2vw, 72px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 32px"><span style="color: #4D6BFF">Celý náš tím robí naraz iba na jednom projekte.</span> Na vašom.</h1>
+<p style="font-size: 20px; color: #C9C9C2; margin: 0 0 48px; max-width: 32em">Programujeme interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku. Menší systém odovzdáme za <strong style="color: #FFFFFF; font-weight: 600">4 až 6 týždňov</strong>, väčší za <strong style="color: #FFFFFF; font-weight: 600">2 až 3 mesiace</strong>. Cena a termín sú v zmluve.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<a class="btn btn-blue" href="#kontakt">Dohodnúť stretnutie</a>
+<a class="btn btn-white" href="#sluzby">Čo programujeme</a>
+</div>
+</div>
+<form id="kontakt" style="flex: 1 1 360px; max-width: 432px; background: #F5F4F0; color: #111214; padding: 32px; border-radius: 16px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+<div style="margin: 0 0 8px">
+<h2 style="font-stretch: 112%; font-size: 24px; font-weight: 800; line-height: 1.1; margin: 0 0 8px">Napíšte nám</h2>
+<p style="margin: 0; font-size: 15px; color: #55554F">Stačí pár viet o tom, čo dnes riešite ručne. Ozveme sa a dohodneme online stretnutie.</p>
+</div>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600">Meno<input class="field" type="text" autocomplete="name"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600">Pracovný e-mail<input class="field" type="email" autocomplete="email"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600">Telefón <span style="font-weight: 400; color: #55554F">nepovinné</span><input class="field" type="tel" autocomplete="tel"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600">Čo potrebujete vyriešiť<textarea class="field" rows="3" style="resize: vertical"></textarea></label>
+<button class="btn btn-blue" type="submit" style="margin-top: 8px; width: 100%">Odoslať správu</button>
+</form>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="sluzby" style="position: relative; background: #F5F4F0; padding: 96px 24px">
+<div aria-hidden="true" class="grid-light" style="position: absolute; inset: 0"></div>
+<div style="position: relative; max-width: 1248px; margin: 0 auto">
+<div style="max-width: 40em; margin: 0 0 64px">
+<h2 style="font-stretch: 125%; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px">Čo programujeme</h2>
+<p style="margin: 0; font-size: 20px; color: #55554F">Väčšina našich projektov začína tabuľkou v Exceli, ktorú už nikto nechce otvárať.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start">
+<article style="flex: 1 1 400px; position: relative; overflow: hidden; background: #2447F5; color: #FFFFFF; padding: 48px; border-radius: 16px; box-sizing: border-box">
+<div aria-hidden="true" class="grid-blue" style="position: absolute; inset: 0"></div>
+<div style="position: relative">
+<h3 style="font-stretch: 125%; font-size: 32px; font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 24px">Softvér na mieru</h3>
+<p style="margin: 0 0 32px; color: #E6EAFE">Systém postavený podľa toho, ako vaša firma reálne pracuje. Napríklad výpočet provízií pre sieť finančných agentov, plánovanie zmien personálu alebo evidencia zákaziek so schvaľovaním.</p>
+<a class="btn btn-white" href="#kontakt">Opíšte nám svoj proces</a>
+</div>
+</article>
+<div style="flex: 1 1 480px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(224px, 1fr)); gap: 48px 32px">
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Klientske portály</h3><p style="margin: 0; color: #3A3A35">Klienti alebo agenti vidia stav, dokumenty a schvaľujú bez e-mailov tam a späť.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Mobilné aplikácie</h3><p style="margin: 0; color: #3A3A35">Pre ľudí v teréne: vodičov, technikov, zdravotníkov. iOS aj Android.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Integrácie</h3><p style="margin: 0; color: #3A3A35">Prepojíme účtovníctvo, CRM alebo e-shop, aby nikto neprepisoval čísla ručne.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Náhrada starého systému</h3><p style="margin: 0; color: #3A3A35">Prenesieme dáta zo zastaraného programu a vypneme ho, až keď nový beží.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Automatizácia s AI</h3><p style="margin: 0; color: #3A3A35">Čítanie faktúr a zmlúv, triedenie e-mailov, vyhľadávanie vo vlastných dokumentoch.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 16px">Niečo iné?</h3><a class="btn btn-dark" href="#kontakt">Napíšte nám</a></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section id="postup" style="background: #FFFFFF; padding: 96px 24px">
+<div style="max-width: 1248px; margin: 0 auto">
+<div style="max-width: 40em; margin: 0 0 64px">
+<h2 style="font-stretch: 125%; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px">Od prvého stretnutia po spustenie</h2>
+<p style="margin: 0; font-size: 20px; color: #55554F">Priebeh projektu vidíte počas celej spolupráce v klientskej zóne.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(208px, 1fr)); gap: 48px 32px; margin: 0 0 64px">
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Stretneme sa</h3><p style="margin: 0; color: #3A3A35">Online prejdeme váš proces a spočítame, koľko vás dnešný stav stojí.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Navrhneme riešenie</h3><p style="margin: 0; color: #3A3A35">Do 7 dní vám ukážeme, ako bude systém fungovať. Vy ho opravíte.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Podpíšeme zmluvu</h3><p style="margin: 0; color: #3A3A35">Zoznam modulov, fixná cena, dátum začatia a termín odovzdania.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Programujeme</h3><p style="margin: 0; color: #3A3A35">Po moduloch. Každý hotový modul vám ukážeme a vy ho schválite.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Odovzdáme</h3><p style="margin: 0; color: #3A3A35">Nasadíme, zaškolíme váš tím a potom sa o systém staráme v rámci Care alebo Care Plus.</p></div>
+</div>
+<a class="btn btn-blue" href="#kontakt">Začať prvým stretnutím</a>
+</div>
+</section>
+
+<!-- CASE STUDY -->
+<section id="referencie" style="background: #F5F4F0; padding: 96px 24px">
+<div style="max-width: 1248px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: center">
+<figure style="flex: 1 1 480px; margin: 0">
+<div style="aspect-ratio: 4 / 3; background: #E2E1DA; border-radius: 16px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 32px; box-sizing: border-box"><span style="font-size: 15px; color: #55554F">[Screenshot aplikácie Medi Ready]</span></div>
+<figcaption style="margin: 16px 0 0; font-size: 15px; color: #55554F">Rozpis zdravotníkov na zápas v aplikácii Medi Ready.</figcaption>
+</figure>
+<div style="flex: 1 1 440px; min-width: 0">
+<h2 style="font-stretch: 125%; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px">Medi Ready</h2>
+<p style="margin: 0 0 48px; font-size: 20px">Aplikácia, cez ktorú Medi Ready obsadzuje zdravotníkov na futbalové zápasy na Slovensku. Funkčnú webovú verziu sme odovzdali <strong style="font-weight: 600">45 dní</strong> od začiatku vývoja.</p>
+<blockquote style="margin: 0 0 48px; position: relative; padding-left: 48px">
+<span aria-hidden="true" style="position: absolute; left: 0; top: -12px; font-stretch: 125%; font-weight: 800; font-size: 72px; line-height: 1; color: #2447F5">„</span>
+<p style="margin: 0 0 16px; font-size: 20px; font-weight: 500">[Doslovný citát od klienta]</p>
+<p style="margin: 0; font-size: 15px; color: #55554F"><strong style="color: #111214; font-weight: 600">[Celé meno]</strong>, [funkcia], Medi Ready</p>
+</blockquote>
+<a class="btn btn-dark" href="#kontakt">Chcem podobný systém</a>
+</div>
+</div>
+</section>
+
+<!-- INDUSTRIES -->
+<section style="position: relative; overflow: hidden; background: #111214; color: #FFFFFF; padding: 96px 24px">
+<div aria-hidden="true" class="grid-dark" style="position: absolute; inset: 0"></div>
+<div style="position: relative; max-width: 1248px; margin: 0 auto">
+<div style="max-width: 40em; margin: 0 0 64px">
+<h2 style="font-stretch: 125%; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px">Pre koho najčastejšie staviame</h2>
+<p style="margin: 0; font-size: 20px; color: #C9C9C2">Firmy, v ktorých veľa ľudí robí ten istý proces každý deň.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start">
+<article style="flex: 2 1 520px; position: relative; overflow: hidden; background: #2447F5; padding: 48px; border-radius: 16px; box-sizing: border-box">
+<div aria-hidden="true" class="grid-blue" style="position: absolute; inset: 0"></div>
+<div style="position: relative">
+<h3 style="font-stretch: 125%; font-size: 32px; font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 24px">Finančné spoločnosti</h3>
+<p style="margin: 0 0 32px; max-width: 32em; color: #E6EAFE">Siete finančných agentov, lízingové spoločnosti a nebankoví veritelia. Staviame výpočty provízií, portály pre agentov a klientov, schvaľovanie a záznam každej zmeny pre kontrolu NBS.</p>
+<a class="btn btn-white" href="#kontakt">Konzultovať projekt</a>
+</div>
+</article>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 48px; padding-top: 48px">
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Doprava a špedícia</h3><p style="margin: 0; color: #C9C9C2">Dispečing bez tabuliek, aplikácia pre vodičov, prepojenie s fakturáciou.</p></div>
+<div><h3 style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Zdravotníctvo a personálne agentúry</h3><p style="margin: 0; color: #C9C9C2">Plánovanie zmien a obsadzovanie ľudí na smeny a podujatia.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TEAM -->
+<section id="tim" style="background: #FFFFFF; padding: 96px 24px">
+<div style="max-width: 1248px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: center">
+<figure style="flex: 1 1 480px; margin: 0">
+<div style="aspect-ratio: 4 / 3; background: #E2E1DA; border-radius: 16px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 32px; box-sizing: border-box"><span style="font-size: 15px; color: #55554F">[Skutočná fotka tímu]</span></div>
+<figcaption style="margin: 16px 0 0; font-size: 15px; color: #55554F">Naša kancelária v Bratislave.</figcaption>
+</figure>
+<div style="flex: 1 1 440px; min-width: 0">
+<h2 style="font-stretch: 125%; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px">Ľudia, s ktorými budete hovoriť</h2>
+<p style="margin: 0 0 48px; font-size: 20px">Na stretnutiach sedia ľudia, ktorí váš systém navrhujú a programujú. Požiadavky si nepreposielame cez sprostredkovateľov.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(192px, 1fr)); gap: 32px; margin: 0 0 48px">
+<div><p style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2">Samuel Sikorjak</p><p style="margin: 8px 0 0; font-size: 15px; color: #55554F">konateľ, obchod a projekty</p></div>
+<div><p style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2">Filip Frtus</p><p style="margin: 8px 0 0; font-size: 15px; color: #55554F">[rola]</p></div>
+</div>
+<a class="btn btn-blue" href="#kontakt">Spoznajte nás na stretnutí</a>
+</div>
+</div>
+</section>
+
+<!-- TERMS -->
+<section style="background: #F5F4F0; padding: 96px 24px">
+<div style="max-width: 1248px; margin: 0 auto">
+<div style="max-width: 40em; margin: 0 0 64px">
+<h2 style="font-stretch: 125%; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; margin: 0">Podmienky spolupráce</h2>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(256px, 1fr)); gap: 48px 32px">
+<div><dt style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Fixná cena</dt><dd style="margin: 0; color: #3A3A35">Platí pre zoznam modulov v zmluve. Zmenu rozsahu vám najprv nacenime a vy ju písomne schválite.</dd></div>
+<div><dt style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Vrátenie peňazí</dt><dd style="margin: 0; color: #3A3A35">Ak nedodáme to, čo je v zmluvnom rozsahu, vrátime vám zaplatenú sumu.</dd></div>
+<div><dt style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Platba</dt><dd style="margin: 0; color: #3A3A35">90 % ceny vopred, alebo plná cena v splátkach 30, 20, 20 a 20 % počas vývoja.</dd></div>
+<div><dt style="font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0 0 8px">Kód a dáta</dt><dd style="margin: 0; color: #3A3A35">Po finálnej platbe vám patria autorské práva ku kódu. Dáta hostujeme v EÚ.</dd></div>
+</dl>
+</div>
+</section>
+
+<!-- CTA -->
+<section style="position: relative; overflow: hidden; background: #2447F5; color: #FFFFFF; padding: 64px 24px">
+<div aria-hidden="true" class="grid-blue" style="position: absolute; inset: 0"></div>
+<div style="position: relative; max-width: 1248px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: center; justify-content: space-between">
+<p style="flex: 1 1 520px; font-stretch: 125%; font-weight: 800; font-size: 32px; line-height: 1.05; letter-spacing: -0.01em; margin: 0; max-width: 22em; text-wrap: balance">Pošlite nám, čo dnes riešite v Exceli. Do 7 dní po stretnutí uvidíte návrh riešenia.</p>
+<a class="btn btn-white" href="#kontakt">Napísať nám</a>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: #111214; color: #C9C9C2; padding: 64px 24px 48px; font-size: 15px">
+<div style="max-width: 1248px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+<div style="flex: 1 1 256px; display: flex; flex-direction: column; gap: 16px">
+<p style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 24px; line-height: 1; margin: 0; color: #FFFFFF"><span style="color: #4D6BFF">&lt;</span>techscope<span style="color: #4D6BFF">_</span></p>
+<p style="margin: 0">techscope s.r.o., Bratislava<br>IČO [doplniť]</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px"><p style="color: #FFFFFF; margin: 0 0 8px; font-weight: 700">Kontakt</p><a class="navlink" href="mailto:[email]">[e-mail]</a><a class="navlink" href="tel:[telefon]">[telefón]</a></div>
+<nav aria-label="Pätička" style="display: flex; flex-direction: column; gap: 8px"><p style="color: #FFFFFF; margin: 0 0 8px; font-weight: 700">Odkazy</p><a class="navlink" href="#sluzby">Služby</a><a class="navlink" href="#referencie">Referencie</a><a class="navlink" href="ClientZone.dc.html">Klientska zóna</a><a class="navlink" href="Admin.dc.html">Prihlásenie pre tím</a></nav>
+</div>
+<p style="max-width: 1248px; margin: 64px auto 0; color: #A3A39C">© 2026 techscope s.r.o. · <a class="navlink" href="#">Obchodné podmienky</a> · <a class="navlink" href="#">Ochrana osobných údajov</a></p>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5500}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
