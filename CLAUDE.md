@@ -20,6 +20,26 @@ Zadanie nového webu: `docs/novy-web/ZADANIE.md`. Vizuálna referencia: `docs/no
 - Jazyk webu: slovenčina (`<html lang="sk">`).
 - Commituj lokálne po každom kroku. **Nepushuj**, kým to výslovne nepoviem – push do `main` nasadí web naživo.
 
+## Paralelná práca (2 chaty naraz)
+Každý súbor patrí jednému chatu. Do cudzích súborov nezapisuj, len ich čítaj.
+
+**Chat A – základ a homepage**
+- `assets/css/web.css` (všetky spoločné štýly vrátane hlavičky a pätičky)
+- `index.html`, `assets/js/web/sloty.js`
+- Ako JEDINÝ smie robiť `git commit`.
+
+**Chat B – rezervácia a ostatné stránky**
+- `rezervacia.html`, `assets/js/web/rezervacia.js`, `assets/css/rezervacia.css`
+- `obchodne-podmienky.html`, `ochrana-udajov.html`, `404.html`, `sitemap.xml`, `robots.txt`
+- Nikdy necommituje. Vlastné štýly píše len do `assets/css/rezervacia.css` a používa v ňom iba premenné z `web.css` (`var(--…)`).
+
+**Spoločné názvy tried (obaja používajú presne tieto):**
+`.site-header` > `.container` > `.logo` + `nav.site-nav` (odkazy `.site-nav__link`) + `.btn.btn--blue`
+`.site-footer` > `.container` > `.site-footer__brand`, `.site-footer__col`, `.site-footer__legal`
+`.section`, `.section--paper|--white|--ink|--blue`, `.section-head`, `.h1`, `.h2`, `.lead`,
+`.btn`, `.btn--blue|--white|--dark`, `.block--blue`, `.field`, `.container`
+Premenné: `--ink --paper --white --blue --blue-dark --blue-light --blue-tint --muted --body-2 --muted-dark --field --space-1..7 (8,16,24,32,48,64,96 px)`
+
 ## Dizajnový systém (dodržať presne)
 - Farby: ink `#111214`, paper `#F5F4F0`, white `#FFFFFF`, blue `#2447F5`, blue-dark `#1531C4`, blue-light (na tmavom) `#4D6BFF`, blue-tint `#E6EAFE`,
   muted (na svetlom) `#55554F`, body-2 `#3A3A35`, muted (na tmavom) `#C9C9C2`, field `#E9E8E2`, placeholder-img `#E2E1DA`.
