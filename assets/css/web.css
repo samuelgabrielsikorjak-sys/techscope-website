@@ -395,7 +395,7 @@ textarea.field { resize: vertical; min-height: 128px; }
   gap: var(--space-1);
 }
 .slots__list li { color: var(--muted); }
-.slots__list a {
+.slots__slot {
   display: block;
   padding: var(--space-2);
   border-radius: var(--radius-field);
@@ -403,7 +403,7 @@ textarea.field { resize: vertical; min-height: 128px; }
   color: var(--ink);
   font-weight: 600;
 }
-.slots__list a:hover { background: var(--blue); color: var(--white); }
+.slots__slot:hover { background: var(--blue); color: var(--white); }
 .slots .btn { width: 100%; margin-top: var(--space-1); }
 
 /* ---------- Služby ---------- */
