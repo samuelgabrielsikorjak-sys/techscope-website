@@ -1,0 +1,245 @@
+/* techscope.sk – rezervácia (.rz-*). Používa iba premenné z web.css. */
+
+.rz-head { max-width: 768px; }
+
+.rz-app { max-width: 896px; }
+.rz-app > p { margin: 0; color: var(--body-2); }
+
+/* ---------- Kalendár ---------- */
+.rz-calendar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 256px;
+  gap: var(--space-4);
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+.rz-calendar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.rz-calendar__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+.rz-calendar__nav-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.rz-calendar__nav-btn:hover { background: var(--ink); color: var(--white); }
+.rz-calendar__nav-btn:disabled {
+  background: var(--field);
+  color: var(--muted-dark);
+  cursor: default;
+}
+
+.rz-calendar__weekdays,
+.rz-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-1);
+  justify-items: center;
+}
+.rz-calendar__weekdays {
+  margin-bottom: var(--space-1);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+.rz-calendar__weekdays span {
+  width: 44px;
+  text-align: center;
+}
+
+.rz-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--fs-small);
+  line-height: 1;
+  transition: background-color .15s ease, color .15s ease;
+}
+.rz-day--empty { visibility: hidden; }
+.rz-day--disabled { color: var(--muted-dark); }
+.rz-day--today { border-color: var(--field); }
+.rz-day--available {
+  font-weight: 700;
+  background: var(--blue-tint);
+  cursor: pointer;
+}
+.rz-day--available:hover,
+.rz-day--selected,
+.rz-day--selected:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.rz-calendar__note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+.rz-calendar__note:empty { display: none; }
+
+/* ---------- Časy ---------- */
+.rz-times h4 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.rz-times__placeholder {
+  margin: 0;
+  color: var(--muted);
+}
+.rz-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.rz-slot {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 2px solid var(--field);
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--ink);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.rz-slot:hover { background: var(--white); border-color: var(--blue); color: var(--blue); }
+.rz-slot--selected,
+.rz-slot--selected:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+@keyframes rz-in { from { opacity: 0; } to { opacity: 1; } }
+.rz-fade-in, .rz-times--in { animation: rz-in .2s ease; }
+
+/* ---------- Formulár ---------- */
+.rz-form {
+  max-width: 640px;
+  margin: var(--space-4) auto 0;
+  padding: var(--space-4);
+  background: var(--white);
+  border-radius: var(--radius);
+}
+.rz-form h3 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+.rz-form__slot {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+.rz-form__slot strong { color: var(--ink); }
+.rz-form__error {
+  display: none;
+  margin: 0 0 var(--space-3);
+  color: var(--blue-dark);
+  font-weight: 600;
+}
+.rz-form__error--show { display: block; }
+
+.rz-row { margin-bottom: var(--space-3); }
+.rz-row label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+.rz-row__error {
+  display: none;
+  margin-top: var(--space-1);
+  font-size: var(--fs-small);
+  color: var(--blue-dark);
+}
+.rz-row--invalid .rz-row__error { display: block; }
+.rz-row--invalid .field { border-bottom-color: var(--blue-dark); }
+
+.rz-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  font-weight: 400;
+}
+.rz-checkbox input {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--blue);
+}
+
+.rz-form .btn { width: 100%; }
+.rz-form__note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--fs-small);
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- Potvrdenie ---------- */
+.rz-confirm {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+  background: var(--white);
+  border-radius: var(--radius);
+}
+.rz-confirm h3 {
+  margin: 0 0 var(--space-3);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: var(--fs-block);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.rz-confirm p { margin: 0 0 var(--space-2); color: var(--body-2); }
+.rz-confirm p:last-child { margin-bottom: 0; }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 759px) {
+  .rz-calendar {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-2);
+  }
+  .rz-calendar__weekdays,
+  .rz-calendar__grid { gap: 0; }
+  .rz-calendar__weekdays span { width: 100%; }
+  .rz-day {
+    width: 100%;
+    max-width: 44px;
+    height: auto;
+    aspect-ratio: 1;
+  }
+  .rz-form,
+  .rz-confirm { padding: var(--space-3); }
+}
