@@ -1,10 +1,11 @@
 {
-  "name": "TECH-SCOPE",
-  "short_name": "TECH-SCOPE",
+  "name": "techscope",
+  "short_name": "techscope",
   "icons": [
     { "src": "/icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
   ],
-  "theme_color": "#0A0E1A",
-  "background_color": "#0A0E1A"
+  "theme_color": "#2447F5",
+  "background_color": "#F6F8FC",
+  "display": "browser"
 }
