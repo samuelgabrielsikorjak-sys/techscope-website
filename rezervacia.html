@@ -16,39 +16,51 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/web.css">
-<link rel="stylesheet" href="assets/css/rezervacia.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="assets/css/web.css?v=20261108c">
+<link rel="stylesheet" href="assets/css/rezervacia.css?v=20261108d">
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header site-header--on-color" data-header>
   <div class="container">
-    <a class="logo" href="index.html"><span>&lt;</span>techscope<span>_</span></a>
+    <a class="logo" href="index.html"><span>&lt;</span>techscope<span class="logo__cursor">_</span></a>
     <nav class="site-nav" aria-label="Hlavná navigácia">
       <a class="site-nav__link" href="index.html#sluzby">Služby</a>
-      <a class="site-nav__link" href="index.html#postup">Postup</a>
+      <a class="site-nav__link" href="index.html#odvetvia">Odvetvia</a>
       <a class="site-nav__link" href="index.html#referencie">Referencie</a>
-      <a class="site-nav__link" href="klient.html">Klientska zóna</a>
+      <a class="site-nav__link" href="index.html#postup">Postup</a>
     </nav>
-    <a class="btn btn--blue" href="rezervacia.html">Rezervovať stretnutie</a>
+    <div class="site-header__actions">
+      <a class="site-header__link" href="klient.html">Klientska zóna <span aria-hidden="true">›</span></a>
+      <a class="btn btn--blue" href="index.html">Späť na web <span class="arr" aria-hidden="true">›</span></a>
+    </div>
   </div>
 </header>
 
-<main class="section section--paper">
-  <div class="grid-bg--light" aria-hidden="true"></div>
-  <div class="container">
-    <div id="step-heading" class="section-head rz-head">
-      <h1 class="h1">Vyberte si termín online stretnutia</h1>
-      <p class="lead">Stretnutie trvá približne 45 minút a prebieha cez Google Meet. Pozvánku dostanete e-mailom.</p>
+<main id="obsah">
+<section class="hero rz-hero">
+  <div class="mesh" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><svg class="waves" viewBox="0 0 1440 920" preserveAspectRatio="none" aria-hidden="true"><path class="wave w3" d="M-100 700 C 300 520, 600 860, 1000 640 S 1500 560, 1600 620"/><path class="wave w1" d="M-100 560 C 260 420, 560 700, 900 520 S 1400 420, 1600 480"/><path class="wave w2" d="M-100 820 C 220 700, 640 900, 1000 760 S 1400 700, 1600 760"/></svg><div class="sheen"></div></div>
+  <div class="container rz-hero__inner">
+    <div id="step-heading" class="rz-intro">
+      <h1 class="h1 rz-intro__title">Vyberte si termín online stretnutia</h1>
+      <p class="lead">Prejdeme, ako vaša firma dnes funguje, a úprimne vám povieme, či vieme pomôcť. Pozvánku dostanete e-mailom.</p>
+      <ul class="rz-facts">
+        <li><strong>45 minút</strong><span>online cez Google Meet</span></li>
+        <li><strong>Nezáväzné</strong><span>bez ceny a bez záväzkov</span></li>
+        <li><strong>Priamo s nami</strong><span>s ľuďmi, ktorí budú systém stavať</span></li>
+      </ul>
     </div>
-    <div id="rezervacia-app" class="rz-app">
-      <p>Načítavam…</p>
+    <div class="rz-stage">
+      <div id="rezervacia-app" class="rz-app">
+        <p>Načítavam voľné termíny…</p>
+      </div>
     </div>
   </div>
+</section>
 </main>
 
 <footer class="site-footer">
@@ -63,7 +75,7 @@
       <a href="index.html#sluzby">Služby</a>
       <a href="index.html#postup">Postup</a>
       <a href="index.html#referencie">Referencie</a>
-      <a href="rezervacia.html">Rezervovať stretnutie</a>
+      <a href="rezervacia.html">Rezervovať<span class="hide-sm"> stretnutie</span></a>
     </div>
     <div class="site-footer__col">
       <p>Informácie</p>
@@ -78,6 +90,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
-<script src="assets/js/web/rezervacia.js"></script>
+<script src="assets/js/web/rezervacia.js?v=20261108d"></script>
+<script src="assets/js/web/anim.js?v=20261108c"></script>
 </body>
 </html>

@@ -34,7 +34,8 @@
 
   function initBooking(app) {
     var selectedSlot = null;
-    var today = new Date().toISOString().slice(0, 10);
+    var _n = new Date();
+    var today = _n.getFullYear() + '-' + String(_n.getMonth() + 1).padStart(2, '0') + '-' + String(_n.getDate()).padStart(2, '0');
 
     // Nadpis (#step-heading s <h1>) je statický v rezervacia.html kvôli SEO;
     // JS ho už nevkladá, len ho skryje po potvrdení rezervácie.
@@ -47,6 +48,16 @@
     var formArea = document.getElementById('form-area');
 
     fetchSlots();
+
+    // Termín sa ponúka, iba ak začína najskôr o MIN_HODIN hodín (dnešné už prebehnuté sa nezobrazia).
+    // Obsadené termíny filtruje už databáza (dostupny = true).
+    var MIN_HODIN = 2;
+    function upcoming(slots) {
+      var limit = Date.now() + MIN_HODIN * 3600 * 1000;
+      return slots.filter(function (s) {
+        return new Date(s.datum + 'T' + s.cas_od.slice(0, 5) + ':00').getTime() >= limit;
+      });
+    }
 
     function fetchSlots() {
       return window.supabaseClient
@@ -62,7 +73,7 @@
             slotArea.innerHTML = '<p>Termíny sa nepodarilo načítať. Napíšte nám prosím na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>.</p>';
             return;
           }
-          renderSlots(res.data || []);
+          renderSlots(upcoming(res.data || []));
         })
         .catch(function () {
           slotArea.innerHTML = '<p>Termíny sa nepodarilo načítať. Napíšte nám prosím na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>.</p>';
@@ -225,6 +236,10 @@
       if (isFirstRender) {
         formArea.innerHTML = buildFormHtml();
         wireForm();
+        // E-mail zadaný na homepage (rezervacia.html?email=...) predvyplníme do formulára.
+        var emailFromUrl = new URLSearchParams(window.location.search).get('email');
+        var emailInput = formArea.querySelector('#f-email');
+        if (emailFromUrl && emailInput && !emailInput.value) emailInput.value = emailFromUrl.trim().slice(0, 254);
       }
       var summaryEl = document.getElementById('selected-slot-summary');
       if (summaryEl) summaryEl.textContent = summary;
@@ -274,6 +289,42 @@
       var form = formArea.querySelector('form');
       var banner = formArea.querySelector('.rz-form__error');
       var submitBtn = form.querySelector('button[type="submit"]');
+      var currentStep = 1;
+      var STEP_TITLES = { 1: 'Na koho máme poslať pozvánku?', 2: 'Pár slov o vás', 3: 'Čo chcete prebrať?' };
+
+      function stepValid(n) {
+        if (n !== 1) return true;
+        var ok = validateField(form.meno_priezvisko, form.meno_priezvisko.value.trim() !== '');
+        ok = validateField(form.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) && ok;
+        return ok;
+      }
+
+      function goToStep(n) {
+        if (n > currentStep && !stepValid(currentStep)) return;
+        currentStep = n;
+        var cards = form.querySelectorAll('.rz-card');
+        for (var i = 0; i < cards.length; i++) {
+          var on = Number(cards[i].getAttribute('data-step')) === n;
+          cards[i].hidden = !on;
+          if (on) { cards[i].classList.remove('rz-card--in'); void cards[i].offsetWidth; cards[i].classList.add('rz-card--in'); }
+        }
+        document.getElementById('rz-step-title').textContent = STEP_TITLES[n];
+        document.getElementById('rz-step-label').textContent = 'Krok ' + n + ' z 3';
+        var dots = formArea.querySelectorAll('.rz-dots i');
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle('is-on', d < n); }
+        var first = form.querySelector('.rz-card[data-step="' + n + '"] .field');
+        if (first) first.focus({ preventScroll: true });
+        // Ak je začiatok karty schovaný pod hlavičkou, posuň ju do obrazu.
+        var top = formArea.getBoundingClientRect().top;
+        if (top < 100 || top > window.innerHeight * 0.6) {
+          window.scrollBy({ top: top - 110, behavior: 'smooth' });
+        }
+      }
+
+      form.addEventListener('click', function (e) {
+        if (e.target.closest('[data-next]')) { goToStep(currentStep + 1); }
+        else if (e.target.closest('[data-back]')) { goToStep(currentStep - 1); }
+      });
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -285,29 +336,24 @@
           return;
         }
 
+        if (currentStep < 3) { goToStep(currentStep + 1); return; }
+
         var values = {
           meno_priezvisko: form.meno_priezvisko.value.trim(),
           nazov_firmy: form.nazov_firmy.value.trim(),
-          pozicia: form.pozicia.value.trim(),
-          produkt: form.produkt.value,
+          pozicia: '',
+          produkt: produktFromUrl(),
           email: form.email.value.trim(),
           telefon: form.telefon.value.trim(),
-          rozpocet: form.rozpocet.value,
-          urgencia: form.urgencia.value,
+          rozpocet: form.rozpocet.value || 'neuvedené',
+          urgencia: 'neuvedené',
           popis_projektu: form.popis_projektu.value.trim(),
-          zdroj: form.zdroj.value,
+          zdroj: '',
           gdpr_suhlas: form.gdpr_suhlas.checked
         };
 
-        var valid = true;
-        valid = validateField(form.meno_priezvisko, values.meno_priezvisko !== '') && valid;
-        valid = validateField(form.nazov_firmy, values.nazov_firmy !== '') && valid;
-        valid = validateField(form.pozicia, values.pozicia !== '') && valid;
-        valid = validateField(form.produkt, values.produkt !== '') && valid;
-        valid = validateField(form.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) && valid;
-        valid = validateField(form.telefon, values.telefon !== '') && valid;
-        valid = validateCheckbox(form.gdpr_suhlas) && valid;
-
+        if (!stepValid(1)) { goToStep(1); return; }
+        var valid = validateCheckbox(form.gdpr_suhlas);
         if (!valid) return;
 
         submitBtn.disabled = true;
@@ -329,7 +375,7 @@
         }).then(function (res) {
           if (res.error) {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Odoslať rezerváciu';
+            submitBtn.textContent = 'Rezervovať stretnutie';
             if (res.error.message && res.error.message.indexOf('slot_obsadeny') !== -1) {
               banner.textContent = 'Tento termín je už bohužiaľ obsadený. Vyberte si prosím iný nižšie.';
               banner.classList.add('rz-form__error--show');
@@ -377,7 +423,7 @@
           });
         }).catch(function () {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Odoslať rezerváciu';
+          submitBtn.textContent = 'Rezervovať stretnutie';
           banner.textContent = 'Nepodarilo sa odoslať rezerváciu. Skúste to prosím znova alebo nám napíšte na contact@techscope.sk.';
           banner.classList.add('rz-form__error--show');
         });
@@ -389,11 +435,18 @@
       slotArea.style.display = 'none';
       formArea.innerHTML =
         '<div class="rz-confirm">' +
-          '<h3>Rezervácia potvrdená, ' + escapeHtml(values.meno_priezvisko) + '!</h3>' +
-          '<p>Váš strategy call je rezervovaný na <strong>' + summary + '</strong>.</p>' +
-          '<p>Ozveme sa vám do 1 pracovného dňa na ' + escapeHtml(values.email) + ' alebo ' + escapeHtml(values.telefon) + ' s potvrdením detailov.</p>' +
+          '<h3>Ďakujeme, stretnutie je rezervované.</h3>' +
+          '<p class="rz-confirm__when"><strong>' + summary + '</strong> · online cez Google Meet</p>' +
+          '<p>Pozvánku s odkazom na stretnutie sme poslali na <strong>' + escapeHtml(values.email) + '</strong>. Ak ju do pár minút nevidíte, pozrite sa aj do priečinka Spam.</p>' +
+          '<p>Potrebujete termín zmeniť? Odpovedzte na pozvánku alebo napíšte na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>.</p>' +
+          '<a class="btn btn--blue" href="index.html">Späť na web <span class="arr" aria-hidden="true">›</span></a>' +
         '</div>';
     }
+  }
+
+  function produktFromUrl() {
+    var fromUrl = new URLSearchParams(window.location.search).get('produkt');
+    return PRODUKTY[fromUrl] ? fromUrl : 'neurcene';
   }
 
   function produktOptionsHtml() {
@@ -430,90 +483,78 @@
     return div.innerHTML;
   }
 
+  // Formulár po kartách: 1) kontakt, 2) nepovinné údaje o firme, 3) téma a súhlas.
+  // Polia, ktoré sme z formulára vyradili (pozícia, urgencia, služba, zdroj), posielame do RPC
+  // s neutrálnou hodnotou, aby tvar payloadu vytvorit_rezervaciu ostal presne rovnaký.
   function buildFormHtml() {
     return (
       '<div class="rz-form">' +
-        '<h3>Krok 2: Vaše údaje</h3>' +
+        '<div class="rz-form__top">' +
+          '<h3 id="rz-step-title">Na koho máme poslať pozvánku?</h3>' +
+          '<p class="rz-form__progress"><span id="rz-step-label">Krok 1 z 3</span>' +
+            '<span class="rz-dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></span></p>' +
+        '</div>' +
         '<p class="rz-form__slot">Vybraný termín: <strong id="selected-slot-summary"></strong></p>' +
-        '<div class="rz-form__error"></div>' +
+        '<div class="rz-form__error" role="alert"></div>' +
         '<form novalidate>' +
-          '<div class="rz-row">' +
-            '<label for="f-meno">Meno a priezvisko *</label>' +
-            '<input type="text" class="field" id="f-meno" name="meno_priezvisko" required>' +
-            '<span class="rz-row__error">Zadajte prosím meno a priezvisko.</span>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-firma">Názov firmy *</label>' +
-            '<input type="text" class="field" id="f-firma" name="nazov_firmy" required>' +
-            '<span class="rz-row__error">Zadajte prosím názov firmy.</span>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-pozicia">Pozícia *</label>' +
-            '<input type="text" class="field" id="f-pozicia" name="pozicia" required>' +
-            '<span class="rz-row__error">Zadajte prosím vašu pozíciu.</span>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-email">E-mail *</label>' +
-            '<input type="email" class="field" id="f-email" name="email" required>' +
-            '<span class="rz-row__error">Zadajte prosím platný e-mail.</span>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-telefon">Telefón *</label>' +
-            '<input type="tel" class="field" id="f-telefon" name="telefon" required>' +
-            '<span class="rz-row__error">Zadajte prosím telefónne číslo.</span>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-rozpocet">Orientačný rozpočet</label>' +
-            '<select class="field" id="f-rozpocet" name="rozpocet">' +
-              '<option value="do 8 000 €">Do 8 000 €</option>' +
-              '<option value="8 000 – 18 000 €">8 000 – 18 000 €</option>' +
-              '<option value="18 000 – 28 000 €">18 000 – 28 000 €</option>' +
-              '<option value="28 000 – 42 000 €">28 000 – 42 000 €</option>' +
-              '<option value="42 000 € a viac">42 000 € a viac</option>' +
-              '<option value="neviem odhadnúť">Neviem odhadnúť</option>' +
-            '</select>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-urgencia">Urgencia</label>' +
-            '<select class="field" id="f-urgencia" name="urgencia">' +
-              '<option value="čo najskôr">Čo najskôr</option>' +
-              '<option value="do 1-3 mesiacov">Do 1-3 mesiacov</option>' +
-              '<option value="len prieskum">Len prieskum</option>' +
-            '</select>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-produkt">O ktorú službu máte záujem? *</label>' +
-            '<select class="field" id="f-produkt" name="produkt" required>' +
-              '<option value="">Vyberte</option>' +
-              produktOptionsHtml() +
-            '</select>' +
-            '<span class="rz-row__error">Vyberte prosím službu.</span>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-popis">Popis projektu (nepovinné)</label>' +
-            '<textarea class="field" id="f-popis" name="popis_projektu" rows="4"></textarea>' +
-          '</div>' +
-          '<div class="rz-row">' +
-            '<label for="f-zdroj">Ako ste sa o nás dozvedeli? (nepovinné)</label>' +
-            '<select class="field" id="f-zdroj" name="zdroj">' +
-              '<option value="">Vyberte</option>' +
-              '<option value="Google">Google</option>' +
-              '<option value="LinkedIn">LinkedIn</option>' +
-              '<option value="Odporúčanie">Odporúčanie</option>' +
-              '<option value="Iné">Iné</option>' +
-            '</select>' +
-          '</div>' +
-          '<div class="rz-row rz-row--checkbox">' +
-            '<label class="rz-checkbox">' +
-              '<input type="checkbox" name="gdpr_suhlas" required> ' +
-              'Súhlasím so <a href="ochrana-udajov.html" target="_blank" rel="noopener">spracovaním osobných údajov</a> *' +
-            '</label>' +
-            '<span class="rz-row__error">Bez súhlasu nie je možné rezerváciu odoslať.</span>' +
-          '</div>' +
-          '<button type="submit" class="btn btn--blue">Odoslať rezerváciu</button>' +
-          '<p class="rz-form__note">Odoslaním súhlasíte, že vás budeme kontaktovať ohľadom vašej rezervácie.</p>' +
+          '<fieldset class="rz-card" data-step="1">' +
+            '<legend class="sr-only">Kontakt</legend>' +
+            '<div class="rz-row">' +
+              '<label for="f-meno">Meno a priezvisko</label>' +
+              '<input type="text" class="field" id="f-meno" name="meno_priezvisko" autocomplete="name" required>' +
+              '<span class="rz-row__error">Zadajte prosím meno a priezvisko.</span>' +
+            '</div>' +
+            '<div class="rz-row">' +
+              '<label for="f-email">E-mail</label>' +
+              '<input type="email" class="field" id="f-email" name="email" autocomplete="email" required>' +
+              '<span class="rz-row__error">Zadajte prosím platný e-mail.</span>' +
+            '</div>' +
+            '<div class="rz-card__nav"><button type="button" class="btn btn--blue" data-next>Pokračovať <span class="arr" aria-hidden="true">›</span></button></div>' +
+          '</fieldset>' +
+          '<fieldset class="rz-card" data-step="2" hidden>' +
+            '<legend class="sr-only">O vás, nepovinné</legend>' +
+            '<p class="rz-card__hint">Všetko na tejto karte je nepovinné. Pomôže nám pripraviť sa.</p>' +
+            '<div class="rz-row">' +
+              '<label for="f-firma">Názov firmy <span class="rz-opt">(nepovinné)</span></label>' +
+              '<input type="text" class="field" id="f-firma" name="nazov_firmy" autocomplete="organization">' +
+            '</div>' +
+            '<div class="rz-row">' +
+              '<label for="f-telefon">Telefón <span class="rz-opt">(nepovinné)</span></label>' +
+              '<input type="tel" class="field" id="f-telefon" name="telefon" autocomplete="tel">' +
+            '</div>' +
+            '<div class="rz-row">' +
+              '<label for="f-rozpocet">Orientačný rozpočet <span class="rz-opt">(nepovinné)</span></label>' +
+              '<select class="field" id="f-rozpocet" name="rozpocet">' +
+                '<option value="">Nechcem uviesť</option>' +
+                '<option value="do 8 000 €">Do 8 000 €</option>' +
+                '<option value="8 000 – 18 000 €">8 000 – 18 000 €</option>' +
+                '<option value="18 000 – 28 000 €">18 000 – 28 000 €</option>' +
+                '<option value="28 000 – 42 000 €">28 000 – 42 000 €</option>' +
+                '<option value="42 000 € a viac">42 000 € a viac</option>' +
+                '<option value="neviem odhadnúť">Neviem odhadnúť</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="rz-card__nav"><button type="button" class="btn btn--outline" data-back>‹ Späť</button><button type="button" class="btn btn--blue" data-next>Pokračovať <span class="arr" aria-hidden="true">›</span></button></div>' +
+          '</fieldset>' +
+          '<fieldset class="rz-card" data-step="3" hidden>' +
+            '<legend class="sr-only">Téma stretnutia</legend>' +
+            '<div class="rz-row">' +
+              '<label for="f-popis">Čo by ste chceli prebrať? <span class="rz-opt">(nepovinné)</span></label>' +
+              '<textarea class="field" id="f-popis" name="popis_projektu" rows="4" placeholder="Napríklad: provízie dnes počítame v Exceli a zaberá to dva dni mesačne."></textarea>' +
+            '</div>' +
+            '<div class="rz-row rz-row--checkbox">' +
+              '<label class="rz-checkbox">' +
+                '<input type="checkbox" name="gdpr_suhlas" required> ' +
+                '<span>Súhlasím so <a href="ochrana-udajov.html" target="_blank" rel="noopener">spracovaním osobných údajov</a> na účel stretnutia.</span>' +
+              '</label>' +
+              '<span class="rz-row__error">Bez súhlasu nie je možné rezerváciu odoslať.</span>' +
+            '</div>' +
+            '<div class="rz-card__nav"><button type="button" class="btn btn--outline" data-back>‹ Späť</button><button type="submit" class="btn btn--blue">Rezervovať stretnutie</button></div>' +
+          '</fieldset>' +
         '</form>' +
+        '<p class="rz-form__note">Stretnutie je nezáväzné a bezplatné. Pozvánku do Google Meet dostanete e-mailom.</p>' +
       '</div>'
     );
   }
+
 })();

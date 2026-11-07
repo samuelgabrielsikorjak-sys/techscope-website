@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>techscope – softvér na mieru, klientske portály a integrácie</title>
-<meta name="description" content="Programujeme interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku. Menší systém odovzdáme za 4 až 6 týždňov, väčší za 2 až 3 mesiace. Cena a termín sú v zmluve.">
+<title>techscope – softvér na mieru</title>
+<meta name="description" content="Softvérové riešenia na mieru. Váš technologický partner od nápadu až po produkt.">
 <link rel="canonical" href="https://techscope.sk/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="techscope – softvér na mieru, klientske portály a integrácie">
-<meta property="og:description" content="Programujeme interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku. Menší systém odovzdáme za 4 až 6 týždňov, väčší za 2 až 3 mesiace. Cena a termín sú v zmluve.">
+<meta property="og:title" content="techscope – softvér na mieru">
+<meta property="og:description" content="Softvérové riešenia na mieru. Váš technologický partner od nápadu až po produkt.">
 <meta property="og:url" content="https://techscope.sk/">
 <meta property="og:image" content="https://techscope.sk/assets/img/og-techscope.png">
 <meta property="og:image:width" content="1200">
@@ -23,152 +23,406 @@
   "email": "contact@techscope.sk"
 }
 </script>
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png">
+<script>document.documentElement.className += ' js';</script>
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png?v=2">
 <link rel="manifest" href="site.webmanifest">
-<link rel="stylesheet" href="assets/css/web.css">
+<link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/web.css?v=20261108b">
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header site-header--on-color" data-header>
   <div class="container">
-    <a class="logo" href="#top"><span>&lt;</span>techscope<span>_</span></a>
+    <a class="logo" href="index.html"><span>&lt;</span>techscope<span class="logo__cursor">_</span></a>
     <nav class="site-nav" aria-label="Hlavná navigácia">
-      <a class="site-nav__link" href="#sluzby">Služby</a>
-      <a class="site-nav__link" href="#postup">Postup</a>
+      <div class="nav-item">
+        <button class="site-nav__link" type="button" aria-expanded="false" aria-controls="menu-sluzby">Služby <svg class="site-nav__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 L5 6.5 L8 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="nav-menu" id="menu-sluzby">
+          <a href="#sluzby"><strong>Softvér na mieru</strong></a>
+          <a href="#sluzby"><strong>Klientske portály</strong></a>
+          <a href="#sluzby"><strong>Integrácie</strong></a>
+          <a href="#sluzby"><strong>Automatizácia s AI</strong></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="site-nav__link" type="button" aria-expanded="false" aria-controls="menu-odvetvia">Odvetvia <svg class="site-nav__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 L5 6.5 L8 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="nav-menu" id="menu-odvetvia">
+          <a href="#odvetvia"><strong>Digitálne produkty</strong></a>
+          <a href="#odvetvia"><strong>Zdravotníctvo</strong></a>
+          <a href="#odvetvia"><strong>Servisné firmy</strong></a>
+          <a href="#odvetvia"><strong>SaaS platformy</strong></a>
+          <a href="#odvetvia"><strong>Iné</strong><span>Developeri, reality, financie a ďalší</span></a>
+        </div>
+      </div>
       <a class="site-nav__link" href="#referencie">Referencie</a>
-      <a class="site-nav__link" href="klient.html">Klientska zóna</a>
+      <a class="site-nav__link" href="#postup">Postup</a>
     </nav>
-    <a class="btn btn--blue" href="rezervacia.html">Rezervovať stretnutie</a>
+    <div class="site-header__actions">
+      <a class="site-header__link" href="klient.html">Klientska zóna <span aria-hidden="true">›</span></a>
+      <a class="btn btn--blue" href="rezervacia.html">Rezervovať<span class="hide-sm"> stretnutie</span> <span class="arr" aria-hidden="true">›</span></a>
+    </div>
   </div>
 </header>
 
-<main>
+<main id="obsah">
 
-<section class="section section--ink hero" id="top">
-  <div class="grid-bg--dark" aria-hidden="true"></div>
-  <div class="hero__mark" aria-hidden="true">&lt;</div>
+<section class="hero" id="top">
+  <div class="mesh" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><svg class="waves" viewBox="0 0 1440 920" preserveAspectRatio="none" aria-hidden="true"><path class="wave w3" d="M-100 700 C 300 520, 600 860, 1000 640 S 1500 560, 1600 620"/><path class="wave w1" d="M-100 560 C 260 420, 560 700, 900 520 S 1400 420, 1600 480"/><path class="wave w2" d="M-100 820 C 220 700, 640 900, 1000 760 S 1400 700, 1600 760"/></svg><div class="sheen"></div></div>
   <div class="container hero__inner">
     <div class="hero__text">
-      <h1 class="h1 hero__title"><span>Celý náš tím robí naraz iba na jednom projekte.</span> Na vašom.</h1>
-      <p class="lead hero__lead">Programujeme interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku. Menší systém odovzdáme za <strong>4 až 6 týždňov</strong>, väčší za <strong>2 až 3 mesiace</strong>. Cena a termín sú v zmluve.</p>
-      <div class="hero__actions">
-        <a class="btn btn--blue" href="rezervacia.html">Rezervovať stretnutie</a>
-        <a class="btn btn--white" href="#sluzby">Čo programujeme</a>
+      <a class="pill" href="rezervacia.html" data-next-slot>Rezervujte si nezáväzné online stretnutie <span aria-hidden="true">›</span></a>
+      <h1 class="h1 hero__title">Softvérové riešenia na mieru pre vašu firmu</h1>
+      <p class="lead hero__lead">Riešenie na mieru. Rýchly vývoj. Záruka funkčnosti.</p>
+      <form class="email-form glass" action="rezervacia.html" method="get">
+        <label class="sr-only" for="hero-email">Pracovný e-mail</label>
+        <input id="hero-email" name="email" type="email" placeholder="Pracovný e-mail" autocomplete="email">
+        <button class="btn btn--dark" type="submit">Vybrať termín <span class="arr" aria-hidden="true">›</span></button>
+      </form>
+    </div>
+
+    <div class="pm" aria-label="Ukážka klientskej zóny techscope" role="img">
+      <div class="pm__canvas">
+      <div class="pm__stage rise" aria-hidden="true"></div>
+      <div class="pm__window glass rise rise--1" aria-hidden="true">
+        <div class="pm__body">
+          <p class="pm__title">Systém provízií agentov</p>
+          <p class="pm__sub">Odovzdanie podľa zmluvy · na čas</p>
+          <div class="pm__grid">
+            <div><p class="pm__label">Program odmeňovania</p><span class="pm__mini">Poslať personalizované pozvánky</span></div>
+            <div><p class="pm__label">Team meeting</p><p class="pm__value">Utorok 10:00</p><p class="pm__label">Google Meet</p></div>
+          </div>
+          <div class="pm__chart inner">
+            <p class="pm__label">Odpracované hodiny tento mesiac</p>
+            <svg viewBox="0 0 480 110"><line x1="0" y1="109" x2="480" y2="109" stroke="#E3E8F3"/><line x1="0" y1="55" x2="480" y2="55" stroke="#EDF0F7"/><path class="draw-now" pathLength="1" d="M0 96 L40 90 L80 92 L120 76 L160 80 L200 62 L240 66 L280 48 L320 52 L360 36 L400 40 L440 24 L480 18" fill="none" stroke="#2447F5" stroke-width="2.5" stroke-linejoin="round"/><path class="draw-now" pathLength="1" d="M0 100 L80 98 L160 92 L240 88 L320 82 L400 76 L480 70" fill="none" stroke="#B7C4E8" stroke-width="2" stroke-dasharray="4 4"/></svg>
+            <div class="pm__axis"><span>1. nov</span><span>dnes</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pm__phone glass rise rise--2" aria-hidden="true">
+        <div class="pm__screen">
+          <div class="pm__notch"></div>
+          <p class="pm__kicker">Na schválenie</p>
+          <p class="pm__heading">Výpočet provízií</p>
+          <div class="pm__doc inner"><i></i><i class="w90"></i><i class="w60"></i><i class="w75"></i></div>
+          <p class="pm__field-label">Ukážka</p>
+          <p class="pm__field">Záznam z 6. 11., 24 min</p>
+          <p class="pm__field-label">Poznámka pre tím</p>
+          <p class="pm__field pm__field--empty">Voliteľné</p>
+          <div class="pm__action">
+            <span class="pm__btn pm__btn--todo">Schváliť modul</span>
+            <span class="pm__btn pm__btn--done">Schválené</span>
+            <svg class="pm__tap" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="rgba(17,18,20,.25)" stroke="#FFFFFF" stroke-width="2"/></svg>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
-    <aside class="slots" aria-labelledby="slots-title">
-      <h2 class="slots__title" id="slots-title">Najbližšie voľné termíny</h2>
-      <ul class="slots__list">
-        <li>Načítavam termíny…</li>
-      </ul>
-      <a class="btn btn--blue" href="rezervacia.html">Všetky termíny</a>
-    </aside>
   </div>
 </section>
 
-<section class="section section--paper" id="sluzby">
+<section class="section section--paper" id="sluzby" data-anim>
   <div class="grid-bg--light" aria-hidden="true"></div>
   <div class="container">
     <div class="section-head">
       <h2 class="h2">Čo programujeme</h2>
-      <p class="lead">Väčšina našich projektov začína tabuľkou v Exceli, ktorú už nikto nechce otvárať.</p>
+      <p class="lead">Systémy, ktoré pracujú za vás, aby ste sa vy aj váš tím mohli sústrediť na dôležitejšie úlohy.</p>
     </div>
-    <div class="services">
-      <article class="block--blue services__main">
-        <div class="grid-bg--blue" aria-hidden="true"></div>
-        <div>
+    <div class="svc">
+      <article class="card svc__card svc__card--wide iso-card">
+        <div class="svc__ill"><svg viewBox="0 0 320 340" aria-hidden="true" focusable="false"><defs><linearGradient id="isoA-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoA-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoA-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="guides"><line x1="279.5" y1="242.9" x2="279.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="160.0" y1="311.9" x2="160.0" y2="234.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="40.5" y1="242.9" x2="40.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line></g><g class="lift l0"><g class="drop" style="animation-delay:0.00s"><polygon points="40.5,251.0 160.0,320.0 160.0,311.9 40.5,242.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,251.0 160.0,320.0 160.0,311.9 279.5,242.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,173.9 279.5,242.9 160.0,311.9 40.5,242.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l1"><g class="drop" style="animation-delay:0.15s"><polygon points="40.5,208.4 160.0,277.4 160.0,269.4 40.5,200.4" fill="url(#isoA-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,208.4 160.0,277.4 160.0,269.4 279.5,200.4" fill="url(#isoA-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,131.4 279.5,200.4 160.0,269.4 40.5,200.4" fill="url(#isoA-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l2"><g class="drop" style="animation-delay:0.30s"><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="179.9" y1="100.4" x2="60.4" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="140.1" y1="100.4" x2="259.6" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="199.8" y1="111.9" x2="80.3" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="120.2" y1="111.9" x2="239.7" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="219.8" y1="123.4" x2="100.2" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="100.2" y1="123.4" x2="219.8" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="239.7" y1="134.9" x2="120.2" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="80.3" y1="134.9" x2="199.8" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="259.6" y1="146.4" x2="140.1" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="60.4" y1="146.4" x2="179.9" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l3"><g class="drop" style="animation-delay:.55s"><polygon points="136.1,118.8 160.0,132.6 160.0,109.5 136.1,95.8" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="183.9,118.8 160.0,132.6 160.0,109.5 183.9,95.8" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,82.0 183.9,95.8 160.0,109.5 136.1,95.8" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="168.0,137.1 191.9,150.9 191.9,109.6 168.0,95.8" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="215.8,137.2 191.9,150.9 191.9,109.6 215.8,95.8" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,82.0 215.8,95.8 191.9,109.6 168.0,95.8" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="199.8,155.6 223.7,169.4 223.7,150.9 199.8,137.1" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="247.6,155.6 223.7,169.4 223.7,150.9 247.6,137.1" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="223.7,123.4 247.6,137.1 223.7,150.9 199.8,137.1" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="104.2,137.2 128.1,150.9 128.1,118.8 104.2,105.0" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="152.0,137.1 128.1,150.9 128.1,118.8 152.0,105.0" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="128.1,91.2 152.0,105.0 128.1,118.8 104.2,105.0" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="136.1,155.6 160.0,169.4 160.0,114.2 136.1,100.3" fill="url(#isoA-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="183.9,155.6 160.0,169.4 160.0,114.2 183.9,100.3" fill="url(#isoA-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,86.6 183.9,100.3 160.0,114.2 136.1,100.3" fill="url(#isoA-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="168.0,174.0 191.9,187.8 191.9,160.2 168.0,146.4" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="215.8,174.0 191.9,187.8 191.9,160.2 215.8,146.4" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,132.6 215.8,146.4 191.9,160.2 168.0,146.4" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="72.4,155.6 96.3,169.4 96.3,155.6 72.4,141.8" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="120.2,155.6 96.3,169.4 96.3,155.6 120.2,141.8" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="96.3,128.0 120.2,141.8 96.3,155.6 72.4,141.8" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="104.2,174.0 128.1,187.8 128.1,164.8 104.2,151.0" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="152.0,174.0 128.1,187.8 128.1,164.8 152.0,151.0" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="128.1,137.2 152.0,151.0 128.1,164.8 104.2,151.0" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="136.1,192.4 160.0,206.2 160.0,169.3 136.1,155.5" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="183.9,192.4 160.0,206.2 160.0,169.3 183.9,155.5" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,141.7 183.9,155.5 160.0,169.3 136.1,155.5" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g></svg></div>
+        <div class="svc__text">
           <h3>Softvér na mieru</h3>
-          <p>Systém postavený podľa toho, ako vaša firma reálne pracuje. Napríklad výpočet provízií pre sieť finančných agentov, plánovanie zmien personálu alebo evidencia zákaziek so schvaľovaním.</p>
-          <a class="btn btn--white" href="rezervacia.html">Opíšte nám svoj proces</a>
+          <p>Systém postavený podľa toho, ako vaša firma reálne pracuje. Zmapujeme každý detail a každú rolu v tíme, aby sme odstránili prestoje a automatizovali procesy.</p>
+          <a class="btn btn--dark" href="rezervacia.html?produkt=softver_na_mieru">Opíšte nám svoj proces <span class="arr" aria-hidden="true">›</span></a>
         </div>
       </article>
-      <div class="services__grid">
-        <div class="item"><h3>Klientske portály</h3><p>Klienti alebo agenti vidia stav, dokumenty a schvaľujú bez e-mailov tam a späť.</p></div>
-        <div class="item"><h3>Mobilné aplikácie</h3><p>Pre ľudí v teréne: vodičov, technikov, zdravotníkov. iOS aj Android.</p></div>
-        <div class="item"><h3>Integrácie</h3><p>Prepojíme účtovníctvo, CRM alebo e-shop, aby nikto neprepisoval čísla ručne.</p></div>
-        <div class="item"><h3>Náhrada starého systému</h3><p>Prenesieme dáta zo zastaraného programu a vypneme ho, až keď nový beží.</p></div>
-        <div class="item"><h3>Automatizácia s AI</h3><p>Čítanie faktúr a zmlúv, triedenie e-mailov, vyhľadávanie vo vlastných dokumentoch.</p></div>
-        <div class="item item--cta"><h3>Niečo iné?</h3><a class="btn btn--dark" href="rezervacia.html">Napíšte nám</a></div>
+      <article class="card svc__card iso-card">
+        <div class="svc__ill"><svg viewBox="0 0 320 340" aria-hidden="true" focusable="false"><defs><linearGradient id="isoB-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoB-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoB-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="guides"><line x1="279.5" y1="242.9" x2="279.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="160.0" y1="311.9" x2="160.0" y2="234.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="40.5" y1="242.9" x2="40.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line></g><g class="lift l0"><g class="drop" style="animation-delay:0.00s"><polygon points="40.5,251.0 160.0,320.0 160.0,311.9 40.5,242.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,251.0 160.0,320.0 160.0,311.9 279.5,242.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,173.9 279.5,242.9 160.0,311.9 40.5,242.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l1"><g class="drop" style="animation-delay:0.15s"><polygon points="40.5,208.4 160.0,277.4 160.0,269.4 40.5,200.4" fill="url(#isoB-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,208.4 160.0,277.4 160.0,269.4 279.5,200.4" fill="url(#isoB-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,131.4 279.5,200.4 160.0,269.4 40.5,200.4" fill="url(#isoB-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l2"><g class="drop" style="animation-delay:0.30s"><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="179.9" y1="100.4" x2="60.4" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="140.1" y1="100.4" x2="259.6" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="199.8" y1="111.9" x2="80.3" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="120.2" y1="111.9" x2="239.7" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="219.8" y1="123.4" x2="100.2" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="100.2" y1="123.4" x2="219.8" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="239.7" y1="134.9" x2="120.2" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="80.3" y1="134.9" x2="199.8" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="259.6" y1="146.4" x2="140.1" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="60.4" y1="146.4" x2="179.9" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l3"><g class="drop" style="animation-delay:.55s"><polygon points="148.4,113.9 220.2,155.3 220.2,95.5 148.4,54.1" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="223.7,153.2 220.2,155.3 220.2,95.5 223.7,93.4" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="152.0,52.0 223.7,93.4 220.2,95.5 148.4,54.1" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="154.4" y1="69.1" x2="204.2" y2="97.8" stroke="#2447F5" stroke-width="2.4" stroke-linecap="round" class="ink" pathLength="1" style="animation-delay:1.00s"></line><line x1="154.4" y1="81.7" x2="190.3" y2="102.4" stroke="#2447F5" stroke-width="2.4" stroke-linecap="round" class="ink" pathLength="1" style="animation-delay:1.12s"></line><line x1="154.4" y1="94.4" x2="198.2" y2="119.7" stroke="#2447F5" stroke-width="2.4" stroke-linecap="round" class="ink" pathLength="1" style="animation-delay:1.24s"></line><polygon points="144.5,157.6 188.3,182.9 188.3,148.4 144.5,123.1" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,180.9 188.3,182.9 188.3,148.4 191.9,146.4" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="148.0,121.0 191.9,146.4 188.3,148.4 144.5,123.1" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="149.4" y1="135.2" x2="180.3" y2="153.0" stroke="#2B3A5C" stroke-width="1.6" stroke-linecap="round" ></line><line x1="149.4" y1="143.2" x2="170.4" y2="155.3" stroke="#9AA3B5" stroke-width="1.6" stroke-linecap="round" ></line><polygon points="149.0,156.1 167.0,166.5 167.0,159.1 149.0,148.8" fill="url(#isoB-l)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="167.4,166.2 167.0,166.5 167.0,159.1 167.4,158.9" fill="url(#isoB-r)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="149.4,148.5 167.4,158.9 167.0,159.1 149.0,148.8" fill="url(#isoB-t)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon></g></g></svg></div>
+        <h3>Klientske portály</h3>
+        <p>Klienti alebo agenti vidia stav, dokumenty a schvaľujú bez e-mailov tam a späť.</p>
+      </article>
+      <article class="card svc__card iso-card">
+        <div class="svc__ill"><svg viewBox="0 0 320 340" aria-hidden="true" focusable="false"><defs><linearGradient id="isoC-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoC-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoC-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="guides"><line x1="279.5" y1="242.9" x2="279.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="160.0" y1="311.9" x2="160.0" y2="234.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="40.5" y1="242.9" x2="40.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line></g><g class="lift l0"><g class="drop" style="animation-delay:0.00s"><polygon points="40.5,251.0 160.0,320.0 160.0,311.9 40.5,242.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,251.0 160.0,320.0 160.0,311.9 279.5,242.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,173.9 279.5,242.9 160.0,311.9 40.5,242.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l1"><g class="drop" style="animation-delay:0.15s"><polygon points="40.5,208.4 160.0,277.4 160.0,269.4 40.5,200.4" fill="url(#isoC-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,208.4 160.0,277.4 160.0,269.4 279.5,200.4" fill="url(#isoC-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,131.4 279.5,200.4 160.0,269.4 40.5,200.4" fill="url(#isoC-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l2"><g class="drop" style="animation-delay:0.30s"><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="179.9" y1="100.4" x2="60.4" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="140.1" y1="100.4" x2="259.6" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="199.8" y1="111.9" x2="80.3" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="120.2" y1="111.9" x2="239.7" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="219.8" y1="123.4" x2="100.2" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="100.2" y1="123.4" x2="219.8" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="239.7" y1="134.9" x2="120.2" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="80.3" y1="134.9" x2="199.8" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="259.6" y1="146.4" x2="140.1" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="60.4" y1="146.4" x2="179.9" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l3"><g class="drop" style="animation-delay:.55s"><polygon points="195.9,146.4 207.8,153.2 207.8,139.4 195.9,132.6" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="219.8,146.4 207.8,153.2 207.8,139.4 219.8,132.6" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="207.8,125.7 219.8,132.6 207.8,139.4 195.9,132.6" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="195.9,132.6 207.8,139.4 207.8,125.6 195.9,118.8" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="219.8,132.6 207.8,139.4 207.8,125.6 219.8,118.8" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="207.8,111.9 219.8,118.8 207.8,125.6 195.9,118.8" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="136.1,139.4 166.0,156.7 166.0,87.7 136.1,70.4" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="170.0,154.4 166.0,156.7 166.0,87.7 170.0,85.4" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="140.1,68.2 170.0,85.4 166.0,87.7 136.1,70.4" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="138.1,135.3 163.2,149.8 163.2,92.3 138.1,77.8" fill="url(#isoC-l)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="163.6,149.6 163.2,149.8 163.2,92.3 163.6,92.1" fill="url(#isoC-r)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="138.5,77.6 163.6,92.1 163.2,92.3 138.1,77.8" fill="url(#isoC-t)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><line x1="141.7" y1="89.1" x2="159.6" y2="99.4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" class="ink" pathLength="1" style="animation-delay:1.00s"></line><line x1="141.7" y1="99.4" x2="154.6" y2="106.9" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" class="ink" pathLength="1" style="animation-delay:1.12s"></line><line x1="141.7" y1="109.8" x2="149.6" y2="114.4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" class="ink" pathLength="1" style="animation-delay:1.24s"></line><polygon points="144.1,194.7 164.0,206.2 164.0,196.9 144.1,185.4" fill="url(#isoC-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="183.9,194.7 164.0,206.2 164.0,196.9 183.9,185.4" fill="url(#isoC-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="164.0,173.9 183.9,185.4 164.0,196.9 144.1,185.4" fill="url(#isoC-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g></svg></div>
+        <h3>Mobilné aplikácie</h3>
+        <p>Pre ľudí v teréne: vodičov, technikov, zdravotníkov. iOS aj Android.</p>
+      </article>
+      <article class="card svc__card iso-card">
+        <div class="svc__ill"><svg viewBox="0 0 320 340" aria-hidden="true" focusable="false"><defs><linearGradient id="isoD-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoD-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoD-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="guides"><line x1="279.5" y1="242.9" x2="279.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="160.0" y1="311.9" x2="160.0" y2="234.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="40.5" y1="242.9" x2="40.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line></g><g class="lift l0"><g class="drop" style="animation-delay:0.00s"><polygon points="40.5,251.0 160.0,320.0 160.0,311.9 40.5,242.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,251.0 160.0,320.0 160.0,311.9 279.5,242.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,173.9 279.5,242.9 160.0,311.9 40.5,242.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l1"><g class="drop" style="animation-delay:0.15s"><polygon points="40.5,208.4 160.0,277.4 160.0,269.4 40.5,200.4" fill="url(#isoD-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,208.4 160.0,277.4 160.0,269.4 279.5,200.4" fill="url(#isoD-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,131.4 279.5,200.4 160.0,269.4 40.5,200.4" fill="url(#isoD-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l2"><g class="drop" style="animation-delay:0.30s"><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="179.9" y1="100.4" x2="60.4" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="140.1" y1="100.4" x2="259.6" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="199.8" y1="111.9" x2="80.3" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="120.2" y1="111.9" x2="239.7" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="219.8" y1="123.4" x2="100.2" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="100.2" y1="123.4" x2="219.8" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="239.7" y1="134.9" x2="120.2" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="80.3" y1="134.9" x2="199.8" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="259.6" y1="146.4" x2="140.1" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="60.4" y1="146.4" x2="179.9" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l3"><g class="drop" style="animation-delay:.55s"><path d="M172.0 132.6 L199.8 148.7 L148.0 178.6 L164.0 187.8" fill="none" stroke="#2447F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ink" pathLength="1" style="animation-delay:1.05s"></path><path d="M148.0 132.6 L96.3 162.5 L140.1 187.8" fill="none" stroke="#2BB8E0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ink" pathLength="1" style="animation-delay:1.25s"></path><polygon points="128.1,121.0 160.0,139.4 160.0,102.6 128.1,84.2" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,121.0 160.0,139.4 160.0,102.6 191.9,84.2" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,65.8 191.9,84.2 160.0,102.6 128.1,84.2" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="136.1,194.7 164.0,210.8 164.0,187.8 136.1,171.7" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,194.7 164.0,210.8 164.0,187.8 191.9,171.7" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="164.0,155.6 191.9,171.7 164.0,187.8 136.1,171.7" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="136.1,171.7 164.0,187.8 164.0,179.7 136.1,163.6" fill="url(#isoD-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,171.7 164.0,187.8 164.0,179.7 191.9,163.6" fill="url(#isoD-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="164.0,147.5 191.9,163.6 164.0,179.7 136.1,163.6" fill="url(#isoD-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="193.9,148.7 199.8,152.1 199.8,145.2 193.9,141.8" fill="url(#isoD-l)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="205.8,148.7 199.8,152.1 199.8,145.2 205.8,141.8" fill="url(#isoD-r)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="199.8,138.3 205.8,141.8 199.8,145.2 193.9,141.8" fill="url(#isoD-t)" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" ></polygon></g></g></svg></div>
+        <h3>Integrácie</h3>
+        <p>Prepojíme účtovníctvo, CRM alebo e-shop, aby ste nemuseli donekonečna ručne prepisovať čísla.</p>
+      </article>
+      <article class="card svc__card iso-card">
+        <div class="svc__ill"><svg viewBox="0 0 320 340" aria-hidden="true" focusable="false"><defs><linearGradient id="isoE-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoE-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoE-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="guides"><line x1="279.5" y1="242.9" x2="279.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="160.0" y1="311.9" x2="160.0" y2="234.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="40.5" y1="242.9" x2="40.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line></g><g class="lift l0"><g class="drop" style="animation-delay:0.00s"><polygon points="40.5,251.0 160.0,320.0 160.0,311.9 40.5,242.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,251.0 160.0,320.0 160.0,311.9 279.5,242.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,173.9 279.5,242.9 160.0,311.9 40.5,242.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l1"><g class="drop" style="animation-delay:0.15s"><polygon points="40.5,208.4 160.0,277.4 160.0,269.4 40.5,200.4" fill="url(#isoE-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,208.4 160.0,277.4 160.0,269.4 279.5,200.4" fill="url(#isoE-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,131.4 279.5,200.4 160.0,269.4 40.5,200.4" fill="url(#isoE-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l2"><g class="drop" style="animation-delay:0.30s"><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="179.9" y1="100.4" x2="60.4" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="140.1" y1="100.4" x2="259.6" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="199.8" y1="111.9" x2="80.3" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="120.2" y1="111.9" x2="239.7" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="219.8" y1="123.4" x2="100.2" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="100.2" y1="123.4" x2="219.8" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="239.7" y1="134.9" x2="120.2" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="80.3" y1="134.9" x2="199.8" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="259.6" y1="146.4" x2="140.1" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="60.4" y1="146.4" x2="179.9" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l3"><g class="drop" style="animation-delay:.55s"><polygon points="72.4,153.2 104.2,171.7 104.2,139.5 72.4,121.0" fill="#E7E7E2" stroke="#9AA3B5" stroke-width="1.1" stroke-linejoin="round" stroke-dasharray="4 3"></polygon><polygon points="136.1,153.2 104.2,171.7 104.2,139.5 136.1,121.0" fill="#D6D6D0" stroke="#9AA3B5" stroke-width="1.1" stroke-linejoin="round" stroke-dasharray="4 3"></polygon><polygon points="104.2,102.7 136.1,121.0 104.2,139.5 72.4,121.0" fill="#F4F4F1" stroke="#9AA3B5" stroke-width="1.1" stroke-linejoin="round" stroke-dasharray="4 3"></polygon><path d="M120.2 162.5 L136.1 171.7 L175.9 148.7 L187.9 155.6" fill="none" stroke="#2447F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ink" pathLength="1" style="animation-delay:1.00s"></path><path d="M188.9 151.5 L189.9 156.7 L180.9 156.1" fill="none" stroke="#2447F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ink" pathLength="1" style="animation-delay:1.40s"></path><polygon points="175.9,167.1 207.8,185.5 207.8,144.1 175.9,125.7" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="239.7,167.1 207.8,185.5 207.8,144.1 239.7,125.7" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="207.8,107.2 239.7,125.7 207.8,144.1 175.9,125.7" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="175.9,125.7 207.8,144.1 207.8,136.0 175.9,117.6" fill="url(#isoE-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="239.7,125.7 207.8,144.1 207.8,136.0 239.7,117.6" fill="url(#isoE-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="207.8,99.2 239.7,117.6 207.8,136.0 175.9,117.6" fill="url(#isoE-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g></svg></div>
+        <h3>Náhrada starého systému</h3>
+        <p>Vyvinieme nové riešenie, prenesieme dáta zo zastaraného systému, otestujeme ho a spustíme tak, aby fungovalo presne podľa vašich predstáv.</p>
+      </article>
+      <article class="card svc__card iso-card">
+        <div class="svc__ill"><svg viewBox="0 0 320 340" aria-hidden="true" focusable="false"><defs><linearGradient id="isoF-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoF-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoF-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="guides"><line x1="279.5" y1="242.9" x2="279.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="160.0" y1="311.9" x2="160.0" y2="234.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line><line x1="40.5" y1="242.9" x2="40.5" y2="165.9" stroke="#B7C2DA" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="3 4"></line></g><g class="lift l0"><g class="drop" style="animation-delay:0.00s"><polygon points="40.5,251.0 160.0,320.0 160.0,311.9 40.5,242.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,251.0 160.0,320.0 160.0,311.9 279.5,242.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,173.9 279.5,242.9 160.0,311.9 40.5,242.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l1"><g class="drop" style="animation-delay:0.15s"><polygon points="40.5,208.4 160.0,277.4 160.0,269.4 40.5,200.4" fill="url(#isoF-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,208.4 160.0,277.4 160.0,269.4 279.5,200.4" fill="url(#isoF-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,131.4 279.5,200.4 160.0,269.4 40.5,200.4" fill="url(#isoF-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l2"><g class="drop" style="animation-delay:0.30s"><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="179.9" y1="100.4" x2="60.4" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="140.1" y1="100.4" x2="259.6" y2="169.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="199.8" y1="111.9" x2="80.3" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="120.2" y1="111.9" x2="239.7" y2="180.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="219.8" y1="123.4" x2="100.2" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="100.2" y1="123.4" x2="219.8" y2="192.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="239.7" y1="134.9" x2="120.2" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="80.3" y1="134.9" x2="199.8" y2="203.9" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="259.6" y1="146.4" x2="140.1" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="60.4" y1="146.4" x2="179.9" y2="215.4" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="40.5,165.9 160.0,234.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="279.5,165.9 160.0,234.9 160.0,226.9 279.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="160.0,88.9 279.5,157.9 160.0,226.9 40.5,157.9" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g><g class="lift l3"><g class="drop" style="animation-delay:.55s"><polygon points="106.6,135.8 138.5,154.2 138.5,110.5 106.6,92.1" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="140.1,153.2 138.5,154.2 138.5,110.5 140.1,109.5" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="108.2,91.2 140.1,109.5 138.5,110.5 106.6,92.1" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="113.8,130.7 145.7,149.1 145.7,105.4 113.8,87.0" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="147.3,148.2 145.7,149.1 145.7,105.4 147.3,104.5" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="115.4,86.1 147.3,104.5 145.7,105.4 113.8,87.0" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="121.0,125.7 152.8,144.0 152.8,100.3 121.0,81.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="154.4,143.1 152.8,144.0 152.8,100.3 154.4,99.4" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="122.6,81.0 154.4,99.4 152.8,100.3 121.0,81.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="128.1,120.6 160.0,139.0 160.0,95.3 128.1,76.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="161.6,138.1 160.0,139.0 160.0,95.3 161.6,94.4" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="129.7,76.0 161.6,94.4 160.0,95.3 128.1,76.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1" stroke-linejoin="round" ></polygon><path d="M144.1 157.9 L160.0 167.1 L175.9 157.9" fill="none" stroke="#2447F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ink" pathLength="1" style="animation-delay:1.00s"></path><polygon points="173.9,161.3 209.8,182.0 209.8,140.6 173.9,119.9" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="245.6,161.3 209.8,182.0 209.8,140.6 245.6,119.9" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="209.8,99.2 245.6,119.9 209.8,140.6 173.9,119.9" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="191.9,119.9 209.8,130.3 209.8,118.8 191.9,108.4" fill="url(#isoF-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="227.7,119.9 209.8,130.3 209.8,118.8 227.7,108.4" fill="url(#isoF-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="209.8,98.1 227.7,108.4 209.8,118.8 191.9,108.4" fill="url(#isoF-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><path d="M221.7 175.1 L227.7 178.6 L179.9 206.2 L156.0 192.4" fill="none" stroke="#2BB8E0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ink" pathLength="1" style="animation-delay:1.30s"></path><polygon points="132.1,187.8 148.0,197.0 148.0,185.5 132.1,176.2" fill="url(#isoF-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="164.0,187.8 148.0,197.0 148.0,185.5 164.0,176.3" fill="url(#isoF-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="148.0,167.1 164.0,176.3 148.0,185.5 132.1,176.2" fill="url(#isoF-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></g></svg></div>
+        <h3>Automatizácia s AI</h3>
+        <p>Čítanie faktúr a zmlúv, triedenie e-mailov, vyhľadávanie vo vlastných dokumentoch.</p>
+      </article>
+      <div class="svc__other">
+        <div class="mesh mesh--flat" aria-hidden="true"><div class="blob b2"></div><div class="blob b3"></div></div>
+        <div class="glass">
+          <h3>Niečo iné?</h3>
+          <p>Ak váš problém nie je v zozname, opíšte nám ho. Povieme vám na rovinu, či ho vieme vyriešiť.</p>
+          <a class="btn btn--dark" href="rezervacia.html">Napísať nám <span class="arr" aria-hidden="true">›</span></a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section--white" id="postup">
-  <div class="container">
-    <div class="section-head">
-      <h2 class="h2">Od prvého stretnutia po spustenie</h2>
-      <p class="lead">Priebeh projektu vidíte počas celej spolupráce v klientskej zóne.</p>
+<section class="section section--white crosshair-sec" data-anim data-crosshair>
+  <span class="drawing__x" aria-hidden="true"></span>
+  <span class="drawing__y" aria-hidden="true"></span>
+  <span class="drawing__tag" aria-hidden="true">x 000 · y 000</span>
+  <div class="container split">
+    <div>
+      <h2 class="h2">Návrh riešenia s presnou cenovou ponukou do 7 dní</h2>
+      <p class="lead">Skôr ako napíšeme prvý riadok kódu, ukážeme vám, ako bude systém fungovať.</p>
+      <ul class="checks">
+        <li>Mapa vášho procesu dnes a po zavedení systému</li>
+        <li>Mapa vášho procesu: kto čo robí a kde sa stráca čas</li>
+        <li>Zoznam modulov</li>
+        <li>Fixná cena a harmonogram s dátumom odovzdania</li>
+      </ul>
     </div>
-    <div class="steps">
-      <div class="item"><h3>Stretneme sa</h3><p>Online prejdeme váš proces a spočítame, koľko vás dnešný stav stojí.</p></div>
-      <div class="item"><h3>Navrhneme riešenie</h3><p>Do 7 dní vám ukážeme, ako bude systém fungovať. Vy ho opravíte.</p></div>
-      <div class="item"><h3>Podpíšeme zmluvu</h3><p>Zoznam modulov, fixná cena, dátum začatia a termín odovzdania.</p></div>
-      <div class="item"><h3>Programujeme</h3><p>Po moduloch. Každý hotový modul vám ukážeme a vy ho schválite.</p></div>
-      <div class="item"><h3>Odovzdáme</h3><p>Nasadíme, zaškolíme váš tím a potom sa o systém staráme v rámci Care alebo Care Plus.</p></div>
-    </div>
-    <a class="btn btn--blue" href="rezervacia.html">Začať prvým stretnutím</a>
+    <figure class="card drawing" data-drawing>
+      <div class="grid-bg--light" aria-hidden="true"></div>
+      <div class="drawing__tilt">
+      <svg viewBox="0 0 560 460" role="img" aria-label="Technický výkres znaku z loga techscope s krokmi spolupráce">
+<defs>
+<pattern id="bpHatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#C9D4F5" stroke-width="2"></line></pattern>
+<linearGradient id="bpGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"></stop><stop offset="1" stop-color="#14B8A6"></stop></linearGradient>
+</defs>
+<circle class="d" pathLength="1" cx="260" cy="210" r="196" fill="none" stroke="#D5DCEB" stroke-dasharray="4 6" style="animation-duration: 1.6s"></circle>
+<line class="d" pathLength="1" x1="40" y1="210" x2="480" y2="210" stroke="#D5DCEB" stroke-dasharray="6 6" style="animation-delay: .1s"></line>
+<line class="d" pathLength="1" x1="260" y1="20" x2="260" y2="400" stroke="#D5DCEB" stroke-dasharray="6 6" style="animation-delay: .1s"></line>
+<g class="bp-extrude" aria-hidden="true"><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="8"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="7"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="6"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="5"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="4"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="3"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="2"/><path d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" data-i="1"/></g><path class="a bp-hatch" d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" fill="url(#bpHatch)" style="animation-delay: 1s"></path>
+<path class="d" pathLength="1" d="M360 50 L120 210 L360 370 L400 320 L210 210 L400 100 Z" fill="none" stroke="#2B3A5C" stroke-width="2" style="animation-delay: .3s"></path>
+<rect class="a" x="428" y="346" width="76" height="22" rx="3" fill="url(#bpGrad)" style="animation-delay: 1.3s"></rect>
+<g class="a" style="animation-delay: 1.5s" font-family="JetBrains Mono, monospace" font-size="13" fill="#4A5468">
+<line x1="120" y1="420" x2="400" y2="420" stroke="#9AA3B5"></line><line x1="120" y1="412" x2="120" y2="428" stroke="#9AA3B5"></line><line x1="400" y1="412" x2="400" y2="428" stroke="#9AA3B5"></line>
+<text x="260" y="446" text-anchor="middle">fixná cena</text>
+<line x1="532" y1="50" x2="532" y2="370" stroke="#9AA3B5"></line><line x1="524" y1="50" x2="540" y2="50" stroke="#9AA3B5"></line><line x1="524" y1="370" x2="540" y2="370" stroke="#9AA3B5"></line>
+<text x="552" y="210" text-anchor="middle" transform="rotate(90 552 210)">fixný termín</text>
+</g>
+<g font-family="Inter Tight, sans-serif" font-size="14" font-weight="600" fill="#111214">
+<g class="a bp-call" data-x="360" data-y="50" style="animation-delay: 1.8s"><circle cx="360" cy="50" r="6" fill="#FFFFFF" stroke="#2447F5" stroke-width="3"></circle><line x1="366" y1="46" x2="430" y2="24" stroke="#9AA3B5"></line><rect x="430" y="8" width="104" height="30" rx="15" fill="#FFFFFF" stroke="#DCE3F3"></rect><text x="482" y="28" text-anchor="middle">stretnutie</text></g>
+<g class="a bp-call" data-x="120" data-y="210" style="animation-delay: 2s"><circle cx="120" cy="210" r="6" fill="#FFFFFF" stroke="#2447F5" stroke-width="3"></circle><line x1="114" y1="206" x2="70" y2="168" stroke="#9AA3B5"></line><rect x="4" y="138" width="84" height="30" rx="15" fill="#FFFFFF" stroke="#DCE3F3"></rect><text x="46" y="158" text-anchor="middle">návrh</text></g>
+<g class="a bp-call" data-x="210" data-y="210" style="animation-delay: 2.2s"><circle cx="210" cy="210" r="6" fill="#FFFFFF" stroke="#2447F5" stroke-width="3"></circle><line x1="207" y1="216" x2="176" y2="282" stroke="#9AA3B5"></line><rect x="128" y="282" width="78" height="30" rx="15" fill="#FFFFFF" stroke="#DCE3F3"></rect><text x="167" y="302" text-anchor="middle">vývoj</text></g>
+<g class="a bp-call" data-x="360" data-y="370" style="animation-delay: 2.4s"><circle cx="360" cy="370" r="6" fill="#FFFFFF" stroke="#2447F5" stroke-width="3"></circle><line x1="354" y1="376" x2="300" y2="414" stroke="#9AA3B5"></line><rect x="186" y="398" width="114" height="30" rx="15" fill="#FFFFFF" stroke="#DCE3F3"></rect><text x="243" y="418" text-anchor="middle">odovzdanie</text></g>
+</g>
+</svg>
+      </div>
+    </figure>
   </div>
 </section>
 
-<section class="section section--paper" id="referencie">
+<section class="section process-sec" id="postup" data-steps>
+  <div class="mesh mesh--flat" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><svg class="waves" viewBox="0 0 1440 920" preserveAspectRatio="none" aria-hidden="true"><path class="wave w3" d="M-100 700 C 300 520, 600 860, 1000 640 S 1500 560, 1600 620"/><path class="wave w1" d="M-100 560 C 260 420, 560 700, 900 520 S 1400 420, 1600 480"/><path class="wave w2" d="M-100 820 C 220 700, 640 900, 1000 760 S 1400 700, 1600 760"/></svg><div class="sheen"></div></div>
   <div class="container">
-    <div class="case">
-      <h2 class="h2">Medi Ready</h2>
-      <p class="lead case__lead">Aplikácia, cez ktorú Medi Ready obsadzuje zdravotníkov na futbalové zápasy na Slovensku. Funkčnú webovú verziu sme odovzdali <strong>45 dní</strong> od začiatku vývoja.</p>
-      <a class="btn btn--dark" href="rezervacia.html">Chcem podobný systém</a>
+    <div class="process glass">
+      <div class="process__top">
+        <h2 class="h2">Od prvého stretnutia po spustenie</h2>
+        <div class="build" data-build aria-hidden="true">
+          <svg viewBox="0 95 560 335" role="presentation"><defs><linearGradient id="isoG-t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA6FF"/><stop offset="1" stop-color="#6FE3F2"/></linearGradient><linearGradient id="isoG-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3D5CFF"/><stop offset="1" stop-color="#2BB8E0"/></linearGradient><linearGradient id="isoG-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2447F5"/><stop offset="1" stop-color="#1A9CC4"/></linearGradient></defs><g class="bd b-plan" data-from="0" style="--d:0.00s"><polygon points="44.2,248.0 312.4,402.8 312.4,402.8 44.2,248.0" fill="none" stroke="#2447F5" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5" opacity=".7"></polygon><polygon points="518.1,284.0 312.4,402.8 312.4,402.8 518.1,284.0" fill="none" stroke="#2447F5" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5" opacity=".7"></polygon><polygon points="250.0,129.2 518.1,284.0 312.4,402.8 44.2,248.0" fill="none" stroke="#2447F5" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5" opacity=".7"></polygon><line x1="22.4" y1="260.6" x2="290.5" y2="415.4" stroke="#2447F5" stroke-width="1" stroke-linecap="round" opacity=".55"></line><line x1="30.2" y1="256.1" x2="14.6" y2="265.1" stroke="#2447F5" stroke-width="1" stroke-linecap="round" opacity=".55"></line><line x1="298.3" y1="410.9" x2="282.7" y2="419.9" stroke="#2447F5" stroke-width="1" stroke-linecap="round" opacity=".55"></line><line x1="539.9" y1="296.6" x2="334.2" y2="415.4" stroke="#2447F5" stroke-width="1" stroke-linecap="round" opacity=".55"></line><line x1="532.2" y1="292.1" x2="547.7" y2="301.1" stroke="#2447F5" stroke-width="1" stroke-linecap="round" opacity=".55"></line><line x1="326.4" y1="410.9" x2="342.0" y2="419.9" stroke="#2447F5" stroke-width="1" stroke-linecap="round" opacity=".55"></line></g><g class="bd b-base" data-from="2" style="--d:0.00s"><polygon points="62.9,248.0 312.4,392.0 312.4,377.6 62.9,233.6" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="499.4,284.0 312.4,392.0 312.4,377.6 499.4,269.6" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="250.0,125.6 499.4,269.6 312.4,377.6 62.9,233.6" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><line x1="281.2" y1="143.6" x2="94.1" y2="251.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="312.4" y1="161.6" x2="125.3" y2="269.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="343.5" y1="179.6" x2="156.5" y2="287.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="374.7" y1="197.6" x2="187.6" y2="305.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="405.9" y1="215.6" x2="218.8" y2="323.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="437.1" y1="233.6" x2="250.0" y2="341.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="468.2" y1="251.6" x2="281.2" y2="359.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="218.8" y1="143.6" x2="468.2" y2="287.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="187.6" y1="161.6" x2="437.1" y2="305.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="156.5" y1="179.6" x2="405.9" y2="323.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="125.3" y1="197.6" x2="374.7" y2="341.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><line x1="94.1" y1="215.6" x2="343.5" y2="359.6" stroke="#E3E8F3" stroke-width="0.8" stroke-linecap="round" ></line><polygon points="62.9,248.0 312.4,392.0 312.4,377.6 62.9,233.6" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="499.4,284.0 312.4,392.0 312.4,377.6 499.4,269.6" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="250.0,125.6 499.4,269.6 312.4,377.6 62.9,233.6" fill="none" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g><g class="bd b-wire" data-from="1" data-until="3" style="--d:0.00s"><polygon points="200.1,176.0 268.7,215.6 268.7,179.6 200.1,140.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="318.6,186.8 268.7,215.6 268.7,179.6 318.6,150.8" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="250.0,111.2 318.6,150.8 268.7,179.6 200.1,140.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="281.2,222.8 331.1,251.6 331.1,194.0 281.2,165.2" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="380.9,222.8 331.1,251.6 331.1,194.0 380.9,165.2" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="331.1,136.4 380.9,165.2 331.1,194.0 281.2,165.2" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="100.4,233.6 150.2,262.4 150.2,212.0 100.4,183.2" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="231.3,215.6 150.2,262.4 150.2,212.0 231.3,165.2" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="181.4,136.4 231.3,165.2 150.2,212.0 100.4,183.2" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="343.5,258.8 412.1,298.4 412.1,269.6 343.5,230.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="462.0,269.6 412.1,298.4 412.1,269.6 462.0,240.8" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="393.4,201.2 462.0,240.8 412.1,269.6 343.5,230.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="162.7,269.6 243.8,316.4 243.8,294.8 162.7,248.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="324.8,269.6 243.8,316.4 243.8,294.8 324.8,248.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="243.8,201.2 324.8,248.0 243.8,294.8 162.7,248.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="256.2,323.6 312.4,356.0 312.4,312.8 256.2,280.4" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="393.4,309.2 312.4,356.0 312.4,312.8 393.4,266.0" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon><polygon points="337.3,233.6 393.4,266.0 312.4,312.8 256.2,280.4" fill="none" stroke="#2447F5" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4" opacity=".6"></polygon></g><g class="bd b-link" data-from="4" style="--d:0.45s"><path d="M293.6 201.2 L306.1 208.4" fill="none" stroke="#2447F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" ></path><path d="M225.1 190.4 L206.4 201.2" fill="none" stroke="#2BB8E0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" ></path><path d="M306.1 237.2 L287.4 248.0" fill="none" stroke="#2447F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" ></path><path d="M284.3 293.0 L296.8 300.2" fill="none" stroke="#2BB8E0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" ></path></g><g class="bd b-mod" data-from="3" style="--d:0.00s"><polygon points="200.1,176.0 268.7,215.6 268.7,179.6 200.1,140.0" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="318.6,186.8 268.7,215.6 268.7,179.6 318.6,150.8" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="250.0,111.2 318.6,150.8 268.7,179.6 200.1,140.0" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g><g class="bd b-mod" data-from="3" style="--d:0.35s"><polygon points="281.2,222.8 331.1,251.6 331.1,194.0 281.2,165.2" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="380.9,222.8 331.1,251.6 331.1,194.0 380.9,165.2" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="331.1,136.4 380.9,165.2 331.1,194.0 281.2,165.2" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g><g class="bd b-mod" data-from="3" style="--d:0.70s"><polygon points="100.4,233.6 150.2,262.4 150.2,212.0 100.4,183.2" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="231.3,215.6 150.2,262.4 150.2,212.0 231.3,165.2" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="181.4,136.4 231.3,165.2 150.2,212.0 100.4,183.2" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g><g class="bd b-mod" data-from="3" style="--d:1.05s"><polygon points="343.5,258.8 412.1,298.4 412.1,269.6 343.5,230.0" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="462.0,269.6 412.1,298.4 412.1,269.6 462.0,240.8" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="393.4,201.2 462.0,240.8 412.1,269.6 343.5,230.0" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g><g class="bd b-mod" data-from="3" style="--d:1.40s"><polygon points="162.7,269.6 243.8,316.4 243.8,294.8 162.7,248.0" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="324.8,269.6 243.8,316.4 243.8,294.8 324.8,248.0" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="243.8,201.2 324.8,248.0 243.8,294.8 162.7,248.0" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g><g class="bd b-top" data-from="4" style="--d:0.10s"><polygon points="200.1,248.0 243.8,273.2 243.8,226.4 200.1,201.2" fill="url(#isoG-l)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="287.4,248.0 243.8,273.2 243.8,226.4 287.4,201.2" fill="url(#isoG-r)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="243.8,176.0 287.4,201.2 243.8,226.4 200.1,201.2" fill="url(#isoG-t)" stroke="#2447F5" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="200.1,201.2 243.8,226.4 243.8,226.4 200.1,201.2" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="287.4,201.2 243.8,226.4 243.8,226.4 287.4,201.2" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" ></polygon><polygon points="243.8,176.0 287.4,201.2 243.8,226.4 200.1,201.2" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" ></polygon></g><g class="bd b-mod" data-from="3" style="--d:1.75s"><polygon points="256.2,323.6 312.4,356.0 312.4,312.8 256.2,280.4" fill="#EEF2FA" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="393.4,309.2 312.4,356.0 312.4,312.8 393.4,266.0" fill="#DCE3F3" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon><polygon points="337.3,233.6 393.4,266.0 312.4,312.8 256.2,280.4" fill="#FFFFFF" stroke="#2B3A5C" stroke-width="1.1" stroke-linejoin="round" ></polygon></g></svg>
+        </div>
+      </div>
+      <div class="steps-wrap">
+        <div class="steps__track" aria-hidden="true"><span class="steps__dot"></span></div>
+        <ol class="steps">
+          <li class="step is-active" tabindex="0">
+            <span class="step__bar" aria-hidden="true"><i></i></span>
+            <span class="step__title">Stretnutie</span>
+          </li>
+          <li class="step" tabindex="0">
+            <span class="step__bar" aria-hidden="true"><i></i></span>
+            <span class="step__title">Návrh riešenia</span>
+          </li>
+          <li class="step" tabindex="0">
+            <span class="step__bar" aria-hidden="true"><i></i></span>
+            <span class="step__title">Zmluva</span>
+          </li>
+          <li class="step" tabindex="0">
+            <span class="step__bar" aria-hidden="true"><i></i></span>
+            <span class="step__title">Vývoj po moduloch</span>
+          </li>
+          <li class="step" tabindex="0">
+            <span class="step__bar" aria-hidden="true"><i></i></span>
+            <span class="step__title">Odovzdanie a starostlivosť</span>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--ink">
-  <div class="grid-bg--dark" aria-hidden="true"></div>
+<section class="section section--white refs-sec" id="referencie" data-refs aria-label="Naše projekty">
+  <div class="container">
+    <ul class="refs">
+      <li class="ref is-active">
+        <button class="ref__card card" type="button" data-ref-open="ref-mediready">
+          <span class="ref__logo ref__logo--dark"><img src="assets/img/ref/mediready.jpg" alt="Medi Ready" width="720" height="263" loading="lazy"></span>
+          <span class="ref__text"><strong class="ref__name">Medi Ready</strong><span class="ref__tease">Obsadzovanie zdravotníkov na futbalové zápasy</span></span>
+          <span class="ref__more">Zistiť viac <span aria-hidden="true">›</span></span>
+        </button>
+      </li>
+      <li class="ref">
+        <button class="ref__card card" type="button" data-ref-open="ref-leadengine">
+          <span class="ref__logo "><span class="ref__word">Lead<b>Engine</b></span></span>
+          <span class="ref__text"><strong class="ref__name">LeadEngine</strong><span class="ref__tease">Kvalifikácia firiem a personalizované cold e-mail kampane s AI</span></span>
+          <span class="ref__more">Zistiť viac <span aria-hidden="true">›</span></span>
+        </button>
+      </li>
+      <li class="ref">
+        <button class="ref__card card" type="button" data-ref-open="ref-mybookmoves">
+          <span class="ref__logo "><img src="assets/img/ref/mybookmoves.png" alt="MyBookMoves" width="600" height="100" loading="lazy"></span>
+          <span class="ref__text"><strong class="ref__name">MyBookMoves</strong><span class="ref__tease">Tréning šachových otvorení z reálnych partií</span></span>
+          <span class="ref__more">Zistiť viac <span aria-hidden="true">›</span></span>
+        </button>
+      </li>
+    </ul>
+    <div class="ref-dots"><button class="ref-dot is-active" type="button" aria-label="Medi Ready"><i></i></button><button class="ref-dot" type="button" aria-label="LeadEngine"><i></i></button><button class="ref-dot" type="button" aria-label="MyBookMoves"><i></i></button></div>
+  </div>
+  <dialog class="ref-modal glass" id="ref-mediready" aria-labelledby="ref-mediready-t">
+    <button class="ref-modal__close" type="button" data-ref-close aria-label="Zavrieť">×</button>
+    <span class="ref__logo ref__logo--dark"><img src="assets/img/ref/mediready.jpg" alt="Medi Ready" width="720" height="263" loading="lazy"></span>
+    <h3 class="h3" id="ref-mediready-t">Medi Ready</h3>
+    <p>Aplikácia, cez ktorú Medi Ready obsadzuje zdravotníkov na futbalové zápasy na Slovensku.</p><p class="ref__stat"><strong>45 dní</strong> od začiatku vývoja po funkčnú webovú aplikáciu</p>
+    <a class="btn btn--dark" href="rezervacia.html">Rezervovať stretnutie <span class="arr" aria-hidden="true">›</span></a>
+  </dialog>
+  <dialog class="ref-modal glass" id="ref-leadengine" aria-labelledby="ref-leadengine-t">
+    <button class="ref-modal__close" type="button" data-ref-close aria-label="Zavrieť">×</button>
+    <span class="ref__logo "><span class="ref__word">Lead<b>Engine</b></span></span>
+    <h3 class="h3" id="ref-leadengine-t">LeadEngine</h3>
+    <p>LeadEngine je náš interný sales nástroj na cold e-maily a kvalifikáciu dopytov. AI personalizuje e-maily podľa schválených skriptov a model sa učí z každej odpovede.</p><p>Rovnaký prístup vieme postaviť aj pre váš obchodný tím.</p>
+    <a class="btn btn--dark" href="rezervacia.html">Rezervovať stretnutie <span class="arr" aria-hidden="true">›</span></a>
+  </dialog>
+  <dialog class="ref-modal glass" id="ref-mybookmoves" aria-labelledby="ref-mybookmoves-t">
+    <button class="ref-modal__close" type="button" data-ref-close aria-label="Zavrieť">×</button>
+    <span class="ref__logo "><img src="assets/img/ref/mybookmoves.png" alt="MyBookMoves" width="600" height="100" loading="lazy"></span>
+    <h3 class="h3" id="ref-mybookmoves-t">MyBookMoves</h3>
+    <p>Tréningová aplikácia na šachové otvorenia. Z reálnych partií cez Lichess a Chess.com API ukazuje ťahy, ktoré hrajú súperi na úrovni hráča, a mení odporúčania s rastúcim ratingom.</p>
+    <a class="btn btn--dark" href="rezervacia.html">Rezervovať stretnutie <span class="arr" aria-hidden="true">›</span></a>
+  </dialog>
+</section>
+
+<section class="section section--ink" id="odvetvia" data-tabs>
+  <div class="glow glow--blue" aria-hidden="true"></div>
+  <div class="glow glow--teal" aria-hidden="true"></div>
   <div class="container">
     <div class="section-head">
-      <h2 class="h2">Pre koho najčastejšie staviame</h2>
-      <p class="lead">Firmy, v ktorých veľa ľudí robí ten istý proces každý deň.</p>
+      <h2 class="h2">Pre koho najčastejšie vyvíjame?</h2>
+      <p class="lead">Firmy, v ktorých veľa ľudí robí ten istý proces každý deň a ktoré chcú inovovať a rásť.</p>
     </div>
     <div class="industries">
-      <article class="block--blue industries__main">
-        <div class="grid-bg--blue" aria-hidden="true"></div>
-        <div>
-          <h3>Finančné spoločnosti</h3>
-          <p>Siete finančných agentov, lízingové spoločnosti a nebankoví veritelia. Staviame výpočty provízií, portály pre agentov a klientov, schvaľovanie a záznam každej zmeny pre kontrolu NBS.</p>
-          <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt</a>
-        </div>
-      </article>
-      <div class="industries__list">
-        <div class="item"><h3>Doprava a špedícia</h3><p>Dispečing bez tabuliek, aplikácia pre vodičov, prepojenie s fakturáciou.</p></div>
-        <div class="item"><h3>Zdravotníctvo a personálne agentúry</h3><p>Plánovanie zmien a obsadzovanie ľudí na smeny a podujatia.</p></div>
+      <div class="industries__main"><div class="ind-panels">
+          <div class="ind-panel is-active" role="tabpanel" id="panel-digital" aria-labelledby="tab-digital">
+            <h3>Digitálne produkty</h3>
+            <p>Webové a mobilné aplikácie od prvej verzie po ďalší rozvoj. Navrhneme, naprogramujeme a nasadíme produkt, ktorý môžu vaši zákazníci hneď začať používať.</p>
+            <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt <span class="arr" aria-hidden="true">›</span></a>
+          </div>
+          <div class="ind-panel" role="tabpanel" id="panel-zdravotnictvo" aria-labelledby="tab-zdravotnictvo">
+            <h3>Zdravotníctvo</h3>
+            <p>Plánovanie zmien a obsadzovanie zdravotníckeho personálu na smeny a podujatia. Overené na projekte MediReady.</p>
+            <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt <span class="arr" aria-hidden="true">›</span></a>
+          </div>
+          <div class="ind-panel" role="tabpanel" id="panel-servis" aria-labelledby="tab-servis">
+            <h3>Servisné firmy</h3>
+            <p>Evidencia zákaziek, plánovanie technikov v teréne, mobilná aplikácia pre výjazdy a prepojenie s automatizovanou fakturáciou.</p>
+            <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt <span class="arr" aria-hidden="true">›</span></a>
+          </div>
+          <div class="ind-panel" role="tabpanel" id="panel-saas" aria-labelledby="tab-saas">
+            <h3>SaaS platformy</h3>
+            <p>Nové moduly, integrácie a administrácia pre vašu platformu. Pridáme kapacitu vášmu tímu bez dlhého náboru.</p>
+            <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt <span class="arr" aria-hidden="true">›</span></a>
+          </div>
+          <div class="ind-panel" role="tabpanel" id="panel-ine" aria-labelledby="tab-ine">
+            <h3>Iné</h3>
+            <p>Developeri, realitný sektor, finančné spoločnosti a ďalší. Ak vo vašej firme veľa ľudí robí ten istý proces každý deň, opíšte nám ho a povieme vám, čo sa dá zjednodušiť.</p>
+            <a class="btn btn--white" href="rezervacia.html">Konzultovať projekt <span class="arr" aria-hidden="true">›</span></a>
+          </div>
+      </div></div>
+      <div class="ind-tabs" role="tablist" aria-label="Odvetvia">
+        <button class="ind-tab is-active" type="button" role="tab" id="tab-digital" aria-controls="panel-digital" aria-selected="true">
+          <span class="ind-tab__title">Digitálne produkty</span>
+          <span class="ind-tab__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="ind-tab" type="button" role="tab" id="tab-zdravotnictvo" aria-controls="panel-zdravotnictvo" aria-selected="false">
+          <span class="ind-tab__title">Zdravotníctvo</span>
+          <span class="ind-tab__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="ind-tab" type="button" role="tab" id="tab-servis" aria-controls="panel-servis" aria-selected="false">
+          <span class="ind-tab__title">Servisné firmy</span>
+          <span class="ind-tab__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="ind-tab" type="button" role="tab" id="tab-saas" aria-controls="panel-saas" aria-selected="false">
+          <span class="ind-tab__title">SaaS platformy</span>
+          <span class="ind-tab__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="ind-tab" type="button" role="tab" id="tab-ine" aria-controls="panel-ine" aria-selected="false">
+          <span class="ind-tab__title">Iné</span>
+          <span class="ind-tab__bar" aria-hidden="true"><i></i></span>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section section--paper">
-  <div class="container">
-    <div class="section-head">
-      <h2 class="h2">Podmienky spolupráce</h2>
+  <div class="container split">
+    <div>
+      <h2 class="h2">Rezervácia zaberie minútku</h2>
+      <p class="lead">Vyberiete si termín, napíšete pár viet o svojom procese a do e-mailu vám príde pozvánka na Google Meet.</p>
+      <ul class="checks">
+        <li>Návrh riešenia je úplne nezáväzný</li>
+        <li>Na prvom stretnutí si prejdeme vaše procesy, aby sme riešenie prispôsobili vám</li>
+        <li>Počas vývoja hovoríte priamo s vývojármi</li>
+      </ul>
     </div>
+    <div class="book">
+      <div class="mesh mesh--flat" aria-hidden="true"><div class="blob b2"></div><div class="blob b4"></div></div>
+      <div class="glass">
+        <p class="book__title">Najbližšie voľné termíny</p>
+        <ul class="slots__list" data-slots="3">
+          <li>Načítavam termíny…</li>
+        </ul>
+        <a class="btn btn--dark" href="rezervacia.html">Všetky termíny <span class="arr" aria-hidden="true">›</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-head"><h2 class="h2">Podmienky spolupráce</h2></div>
     <dl class="terms">
-      <div class="item"><dt>Fixná cena</dt><dd>Platí pre zoznam modulov v zmluve. Zmenu rozsahu vám najprv nacenime a vy ju písomne schválite.</dd></div>
-      <div class="item"><dt>Vrátenie peňazí</dt><dd>Ak nedodáme to, čo je v zmluvnom rozsahu, vrátime vám zaplatenú sumu.</dd></div>
-      <div class="item"><dt>Platba</dt><dd>90 % ceny vopred, alebo plná cena v splátkach 30, 20, 20 a 20 % počas vývoja.</dd></div>
-      <div class="item"><dt>Kód a dáta</dt><dd>Po finálnej platbe vám patria autorské práva ku kódu. Dáta hostujeme v EÚ.</dd></div>
+      <div><dt>Fixná cena</dt><dd>Platí pre zoznam modulov v zmluve. Zmenu rozsahu vám najprv nacenime a vy ju písomne schválite.</dd></div>
+      <div><dt>Vrátenie peňazí</dt><dd>Ak nedodáme to, čo je v zmluvnom rozsahu, vrátime vám zaplatenú sumu.</dd></div>
+      <div><dt>Kód a dáta</dt><dd>Po finálnej platbe vám odovzdáme zdrojový kód a výhradnú licenciu na jeho používanie. Dáta hostujeme v EÚ.</dd></div>
     </dl>
   </div>
 </section>
 
-<section class="section section--blue cta-band">
-  <div class="grid-bg--blue" aria-hidden="true"></div>
-  <div class="container cta-band__inner">
-    <p class="cta-band__text">Pošlite nám, čo dnes riešite v Exceli. Do 7 dní po stretnutí uvidíte návrh riešenia.</p>
-    <a class="btn btn--white" href="rezervacia.html">Rezervovať stretnutie</a>
+<section class="cta-band">
+  <div class="mesh mesh--band" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b4"></div><div class="sheen"></div></div>
+  <div class="container">
+    <div class="cta-band__card glass">
+      <h2 class="h2">Pošlite nám váš nápad a ozveme sa vám s riešením</h2>
+      <p class="lead">Do 7 dní po stretnutí uvidíte návrh riešenia s fixnou cenou.</p>
+      <form class="email-form glass" action="rezervacia.html" method="get">
+        <label class="sr-only" for="cta-email">Pracovný e-mail</label>
+        <input id="cta-email" name="email" type="email" placeholder="Pracovný e-mail" autocomplete="email">
+        <button class="btn btn--dark" type="submit">Vybrať termín <span class="arr" aria-hidden="true">›</span></button>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -196,8 +450,57 @@
   </div>
 </footer>
 
+<div class="devai" data-devai>
+  <div class="devai__panel" id="devai-panel" role="dialog" aria-modal="false" aria-labelledby="devai-h" hidden>
+    <button class="devai__close" type="button" aria-label="Zavrieť" data-devai-close>×</button>
+    <div class="devai__head">
+      <svg class="devai__logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#freescope-mark"/></svg>
+      <div><h2 class="devai__title" id="devai-h" tabindex="-1">freescope AI</h2><p class="devai__soon">od techscope · coming soon</p></div>
+    </div>
+    <p class="devai__lead">Web, landing page a jednoduché interné systémy pre malé a stredné firmy. Bez drahej agentúry, bez programátora a bez prepisovania dát medzi programami. Napíšete, čo potrebujete, freescope AI to postaví a vy upravujete klikaním.</p>
+    <h3 class="devai__h3">Čo bude obsahovať</h3>
+    <div class="devai__list">
+      <section><h4>Prezentačná webstránka</h4><p>Web na jednej stránke o vašej firme, službách a kontakte. freescope AI navrhne štruktúru, texty aj dizajn podľa toho, čo o firme napíšete. Funguje na mobile, beží na vašej doméne so zabezpečeným spojením a má kontaktný formulár, z ktorého vám prídu e-maily.</p></section>
+      <section><h4>Landing page pre kampane</h4><p>Samostatná stránka pre reklamu na Facebooku alebo Google. Dve verzie textu naraz, aby ste videli, ktorá prináša viac záujemcov. Počet návštev a vyplnených formulárov na jednom mieste. Meranie reklám až po súhlase návštevníka s cookies.</p></section>
+      <section><h4>Rezervačný systém</h4><p>Kalendár, v ktorom si zákazník sám vyberie voľný termín. Obsadené a minulé termíny sa neponúkajú. Potvrdenie a pripomienka e-mailom, odkaz na online stretnutie a krátky dotazník, aby ste vedeli, s kým budete hovoriť. Samostatne alebo ako súčasť landing page.</p></section>
+      <section><h4>Jednoduché interné systémy</h4><p>CRM so zákazníkmi, stavmi a poznámkami z hovorov. Evidencia objednávok alebo zákaziek so schvaľovaním. Prehľady pre tím a prístupy podľa rolí, aby každý videl iba to, čo potrebuje.</p></section>
+      <section><h4>Všetko prepojené</h4><p>Dopyt z webu, landing page aj rezervácie príde rovno do CRM. Žiadne kopírovanie medzi tabuľkami a e-mailami. Export do Excelu pre účtovníctvo a e-mailové upozornenia, keď sa niečo stane.</p></section>
+    </div>
+    <p class="devai__note">Pre koho: firmy, ktoré platia priveľa za web, ktorý nevedia samé upraviť, alebo strácajú čas prepisovaním dát medzi programami. Zložité systémy aj naďalej staviame na mieru s naším tímom.</p>
+    <form class="fs-signup" data-fs-signup novalidate>
+      <h3>Buďte pri spustení medzi prvými</h3>
+      <p>Pošleme vám jeden e-mail, keď freescope AI spustíme, a prví prihlásení ho dostanú vyskúšať skôr.</p>
+      <label class="sr-only" for="fs-name">Meno (nepovinné)</label>
+      <input class="field" id="fs-name" name="name" maxlength="120" autocomplete="name" placeholder="Meno (nepovinné)">
+      <label class="sr-only" for="fs-email">E-mail</label>
+      <input class="field" id="fs-email" name="email" type="email" maxlength="200" autocomplete="email" required placeholder="Váš e-mail">
+      <div class="fs-signup__hp" aria-hidden="true"><label for="fs-web">Nevypĺňajte</label><input id="fs-web" name="web" tabindex="-1" autocomplete="off"></div>
+      <label class="fs-signup__consent"><input type="checkbox" name="consent" required> <span>Súhlasím so spracovaním e-mailu na zaslanie informácie o spustení freescope AI. Súhlas môžete kedykoľvek odvolať. <a href="ochrana-udajov.html">Ochrana osobných údajov</a></span></label>
+      <button class="btn btn--blue" type="submit">Chcem vedieť o spustení <span class="arr" aria-hidden="true">›</span></button>
+      <p class="fs-signup__msg" role="status" aria-live="polite" data-fs-msg></p>
+    </form>
+  </div>
+  <button class="devai__orb" type="button" aria-expanded="false" aria-controls="devai-panel" aria-label="freescope AI od techscope, coming soon" data-devai-toggle>
+    <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#freescope-mark"/></svg>
+    <span class="devai__hint" aria-hidden="true">freescope AI · coming soon</span>
+  </button>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="fs-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2447F5"/><stop offset=".55" stop-color="#1FB8E8"/><stop offset="1" stop-color="#14B8A6"/></linearGradient>
+      <g id="freescope-mark">
+        <circle cx="32" cy="32" r="32" fill="url(#fs-g)"/>
+        <path d="M30 21 19 32l11 11" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M42 15c.9 4.6 2.4 6.1 7 7-4.6.9-6.1 2.4-7 7-.9-4.6-2.4-6.1-7-7 4.6-.9 6.1-2.4 7-7Z" fill="#fff"/>
+        <rect x="34" y="39" width="13" height="5" rx="2.5" fill="#fff"/>
+      </g>
+    </defs>
+  </svg>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
-<script src="assets/js/web/sloty.js"></script>
+<script src="assets/js/web/sloty.js?v=20261108b"></script>
+<script src="assets/js/web/anim.js?v=20261108b"></script>
+<script src="assets/js/web/freescope.js?v=20261108c"></script>
 </body>
 </html>

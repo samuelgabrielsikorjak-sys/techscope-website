@@ -40,21 +40,21 @@ Každý súbor patrí jednému chatu. Do cudzích súborov nezapisuj, len ich č
 `.btn`, `.btn--blue|--white|--dark`, `.block--blue`, `.field`, `.container`
 Premenné: `--ink --paper --white --blue --blue-dark --blue-light --blue-tint --muted --body-2 --muted-dark --field --space-1..7 (8,16,24,32,48,64,96 px)`
 
-## Dizajnový systém (dodržať presne)
-- Farby: ink `#111214`, paper `#F5F4F0`, white `#FFFFFF`, blue `#2447F5`, blue-dark `#1531C4`, blue-light (na tmavom) `#4D6BFF`, blue-tint `#E6EAFE`,
-  muted (na svetlom) `#55554F`, body-2 `#3A3A35`, muted (na tmavom) `#C9C9C2`, field `#E9E8E2`, placeholder-img `#E2E1DA`.
-- Písmo: Archivo (variabilné, self-hosted v `assets/fonts/`). Nadpisy H1/H2 a veľké bloky: `font-stretch:125%`, `font-weight:800`, `letter-spacing:-0.02em`.
-  JetBrains Mono 800 LEN v logu `<techscope_` (`<` a `_` modrou).
-- Veľkosti: H1 clamp(40px,5.2vw,72px) · H2 clamp(32px,3.4vw,48px) · veľký blok 32 · malé nadpisy 20 · lead 20 · text 17 · popisky 15.
-- Medzery: iba 8 / 16 / 24 / 32 / 48 / 64 / 96 px. Sekcia 96 px zvisle, pod hlavičkou sekcie 64 px. Max šírka obsahu 1248 px, bočný okraj 24 px.
-- Tlačidlá: `border-radius:999px`, výška 56 px, 15 px / 600, rámik 2 px vo farbe pozadia. Hover = prehodenie farieb (pozadie ↔ text). Active = posun o 2 px dole.
-  Varianty: blue (modré/biely text), white (biele/ink text), dark (ink/biely text).
-- Zaoblenie: bloky a obrázky 16 px, polia formulára 8 px.
-- Pozadie: „blueprint“ mriežka (1 px čiary, 64 px; v modrých blokoch 32 px biela 9 %) s maskou, ktorá ju vytráca. Hero má navyše obrovský orezaný znak `<` (#16181D).
-- Odkazy bez podčiarknutia, hover = zmena farby. `:focus-visible` = 2 px modrý obrys s odsadením 4 px.
+## Dizajnový systém (od 7. 11. 2026: „glass + gradient“, inšpirácia Stripe)
+Zdroj pravdy je `assets/css/web.css`. Nové štýly patria tam, nie inline.
+- Písmo: Inter Tight (variabilné, self-hosted v `assets/fonts/`), nadpisy hrúbka 600 s tesným rozostupom. JetBrains Mono 800 LEN v logu.
+- Farby: ink `#111214`, paper `#F6F8FC`, blue `#2447F5`, teal `#14B8A6`, cyan `#1FB8E8`, muted `#4A5468`, text `#3A3F4B`, tmavé sekcie `#0A0F1E`.
+  Gradient: `--gradient` (modrá → tyrkysová). Používa sa iba v páse za hero, v záverečnom páse a v malých zvýraznených blokoch.
+- Sklo (`.glass`, hlavička, menu): vždy dostatočne matné, text na skle musí mať kontrast min. 4.5:1.
+  Prvok so sklom nesmie obsahovať ďalšie sklo (prehliadač ho nerozmaže) – preto má hlavička sklo v `::before`.
+- Tlačidlá: zaoblené (999px), hover = prehodenie farieb pozadia a textu, šípka `›` sa posunie.
+- Animácie: prehrajú sa raz – hero pri načítaní, sekcie s `data-anim` keď prídu do obrazu (`assets/js/web/anim.js` pridá `.in`).
+  Nepretržite sa hýbe iba gradient v páse a kurzor `_` v logu. Všetko rešpektuje `prefers-reduced-motion`.
+- 3D ilustrácie služieb sú vygenerované SVG (izometria) priamo v `index.html`; meniť ich ručne len opatrne.
+- Údaje v ukážke klientskej zóny v hero sú ilustračné a musia byť tak označené.
 
 ## Zakázané (AI slop)
-Gradienty (fialová/modrá, gradient v texte), štítky nad nadpismi („eyebrow“), číslovanie 01/02/03, ikony v štvorčekoch, emoji,
-farebné pruhy na okraji kariet, deliace čiary medzi položkami, sklenené/rozmazané karty, šum/grain, animácie pri scrollovaní,
+Fialové gradienty, gradient v texte, štítky nad nadpismi („eyebrow“), číslovanie 01/02/03, ikony v štvorčekoch, emoji,
+farebné pruhy na okraji kariet, deliace čiary medzi položkami, šum/grain, prvky, ktoré sa pri scrollovaní objavujú bez dôvodu,
 žiar za kurzorom, dlhé pomlčky „—“ v texte, buzzwordy (inovatívny, robustný, seamless, posunúť na vyššiu úroveň…),
 vymyslené čísla a vymyslené referencie/mená. Ak chýba skutočný obsah, sekciu skry, nepíš výplň.

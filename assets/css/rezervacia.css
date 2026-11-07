@@ -1,17 +1,46 @@
 /* techscope.sk – rezervácia (.rz-*). Používa iba premenné z web.css. */
 
-.rz-head { max-width: 768px; }
-
-.rz-app { max-width: 896px; }
-.rz-app > p { margin: 0; color: var(--body-2); }
+/* ---------- Úvod a sklenená scéna (rovnaký jazyk ako hero na homepage) ---------- */
+.rz-hero { padding-bottom: var(--space-6); }
+.rz-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-5); align-items: start; }
+.rz-intro { padding-top: var(--space-3); position: sticky; top: 112px; }
+.rz-intro__title { font-size: clamp(40px, 4.6vw, 68px); margin: 0 0 var(--space-3); mix-blend-mode: multiply; }
+.rz-intro .lead { margin: 0 0 var(--space-4); }
+.rz-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 380px; }
+.rz-facts li {
+  display: flex; flex-direction: column; gap: 2px; padding: 12px 18px; border-radius: 16px;
+  background: rgba(255, 255, 255, .72); -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 10px 28px -18px rgba(25, 40, 110, .45);
+}
+.rz-facts strong { font-weight: 600; color: var(--ink); }
+.rz-facts span { font-size: var(--fs-small); color: var(--muted); }
+.rz-stage {
+  padding: 12px; border-radius: 30px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .34), rgba(255, 255, 255, .1));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .6); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 40px 80px -40px rgba(25, 40, 110, .45);
+}
+.rz-app { border-radius: 22px; background: rgba(255, 255, 255, .94); box-shadow: 0 1px 0 rgba(255, 255, 255, .9) inset; overflow: hidden; }
+.rz-app > p { margin: 0; padding: var(--space-4); color: var(--body-2); }
+#slot-area > p { margin: 0; padding: var(--space-4); color: var(--body-2); }
+@media (max-width: 1000px) {
+  .rz-hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .rz-intro { position: static; }
+  .rz-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; }
+}
+@media (max-width: 640px) {
+  .rz-facts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .rz-facts li { padding: 8px 14px; border-radius: 999px; }
+  .rz-facts span { display: none; }
+  .rz-stage { padding: 6px; border-radius: 24px; }
+  .rz-app { border-radius: 19px; }
+}
 
 /* ---------- Kalendár ---------- */
 .rz-calendar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 256px;
   gap: var(--space-4);
-  background: var(--white);
-  border-radius: var(--radius);
   padding: var(--space-4);
 }
 
@@ -24,7 +53,8 @@
 }
 .rz-calendar__title {
   font-size: var(--fs-h3);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 .rz-calendar__nav-btn {
   width: 44px;
@@ -32,7 +62,8 @@
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: var(--field);
+  background: var(--paper);
+  border: 1px solid rgba(17, 18, 20, .08);
   color: var(--ink);
   font-size: 20px;
   line-height: 1;
@@ -102,10 +133,11 @@
 .rz-calendar__note:empty { display: none; }
 
 /* ---------- Časy ---------- */
+.rz-times { padding: var(--space-3); border-radius: 18px; background: var(--paper); align-self: start; }
 .rz-times h4 {
   margin: 0 0 var(--space-2);
   font-size: var(--fs-h3);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.3;
 }
 .rz-times__placeholder {
@@ -120,9 +152,9 @@
 .rz-slot {
   min-height: 44px;
   padding: 0 var(--space-2);
-  border: 2px solid var(--field);
+  border: 1px solid rgba(17, 18, 20, .1);
   border-radius: 999px;
-  background: var(--field);
+  background: var(--white);
   color: var(--ink);
   font-size: var(--fs-small);
   font-weight: 600;
@@ -142,16 +174,31 @@
 
 /* ---------- Formulár ---------- */
 .rz-form {
-  max-width: 640px;
-  margin: var(--space-4) auto 0;
+  margin: 0;
   padding: var(--space-4);
-  background: var(--white);
-  border-radius: var(--radius);
+  background: var(--paper);
 }
+/* Formulár po kartách */
+.rz-form__top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+.rz-form__progress { margin: 0; display: inline-flex; align-items: center; gap: 10px; font-size: var(--fs-small); color: var(--muted); }
+.rz-dots { display: inline-flex; gap: 6px; }
+.rz-dots i { width: 22px; height: 5px; border-radius: 3px; background: rgba(17, 18, 20, .12); transition: background .25s ease; }
+.rz-dots i.is-on { background: var(--blue); }
+.rz-card { margin: 0; padding: var(--space-3); border: 0; border-radius: 20px; background: var(--white); box-shadow: 0 14px 34px -24px rgba(25, 40, 110, .45); }
+.rz-card[hidden] { display: none; }
+.rz-card--in { animation: rz-card-in .32s cubic-bezier(.2, .8, .2, 1); }
+@keyframes rz-card-in { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+.rz-card__hint { margin: 0 0 var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+.rz-card__nav { display: flex; justify-content: space-between; gap: 12px; margin-top: var(--space-1); }
+.rz-card__nav .btn:only-child { margin-left: auto; }
+.rz-opt { font-weight: 400; color: var(--muted); }
+.rz-form .rz-card .btn { width: auto; }
+.rz-confirm__when { font-size: 18px; color: var(--ink) !important; }
+.rz-confirm .btn { margin-top: var(--space-2); }
 .rz-form h3 {
   margin: 0 0 var(--space-1);
   font-size: var(--fs-h3);
-  font-weight: 700;
+  font-weight: 600;
 }
 .rz-form__slot {
   margin: 0 0 var(--space-3);
@@ -207,19 +254,15 @@
 
 /* ---------- Potvrdenie ---------- */
 .rz-confirm {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: var(--space-5) var(--space-4);
-  background: var(--white);
-  border-radius: var(--radius);
+  margin: 0;
+  padding: var(--space-6) var(--space-5);
 }
 .rz-confirm h3 {
   margin: 0 0 var(--space-3);
-  font-stretch: 125%;
-  font-weight: 800;
-  font-size: var(--fs-block);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-weight: 600;
+  font-size: clamp(30px, 3.4vw, 44px);
+  letter-spacing: -0.025em;
+  line-height: 1.08;
 }
 .rz-confirm p { margin: 0 0 var(--space-2); color: var(--body-2); }
 .rz-confirm p:last-child { margin-bottom: 0; }
@@ -240,6 +283,9 @@
     height: auto;
     aspect-ratio: 1;
   }
+  .rz-times { padding: var(--space-2); }
+  .rz-card { padding: var(--space-2); }
+  .rz-card__nav .btn { flex: 1; justify-content: center; }
   .rz-form,
   .rz-confirm { padding: var(--space-3); }
 }
@@ -271,6 +317,9 @@
 
 /* ---------- Obmedzený pohyb ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .rz-fade-in, .rz-times--in { animation: none; }
+  .rz-fade-in, .rz-times--in, .rz-card--in { animation: none; }
   .rz-day, .rz-slot, .rz-calendar__nav-btn, .btn, .field { transition: none; }
 }
+
+/* Po potvrdení sa úvod skryje: potvrdenie ide na stred */
+.rz-hero__inner:has(#step-heading[style*="none"]) .rz-stage { grid-column: 1 / -1; justify-self: center; width: min(720px, 100%); }
