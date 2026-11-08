@@ -652,7 +652,7 @@ input, textarea, select, button { font: inherit; }
 .bd.b-top.on { filter: drop-shadow(0 10px 18px rgba(36, 71, 245, .35)); }
 @media (max-width: 900px) {
   .process__top { flex-direction: column; align-items: flex-start; }
-  .build { width: 100%; max-width: 460px; align-self: center; }
+  .build { width: 100%; max-width: 460px; align-self: center; flex: none; }
 }
 
 /* referencie: točiace sa projekty */
@@ -776,3 +776,85 @@ input, textarea, select, button { font: inherit; }
 .fs-signup__msg--ok { color: #0B6B5F; }
 .fs-signup__msg--err { color: #A11C1C; }
 .fs-signup .btn { justify-self: start; }
+
+/* ---------- Karty služieb sú celé klikateľné ---------- */
+.svc__track { display: contents; }
+a.svc__card { color: inherit; text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; }
+a.svc__card:hover { color: inherit; transform: translateY(-3px); box-shadow: var(--shadow-float); }
+a.svc__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+a.svc__card:not(.svc__card--wide)::after { content: "Rezervovať stretnutie ›"; margin-top: auto; padding-top: 16px; font-size: 15px; font-weight: 600; color: var(--blue); }
+
+/* ---------- Mobil: statické obrázky, vodorovné pásy kariet ---------- */
+@media (max-width: 760px) {
+  /* bez animácií: ilustrácie hneď v hotovom stave */
+  .js [data-anim] .drop, .js [data-anim] .guides, .js [data-anim] .a { opacity: 1 !important; animation: none !important; }
+  .js [data-anim] .ink, .js [data-anim] .d { stroke-dashoffset: 0 !important; animation: none !important; }
+  .lift { transition: none; }
+
+  /* hero: bez štítku termínu a bez ukážky systému */
+  .hero .pill, .hero .pm { display: none; }
+  .hero__title { margin-top: 0; }
+  .hero { padding-bottom: var(--space-6); }
+
+  /* spoločný vodorovný pás */
+  .svc__track, .steps, .ind-panels {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 18px; scroll-padding: 0 var(--gutter);
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .svc__track::-webkit-scrollbar, .steps::-webkit-scrollbar, .ind-panels::-webkit-scrollbar { display: none; }
+
+  /* Čo programujeme */
+  .svc { display: block; }
+  .svc__track > .svc__card { flex: 0 0 82%; scroll-snap-align: start; }
+  .svc__card--wide { flex-direction: column; align-items: stretch; gap: 0; }
+  .svc__card--wide h3 { font-size: var(--fs-h3); }
+  .svc__card--wide .svc__ill { margin: 0 0 var(--space-3); }
+  .svc__card--wide .btn { margin-top: var(--space-2); align-self: flex-start; }
+  .svc__card p { font-size: 15px; }
+  .svc__other { margin-top: var(--space-3); min-height: 0; }
+  .svc__other .glass { margin: 12px; padding: var(--space-3); }
+
+  /* Od prvého stretnutia po spustenie */
+  .process-sec { padding: 72px 0; }
+  .process { padding: var(--space-3) 0 var(--space-2); overflow: visible; }
+  .process__top { padding: 0 var(--space-3); }
+  .steps { margin: 0; padding: 12px var(--space-3) 18px; }
+  .step { flex: 0 0 68%; min-height: 104px; scroll-snap-align: start; justify-content: flex-end; }
+  .step.is-active { transform: none; }
+  /* stavba produktu: na mobile hotová a statická */
+  .build { max-width: 320px; margin: 0 auto; }
+  .process .build svg { min-width: 0; }
+  .bd { opacity: 1 !important; transform: none !important; transition: none; }
+
+  /* Pre koho najčastejšie vyvíjame: karty vedľa seba */
+  .ind-tabs { display: none; }
+  .industries { display: block; }
+  .industries__main { padding: 0; background: none; width: 100%; min-width: 0; }
+  .industries__main > .ind-panels { padding: 4px var(--gutter) 18px; min-height: 0; height: auto; border-radius: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; overflow-x: auto; }
+  .ind-panel {
+    position: relative; inset: auto; flex: 0 0 82%; scroll-snap-align: start; opacity: 1; visibility: visible; transform: none;
+    padding: var(--space-3); border-radius: 18px; background: rgba(10, 15, 30, .78);
+    border: 1px solid rgba(159, 232, 245, .35); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+  }
+  .ind-panel h3 { font-size: 24px; }
+  .ind-panel p { font-size: 15px; margin-bottom: var(--space-3); }
+  .ind-panel .btn { margin-top: auto; }
+
+  /* Rezervácia zaberie minútku */
+  .book { padding: 10px; border-radius: 22px; }
+  .book .glass { padding: 20px; border-radius: 16px; }
+  .book__title { font-size: 20px; }
+  .slots__slot { min-height: 50px; padding: 0 16px; font-size: 15px; }
+  .book .btn { width: 100%; justify-content: center; }
+  .checks li { font-size: 16px; }
+
+  /* záverečný pás: väčšia karta, e-mail má dosť miesta */
+  .cta-band { padding: 96px 0; }
+  .cta-band__card { padding: var(--space-4) 18px; }
+  .cta-band__card .h2 { font-size: 32px; }
+  .email-form .btn { padding-left: 18px; padding-right: 18px; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .svc__track, .steps, .ind-panels { scroll-behavior: smooth; }
+}

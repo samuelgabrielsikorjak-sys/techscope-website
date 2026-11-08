@@ -6,7 +6,11 @@
   'use strict';
 
   var animated = document.querySelectorAll('[data-anim]');
-  if ('IntersectionObserver' in window) {
+  // Na mobile sú ilustrácie statické: hneď ukážeme ich výsledný stav (CSS vypne animácie).
+  var mobile = window.matchMedia('(max-width: 760px)').matches;
+  if (mobile) {
+    animated.forEach(function (el) { el.classList.add('in'); });
+  } else if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -14,7 +18,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
     animated.forEach(function (el) { io.observe(el); });
   } else {
     animated.forEach(function (el) { el.classList.add('in'); });
@@ -232,6 +236,10 @@
         el.classList.toggle('is-done', j < i);
       });
       if (dot) dot.style.setProperty('--dot', ((i + 0.5) / items.length * 100) + '%');
+      // mobil: kroky sú vodorovný pás, aktívny krok posunieme do obrazu (iba vodorovne)
+      if (list.scrollWidth > list.clientWidth + 4) {
+        list.scrollTo({ left: Math.max(0, items[i].offsetLeft - 16), behavior: reduce ? 'auto' : 'smooth' });
+      }
       buildParts.forEach(function (g) {
         var from = +g.getAttribute('data-from');
         var until = g.hasAttribute('data-until') ? +g.getAttribute('data-until') : 99;
