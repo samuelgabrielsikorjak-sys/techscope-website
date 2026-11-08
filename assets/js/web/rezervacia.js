@@ -439,7 +439,7 @@
           '<p class="rz-confirm__when"><strong>' + summary + '</strong> · online cez Google Meet</p>' +
           '<p>Pozvánku s odkazom na stretnutie sme poslali na <strong>' + escapeHtml(values.email) + '</strong>. Ak ju do pár minút nevidíte, pozrite sa aj do priečinka Spam.</p>' +
           '<p>Potrebujete termín zmeniť? Odpovedzte na pozvánku alebo napíšte na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>.</p>' +
-          '<a class="btn btn--blue" href="index.html">Späť na web <span class="arr" aria-hidden="true">›</span></a>' +
+          '<a class="btn btn--dark" href="index.html">Späť na web <span class="arr" aria-hidden="true">›</span></a>' +
         '</div>';
     }
   }
@@ -509,7 +509,7 @@
               '<input type="email" class="field" id="f-email" name="email" autocomplete="email" required>' +
               '<span class="rz-row__error">Zadajte prosím platný e-mail.</span>' +
             '</div>' +
-            '<div class="rz-card__nav"><button type="button" class="btn btn--blue" data-next>Pokračovať <span class="arr" aria-hidden="true">›</span></button></div>' +
+            '<div class="rz-card__nav"><button type="button" class="btn btn--dark" data-next>Pokračovať <span class="arr" aria-hidden="true">›</span></button></div>' +
           '</fieldset>' +
           '<fieldset class="rz-card" data-step="2" hidden>' +
             '<legend class="sr-only">O vás, nepovinné</legend>' +
@@ -534,7 +534,7 @@
                 '<option value="neviem odhadnúť">Neviem odhadnúť</option>' +
               '</select>' +
             '</div>' +
-            '<div class="rz-card__nav"><button type="button" class="btn btn--outline" data-back>‹ Späť</button><button type="button" class="btn btn--blue" data-next>Pokračovať <span class="arr" aria-hidden="true">›</span></button></div>' +
+            '<div class="rz-card__nav"><button type="button" class="btn btn--outline" data-back>‹ Späť</button><button type="button" class="btn btn--dark" data-next>Pokračovať <span class="arr" aria-hidden="true">›</span></button></div>' +
           '</fieldset>' +
           '<fieldset class="rz-card" data-step="3" hidden>' +
             '<legend class="sr-only">Téma stretnutia</legend>' +
@@ -549,7 +549,7 @@
               '</label>' +
               '<span class="rz-row__error">Bez súhlasu nie je možné rezerváciu odoslať.</span>' +
             '</div>' +
-            '<div class="rz-card__nav"><button type="button" class="btn btn--outline" data-back>‹ Späť</button><button type="submit" class="btn btn--blue">Rezervovať stretnutie</button></div>' +
+            '<div class="rz-card__nav"><button type="button" class="btn btn--outline" data-back>‹ Späť</button><button type="submit" class="btn btn--dark">Rezervovať stretnutie</button></div>' +
           '</fieldset>' +
         '</form>' +
         '<p class="rz-form__note">Stretnutie je nezáväzné a bezplatné. Pozvánku do Google Meet dostanete e-mailom.</p>' +

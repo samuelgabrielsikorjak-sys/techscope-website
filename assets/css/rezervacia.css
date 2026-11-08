@@ -120,8 +120,8 @@
 .rz-day--available:hover,
 .rz-day--selected,
 .rz-day--selected:hover {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--ink);
+  border-color: var(--ink);
   color: var(--white);
 }
 
@@ -161,11 +161,11 @@
   cursor: pointer;
   transition: background-color .15s ease, color .15s ease, border-color .15s ease;
 }
-.rz-slot:hover { background: var(--white); border-color: var(--blue); color: var(--blue); }
+.rz-slot:hover { background: var(--white); border-color: var(--ink); color: var(--ink); }
 .rz-slot--selected,
 .rz-slot--selected:hover {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--ink);
+  border-color: var(--ink);
   color: var(--white);
 }
 
