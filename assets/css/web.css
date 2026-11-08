@@ -881,3 +881,27 @@ a.svc__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px;
   .float-cta--dark:hover, .float-cta--dark:active { color: var(--ink); background: #E9EDF5; }
   .ind-panel p { margin-bottom: 0; }
 }
+
+/* ---------- Výkon ---------- */
+/* Gradientové pásy mimo obrazovky nehýbu (triedu .is-off pridáva anim.js) */
+.mesh.is-off .blob, .mesh.is-off .wave, .mesh.is-off .sheen { animation-play-state: paused; }
+
+/* Mobil: rovnaký vzhľad, ale bez drahých efektov (rozmazanie, prelínanie, nekonečné animácie) */
+@media (max-width: 760px) {
+  .blob { animation: none !important; filter: none; }
+  .b1 { background: radial-gradient(closest-side, #3D5CFF, rgba(61, 92, 255, 0)); }
+  .b2 { background: radial-gradient(closest-side, #4FE3F5, rgba(79, 227, 245, 0)); }
+  .b3 { background: radial-gradient(closest-side, #A9BDFF, rgba(169, 189, 255, 0)); }
+  .b4 { background: radial-gradient(closest-side, #2DD4BF, rgba(45, 212, 191, 0)); }
+  .b5 { background: radial-gradient(closest-side, #DCE4FF, rgba(220, 228, 255, 0)); }
+  .waves, .sheen { display: none; }
+  .hero__title { mix-blend-mode: normal; }
+  .glow { filter: none; }
+  .glow--blue { background: radial-gradient(closest-side, rgba(36, 71, 245, .9), rgba(36, 71, 245, 0)); }
+  .glow--teal { background: radial-gradient(closest-side, rgba(20, 184, 166, .9), rgba(20, 184, 166, 0)); }
+  .glass, .g-card, .ind-tab, .industries__main > div, .pill { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .site-header > .container::before { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: rgba(255, 255, 255, .86); }
+  .site-header--on-color > .container::before { background: rgba(17, 18, 20, .4); }
+  .devai__orb { animation: none; -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(255, 255, 255, .85); }
+  .logo__cursor { animation: none; }
+}

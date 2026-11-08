@@ -61,6 +61,14 @@
     document.addEventListener('click', function (e) { if (!panel.hidden && !devai.contains(e.target)) { setOpen(false); } });
   }
 
+  // Gradientové pásy mimo obrazovky pozastavíme, aby zbytočne nekreslili.
+  if ('IntersectionObserver' in window) {
+    var meshIo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('is-off', !e.isIntersecting); });
+    }, { rootMargin: '100px 0px' });
+    document.querySelectorAll('.mesh').forEach(function (m) { meshIo.observe(m); });
+  }
+
   var header = document.querySelector('[data-header]');
   var hero = document.querySelector('.hero');
   if (header && hero && header.classList.contains('site-header--on-color')) {
