@@ -69,6 +69,18 @@
     document.querySelectorAll('.mesh').forEach(function (m) { meshIo.observe(m); });
   }
 
+  // Keď je na obrazovke rezervačný kalendár, navigácia zmizne, aby ho neprekrývala.
+  var navHeader = document.querySelector('[data-header]');
+  var bookAreas = document.querySelectorAll('.book');
+  if (navHeader && bookAreas.length && 'IntersectionObserver' in window) {
+    var bookIo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target._inView = e.isIntersecting; });
+      var any = Array.prototype.some.call(bookAreas, function (el) { return el._inView; });
+      navHeader.classList.toggle('is-hidden', any);
+    }, { rootMargin: '0px 0px -35% 0px' });
+    bookAreas.forEach(function (el) { bookIo.observe(el); });
+  }
+
   var header = document.querySelector('[data-header]');
   var hero = document.querySelector('.hero');
   if (header && hero && header.classList.contains('site-header--on-color')) {

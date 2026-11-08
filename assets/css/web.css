@@ -905,3 +905,19 @@ a.svc__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px;
   .devai__orb { animation: none; -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(255, 255, 255, .85); }
   .logo__cursor { animation: none; }
 }
+
+/* Navigácia zmizne, keď je na obrazovke rezervačný kalendár (triedu .is-hidden pridáva anim.js) */
+.site-header { transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .25s ease; }
+.site-header.is-hidden { transform: translateY(-140%); opacity: 0; pointer-events: none; }
+
+/* Stránka rezervácie: bez navigácie, iba logo, ktoré odroluje s obsahom */
+.site-header--minimal { position: absolute; left: 0; right: 0; }
+.site-header--minimal .site-nav, .site-header--minimal .site-header__actions { display: none; }
+.site-header--minimal > .container::before { display: none; }
+.site-header--minimal + main .hero { margin-top: 0; }
+
+/* Mobil: gradient v hero bez šikmého okraja, vyplní celú sekciu */
+@media (max-width: 760px) {
+  .hero > .mesh { top: 0; bottom: 0; height: auto; transform: none; }
+  .hero .lead { color: var(--ink); }
+}
