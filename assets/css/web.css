@@ -920,4 +920,5 @@ a.svc__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px;
 @media (max-width: 760px) {
   .hero > .mesh { top: 0; bottom: 0; height: auto; transform: none; }
   .hero .lead { color: var(--ink); }
+  .hero > .mesh::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, .2); }
 }
