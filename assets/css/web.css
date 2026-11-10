@@ -922,3 +922,22 @@ a.svc__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px;
   .hero .lead { color: var(--ink); }
   .hero > .mesh::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, .2); }
 }
+
+/* ---------- Hero: hodvábne vlákna (rovnaké ako na vizitke) ---------- */
+.silk { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, #000 78%, transparent 100%); }
+.silk img { position: absolute; top: 0; right: 0; width: max(100%, 1440px); height: auto; display: block; }
+.hero .hero__title { mix-blend-mode: normal; }
+/* štítok s termínom na bielom pozadí: svetlé modré sklo namiesto tmavého */
+.hero .pill { color: var(--blue); background: rgba(36, 71, 245, .07); border-color: rgba(36, 71, 245, .18); box-shadow: none; }
+.hero .pill:hover { color: var(--blue-dark); background: rgba(36, 71, 245, .12); }
+@media (max-width: 760px) {
+  .silk { bottom: auto; height: 300px; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 30%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 30%, transparent 100%); }
+  .silk img { width: 100%; height: 100%; right: 0; top: 0; object-fit: cover; object-position: 100% 0; opacity: .85; }
+}
+
+/* ---------- Logo (znak + nápis, SVG) ---------- */
+.logo--img { display: inline-flex; align-items: center; line-height: 0; }
+.logo--img img { height: 30px; width: auto; display: block; }
+.site-footer__brand .logo--img img { height: 28px; }
+@media (max-width: 760px) { .site-header .logo--img img { height: 26px; } }

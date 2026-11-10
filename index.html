@@ -64,22 +64,23 @@
 }
 </script>
 <script>document.documentElement.className += ' js';</script>
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg?v=2">
-<link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png?v=2">
-<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png?v=2">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg?v=3">
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png?v=3">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png?v=3">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="assets/img/silk-hero-mobile.webp" as="image" type="image/webp" media="(max-width: 760px)">
 <link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/web.css?v=20261108j">
+<link rel="stylesheet" href="assets/css/web.css?v=20261110b">
 </head>
 <body>
 
-<header class="site-header site-header--on-color" data-header>
+<header class="site-header" data-header>
   <div class="container">
-    <a class="logo" href="index.html"><span>&lt;</span>techscope<span class="logo__cursor">_</span></a>
+    <a class="logo logo--img" href="index.html" aria-label="techscope – domov"><img src="assets/img/logo/techscope-logo.svg" alt="techscope" width="368" height="67"></a>
     <nav class="site-nav" aria-label="Hlavná navigácia">
       <div class="nav-item">
         <button class="site-nav__link" type="button" aria-expanded="false" aria-controls="menu-sluzby">Služby <svg class="site-nav__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 L5 6.5 L8 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
@@ -113,7 +114,7 @@
 <main id="obsah">
 
 <section class="hero" id="top">
-  <div class="mesh" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><svg class="waves" viewBox="0 0 1440 920" preserveAspectRatio="none" aria-hidden="true"><path class="wave w3" d="M-100 700 C 300 520, 600 860, 1000 640 S 1500 560, 1600 620"/><path class="wave w1" d="M-100 560 C 260 420, 560 700, 900 520 S 1400 420, 1600 480"/><path class="wave w2" d="M-100 820 C 220 700, 640 900, 1000 760 S 1400 700, 1600 760"/></svg><div class="sheen"></div></div>
+  <div class="silk" aria-hidden="true"><picture><source media="(max-width: 760px)" srcset="assets/img/silk-hero-mobile.webp" width="780" height="538"><img src="assets/img/silk-hero.webp" srcset="assets/img/silk-hero-1440.webp 1441w, assets/img/silk-hero.webp 2882w" sizes="max(100vw, 1440px)" width="2882" height="1813" alt="" fetchpriority="high" decoding="async"></picture></div>
   <div class="container hero__inner">
     <div class="hero__text">
       <a class="pill" href="rezervacia.html" data-next-slot>Rezervujte si nezáväzné online stretnutie <span aria-hidden="true">›</span></a>
@@ -473,7 +474,7 @@
 <footer class="site-footer">
   <div class="container">
     <div class="site-footer__brand">
-      <p class="logo"><span>&lt;</span>techscope<span>_</span></p>
+      <p class="logo logo--img"><img src="assets/img/logo/techscope-logo.svg" alt="techscope" width="368" height="67" loading="lazy"></p>
       <p>Samuel Gabriel Sikorjak<br>Žarnovova 1621/9, 903 01 Senec<br>IČO: 56 874 812</p>
     </div>
     <div class="site-footer__col">
