@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyBookMoves: tréning šachových otvorení z reálnych partií | techscope</title>
+<meta name="description" content="Prípadová štúdia: webová aplikácia, ktorá cez Lichess a Chess.com API ukazuje ťahy, ktoré hrajú súperi na úrovni hráča, a mení odporúčania s rastúcim ratingom.">
+<link rel="canonical" href="https://techscope.sk/pripadove-studie/mybookmoves.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="techscope">
+<meta property="og:title" content="MyBookMoves: tréning šachových otvorení z reálnych partií | techscope">
+<meta property="og:description" content="Prípadová štúdia: webová aplikácia, ktorá cez Lichess a Chess.com API ukazuje ťahy, ktoré hrajú súperi na úrovni hráča, a mení odporúčania s rastúcim ratingom.">
+<meta property="og:url" content="https://techscope.sk/pripadove-studie/mybookmoves.html">
+<meta property="og:image" content="https://techscope.sk/assets/img/og-techscope-2026.jpg">
+<meta property="og:locale" content="sk_SK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0F1E">
+<link rel="icon" href="../favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png?v=3">
+<link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png?v=3">
+<link rel="manifest" href="../site.webmanifest?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Caveat:wght@500&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@800&display=swap">
+<link rel="stylesheet" href="../assets/css/web.css?v=20261111t">
+<link rel="stylesheet" href="../assets/css/case.css?v=20261111c">
+</head>
+<body class="cs">
+
+
+<main>
+<div class="cs-strip"><i aria-hidden="true"></i>Prípadová štúdia<span>·</span>MyBookMoves<span>·</span>Digitálny produkt<span>·</span>Lichess a Chess.com API</div>
+
+<section class="cs-hero">
+  <div class="container">
+    <a class="cs-brand" href="../index.html" aria-label="techscope – domov"><img src="../assets/img/logo/techscope-logo-biele.svg" alt="techscope" width="368" height="67"></a>
+    <span class="cs-logo cs-logo--tile" aria-hidden="true"><img src="../assets/img/ref/mybookmoves.png" alt="MyBookMoves" width="600" height="100"></span>
+    <h1 class="cs-h1"><em>MyBookMoves:</em><span>Tréning šachových otvorení z partií, ktoré ľudia naozaj hrajú.</span></h1>
+    <div class="cs-media"><div class="mk mk--hero" aria-hidden="true"><div class="mk__top"><span>MyBookMoves · Sicílska obrana</span><small>rating 1400–1600 · 1 240 partií</small></div><div class="mk__body"><div class="mk__cols"><div class="mk__list"><div class="mk__row"><div>2. Jf3<span>hrá 61 % súperov</span></div><i class="mk__tag mk__tag--ok">trénovať</i></div><div class="mk__row"><div>2. Jc3<span>hrá 22 % súperov</span></div></div><div class="mk__row"><div>2. c3<span>hrá 9 % súperov</span></div></div><div class="mk__row"><div>2. f4<span>hrá 4 % súperov</span></div><i class="mk__tag mk__tag--off">zriedkavé</i></div></div><div class="mk__panel"><h4>Pozícia po 1. e4 c5</h4><div class="brd" aria-hidden="true"><i class="l">♜</i><i class="d">♞</i><i class="l">♝</i><i class="d">♛</i><i class="l">♚</i><i class="d">♝</i><i class="l">♞</i><i class="d">♜</i><i class="d">♟</i><i class="l">♟</i><i class="d"></i><i class="l">♟</i><i class="d">♟</i><i class="l">♟</i><i class="d">♟</i><i class="l">♟</i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="d"></i><i class="l"></i><i class="d hl">♟</i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l hl">♙</i><i class="d"></i><i class="l"></i><i class="d"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="d"></i><i class="l"></i><i class="l">♙</i><i class="d">♙</i><i class="l">♙</i><i class="d">♙</i><i class="l"></i><i class="d">♙</i><i class="l">♙</i><i class="d">♙</i><i class="d">♖</i><i class="l">♘</i><i class="d">♗</i><i class="l">♕</i><i class="d">♔</i><i class="l">♗</i><i class="d">♘</i><i class="l">♖</i></div><div class="mk__kv"><span>Váš repertoár</span><b>2…d6 · 3…cxd4</b></div><span class="mk__btn">Hrať proti 2. Jf3</span></div></div></div></div></div>
+    <a class="cs-btn" href="../rezervacia.html">Konzultovať projekt</a>
+    <p class="cs-proof">2 platformy<small>Ukážky obrazoviek sú ilustračné, dáta sú anonymizované.</small></p>
+    <p class="cs-lead">Webová aplikácia, ktorá cez Lichess a Chess.com API ukazuje ťahy, ktoré hrajú súperi na úrovni hráča, a mení odporúčania s rastúcim ratingom.</p>
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--paper" id="problem">
+  <div class="container cs-two">
+    <div>
+      <figure class="cs-figure"><div class="mk mk--phone" aria-hidden="true"><div class="mk__top"><span>Dnešný tréning</span><small>12 / 20</small></div><div class="mk__body"><div class="mk__prog"><i style="--w:60%"></i></div><div class="mk__row"><div>Sicílska · 2. Jf3<span>správne 9 z 12</span></div><i class="mk__tag mk__tag--ok">75 %</i></div><span class="mk__btn">Pokračovať</span></div></div></figure>
+      <h2 class="cs-h2">Učebnica pripravuje na súperov, ktorých hráč nikdy nestretne.</h2>
+    </div>
+    <div>
+      <p class="cs-sym-label">Typické príznaky:</p>
+      <ul class="cs-sym"><li>Hráč sa naučí hlavnú líniu z knihy. Súper v klube ju nikdy nezahrá.</li><li>Databázy ukazujú partie veľmajstrov, nie to, čo hrajú ľudia s ratingom 1400.</li><li>Po každom postupe v ratingu sa menia súperi – aj ich ťahy. Repertoár zostáva starý.</li><li>Partie z Lichess a Chess.com sú v dvoch rôznych účtoch, nikto ich nespája.</li><li>Chyby v otvorení sa opakujú, lebo hráč nevidí, kde presne odbočil.</li><li>Tréning je buď náhodný, alebo trvá hodiny ručného prehrávania partií.</li></ul>
+      <p>Riešením nie je ďalšia učebnica. Je ním tréning proti ťahom, ktoré hráč naozaj uvidí na ďalšej partii – z jeho vlastných dát a dát súperov na jeho úrovni.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-sec" id="co-sme-postavili">
+  <div class="container cs-two cs-two--top">
+    <div>
+      <p class="cs-kicker">Päť častí</p>
+      <h2 class="cs-h2">Produkt stojí na piatich častiach.</h2>
+      <p>Od napojenia na platformy po tréning, ktorý sa prispôsobuje hráčovi.</p>
+      <div class="cs-tiles"><div class="mk mk--tile" aria-hidden="true"><div class="mk__top"><span>Napojenie</span><small>2 platformy</small></div><div class="mk__body"><div class="mk__row"><div>Lichess<span>812 partií</span></div><i class="mk__tag mk__tag--ok">OK</i></div><div class="mk__row"><div>Chess.com<span>428 partií</span></div><i class="mk__tag mk__tag--ok">OK</i></div></div></div><div class="mk mk--tile" aria-hidden="true"><div class="mk__top"><span>Rating</span><small>posledných 30 dní</small></div><div class="mk__body"><div class="mk__kpi">1 487<small>+52 · repertoár prepočítaný</small></div></div></div></div>
+    </div>
+    <ol class="cs-cards"><li class="cs-card"><b>01</b><h3>Napojenie na Lichess a Chess.com</h3><p>Partie sa sťahujú cez oficiálne API oboch platforiem. Hráč zadá meno účtu a má svoje dáta aj dáta súperov.</p></li><li class="cs-card"><b>02</b><h3>Štatistika ťahov podľa ratingu</h3><p>Pre každú pozíciu vidí, čo hrajú súperi v jeho ratingovom pásme a ako často. Nie teóriu, ale realitu.</p></li><li class="cs-card"><b>03</b><h3>Tréningový režim</h3><p>Hráč hrá otvorenie proti najčastejším odpovediam. Chybu vidí hneď, s ťahom, ktorý mal prísť.</p></li><li class="cs-card"><b>04</b><h3>Adaptívne odporúčania</h3><p>S rastúcim ratingom sa repertoár prispôsobí ťahom, ktoré sa objavujú v novom pásme.</p></li><li class="cs-card"><b>05</b><h3>Webová aplikácia</h3><p>Funguje v prehliadači na počítači aj v telefóne, bez inštalácie a bez sťahovania databáz.</p></li></ol>
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--paper" id="co-riesi">
+  <div class="container cs-two">
+    <div>
+      <h2 class="cs-h2">Čo aplikácia reálne rieši</h2>
+      <ul class="cs-checks"><li>Partie z Lichess a Chess.com na jednom mieste, automaticky.</li><li>Pre každú pozíciu: čo hrajú súperi v ratingu hráča a ako často.</li><li>Tréning proti najčastejším odpovediam, nie proti teórii.</li><li>Chyba sa ukáže hneď, s ťahom, ktorý mal prísť.</li><li>Repertoár sa prepočíta, keď rating stúpne do vyššieho pásma.</li><li>Prehľad pokroku: ktoré otvorenia idú a ktoré treba precvičiť.</li><li>Beží v prehliadači, bez inštalácie, na počítači aj v telefóne.</li></ul>
+    </div>
+    <div class="cs-grid4"><div class="mk mk--tile" aria-hidden="true"><div class="mk__top"><span>Štatistika ťahov</span><small>po 1. e4 c5 2. Jf3</small></div><div class="mk__body"><div class="mk__bars" aria-hidden="true"><i style="--h:100%"></i><i style="--h:45%"></i><i style="--h:30%"></i><i style="--h:18%"></i><i style="--h:10%"></i><i style="--h:6%"></i></div></div></div><div class="mk mk--tile" aria-hidden="true"><div class="mk__top"><span>Tréning</span><small>Sicílska obrana</small></div><div class="mk__body"><div class="mk__row"><div>Správne: 2…d6<span>súper hrá 3. d4 v 71 %</span></div><i class="mk__tag mk__tag--ok">ďalej</i></div><div class="mk__row"><div>Chyba: 2…Jc6?!<span>v tomto pásme vedie k 3. Sb5</span></div><i class="mk__tag mk__tag--warn">precvičiť</i></div></div></div><div class="mk mk--tile" aria-hidden="true"><div class="mk__top"><span>Repertoár</span><small>rating 1400–1600</small></div><div class="mk__body"><div class="mk__row"><div>Sicílska obrana<span>2…d6</span></div><i class="mk__tag mk__tag--ok">92 %</i></div><div class="mk__row"><div>Francúzska obrana<span>3. Jc3</span></div><i class="mk__tag mk__tag--warn">64 %</i></div></div></div><div class="mk mk--tile mk--dark" aria-hidden="true"><div class="mk__top"><span>Pokrok</span><small>posledných 6 týždňov</small></div><div class="mk__body"><div class="mk__kpi">78 %<small>správnych ťahov v otvorení</small></div><div class="mk__bars" aria-hidden="true"><i style="--h:40%"></i><i style="--h:48%"></i><i style="--h:55%"></i><i style="--h:60%"></i><i style="--h:70%"></i><i style="--h:78%"></i></div></div></div></div>
+  </div>
+</section>
+
+<section class="cs-quote-sec">
+  <div class="container">
+    <div class="cs-quote"><p class="cs-stars" aria-label="5 z 5 hviezdičiek">★★★★★</p><p>Roky som žiakom hovoril, aby sa učili otvorenia z kníh. Potom prišli na turnaj a súper v prvých piatich ťahoch zahral niečo, čo v knihe nebolo. MyBookMoves ukazuje presne to, čo hrajú ľudia na ich úrovni.</p><p>Žiak si napojí Lichess aj Chess.com, aplikácia mu vytiahne partie a pri každej pozícii vidí, čo ho reálne čaká. Keď mu stúpne rating, repertoár sa prepočíta sám.</p><p>Od nápadu po funkčnú aplikáciu to šlo rýchlo a bez zbytočných rečí. Vedeli, čo stavajú, a priebežne mi ukazovali hotové časti.</p><p class="cs-sign">Adam Chodzkej<small>šachový tréner</small></p></div>
+  </div>
+</section>
+
+<section class="cs-sec" id="cisla">
+  <div class="container"><ul class="cs-stats"><li><strong>2</strong><span>platformy</span></li><li><strong>100 %</strong><span>ťahov z reálnych partií</span></li><li><strong>každý</strong><span>rating má vlastné dáta</span></li><li><strong>0</strong><span>inštalácií · beží v prehliadači</span></li></ul></div>
+</section>
+
+<section class="cs-sec cs-sec--paper cs-next" id="dalsi-krok">
+  <div class="container">
+    <h2 class="cs-h2">Máte nápad na digitálny produkt?</h2>
+    <p>Ak potrebuje dáta z externých platforiem a logiku, ktorá sa učí z používateľa, vieme ho postaviť. Prvé stretnutie je online, trvá 30 minút a povieme vám, či to dáva zmysel.</p>
+    <div class="cs-next__btns">
+      <a class="cs-btn" href="../rezervacia.html">Konzultovať projekt</a>
+      <a class="cs-btn cs-btn--ghost" href="mailto:contact@techscope.sk?subject=Projekt%20pre%20na%C5%A1u%20firmu">Napíšte nám</a>
+    </div>
+    <p class="cs-next__note">30 min · online cez Google Meet · bez záväzkov · Ďalšie prípadové štúdie: <a href="medi-ready.html">Medi Ready</a> · <a href="leadengine.html">LeadEngine</a></p>
+  </div>
+</section>
+
+<section class="cs-sec" id="faq">
+  <div class="container cs-faq">
+    <h2 class="cs-h2">Časté otázky</h2>
+    <details><summary>Koľko stojí podobný systém?</summary><p>Cena je fixná podľa rozsahu: menšie systémy s 1–2 modulmi 8 000–13 000 €, stredné 13 000–18 000 €, väčšie s výpočtami a integráciami 18 000–28 000 €. Presnú fixnú cenu, zoznam modulov a termín dostanete v Blueprinte do 7 dní – zadarmo.</p></details><details><summary>Ako dlho to trvá?</summary><p>Menšie systémy 4–6 týždňov, stredné 6–8, väčšie 9–12 týždňov. Medi Ready bola v prevádzke za 45 dní. Termín garantujeme: každý týždeň omeškania z našej strany znamená 5 % zľavu z finálnej faktúry, maximálne 25 %.</p></details><details><summary>Čo potrebujeme od vás?</summary><p>30-minútové online stretnutie, potom prístup k dátam, ktoré dnes používate (tabuľky, exporty), a jedného človeka, ktorý rozhoduje. Každý hotový modul si otestujete a akceptujete v dohodnutom počte dní.</p></details><details><summary>Ako sa platí?</summary><p>Po míľnikoch: 40 % pri podpise, 40 % po prvom funkčnom module, 20 % pri odovzdaní. Rozsah je daný zoznamom modulov v zmluve – čo v ňom nie je, je samostatná požiadavka odsúhlasená vopred.</p></details><details><summary>Čo sa deje po odovzdaní?</summary><p>60 dní opráv chýb zadarmo. Potom voliteľná údržba Care (150 € mesačne) alebo Care Plus (500 € mesačne): monitoring, zálohy, bezpečnostné aktualizácie a drobné úpravy. Autorské práva prechádzajú na vás po finálnej platbe.</p></details>
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--paper" id="o-nas">
+  <div class="container cs-about">
+    <div class="cs-about__tile" aria-hidden="true"><img src="../assets/img/logo/techscope-logo-biele.svg" alt="" width="368" height="67" onerror="this.src='../assets/img/logo/techscope-logo.svg'"></div>
+    <div>
+      <h2>O techscope</h2>
+      <p>techscope je softvérové štúdio zo Senca. Staviame interné systémy, klientske portály a integrácie pre firmy na Slovensku a v Česku – od prvého stretnutia po odovzdanie a starostlivosť.</p>
+      <p>Celý tím pracuje na jednom projekte naraz a klient hovorí priamo s tým, kto programuje. Cena je fixná za fixný rozsah, termín je garantovaný a každý projekt má 60 dní opráv zadarmo.</p>
+      <p>Zakladateľom je Samuel Gabriel Sikorjak. Medi Ready, LeadEngine a MyBookMoves sú projekty, na ktorých vidíte, ako pracujeme.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__brand">
+      <p class="logo logo--img"><img src="../assets/img/logo/techscope-logo.svg" alt="techscope" width="368" height="67" loading="lazy"></p>
+      <p>Samuel Gabriel Sikorjak<br>Žarnovova 1621/9, 903 01 Senec<br>IČO: 56 874 812</p>
+    </div>
+    <div class="site-footer__col">
+      <p>Kontakt</p>
+      <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>
+    </div>
+    <nav class="site-footer__col" aria-label="Pätička">
+      <p>Odkazy</p>
+      <a href="../index.html#sluzby">Služby</a>
+      <a href="../index.html#postup">Postup</a>
+      <a href="../index.html#referencie">Referencie</a>
+      <a href="../klient.html">Klientska zóna</a>
+      <a href="../admin.html">Prihlásenie pre tím</a>
+    </nav>
+    <p class="site-footer__legal">© 2026 techscope.sk · <a href="../obchodne-podmienky.html">Obchodné podmienky</a> · <a href="../ochrana-udajov.html">Ochrana osobných údajov</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -35,8 +35,19 @@
         var li = document.createElement('li');
         var a = document.createElement('a');
         a.href = 'rezervacia.html';
-        a.className = 'slots__slot';
-        a.textContent = label(slot, true);
+        if (list.classList.contains('slots__list--bubbles')) {
+          // bublina: dátum hore, čas veľký, šípka vpravo
+          a.className = 'bubble';
+          var text = label(slot, true), cut = text.lastIndexOf(', ');
+          var dSpan = document.createElement('span'); dSpan.className = 'bubble__date'; dSpan.textContent = text.slice(0, cut);
+          var tSpan = document.createElement('span'); tSpan.className = 'bubble__time'; tSpan.textContent = text.slice(cut + 2);
+          var small = document.createElement('small'); small.textContent = 'Google Meet'; tSpan.appendChild(small);
+          var arr = document.createElement('span'); arr.className = 'arr'; arr.setAttribute('aria-hidden', 'true'); arr.textContent = '›';
+          a.appendChild(dSpan); a.appendChild(tSpan); a.appendChild(arr);
+        } else {
+          a.className = 'slots__slot';
+          a.textContent = label(slot, true);
+        }
         li.appendChild(a);
         list.appendChild(li);
       });
