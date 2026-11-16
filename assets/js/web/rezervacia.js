@@ -320,7 +320,7 @@
           rozpocet: 'neuvedené',
           urgencia: 'neuvedené',
           popis_projektu: '',
-          zdroj: '',
+          zdroj: zdrojFromUrl(),
           gdpr_suhlas: true
         };
 
@@ -412,6 +412,12 @@
         if (when) when.textContent = summary;
         var mail = document.getElementById('rz-thanks-email');
         if (mail) mail.textContent = values.email;
+        // kalendárny lístok: mesiac, deň a čas
+        var dt = new Date(selectedSlot.datum + 'T12:00:00');
+        var setT = function (id, v) { var n = document.getElementById(id); if (n) n.textContent = v; };
+        setT('rz-thanks-month', dt.toLocaleDateString('sk-SK', { month: 'long' }));
+        setT('rz-thanks-day', String(dt.getDate()));
+        setT('rz-thanks-time', dt.toLocaleDateString('sk-SK', { weekday: 'long' }) + ', ' + selectedSlot.cas_od.slice(0, 5));
         // odkaz „Pridať do kalendára“ (Google Kalendár), čas v miestnom pásme
         var cal = document.getElementById('rz-thanks-cal');
         if (cal) {
@@ -419,7 +425,9 @@
           cal.href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Online stretnutie s techscope') +
             '&dates=' + d + 'T' + t1 + '/' + d + 'T' + t2 + '&ctz=Europe%2FBratislava&details=' + encodeURIComponent('Odkaz na Google Meet nájdete v pozvánke od techscope.');
         }
+        dlg.tabIndex = -1;
         dlg.showModal();
+        dlg.focus();
         dlg.querySelectorAll('[data-thanks-close]').forEach(function (b) { b.addEventListener('click', function () { dlg.close(); }); });
       }
       app.insertAdjacentHTML('beforeend', '<div id="confirm-area"></div>');
@@ -432,6 +440,13 @@
           '<a class="btn btn--dark" href="index.html">Späť na web <span class="arr" aria-hidden="true">›</span></a>' +
         '</div>';
     }
+  }
+
+  // Landing page portálu posiela ?zdroj=lp-<varianta>, aby sa booknutý hovor pripísal správnej variante A/B testu.
+  // Tvar payloadu vytvorit_rezervaciu sa nemení, mení sa iba hodnota p_zdroj (predtým vždy prázdna).
+  function zdrojFromUrl() {
+    var z = new URLSearchParams(window.location.search).get('zdroj') || '';
+    return /^[a-z0-9-]{1,60}$/i.test(z) ? z : '';
   }
 
   function produktFromUrl() {

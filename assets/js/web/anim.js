@@ -372,9 +372,32 @@
   var n = dots.length, idx = 0, timer = null, visible = false, paused = false, resume = null;
   root.style.setProperty('--show-dur', '6s');
 
+  // Automatické scrollovanie: aktívna obrazovka (tablet aj mobil) sa po chvíli pomaly posunie nadol,
+  // podrží sa a potom príde ďalšia ukážka. Ostatné obrazovky sa vrátia hore.
+  var scrollAnims = [], nextDelay = 6000;
+  function autoScroll() {
+    scrollAnims.forEach(function (a) { a.cancel(); });
+    scrollAnims = [];
+    var longest = 0;
+    tracks.forEach(function (t) {
+      var slide = t.children[idx], screen = t.parentElement;
+      if (!slide || !screen || !slide.animate) return;
+      var dist = Math.max(0, slide.offsetHeight - screen.clientHeight);
+      if (reduce || dist < 8) return;
+      var dur = Math.min(4200, Math.max(2400, dist * 16));
+      var a = slide.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(' + (-dist) + 'px)' }],
+        { duration: dur, delay: 1600, easing: 'cubic-bezier(.45, 0, .2, 1)', fill: 'forwards' });
+      if (paused) a.pause();
+      scrollAnims.push(a);
+      longest = Math.max(longest, 1600 + dur);
+    });
+    nextDelay = Math.max(6000, longest + 2200);
+  }
+
   function go(i) {
     idx = (i + n) % n;
     tracks.forEach(function (t) { t.style.setProperty('--i', idx); t.style.transform = ''; });
+    autoScroll();
     dots.forEach(function (d, j) {
       d.classList.toggle('is-active', j === idx);
       d.setAttribute('aria-selected', j === idx ? 'true' : 'false');
@@ -385,9 +408,13 @@
   function schedule() {
     clearTimeout(timer);
     if (reduce || !visible || paused) return;
-    timer = setTimeout(function () { go(idx + 1); schedule(); }, 6000);
+    timer = setTimeout(function () { go(idx + 1); schedule(); }, nextDelay);
   }
-  function pause(on) { paused = on; root.classList.toggle('is-paused', on); schedule(); }
+  function pause(on) {
+    paused = on; root.classList.toggle('is-paused', on);
+    scrollAnims.forEach(function (a) { if (on) { a.pause(); } else if (a.playState === 'paused') { a.play(); } });
+    schedule();
+  }
   function pauseFor(ms) { clearTimeout(resume); pause(true); resume = setTimeout(function () { pause(false); }, ms); }
 
   dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); pauseFor(12000); }); });
@@ -429,7 +456,7 @@
   } else { visible = true; schedule(); }
   go(0);
 
-  // Pamäť e-mailu: hero formulár, brána k prípadovým štúdiám, rezervácia
+  // Pamäť e-mailu: e-mailové formuláre na webe, pop-up a rezervácia
   var EMAIL_KEY = 'ts_email';
   var getEmail = function () { try { return localStorage.getItem(EMAIL_KEY) || ''; } catch (e) { return ''; } };
   var setEmail = function (v) { try { localStorage.setItem(EMAIL_KEY, v); } catch (e) {} };
@@ -439,35 +466,42 @@
     if (inp && !inp.value && getEmail()) inp.value = getEmail();
     f.addEventListener('submit', function () { var v = inp ? inp.value.trim() : ''; if (validEmail(v)) setEmail(v); });
   });
-  var gate = document.getElementById('cs-gate');
-  if (gate) {
-    var gateForm = gate.querySelector('form'), gateInp = gate.querySelector('input'), gateErr = gate.querySelector('.cs-gate__err'), gateNames = gate.querySelectorAll('[data-gate-name]'), gateBtn = gateForm.querySelector('button[type="submit"]');
-    var gateLocked = gate.querySelector('[data-gate-locked]'), gateUnlocked = gate.querySelector('[data-gate-unlocked]');
-    var setLock = function (open) { gate.classList.toggle('is-open', open); gateBtn.disabled = !open; if (gateLocked) gateLocked.hidden = open; if (gateUnlocked) gateUnlocked.hidden = !open; };
-    gateInp.addEventListener('input', function () { gateErr.hidden = true; setLock(validEmail(gateInp.value.trim())); });
-    var target = '';
-    var go = function (href, email) { window.location.href = href + (href.indexOf('?') < 0 ? '?' : '&') + 'email=' + encodeURIComponent(email); };
-    document.querySelectorAll('[data-cs]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        if (e.defaultPrevented) return;
-        e.preventDefault();
-        var known = getEmail();
-        if (known) { go(a.getAttribute('href'), known); return; }
-        target = a.getAttribute('href');
-        gateNames.forEach(function (n) { n.textContent = a.getAttribute('data-cs') || ''; });
-        gateErr.hidden = true; gateInp.value = ''; setLock(false);
-        if (gate.showModal) gate.showModal(); else gate.setAttribute('open', '');
-        setTimeout(function () { gateInp.focus(); }, 50);
-      });
+})();
+
+
+// ---------------------------------------------------------------------------
+// Postup: krok, ktorý je v strede obrazovky, je aktívny a ukážka vpravo sa zmení
+// na jeho obrazovku. Klik na krok ho vyberie tiež. Na mobile je ukážka skrytá.
+// ---------------------------------------------------------------------------
+(function () {
+  'use strict';
+  var root = document.querySelector('[data-proc]');
+  if (!root) return;
+  var steps = Array.prototype.slice.call(root.querySelectorAll('.proc__step'));
+  var parts = Array.prototype.slice.call(root.querySelectorAll('.bld [data-from]'));
+  var caps = Array.prototype.slice.call(root.querySelectorAll('.bld__cap'));
+  var cur = -1;
+  function set(i) {
+    if (i === cur || i < 0) return;
+    cur = i;
+    steps.forEach(function (el, j) { el.classList.toggle('is-active', j === i); });
+    // stavba: časti do aktuálneho kroku sú postavené, časť pridaná v tomto kroku je tyrkysová
+    parts.forEach(function (g) {
+      var from = +g.getAttribute('data-from');
+      g.classList.toggle('on', from <= i);
+      g.classList.toggle('is-new', from === i);
     });
-    gateForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var v = gateInp.value.trim();
-      if (!validEmail(v)) { gateErr.hidden = false; gateInp.focus(); return; }
-      setEmail(v);
-      gate.classList.add('is-leaving');
-      setTimeout(function () { go(target, v); }, 450);
-    });
-    gate.addEventListener('click', function (e) { if (e.target === gate || e.target.hasAttribute('data-gate-close')) gate.close(); });
+    caps.forEach(function (el, j) { el.classList.toggle('is-active', j === i); });
   }
+  steps.forEach(function (el, i) {
+    var b = el.querySelector('button');
+    if (b) b.addEventListener('click', function () { set(i); });
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) set(steps.indexOf(e.target)); });
+    }, { rootMargin: '-48% 0px -48% 0px' });
+    steps.forEach(function (el) { io.observe(el); });
+  }
+  set(0);
 })();

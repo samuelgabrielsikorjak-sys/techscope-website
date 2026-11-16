@@ -24,8 +24,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png?v=3">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png?v=3">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=3">
-<link rel="stylesheet" href="assets/css/web.css?v=20261111t">
-<link rel="stylesheet" href="assets/css/rezervacia.css?v=20261111k">
+<link rel="stylesheet" href="assets/css/web.css?v=20261116g">
+<link rel="stylesheet" href="assets/css/rezervacia.css?v=20261116t">
 </head>
 <body>
 
@@ -70,34 +70,32 @@
 </section>
 
 <dialog class="rz-thanks" id="rz-thanks" aria-labelledby="rz-thanks-title">
-  <div class="rz-thanks__band" aria-hidden="true">
-    <img src="assets/img/silk-wave-2-1440.webp" alt="" width="1441" height="906" decoding="async">
-    <button class="ref-modal__close" type="button" data-thanks-close aria-label="Zavrieť">×</button>
+  <button class="rz-thanks__close" type="button" data-thanks-close aria-label="Zavrieť">×</button>
+  <div class="rz-thanks__stage" aria-hidden="true">
+    <div class="rz-ticket">
+      <span class="rz-ticket__month" id="rz-thanks-month"></span>
+      <span class="rz-ticket__day" id="rz-thanks-day"></span>
+      <span class="rz-ticket__meta" id="rz-thanks-time"></span>
+      <span class="rz-ticket__check"><svg viewBox="0 0 24 24"><path d="M6 12.5 10 16.5 18 8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
   </div>
   <div class="rz-thanks__body">
-    <span class="rz-thanks__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.5 17 19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <p class="rz-thanks__kicker">Stretnutie je rezervované</p>
-    <h2 class="h2" id="rz-thanks-title">Ďakujeme, tešíme sa na vás</h2>
-    <div class="rz-thanks__card">
-      <div><span>Termín</span><b id="rz-thanks-when">—</b></div>
-      <div><span>Formát</span><b>Online · Google Meet · 30 min</b></div>
-      <div><span>Pozvánka</span><b id="rz-thanks-email">—</b></div>
+    <h2 class="rz-thanks__title" id="rz-thanks-title">Ďakujeme, tešíme sa na vás</h2>
+    <p class="rz-thanks__lead">Stretnutie je rezervované na <b id="rz-thanks-when"></b>, online cez Google Meet na 30 minút. Pozvánku sme poslali na <b id="rz-thanks-email"></b>.</p>
+    <div class="rz-thanks__actions">
+      <a class="btn btn--blue" id="rz-thanks-cal" href="#" target="_blank" rel="noopener">Pridať do kalendára <span class="arr" aria-hidden="true">›</span></a>
+      <button class="rz-thanks__done" type="button" data-thanks-close>Zavrieť</button>
     </div>
-    <p class="rz-thanks__h">Čo bude ďalej</p>
-    <ol class="rz-timeline">
-      <li><span class="rz-timeline__when">O pár minút</span><div><b>Pozvánka v e-maile</b><p>Príde vám pozvánka s odkazom na Google Meet. Ak ju nevidíte, pozrite sa do priečinka Spam a potvrďte účasť.</p></div></li>
-      <li><span class="rz-timeline__when">Pred stretnutím</span><div><b>Pripomienka</b><p>Google Kalendár vám stretnutie pripomenie. V ten deň vám ešte napíšeme krátku správu s potvrdením.</p></div></li>
-      <li><span class="rz-timeline__when">Stretnutie · 30 min</span><div><b>Prejdeme váš proces</b><p>Ako to beží dnes, kto s tým pracuje a kde sa stráca čas. Na konci vám úprimne povieme, či vieme pomôcť.</p></div></li>
-      <li><span class="rz-timeline__when">Do 7 dní</span><div><b>Návrh riešenia s fixnou cenou</b><p>Mapa procesu, náčrt obrazoviek, zoznam modulov, cena a termín odovzdania. Nezáväzne.</p></div></li>
-    </ol>
-    <p class="rz-thanks__h">Pripravte si</p>
-    <ul class="rz-prep">
-      <li>Ako proces prebieha dnes a kto s ním pracuje</li>
-      <li>Kde vás to najviac brzdí alebo stojí čas</li>
-      <li>Tabuľky alebo systém, ktorý používate, ukážete nám ich cez zdieľanie obrazovky</li>
-    </ul>
-    <div class="rz-thanks__actions"><a class="btn btn--blue" id="rz-thanks-cal" href="#" target="_blank" rel="noopener">Pridať do kalendára <span class="arr" aria-hidden="true">›</span></a><a class="btn btn--outline" href="index.html">Späť na web</a></div>
-    <p class="rz-thanks__note">Potrebujete termín zmeniť? Odpovedzte na pozvánku alebo napíšte na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a>.</p>
+    <div class="rz-next">
+      <p class="rz-next__h">Čo bude ďalej</p>
+      <ol class="rz-next__list">
+        <li><span>O pár minút</span><b>Pozvánka v e-maile</b><p>Príde vám pozvánka s odkazom na Google Meet. Ak ju nevidíte, pozrite sa do priečinka Spam a potvrďte účasť.</p></li>
+        <li><span>Pred stretnutím</span><b>Pripomienka</b><p>Google Kalendár vám stretnutie pripomenie. V ten deň vám ešte napíšeme krátku správu s potvrdením.</p></li>
+        <li><span>Stretnutie, 30 min</span><b>Prejdeme váš proces</b><p>Ako to beží dnes, kto s tým pracuje a kde sa stráca čas. Na konci vám úprimne povieme, či vieme pomôcť.</p></li>
+        <li><span>Do 7 dní</span><b>Návrh riešenia s fixnou cenou</b><p>Mapa procesu, náčrt obrazoviek, zoznam modulov, cena a termín odovzdania. Nezáväzne.</p></li>
+      </ol>
+    </div>
+    <p class="rz-thanks__note">Potrebujete termín zmeniť? Napíšte na <a href="mailto:contact@techscope.sk">contact@techscope.sk</a></p>
   </div>
 </dialog>
 </main>
@@ -129,7 +127,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
-<script src="assets/js/web/rezervacia.js?v=20261111l"></script>
-<script src="assets/js/web/anim.js?v=20261111i"></script>
+<script src="assets/js/web/rezervacia.js?v=20261116t"></script>
+<script src="assets/js/web/anim.js?v=20261116g"></script>
+<script src="assets/js/web/lead-popup.js?v=1" data-delay="45000" data-source="popup · rezervácia" data-title="Nenašli ste vhodný termín?" data-text="Nechajte nám e-mail alebo telefónne číslo a termín stretnutia dohodneme s vami priamo." data-policy="ochrana-udajov.html" defer></script>
+<script src="assets/js/web/consent.js?v=1" defer></script>
 </body>
 </html>
